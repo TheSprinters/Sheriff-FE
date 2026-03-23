@@ -405,7 +405,7 @@ sticky_rank: 8
 </div>
 
 <div class="bs-stat-bar">
-  <div class="bs-stat-box"><div class="s-num">3</div><div class="s-lab">Core Features</div></div>
+  <div class="bs-stat-box"><div class="s-num">4</div><div class="s-lab">Core Features</div></div>
   <div class="bs-stat-box"><div class="s-num">7</div><div class="s-lab">Sections Built</div></div>
   <div class="bs-stat-box"><div class="s-num">1</div><div class="s-lab">Page (No Redirects)</div></div>
   <div class="bs-stat-box"><div class="s-num">11</div><div class="s-lab">Real DSA Images</div></div>
@@ -585,6 +585,71 @@ sticky_rank: 8
   </table>
 </div>
 
+<!-- FEATURE 4 -->
+<div class="bs-card">
+  <h2>Feature 4: Interactive Events Calendar</h2>
+  <blockquote>"See Every Event at a Glance &mdash; Click a Date, RSVP Instantly"</blockquote>
+
+  <div class="bs-feat-grid">
+    <div class="bs-feat">
+      <div class="f-icon">&#128197;</div>
+      <h4>Month-View Calendar Grid</h4>
+      <p>Full interactive calendar with <strong>month navigation</strong> (prev/next/today buttons), day cells that highlight dates with events, and a today indicator</p>
+    </div>
+    <div class="bs-feat">
+      <div class="f-icon">&#128204;</div>
+      <h4>Day Detail Panel</h4>
+      <p>Click any date to see event cards with <strong>title, time, location</strong>, and optional event images (golf tournament flyer, memorial photo)</p>
+    </div>
+    <div class="bs-feat">
+      <div class="f-icon">&#127919;</div>
+      <h4>Event Badges + RSVP</h4>
+      <p>Dates with events show a <strong>count badge</strong>. Each event card has a functional <strong>RSVP button</strong> that toggles between "RSVP" and "Going"</p>
+    </div>
+    <div class="bs-feat">
+      <div class="f-icon">&#128736;</div>
+      <h4>Smart Auto-Navigation</h4>
+      <p>Calendar <strong>auto-opens to the month of the next upcoming event</strong> and auto-selects the first event date so members immediately see what's next</p>
+    </div>
+  </div>
+
+  <h3>How the calendar works:</h3>
+  <ul>
+    <li>Event data is stored as a JavaScript array with title, date, time, location, and optional image fields</li>
+    <li>A Map (eventMap) indexes events by date key (YYYY-MM-DD) for instant lookup</li>
+    <li>renderCalendar() builds a 7-column CSS Grid of day buttons, marking today, out-of-month days, and event days with badges</li>
+    <li>Clicking a day calls selectDate() which updates the detail panel with event cards for that date</li>
+    <li>Month navigation (shiftCalendarMonth) re-renders the grid and auto-selects the first event in the new month</li>
+    <li>"Today" button jumps back to the current month and highlights today's date</li>
+  </ul>
+
+  <h3>Tech stack used:</h3>
+  <table class="bs-table">
+    <thead>
+      <tr><th>Component</th><th>Technology</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Calendar grid</td><td>CSS Grid (7 columns) + Vanilla JS</td><td>Responsive month layout with day cells</td></tr>
+      <tr><td>Event data</td><td>JavaScript Map</td><td>O(1) lookup of events by date key</td></tr>
+      <tr><td>Date handling</td><td>Native Date API</td><td>Month math, day-of-week offsets, formatting</td></tr>
+      <tr><td>Day detail panel</td><td>Dynamic HTML rendering</td><td>Event cards with images and RSVP buttons</td></tr>
+      <tr><td>Navigation</td><td>Event listeners on prev/next/today buttons</td><td>Month shifting and today jump</td></tr>
+      <tr><td>RSVP toggle</td><td>Inline onclick handler</td><td>Visual feedback on button click</td></tr>
+    </tbody>
+  </table>
+
+  <h3>SRP functions powering the calendar:</h3>
+  <ul>
+    <li><strong>buildEventMap()</strong> &mdash; indexes events by date into a Map for fast lookup</li>
+    <li><strong>getInitialCalendarMonth()</strong> &mdash; finds the month of the next upcoming event to auto-navigate</li>
+    <li><strong>renderCalendar()</strong> &mdash; builds the month grid with day buttons, badges, and highlights</li>
+    <li><strong>renderDayDetail()</strong> &mdash; populates the detail panel with event cards for a selected date</li>
+    <li><strong>selectDate()</strong> &mdash; updates selection state and triggers re-render</li>
+    <li><strong>shiftCalendarMonth()</strong> &mdash; navigates forward/backward by one month</li>
+    <li><strong>goToToday()</strong> &mdash; jumps to the current month and selects today</li>
+  </ul>
+</div>
+
 <!-- IMAGES -->
 <div class="bs-card">
   <h2>Real DSA Images Integrated</h2>
@@ -739,7 +804,7 @@ sticky_rank: 8
       <tr><td><strong>Hero</strong></td><td>DSA logo, stats (4,229 members / 70+ years / 12 stations / 24/7), CTA buttons</td><td>Landing &rarr; immediate context</td></tr>
       <tr><td><strong>Resources Dashboard</strong></td><td>8 tiles with inline expandable detail panels</td><td>3-4 clicks &rarr; 1 click</td></tr>
       <tr><td><strong>News</strong></td><td>3 cards with images, category tags, dates</td><td>Static page &rarr; scrollable feed</td></tr>
-      <tr><td><strong>Events</strong></td><td>6 events with date badges, RSVP buttons, event images</td><td>Calendar page &rarr; inline list</td></tr>
+      <tr><td><strong>Events Calendar</strong></td><td>Interactive month-view calendar, day detail panel, event cards with images, RSVP buttons, auto-navigation to next event</td><td>Calendar page &rarr; click-a-date inline</td></tr>
       <tr><td><strong>About</strong></td><td>4 cards: Mission, Stations, Leadership, History with images</td><td>About page &rarr; scrollable section</td></tr>
       <tr><td><strong>Store</strong></td><td>8 product cards + real store photos + relaunch flyer</td><td>Store page &rarr; inline grid</td></tr>
       <tr><td><strong>FAQ</strong></td><td>9 Q&As, search filter, category tags, AI chatbot</td><td>5 static Q&As &rarr; searchable + AI</td></tr>
