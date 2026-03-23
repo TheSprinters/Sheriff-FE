@@ -191,6 +191,62 @@ search_exclude: true
     .ev-rsvp:hover { background: #3b82f6; color: #fff; border-color: #3b82f6; }
     .ev-rsvp.done { background: rgba(52,211,153,0.1); border-color: #34d399; color: #34d399; pointer-events: none; }
 
+    .ev-cal {
+      background: #162a46; border: 1px solid #1e3352; border-radius: 14px; padding: 18px;
+    }
+    .ev-cal-header {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid #1e3352;
+    }
+    .ev-cal-title { display: flex; flex-direction: column; gap: 4px; }
+    .ev-cal-month { font-size: 1.05rem; font-weight: 700; color: #fff; }
+    .ev-cal-sub { font-size: 0.72rem; color: #64748b; }
+    .ev-cal-controls { display: flex; gap: 8px; align-items: center; }
+    .ev-cal-btn {
+      background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3); color: #60a5fa;
+      border-radius: 8px; padding: 6px 10px; font-size: 0.75rem; cursor: pointer; transition: all 0.2s;
+    }
+    .ev-cal-btn:hover { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+    .ev-cal-weekdays {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 8px;
+      font-size: 0.62rem; text-transform: uppercase; letter-spacing: 1px; color: #475569;
+    }
+    .ev-cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .ev-day {
+      background: rgba(11,26,46,0.55); border: 1px solid #1e3352; border-radius: 10px;
+      min-height: 70px; padding: 8px; text-align: left; cursor: pointer; position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .ev-day:hover { border-color: #60a5fa; transform: translateY(-2px); }
+    .ev-day.is-out { opacity: 0.45; }
+    .ev-day.is-today { border-color: #fbbf24; box-shadow: 0 0 0 1px rgba(251,191,36,0.2); }
+    .ev-day.selected { border-color: #3b82f6; box-shadow: 0 0 0 1px rgba(59,130,246,0.25); }
+    .ev-day .num { font-size: 0.8rem; color: #e2e8f0; font-weight: 600; }
+    .ev-day.has-event .num { color: #fbbf24; }
+    .ev-badge {
+      position: absolute; bottom: 8px; right: 8px; background: rgba(96,165,250,0.18); color: #60a5fa;
+      border: 1px solid rgba(96,165,250,0.3); font-size: 0.62rem; padding: 2px 6px; border-radius: 999px;
+    }
+    .ev-cal-detail {
+      margin-top: 16px; padding-top: 16px; border-top: 1px solid #1e3352;
+      display: grid; gap: 12px;
+    }
+    .ev-detail-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .ev-detail-head h3 { font-size: 1rem; color: #fff; }
+    .ev-detail-sub { font-size: 0.72rem; color: #64748b; }
+    .ev-detail-list { display: grid; gap: 10px; }
+    .ev-card {
+      background: rgba(11,26,46,0.4); border: 1px solid #1e3352; border-radius: 12px; padding: 14px;
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .ev-card-main { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 200px; }
+    .ev-card-info h4 { font-size: 0.9rem; color: #fff; margin-bottom: 4px; }
+    .ev-card-info p { font-size: 0.75rem; color: #7f8ea3; }
+    .ev-card-img {
+      width: 48px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0;
+    }
+    .ev-empty { font-size: 0.8rem; color: #64748b; background: rgba(11,26,46,0.4); border-radius: 10px; padding: 14px; }
+
     /* About */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .about-card { background: #162a46; border: 1px solid #1e3352; border-radius: 12px; padding: 24px; }
@@ -530,13 +586,31 @@ search_exclude: true
 <!-- EVENTS -->
 <div class="section" id="events">
   <div class="sec-head"><h2>Upcoming Events</h2></div>
-  <div class="ev-list">
-    <div class="ev"><div class="ev-date"><div class="m">APR</div><div class="d">02</div></div><div class="ev-info"><h4>Board of Directors Meeting</h4><p>DSA Headquarters, Poway &mdash; 6:00 PM</p></div><button class="ev-rsvp" onclick="rsvp(this)">RSVP</button></div>
-    <div class="ev"><div class="ev-date"><div class="m">APR</div><div class="d">12</div></div><div class="ev-info"><h4>Annual Family Picnic</h4><p>Poway Community Park &mdash; 11:00 AM</p></div><button class="ev-rsvp" onclick="rsvp(this)">RSVP</button></div>
-    <div class="ev"><div class="ev-date"><div class="m">APR</div><div class="d">18</div></div><div class="ev-info"><h4>Wellness Workshop: Stress Management</h4><p>Virtual Event &mdash; 2:00 PM</p></div><button class="ev-rsvp" onclick="rsvp(this)">RSVP</button></div>
-    <div class="ev"><div class="ev-date"><div class="m">MAY</div><div class="d">01</div></div><div class="ev-info"><h4>Deputy of the Year Awards</h4><p>Hilton San Diego &mdash; 7:00 PM</p></div><button class="ev-rsvp" onclick="rsvp(this)">RSVP</button></div>
-    <div class="ev"><div class="ev-date"><div class="m">MAY</div><div class="d">15</div></div><div class="ev-info"><h4>Charity Golf Tournament</h4><p>Morgan Run Club & Resort &mdash; 8:00 AM</p></div><img src="{{ site.baseurl }}/images/dsa/golf-tournament-flyer.png" alt="Golf Tournament" style="width:48px;height:48px;border-radius:8px;object-fit:cover;margin-left:auto;margin-right:8px;flex-shrink:0"><button class="ev-rsvp" onclick="rsvp(this)">RSVP</button></div>
-    <div class="ev"><div class="ev-date"><div class="m">MAY</div><div class="d">22</div></div><div class="ev-info"><h4>Law Enforcement Memorial</h4><p>County Admin Center &mdash; 10:00 AM</p></div><img src="{{ site.baseurl }}/images/dsa/memorial-line-of-duty.png" alt="Line of Duty Memorial" style="width:48px;height:48px;border-radius:8px;object-fit:cover;margin-left:auto;margin-right:8px;flex-shrink:0"><button class="ev-rsvp" onclick="rsvp(this)">RSVP</button></div>
+  <div class="ev-cal">
+    <div class="ev-cal-header">
+      <div class="ev-cal-title">
+        <div class="ev-cal-month" id="evCalMonth">April 2026</div>
+        <div class="ev-cal-sub">Select a date to see details and RSVP</div>
+      </div>
+      <div class="ev-cal-controls">
+        <button class="ev-cal-btn" id="evPrev" type="button">&#10094;</button>
+        <button class="ev-cal-btn" id="evToday" type="button">Today</button>
+        <button class="ev-cal-btn" id="evNext" type="button">&#10095;</button>
+      </div>
+    </div>
+    <div class="ev-cal-weekdays">
+      <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+    </div>
+    <div class="ev-cal-days" id="evCalDays"></div>
+    <div class="ev-cal-detail" id="evCalDetail">
+      <div class="ev-detail-head">
+        <h3 id="evCalDetailTitle">Select a date</h3>
+        <div class="ev-detail-sub">All times local (PT)</div>
+      </div>
+      <div class="ev-detail-list" id="evCalList">
+        <div class="ev-empty">Click a highlighted day to view event details.</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -769,6 +843,194 @@ function rsvp(btn) {
   btn.textContent = '\u2713 RSVP\'d';
   btn.classList.add('done');
 }
+
+/* ================================================================
+   EVENTS CALENDAR — interactive month view + day detail
+   ================================================================ */
+
+const eventData = [
+  { title: 'Board of Directors Meeting', date: '2026-04-02', time: '6:00 PM', location: 'DSA Headquarters, Poway' },
+  { title: 'Annual Family Picnic', date: '2026-04-12', time: '11:00 AM', location: 'Poway Community Park' },
+  { title: 'Wellness Workshop: Stress Management', date: '2026-04-18', time: '2:00 PM', location: 'Virtual Event' },
+  { title: 'Deputy of the Year Awards', date: '2026-05-01', time: '7:00 PM', location: 'Hilton San Diego' },
+  {
+    title: 'Charity Golf Tournament', date: '2026-05-15', time: '8:00 AM', location: 'Morgan Run Club & Resort',
+    image: '{{ site.baseurl }}/images/dsa/golf-tournament-flyer.png', imageAlt: 'Golf Tournament'
+  },
+  {
+    title: 'Law Enforcement Memorial', date: '2026-05-22', time: '10:00 AM', location: 'County Admin Center',
+    image: '{{ site.baseurl }}/images/dsa/memorial-line-of-duty.png', imageAlt: 'Line of Duty Memorial'
+  },
+];
+
+const eventMap = buildEventMap(eventData);
+let selectedDateKey = null;
+let calendarMonth = getInitialCalendarMonth(eventData);
+
+function buildEventMap(events) {
+  const map = new Map();
+  events.forEach(e => {
+    const key = e.date;
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(e);
+  });
+  return map;
+}
+
+function parseDateKey(key) {
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function formatMonthYear(date) {
+  return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+}
+
+function formatDisplayDate(date) {
+  return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+function dateKey(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function getInitialCalendarMonth(events) {
+  if (!events.length) return new Date();
+  const sorted = [...events].sort((a, b) => a.date.localeCompare(b.date));
+  const today = new Date();
+  const todayKey = dateKey(today);
+  const upcoming = sorted.find(e => e.date >= todayKey) || sorted[0];
+  return new Date(parseDateKey(upcoming.date).getFullYear(), parseDateKey(upcoming.date).getMonth(), 1);
+}
+
+function getEventKeysInMonth(year, month) {
+  return [...eventMap.keys()]
+    .filter(k => {
+      const d = parseDateKey(k);
+      return d.getFullYear() === year && d.getMonth() === month;
+    })
+    .sort();
+}
+
+function renderCalendar() {
+  const monthLabel = el('evCalMonth');
+  const daysGrid = el('evCalDays');
+  if (!monthLabel || !daysGrid) return;
+
+  monthLabel.textContent = formatMonthYear(calendarMonth);
+
+  const year = calendarMonth.getFullYear();
+  const month = calendarMonth.getMonth();
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const prevMonthLast = new Date(year, month, 0);
+
+  const startOffset = firstDay.getDay();
+  const totalDays = lastDay.getDate();
+  const prevMonthDays = prevMonthLast.getDate();
+  const cells = [];
+
+  for (let i = 0; i < startOffset; i++) {
+    const day = prevMonthDays - startOffset + i + 1;
+    cells.push({ date: new Date(year, month - 1, day), isOut: true });
+  }
+
+  for (let day = 1; day <= totalDays; day++) {
+    cells.push({ date: new Date(year, month, day), isOut: false });
+  }
+
+  while (cells.length % 7 !== 0) {
+    const day = cells.length - (startOffset + totalDays) + 1;
+    cells.push({ date: new Date(year, month + 1, day), isOut: true });
+  }
+
+  const todayKey = dateKey(new Date());
+
+  daysGrid.innerHTML = cells.map(c => {
+    const key = dateKey(c.date);
+    const count = eventMap.get(key)?.length || 0;
+    const classes = [
+      'ev-day',
+      c.isOut ? 'is-out' : '',
+      count ? 'has-event' : '',
+      key === todayKey ? 'is-today' : '',
+      key === selectedDateKey ? 'selected' : '',
+    ].filter(Boolean).join(' ');
+    return `
+      <button class="${classes}" type="button" data-date="${key}">
+        <span class="num">${c.date.getDate()}</span>
+        ${count ? `<span class="ev-badge">${count}</span>` : ''}
+      </button>
+    `;
+  }).join('');
+
+  daysGrid.querySelectorAll('.ev-day').forEach(btn => {
+    btn.addEventListener('click', () => selectDate(btn.dataset.date));
+  });
+
+  if (!selectedDateKey || parseDateKey(selectedDateKey).getMonth() !== month || parseDateKey(selectedDateKey).getFullYear() !== year) {
+    const keysInMonth = getEventKeysInMonth(year, month);
+    const fallbackKey = keysInMonth[0] || dateKey(new Date(year, month, 1));
+    selectDate(fallbackKey, false);
+  } else {
+    renderDayDetail(selectedDateKey);
+  }
+}
+
+function renderDayDetail(key) {
+  const title = el('evCalDetailTitle');
+  const list = el('evCalList');
+  if (!title || !list) return;
+
+  const date = parseDateKey(key);
+  title.textContent = formatDisplayDate(date);
+
+  const events = eventMap.get(key) || [];
+  if (!events.length) {
+    list.innerHTML = `<div class="ev-empty">No events scheduled for this date.</div>`;
+    return;
+  }
+
+  list.innerHTML = events.map(e => `
+    <div class="ev-card">
+      <div class="ev-card-main">
+        <div class="ev-card-info">
+          <h4>${e.title}</h4>
+          <p>${e.location} &mdash; ${e.time}</p>
+        </div>
+        ${e.image ? `<img class="ev-card-img" src="${e.image}" alt="${e.imageAlt || e.title}">` : ''}
+      </div>
+      <button class="ev-rsvp" onclick="rsvp(this)">RSVP</button>
+    </div>
+  `).join('');
+}
+
+function selectDate(key, rerender = true) {
+  selectedDateKey = key;
+  if (rerender) { renderCalendar(); return; }
+  renderDayDetail(key);
+}
+
+function shiftCalendarMonth(delta) {
+  calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + delta, 1);
+  renderCalendar();
+}
+
+function goToToday() {
+  const today = new Date();
+  calendarMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  selectedDateKey = dateKey(today);
+  renderCalendar();
+}
+
+el('evPrev')?.addEventListener('click', () => shiftCalendarMonth(-1));
+el('evNext')?.addEventListener('click', () => shiftCalendarMonth(1));
+el('evToday')?.addEventListener('click', goToToday);
+
+renderCalendar();
 
 /* ================================================================
    FAQ — toggle answers and filter by category / search
