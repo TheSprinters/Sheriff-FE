@@ -361,6 +361,51 @@ search_exclude: true
     .modal-submit { width: 100%; padding: 12px; background: linear-gradient(135deg,#f59e0b,#d97706); border: none; border-radius: 10px; color: #1e3a5f; font-size: 0.95rem; font-weight: 700; cursor: pointer; margin-top: 6px; }
     .modal-err { color: #ef4444; font-size: 0.8rem; margin-top: 8px; display: none; }
 
+    /* ===== GAMIFICATION ===== */
+    .game-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .gtab { padding: 9px 20px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; background: rgba(255,255,255,0.04); border: 1px solid #1e3352; color: #64748b; cursor: pointer; transition: all 0.2s; }
+    .gtab:hover, .gtab.active { background: rgba(251,191,36,0.12); border-color: #fbbf24; color: #fbbf24; }
+    .game-layout { display: flex; gap: 16px; align-items: flex-start; }
+    .game-canvas-wrap { position: relative; flex: 1; border-radius: 12px; overflow: hidden; background: #0b1a2e; border: 1px solid #1e3352; min-width: 0; }
+    #netCanvas { display: block; width: 100%; height: auto; }
+    .game-overlay { position: absolute; inset: 0; background: rgba(11,26,46,0.9); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 24px; }
+    .game-overlay h3 { font-size: 1.4rem; color: #fbbf24; }
+    .game-overlay p { font-size: 0.85rem; color: #94a3b8; max-width: 360px; }
+    .game-sidebar { width: 210px; flex-shrink: 0; display: flex; flex-direction: column; gap: 12px; }
+    .gs-card { background: #162a46; border: 1px solid #1e3352; border-radius: 10px; padding: 14px; }
+    .gs-card h4 { font-size: 0.75rem; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .gs-card p { font-size: 0.76rem; color: #94a3b8; line-height: 1.6; }
+    #scoreDisplay { font-size: 1.9rem; font-weight: 800; color: #fbbf24; }
+    #layerText { font-size: 0.74rem; color: #94a3b8; line-height: 1.55; }
+    /* Quiz */
+    .quiz-q { background: #162a46; border: 1px solid #1e3352; border-radius: 12px; padding: 20px; margin-bottom: 14px; }
+    .quiz-q h4 { font-size: 0.92rem; color: #e2e8f0; margin-bottom: 14px; }
+    .quiz-opts { display: grid; gap: 8px; }
+    .qopt { padding: 10px 16px; border-radius: 8px; border: 1px solid #1e3352; background: rgba(255,255,255,0.03); color: #94a3b8; cursor: pointer; font-size: 0.83rem; transition: all 0.15s; text-align: left; }
+    .qopt:hover:not(:disabled) { border-color: #3b82f6; color: #e2e8f0; background: rgba(59,130,246,0.08); }
+    .qopt.correct { border-color: #34d399 !important; background: rgba(52,211,153,0.12) !important; color: #34d399 !important; }
+    .qopt.wrong   { border-color: #ef4444 !important; background: rgba(239,68,68,0.1)   !important; color: #ef4444 !important; }
+    .quiz-exp { margin-top: 10px; padding: 10px 14px; background: rgba(96,165,250,0.07); border-radius: 8px; font-size: 0.8rem; color: #7f8ea3; display: none; }
+    .quiz-exp.show { display: block; }
+    .quiz-score { text-align: center; padding: 30px 20px; }
+    .quiz-score .qs-num { font-size: 3rem; font-weight: 800; color: #fbbf24; }
+    /* MTU Explorer */
+    .mtu-explorer { display: flex; flex-direction: column; gap: 16px; }
+    .mtu-row { display: flex; align-items: center; gap: 14px; }
+    .mtu-row label { font-size: 0.82rem; color: #94a3b8; min-width: 160px; }
+    .mtu-row input[type=range] { flex: 1; accent-color: #fbbf24; }
+    .mtu-row span { min-width: 62px; font-size: 0.82rem; color: #fbbf24; font-weight: 700; text-align: right; }
+    .mtu-frame-box { background: #0b1a2e; border: 1px solid #1e3352; border-radius: 10px; padding: 16px; overflow-x: auto; }
+    .mtu-viz { display: flex; align-items: stretch; height: 60px; border-radius: 6px; overflow: hidden; min-width: 560px; }
+    .mf-seg { display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; padding: 2px; }
+    .mf-seg span { font-size: 0.6rem; opacity: 0.8; margin-top: 2px; }
+    .mtu-info-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .mtu-ic { background: #162a46; border: 1px solid #1e3352; border-radius: 8px; padding: 12px; }
+    .mtu-ic h5 { font-size: 0.72rem; color: #fbbf24; margin-bottom: 6px; text-transform: uppercase; }
+    .mtu-ic p { font-size: 0.78rem; color: #94a3b8; line-height: 1.5; }
+    .mtu-warn { background: rgba(245,158,11,0.1); border: 1px solid #d97706; border-radius: 8px; padding: 10px 14px; font-size: 0.82rem; color: #fbbf24; display: none; }
+    .mtu-warn.show { display: block; }
+
     /* Mobile */
     .mob-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.4rem; cursor: pointer; }
     @media (max-width: 900px) {
@@ -402,6 +447,7 @@ search_exclude: true
       <div class="nav-link" onclick="scrollTo('#store')">Store</div>
       <div class="nav-link" onclick="scrollTo('#faq')">FAQ</div>
       <div class="nav-link" onclick="scrollTo('#contact')">Contact</div>
+      <div class="nav-link" onclick="scrollTo('#games')">&#127918; Games</div>
     </nav>
     <div class="header-right">
       <div class="search-box">
@@ -666,6 +712,84 @@ search_exclude: true
     <div style="border-radius:10px;overflow:hidden"><img src="{{ site.baseurl }}/images/dsa/store-uniforms.jpg" alt="DSA Uniforms" style="width:100%;height:180px;object-fit:cover;display:block"></div>
   </div>
   <p style="text-align:center;margin-top:16px;color:#475569;font-size:0.8rem">Also available at DSA HQ, 13881 Danielson St, Poway &mdash; Online orders ship within 5-7 business days</p>
+</div>
+
+<!-- GAMIFICATION -->
+<div class="section" id="games">
+  <div class="sec-head">
+    <h2>&#127918; Net Patrol &mdash; Networking Games</h2>
+    <p>CB Unit 4 &bull; Learn OSI vs TCP/IP, MTU &amp; how this DSA site deploys from GitHub Pages &#8594; AWS EC2</p>
+  </div>
+  <div class="game-tabs">
+    <button class="gtab active" onclick="switchGameTab(event,'patrol')">&#127914; Net Patrol (Game)</button>
+    <button class="gtab" onclick="switchGameTab(event,'quiz')">&#9997;&#65039; OSI / TCP-IP Quiz</button>
+    <button class="gtab" onclick="switchGameTab(event,'mtu')">&#128202; MTU Explorer</button>
+  </div>
+
+  <!-- TAB 1: Canvas Game -->
+  <div class="gtab-panel" id="gtab-patrol">
+    <div class="game-layout">
+      <div class="game-canvas-wrap">
+        <canvas id="netCanvas" width="780" height="440"></canvas>
+        <div class="game-overlay" id="gameOverlay">
+          <div style="font-size:2.8rem">&#128737;</div>
+          <h3>Net Patrol</h3>
+          <p>You're a DSA deputy escorting data packets through the 7-layer OSI stack &mdash; from GitHub Pages all the way down to the AWS EC2 Physical layer. Stop Hacker H4X from stealing your frames!</p>
+          <p style="font-size:0.74rem;color:#64748b;margin-top:2px"><strong>&#8592;&#8594;</strong> Move &nbsp;|&nbsp; <strong>&#8593; / Space</strong> Jump &nbsp;|&nbsp; <strong>E</strong> Carry/Drop packet &nbsp;|&nbsp; <strong>F</strong> Fragment if &gt;1460B</p>
+          <button class="btn btn-gold" style="margin-top:10px" onclick="startNetGame()">Start Game</button>
+        </div>
+      </div>
+      <div class="game-sidebar">
+        <div class="gs-card">
+          <h4>&#127947; Score</h4>
+          <div id="scoreDisplay">0</div>
+          <div style="margin-top:6px;font-size:0.76rem;color:#475569">Level: <span id="levelDisplay">1</span> &nbsp;|&nbsp; Lives: <span id="livesDisplay">&#9733;&#9733;&#9733;</span></div>
+        </div>
+        <div class="gs-card">
+          <h4>&#127758; Current Layer</h4>
+          <p id="layerText">Start the game to see your current OSI layer here.</p>
+        </div>
+        <div class="gs-card">
+          <h4>&#128736; Controls</h4>
+          <p>&#8592;&#8594; Move &nbsp;|&nbsp; &#8593; Jump<br>E &mdash; Pick up / Drop packet<br>F &mdash; Fragment oversized packet<br><br>&#9733; <span style="color:#fbbf24">Gold badge</span> = You (Deputy)<br>&#128308; <span style="color:#ef4444">Red mask</span> = Hacker H4X<br>&#128994; <span style="color:#34d399">Router box</span> = NGINX proxy</p>
+        </div>
+        <div class="gs-card">
+          <h4>&#128218; Mission</h4>
+          <p id="missionText">Escort packets from Application (L7) down through all OSI layers to Physical (L1). Each layer adds headers. Fragment any packet &gt;1460B before Transport layer!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: Quiz -->
+  <div class="gtab-panel" id="gtab-quiz" style="display:none">
+    <div id="quizContainer" style="max-width:720px;margin:0 auto"></div>
+  </div>
+
+  <!-- TAB 3: MTU Explorer -->
+  <div class="gtab-panel" id="gtab-mtu" style="display:none">
+    <div class="mtu-explorer">
+      <p style="font-size:0.88rem;color:#94a3b8;max-width:700px">Adjust the payload size to see how an Ethernet frame is assembled. This mirrors how the DSA site's GitHub Pages frontend sends data over TCP/IP to the AWS EC2 Flask/Spring backend via NGINX.</p>
+      <div class="mtu-row">
+        <label>Application Payload (bytes)</label>
+        <input type="range" id="mtuPayload" min="100" max="3000" value="800" oninput="updateMTU()">
+        <span id="mtuPayloadVal">800 B</span>
+      </div>
+      <div class="mtu-frame-box">
+        <div class="mtu-viz" id="mtuFrameViz"></div>
+        <div style="margin-top:10px;font-size:0.78rem;color:#64748b" id="mtuFrameLabel"></div>
+      </div>
+      <div class="mtu-warn" id="mtuWarn">&#9888; Payload exceeds 1460 B TCP MSS (MTU 1500 &minus; 40 B headers). Fragmentation required &mdash; Fragments needed: <strong id="mtuFragCount">-</strong></div>
+      <div class="mtu-info-grid">
+        <div class="mtu-ic"><h5>Ethernet Frame (L2)</h5><p>14B Dest/Src MAC + EtherType<br>+ IP Packet (payload)<br>+ 4B FCS / CRC tail<br><strong>Max: 1518 B total</strong></p></div>
+        <div class="mtu-ic"><h5>IP Packet (L3)</h5><p>20B IP Header<br>(TTL, src/dst IP, protocol)<br>+ TCP Segment<br><strong>Max: 1500 B (MTU)</strong></p></div>
+        <div class="mtu-ic"><h5>TCP Segment (L4)</h5><p>20B TCP Header<br>(ports, seq, ack, flags)<br>+ Application Data<br><strong>Max payload: 1460 B (MSS)</strong></p></div>
+        <div class="mtu-ic"><h5>Our Deployment Stack</h5><p>GitHub Pages JS <code>fetch()</code><br>&#8594; HTTPS via Certbot/TLS<br>&#8594; TCP &#8594; IP &#8594; Ethernet<br>&#8594; NGINX &#8594; Flask / Spring on EC2</p></div>
+        <div class="mtu-ic"><h5>OSI Model (7 layers)</h5><p>7: Application (HTTP/DNS)<br>6: Presentation (TLS/SSL)<br>5: Session (WebSocket)<br>4: Transport (TCP/UDP)<br>3: Network (IP routing)<br>2: Data Link (Ethernet)<br>1: Physical (signals)</p></div>
+        <div class="mtu-ic"><h5>TCP/IP Model (5 layers)</h5><p>5: Application (L5+L6+L7)<br>4: Transport (TCP/UDP)<br>3: Internet (IP)<br>2: Link (Ethernet/Wi-Fi)<br>1: Physical (bits/signals)<br><br><em>OSI is a guideline (7);<br>TCP/IP is the standard (5).</em></p></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- FAQ -->
@@ -1086,6 +1210,11 @@ const searchMap = [
   { label: 'About DSA',            target: '#about' },
   { label: 'Latest News',          target: '#news' },
   { label: 'Membership',           target: '#faq' },
+  { label: 'Games',               target: '#games' },
+  { label: 'Net Patrol',          target: '#games' },
+  { label: 'Networking Game',     target: '#games' },
+  { label: 'OSI Quiz',            target: '#games' },
+  { label: 'MTU Explorer',        target: '#games' },
 ];
 
 function findSearchMatches(query) {
@@ -1132,7 +1261,7 @@ document.addEventListener('click', closeDropdownsOnClickAway);
    NAV HIGHLIGHT — highlight the active nav link on scroll
    ================================================================ */
 
-const sectionIds = ['dashboard', 'news', 'events', 'about', 'store', 'faq', 'contact'];
+const sectionIds = ['dashboard', 'news', 'events', 'about', 'store', 'games', 'faq', 'contact'];
 
 function getActiveSection() {
   const y = window.scrollY + 120;
@@ -1338,6 +1467,463 @@ function sendChat() {
     })
     .finally(enableChatSend);
 }
+
+/* ================================================================
+   GAMIFICATION — Net Patrol / OSI Quiz / MTU Explorer
+   CB Unit 4: Networking — OSI 7-layer vs TCP/IP 5-layer, MTU
+   ================================================================ */
+(function () {
+
+  /* ---- TAB SWITCHING ---- */
+  window.switchGameTab = function (e, tab) {
+    document.querySelectorAll('.gtab').forEach(t => t.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    document.querySelectorAll('.gtab-panel').forEach(p => p.style.display = 'none');
+    const panel = el('gtab-' + tab);
+    if (panel) panel.style.display = 'block';
+    if (tab === 'quiz') initQuiz();
+    if (tab === 'mtu') updateMTU();
+    if (tab !== 'patrol') { gameRunning = false; if (animId) cancelAnimationFrame(animId); }
+  };
+
+  /* ================================================================
+     NET PATROL — Canvas Game
+     Player = Deputy, NPC = NGINX Router Ron, AI NPC = Hacker H4X
+     Teach: OSI layers, headers, MTU / fragmentation
+     ================================================================ */
+  let ctx = null, animId = null, gameRunning = false;
+  const gState = { score: 0, lives: 3, level: 1, delivered: 0, lost: 0 };
+
+  /* 7 OSI layers mapped to canvas y-positions (canvas height 440) */
+  const OSI = [
+    { id:7, name:'Application', y:0,   h:52, col:'#f59e0b', tcp:'Application',  desc:'HTTP/DNS — JS fetch() from GitHub Pages'   },
+    { id:6, name:'Presentation',y:52,  h:42, col:'#d97706', tcp:'(App layer)',   desc:'TLS/SSL — Certbot encrypts the payload'    },
+    { id:5, name:'Session',     y:94,  h:42, col:'#b45309', tcp:'(App layer)',   desc:'Session mgmt — WebSocket / keep-alive'     },
+    { id:4, name:'Transport',   y:136, h:68, col:'#3b82f6', tcp:'Transport',     desc:'TCP — 20B header, MSS = 1460B max payload' },
+    { id:3, name:'Network',     y:204, h:68, col:'#10b981', tcp:'Internet',      desc:'IP Routing — src→ EC2 3.233.212.71'        },
+    { id:2, name:'Data Link',   y:272, h:68, col:'#8b5cf6', tcp:'Link',          desc:'Ethernet Frame — 14B header + 4B FCS/CRC'  },
+    { id:1, name:'Physical',    y:340, h:100,col:'#475569', tcp:'Link',          desc:'Electrical / Optical signals — raw bits!'  },
+  ];
+
+  /* Entities */
+  const player = { x:80,  y:250, w:28, h:36, vx:0, vy:0, onGround:false, carrying:null, speed:3.5, jump:-11, invince:0 };
+  const hacker  = { x:420, y:50,  w:26, h:34, vx:1.2, vy:0, onGround:false, carrying:null };
+  const routerNpc = { x:650, y:376, w:44, h:40, msg:'', msgT:0 };
+  let packets = [], fx = [];
+  const keys = {};
+
+  /* ---- Rounded rect polyfill ---- */
+  function rr(c, x, y, w, h, r) {
+    c.beginPath();
+    c.moveTo(x+r, y); c.lineTo(x+w-r, y); c.quadraticCurveTo(x+w, y, x+w, y+r);
+    c.lineTo(x+w, y+h-r); c.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    c.lineTo(x+r, y+h); c.quadraticCurveTo(x, y+h, x, y+h-r);
+    c.lineTo(x, y+r); c.quadraticCurveTo(x, y, x+r, y); c.closePath();
+  }
+
+  function mkPkt(x, y) {
+    const sz = Math.floor(Math.random() * 2200 + 300);
+    return { x, y, w:48, h:26, vy:0.4, vx:0, layer:7, headers:[], escore:false, stolen:false, done:false, sz, frag:false, frags:1 };
+  }
+  function pTotal(p) { return p.sz + p.headers.reduce((s,h)=>s+h.b,0); }
+  function pNeedsFrag(p) { return p.sz > 1460 && p.layer <= 4 && !p.frag; }
+
+  function addScore(n) { gState.score += n; if (el('scoreDisplay')) el('scoreDisplay').textContent = gState.score; }
+  function spawnFX(x, y, col, txt) { fx.push({ x, y, col, txt, life:90, vy:-1.0 }); }
+
+  function physics(e) {
+    e.vy = Math.min(e.vy + 0.48, 14);
+    e.x += e.vx; e.y += e.vy;
+    if (e.y >= 440 - e.h) { e.y = 440 - e.h; e.vy = 0; e.onGround = true; } else { e.onGround = false; }
+    e.x = Math.max(0, Math.min(780 - e.w, e.x));
+  }
+
+  function layerAt(y) {
+    for (let i = OSI.length - 1; i >= 0; i--) if (y + 20 >= OSI[i].y) return OSI[i];
+    return OSI[0];
+  }
+
+  function updatePlayer() {
+    player.vx = 0;
+    if (keys['ArrowLeft']  || keys['a']) player.vx = -player.speed;
+    if (keys['ArrowRight'] || keys['d']) player.vx =  player.speed;
+    if ((keys['ArrowUp'] || keys[' '] || keys['w']) && player.onGround) player.vy = player.jump;
+    physics(player);
+    if (player.carrying) {
+      player.carrying.x = player.x + player.w/2 - player.carrying.w/2;
+      player.carrying.y = player.y - player.carrying.h - 3;
+    }
+    if (player.invince > 0) player.invince--;
+    const lay = layerAt(player.y);
+    if (lay && el('layerText')) {
+      el('layerText').innerHTML = '<strong>OSI Layer ' + lay.id + ': ' + lay.name + '</strong><br>TCP/IP: ' + lay.tcp + '<br><span style="color:#64748b">' + lay.desc + '</span>';
+    }
+  }
+
+  function updateHacker() {
+    let tgt = null, minD = 9999;
+    packets.forEach(p => {
+      if (!p.stolen && !p.done && !p.escore) {
+        const d = Math.hypot(p.x - hacker.x, p.y - hacker.y);
+        if (d < minD) { minD = d; tgt = p; }
+      }
+    });
+    if (tgt && !hacker.carrying) {
+      const dx = tgt.x - hacker.x, dy = tgt.y - hacker.y, dist = Math.hypot(dx, dy);
+      const spd = 1.0 + gState.level * 0.22;
+      hacker.vx = (dx / dist) * spd;
+      if (dist < 25 && hacker.onGround && dy < -35) hacker.vy = -9;
+      if (dist < 30 && tgt !== player.carrying) {
+        hacker.carrying = tgt; tgt.stolen = true;
+        spawnFX(tgt.x, tgt.y, '#ef4444', 'STOLEN!');
+        setRouterMsg('Stop the hacker! Press E near a packet to grab it!');
+        gState.lost++; loseLife();
+      }
+    } else if (hacker.carrying) {
+      hacker.vx = -2.8;
+      hacker.carrying.x = hacker.x; hacker.carrying.y = hacker.y - 30;
+      if (hacker.x <= 4) hacker.carrying = null;
+    }
+    physics(hacker);
+  }
+
+  function updatePackets() {
+    packets.forEach(p => {
+      if (p.escore || p.stolen || p.done) return;
+      p.vy = Math.min(p.vy + 0.03, 1.3); p.y += p.vy;
+      OSI.forEach(lay => {
+        if (p.y + p.h >= lay.y + lay.h && p.layer > lay.id) {
+          p.layer = lay.id;
+          const adds = { 4:20, 3:20, 2:18 };
+          if (adds[lay.id]) {
+            p.headers.push({ b: adds[lay.id] });
+            spawnFX(p.x + p.w/2, p.y, lay.col, '+' + adds[lay.id] + 'B hdr');
+          }
+        }
+      });
+      if (p.y + p.h >= 438) deliverPacket(p);
+    });
+    const active = packets.filter(p => !p.done && !p.stolen).length;
+    if (active < 4 + gState.level && Math.random() < 0.006 + gState.level * 0.002) {
+      packets.push(mkPkt(60 + Math.random() * 620, 5));
+    }
+    packets = packets.filter(p => p.y < 510 && !(p.stolen && !hacker.carrying));
+  }
+
+  function deliverPacket(p) {
+    if (p.done) return;
+    p.done = true; gState.delivered++;
+    const pts = p.frag ? 150 : 100;
+    addScore(pts);
+    spawnFX(p.x + p.w/2, p.y, '#34d399', '+' + pts + ' pts!');
+    setRouterMsg('Packet delivered to AWS EC2! +' + pts + ' pts');
+    if (gState.delivered % 5 === 0) {
+      gState.level++;
+      if (el('levelDisplay')) el('levelDisplay').textContent = gState.level;
+      setRouterMsg('Level ' + gState.level + '! Hacker H4X is faster now!');
+    }
+  }
+
+  function loseLife() {
+    gState.lives = Math.max(0, gState.lives - 1);
+    if (el('livesDisplay')) el('livesDisplay').innerHTML = '&#9733;'.repeat(gState.lives) + '&#9734;'.repeat(3 - gState.lives);
+    if (gState.lives <= 0) endNetGame();
+  }
+
+  function setRouterMsg(m) { routerNpc.msg = m; routerNpc.msgT = 240; }
+
+  /* ---- Drawing ---- */
+  function drawBg() {
+    ctx.fillStyle = '#0b1a2e'; ctx.fillRect(0, 0, 780, 440);
+    OSI.forEach(l => {
+      ctx.fillStyle = l.col + '16'; ctx.fillRect(0, l.y, 780, l.h);
+      ctx.fillStyle = l.col + 'bb'; ctx.font = 'bold 10px monospace';
+      ctx.fillText('L' + l.id + ' ' + l.name, 5, l.y + l.h - 5);
+      ctx.strokeStyle = l.col + '33'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, l.y + l.h); ctx.lineTo(780, l.y + l.h); ctx.stroke();
+    });
+    ctx.strokeStyle = 'rgba(96,165,250,0.03)'; ctx.lineWidth = 1;
+    for (let x = 0; x < 780; x += 32) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,440); ctx.stroke(); }
+  }
+
+  function drawPlayer() {
+    const {x,y,w,h} = player;
+    if (player.invince > 0 && Math.floor(player.invince/5) % 2) return;
+    ctx.fillStyle = '#1e3a5f'; ctx.fillRect(x+4, y+12, w-8, h-12);
+    ctx.fillStyle = '#d4a574'; ctx.beginPath(); ctx.ellipse(x+w/2, y+7, 8, 8, 0, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#0f2040'; ctx.fillRect(x+2, y-1, w-4, 9); ctx.fillRect(x-1, y+4, w+2, 5);
+    ctx.fillStyle = '#fbbf24'; ctx.font = 'bold 13px serif'; ctx.fillText('★', x+8, y+26);
+    ctx.fillStyle = '#1e3a5f'; ctx.fillRect(x-1, y+16, 5, player.carrying?10:14); ctx.fillRect(x+w-4, y+16, 5, player.carrying?10:14);
+    ctx.fillStyle = '#0f2040'; ctx.fillRect(x+6, y+h-11, 7, 11); ctx.fillRect(x+w-13, y+h-11, 7, 11);
+  }
+
+  function drawHacker() {
+    const {x,y,w,h} = hacker;
+    ctx.fillStyle = '#7f1d1d'; ctx.fillRect(x+4, y+12, w-8, h-12);
+    ctx.fillStyle = '#1c1c1c'; ctx.beginPath(); ctx.ellipse(x+w/2, y+7, 8, 8, 0, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#ef4444'; ctx.fillRect(x+3, y+3, 5, 3); ctx.fillRect(x+w-8, y+3, 5, 3);
+    ctx.fillStyle = '#ef4444'; ctx.font = 'bold 7px monospace'; ctx.fillText('H4X', x+2, y-3);
+    ctx.fillStyle = '#7f1d1d'; ctx.fillRect(x-1, y+16, 5, 14); ctx.fillRect(x+w-4, y+16, 5, 14);
+    ctx.fillStyle = '#450a0a'; ctx.fillRect(x+5, y+h-11, 7, 11); ctx.fillRect(x+w-12, y+h-11, 7, 11);
+  }
+
+  function drawRouter() {
+    const {x,y,w,h} = routerNpc;
+    ctx.fillStyle = '#0f2040'; ctx.strokeStyle = '#34d399'; ctx.lineWidth = 2;
+    rr(ctx, x, y, w, h, 5); ctx.fill(); ctx.stroke();
+    [[x+8,y,x+5,y-14],[x+22,y,x+21,y-11],[x+37,y,x+39,y-13]].forEach(([ax,ay,bx,by]) => {
+      ctx.strokeStyle = '#34d399'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke();
+      ctx.fillStyle = Math.random()>0.5?'#34d399':'#10b981';
+      ctx.beginPath(); ctx.arc(bx, by, 3, 0, Math.PI*2); ctx.fill();
+    });
+    ctx.fillStyle = '#34d399'; ctx.font = 'bold 8px monospace'; ctx.fillText('NGINX', x+5, y+16);
+    ctx.fillStyle = '#64748b'; ctx.font = '7px monospace'; ctx.fillText('Router Ron', x+1, y+28);
+    ctx.fillStyle = Date.now()%900<450 ? '#34d399' : '#065f46';
+    ctx.beginPath(); ctx.arc(x+37, y+10, 4, 0, Math.PI*2); ctx.fill();
+    if (routerNpc.msgT > 0 && routerNpc.msg) {
+      routerNpc.msgT--;
+      const alpha = Math.min(1, routerNpc.msgT/40);
+      const bw=210, bh=40, bx=x-bw-8, by=y-14;
+      ctx.fillStyle = 'rgba(22,42,70,'+(alpha*0.95)+')';
+      ctx.strokeStyle = 'rgba(52,211,153,'+alpha+')'; ctx.lineWidth = 1;
+      rr(ctx, bx, by, bw, bh, 6); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = 'rgba(200,220,255,'+alpha+')'; ctx.font = '8.5px sans-serif';
+      const lines = routerNpc.msg.match(/.{1,32}(\s|$)/g) || [routerNpc.msg];
+      lines.slice(0,2).forEach((ln,i) => ctx.fillText(ln.trim(), bx+8, by+14+i*13));
+    }
+  }
+
+  function drawPackets() {
+    packets.forEach(p => {
+      if (p.stolen || p.done) return;
+      if (pNeedsFrag(p)) { ctx.shadowColor='#f59e0b'; ctx.shadowBlur=10; }
+      ctx.fillStyle = p.escore ? '#1d4ed8' : '#0f2447';
+      ctx.strokeStyle = p.escore ? '#93c5fd' : '#3b82f6'; ctx.lineWidth = 1.5;
+      rr(ctx, p.x, p.y, p.w, p.h, 4); ctx.fill(); ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = '#e2e8f0'; ctx.font = 'bold 8px monospace';
+      ctx.fillText(pTotal(p)+'B', p.x+4, p.y+11);
+      if (pNeedsFrag(p)) { ctx.fillStyle='#f59e0b'; ctx.font='bold 7px monospace'; ctx.fillText('⚠ FRAG!',p.x+3,p.y+22); }
+      else if (p.frag) { ctx.fillStyle='#34d399'; ctx.font='7px monospace'; ctx.fillText(p.frags+'x',p.x+p.w-18,p.y+22); }
+      let hx = p.x + p.w - 3;
+      p.headers.forEach(hdr => { const hcols={4:'#3b82f6',3:'#10b981',2:'#8b5cf6'}; ctx.fillStyle=(hcols[hdr.b===20&&p.layer<=4?4:hdr.b===20?3:2]||'#60a5fa')+'88'; ctx.fillRect(hx-3,p.y+2,3,p.h-4); hx-=4; });
+    });
+  }
+
+  function drawFX() {
+    fx = fx.filter(f => f.life > 0);
+    fx.forEach(f => {
+      f.y += f.vy; f.life--;
+      const alpha = f.life/90;
+      ctx.globalAlpha = alpha; ctx.fillStyle = f.col;
+      ctx.font = 'bold 10px monospace'; ctx.fillText(f.txt||'+', f.x, f.y);
+      ctx.globalAlpha = 1;
+    });
+  }
+
+  function drawHUD() {
+    const lay = layerAt(player.y);
+    if (lay) {
+      ctx.fillStyle = 'rgba(15,32,64,0.88)'; rr(ctx,596,5,178,38,6); ctx.fill();
+      ctx.fillStyle = lay.col; ctx.font = 'bold 10px monospace'; ctx.fillText('Layer '+lay.id+': '+lay.name, 603, 20);
+      ctx.fillStyle = '#475569'; ctx.font = '9px monospace'; ctx.fillText('TCP/IP: '+lay.tcp, 603, 35);
+    }
+    ctx.fillStyle = 'rgba(15,32,64,0.8)'; rr(ctx,5,5,168,24,5); ctx.fill();
+    ctx.fillStyle = '#64748b'; ctx.font = '9px monospace';
+    ctx.fillText('Active: '+packets.filter(p=>!p.done&&!p.stolen).length+' | Delivered: '+gState.delivered, 10, 19);
+    ctx.fillStyle = '#1e3352'; ctx.font = '8px monospace';
+    ctx.fillText('MTU=1500B  MSS=1460B  Eth frame=1518B', 6, 437);
+  }
+
+  function gameLoop() {
+    if (!gameRunning) return;
+    ctx.clearRect(0, 0, 780, 440);
+    drawBg(); updatePlayer(); updateHacker(); updatePackets();
+    drawPackets(); drawRouter(); drawPlayer(); drawHacker(); drawFX(); drawHUD();
+    animId = requestAnimationFrame(gameLoop);
+  }
+
+  let eDown = false, fDown = false;
+  document.addEventListener('keydown', e => {
+    keys[e.key] = true;
+    if (!eDown && (e.key==='e'||e.key==='E')) { eDown=true; doInteract(); }
+    if (!fDown && (e.key==='f'||e.key==='F')) { fDown=true; doFragment(); }
+    if (gameRunning && ['ArrowUp','ArrowLeft','ArrowRight',' '].includes(e.key)) e.preventDefault();
+  });
+  document.addEventListener('keyup', e => {
+    keys[e.key] = false;
+    if (e.key==='e'||e.key==='E') eDown=false;
+    if (e.key==='f'||e.key==='F') fDown=false;
+  });
+
+  function doInteract() {
+    if (player.carrying) {
+      player.carrying.escore = false; player.carrying.vy = 0.5; player.carrying = null;
+    } else {
+      packets.forEach(p => {
+        if (!p.stolen && !p.done && !p.escore &&
+            Math.abs(p.x+p.w/2 - (player.x+player.w/2)) < 44 &&
+            Math.abs(p.y+p.h/2 - (player.y+player.h/2)) < 44) {
+          player.carrying = p; p.escore = true;
+        }
+      });
+    }
+  }
+
+  function doFragment() {
+    const p = player.carrying;
+    if (!p || !pNeedsFrag(p)) return;
+    p.frags = Math.ceil(p.sz / 1460); p.frag = true; p.sz = 1460;
+    addScore(25);
+    spawnFX(p.x+p.w/2, p.y, '#f59e0b', 'FRAG x'+p.frags+'!');
+    setRouterMsg('Fragmented into '+p.frags+' pieces! MTU 1500 — good thinking, Deputy!');
+  }
+
+  window.startNetGame = function () {
+    const c = document.getElementById('netCanvas'); if (!c) return;
+    ctx = c.getContext('2d');
+    Object.assign(gState, {score:0, lives:3, level:1, delivered:0, lost:0});
+    packets = []; fx = [];
+    Object.assign(player, {x:80, y:250, vx:0, vy:0, carrying:null, invince:0});
+    Object.assign(hacker, {x:420, y:50, vx:1.2, vy:0, carrying:null});
+    if (el('scoreDisplay'))  el('scoreDisplay').textContent = '0';
+    if (el('levelDisplay'))  el('levelDisplay').textContent = '1';
+    if (el('livesDisplay'))  el('livesDisplay').innerHTML = '&#9733;&#9733;&#9733;';
+    /* Spawn initial packets — one oversized to teach fragmentation */
+    packets.push(mkPkt(180, 8));
+    packets.push(mkPkt(400, 8));
+    const bigPkt = mkPkt(580, 8); bigPkt.sz = 1900; packets.push(bigPkt);
+    const ov = el('gameOverlay'); if (ov) ov.style.display = 'none';
+    setRouterMsg('Route packets down through all 7 OSI layers to deliver data to AWS EC2!');
+    gameRunning = true;
+    if (animId) cancelAnimationFrame(animId);
+    gameLoop();
+  };
+
+  window.endNetGame = function () {
+    gameRunning = false;
+    const ov = el('gameOverlay'); if (!ov) return;
+    ov.style.display = 'flex'; ov.style.flexDirection = 'column';
+    ov.style.alignItems = 'center'; ov.style.justifyContent = 'center'; ov.style.gap = '10px';
+    ov.innerHTML = '<div style="font-size:2.2rem">&#128737;</div>' +
+      '<h3 style="color:#fbbf24">Game Over!</h3>' +
+      '<p>Score: <strong>' + gState.score + '</strong> &nbsp;|&nbsp; Delivered: <strong>' + gState.delivered + '</strong> &nbsp;|&nbsp; Level: <strong>' + gState.level + '</strong></p>' +
+      '<p style="font-size:0.76rem;color:#475569">Packets Lost: ' + gState.lost + '</p>' +
+      '<button class="btn btn-gold" style="margin-top:12px" onclick="startNetGame()">Play Again</button>';
+  };
+
+  /* ================================================================
+     OSI / TCP-IP QUIZ
+     ================================================================ */
+  const QUIZ = [
+    { q:'How many layers does the OSI reference model have?',
+      opts:['4','5','7','9'], ans:2,
+      exp:'OSI (Open Systems Interconnection) has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application. It is a guideline/reference. TCP/IP is the practical standard with 4–5 layers.' },
+    { q:'In TCP/IP (5-layer model), what happens to OSI Layers 5, 6, and 7?',
+      opts:['They are removed entirely','All three merge into the TCP/IP Application layer','They become the Transport layer','They stay as separate sub-layers'], ans:1,
+      exp:'TCP/IP merges OSI Layers 5 (Session), 6 (Presentation), and 7 (Application) into one Application layer. That is why our HTTPS (TLS = Presentation) and WebSocket sessions are all "Application layer" in TCP/IP terms.' },
+    { q:'What is the Maximum Transmission Unit (MTU) for standard Ethernet?',
+      opts:['512 bytes','1024 bytes','1500 bytes','9000 bytes'], ans:2,
+      exp:'Standard Ethernet MTU is 1500 bytes — the maximum IP packet size. With 20B IP header + 20B TCP header = 40B overhead, the TCP Maximum Segment Size (MSS) is 1460 bytes of application payload.' },
+    { q:'In our DSA project, which tool provides OSI Layer 6 (Presentation / TLS encryption)?',
+      opts:['Python Flask API','NGINX reverse proxy','Certbot / Let\'s Encrypt TLS','GitHub Pages CDN'], ans:2,
+      exp:'Certbot manages SSL/TLS certificates (Let\'s Encrypt), providing the encryption that corresponds to OSI Layer 6 Presentation. NGINX uses these certs to terminate HTTPS connections.' },
+    { q:'How large is a standard Ethernet frame header (destination MAC + source MAC + EtherType)?',
+      opts:['4 bytes','8 bytes','14 bytes','20 bytes'], ans:2,
+      exp:'Ethernet header = 6B destination MAC + 6B source MAC + 2B EtherType = 14B. There is also a 4B FCS/CRC tail, so total Ethernet overhead is 18B. Max Ethernet frame = 14+1500+4 = 1518B.' },
+    { q:'What role does NGINX play in our deployment (OSI perspective)?',
+      opts:['It is the SQL database','It is a Reverse Proxy operating at L4/L7 boundary','It compiles the Java Spring code','It manages GitHub Actions CI/CD'], ans:1,
+      exp:'NGINX is a reverse proxy and orchestrator. It receives TCP traffic on port 80/443 (L4 Transport) and routes HTTP requests (L7 Application) to the correct Docker container. It sits at the Transport ↔ Application boundary.' },
+    { q:'When a JS fetch() request travels DOWN the OSI stack, what does Layer 3 (Network) add?',
+      opts:['MAC addresses','Port numbers','Source & destination IP addresses','TLS certificate'], ans:2,
+      exp:'Layer 3 (Network / IP) adds the 20-byte IP header containing source IP (your home) and destination IP (AWS EC2 3.233.212.71). This enables routing across the internet through multiple routers.' },
+    { q:'Correct order of ENCAPSULATION going DOWN from the application:',
+      opts:['IP packet → TCP segment → Ethernet frame → Data','Data → TCP segment → IP packet → Ethernet frame','Ethernet frame → IP packet → TCP segment → Data','Data → IP packet → Ethernet frame → TCP segment'], ans:1,
+      exp:'Encapsulation: Application Data → TCP wraps with 20B header (segment) → IP wraps with 20B header (packet) → Ethernet wraps with 14B header + 4B FCS (frame) → Physical layer sends as bits.' },
+    { q:'OSI Layer 5 (Session) is primarily responsible for:',
+      opts:['Routing packets between networks','Establishing, managing, and terminating application dialogues (e.g. WebSockets)','Encrypting payload data','Converting frames to electrical signals'], ans:1,
+      exp:'OSI Layer 5 (Session) manages communication sessions between applications — things like WebSocket persistent connections. In TCP/IP this is folded into the Application layer alongside Presentation and Application.' },
+    { q:'A payload is 2200 bytes. With MTU=1500 and TCP/IP overhead of 40B, how many TCP fragments are needed?',
+      opts:['1','2','3','4'], ans:1,
+      exp:'MSS = 1500 - 40 = 1460B. Fragments: ⌈2200/1460⌉ = 2. Fragment 1 carries 1460B, Fragment 2 carries 740B. Each gets its own IP+TCP headers. Press F in Net Patrol to practice this!' },
+  ];
+  let qIdx = 0, qScore = 0, qAnswered = false;
+
+  window.initQuiz = function () {
+    if (el('quizContainer') && el('quizContainer').innerHTML) return;
+    qIdx = 0; qScore = 0; renderQ();
+  };
+
+  function renderQ() {
+    const c = el('quizContainer'); if (!c) return;
+    if (qIdx >= QUIZ.length) {
+      const pct = Math.round(qScore/QUIZ.length*100);
+      const msg = pct>=80?'<p style="color:#34d399;margin-top:8px">&#9733; Expert Network Deputy! Your packets route flawlessly.</p>'
+                 :pct>=50?'<p style="color:#fbbf24;margin-top:8px">&#128218; Solid — review the OSI/TCP-IP blog for the ones you missed.</p>'
+                         :'<p style="color:#94a3b8;margin-top:8px">Keep studying the networking stack blog and try again!</p>';
+      c.innerHTML = '<div class="quiz-score"><div class="qs-num">'+qScore+'/'+QUIZ.length+'</div><p style="color:#94a3b8;margin-top:8px">'+pct+'% — '+qScore+' correct out of '+QUIZ.length+'</p>'+msg+'<button class="btn btn-gold" style="margin-top:18px" onclick="resetQuiz()">Retry Quiz</button></div>';
+      return;
+    }
+    qAnswered = false;
+    const q = QUIZ[qIdx];
+    c.innerHTML = '<div style="text-align:right;font-size:0.78rem;color:#475569;margin-bottom:8px">Question '+(qIdx+1)+' / '+QUIZ.length+' &nbsp;|&nbsp; Score: '+qScore+'</div>'
+      +'<div class="quiz-q"><h4>'+q.q+'</h4><div class="quiz-opts">'
+      +q.opts.map((o,i)=>'<button class="qopt" onclick="answerQuiz('+i+')">'+o+'</button>').join('')
+      +'</div><div class="quiz-exp" id="quizExp"><strong>Explanation:</strong> '+q.exp+'</div></div>';
+  }
+
+  window.answerQuiz = function (i) {
+    if (qAnswered) return; qAnswered = true;
+    const q = QUIZ[qIdx];
+    document.querySelectorAll('.qopt').forEach((b,j) => {
+      if (j===q.ans) b.classList.add('correct');
+      else if (j===i) b.classList.add('wrong');
+      b.disabled = true;
+    });
+    const exp = el('quizExp'); if (exp) exp.classList.add('show');
+    if (i===q.ans) qScore++;
+    setTimeout(() => { qIdx++; renderQ(); }, 1900);
+  };
+
+  window.resetQuiz = function () { qIdx=0; qScore=0; const c=el('quizContainer'); if(c)c.innerHTML=''; renderQ(); };
+
+  /* ================================================================
+     MTU EXPLORER
+     ================================================================ */
+  window.updateMTU = function () {
+    const payloadEl = el('mtuPayload'); if (!payloadEl) return;
+    const payload = parseInt(payloadEl.value);
+    if (el('mtuPayloadVal')) el('mtuPayloadVal').textContent = payload + ' B';
+    const tcpHdr=20, ipHdr=20, ethHdr=14, ethFcs=4, mss=1460;
+    const needsFrag = payload > mss;
+    const frags = needsFrag ? Math.ceil(payload/mss) : 1;
+    const seg1Payload = needsFrag ? mss : payload;
+    const ipPkt = seg1Payload + tcpHdr + ipHdr;
+    const frame = ipPkt + ethHdr + ethFcs;
+    const segs = [
+      { label:'Eth Hdr', bytes:ethHdr, col:'#8b5cf6', tc:'white' },
+      { label:'IP Hdr',  bytes:ipHdr,  col:'#10b981', tc:'white' },
+      { label:'TCP Hdr', bytes:tcpHdr, col:'#3b82f6', tc:'white' },
+      { label:'Payload', bytes:seg1Payload, col:'#f59e0b', tc:'#1e3a5f' },
+      { label:'FCS',     bytes:ethFcs, col:'#475569', tc:'white' },
+    ];
+    const total = segs.reduce((s,sg)=>s+sg.bytes, 0);
+    const viz = el('mtuFrameViz');
+    if (viz) viz.innerHTML = segs.map(sg => '<div class="mf-seg" style="background:'+sg.col+';flex:'+sg.bytes+';color:'+sg.tc+'"><strong>'+sg.label+'</strong><span>'+sg.bytes+'B</span></div>').join('');
+    const lbl = el('mtuFrameLabel');
+    if (lbl) lbl.innerHTML = 'Frame: <strong>'+frame+'B</strong> &nbsp;|&nbsp; IP packet: <strong>'+ipPkt+'B</strong> &nbsp;|&nbsp; MTU check: '+(ipPkt<=1500?'<span style="color:#34d399">✓ OK ('+ipPkt+' ≤ 1500)</span>':'<span style="color:#ef4444">✗ Exceeds MTU</span>')+' &nbsp;|&nbsp; '+(needsFrag?'<span style="color:#f59e0b">Fragments: '+frags+'</span>':'<span style="color:#34d399">No fragmentation needed</span>');
+    const warn = el('mtuWarn');
+    if (warn) {
+      if (needsFrag) { warn.classList.add('show'); const fc=el('mtuFragCount'); if(fc) fc.textContent=frags; }
+      else warn.classList.remove('show');
+    }
+  };
+
+  /* Auto-init MTU on page load so the diagram renders */
+  window.addEventListener('load', function () { updateMTU(); });
+
+})();
 
 /* ================================================================
    INIT — check auth session on page load
