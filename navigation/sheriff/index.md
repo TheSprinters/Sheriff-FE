@@ -373,6 +373,9 @@ search_exclude: true
     }
     .game-feature-card h4 { font-size: 0.76rem; color: #fbbf24; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.6px; }
     .game-feature-card p { font-size: 0.76rem; color: #94a3b8; line-height: 1.55; }
+    .teach-list { display: grid; gap: 6px; }
+    .teach-step { font-size: 0.76rem; color: #cbd5e1; line-height: 1.5; }
+    .teach-step strong { color: #fbbf24; }
     .requirement-tags { display: flex; gap: 7px; flex-wrap: wrap; }
     .requirement-tag {
       padding: 5px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 700;
@@ -381,11 +384,70 @@ search_exclude: true
     .requirement-tag.academic { background: rgba(96,165,250,0.08); border-color: rgba(96,165,250,0.28); color: #60a5fa; }
     .requirement-tag.warning { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.28); color: #fbbf24; }
     .game-layout { display: flex; gap: 16px; align-items: flex-start; }
-    .game-canvas-wrap { position: relative; flex: 1; border-radius: 12px; overflow: hidden; background: #0b1a2e; border: 1px solid #1e3352; min-width: 0; }
+    .game-canvas-stack { display: flex; flex-direction: column; gap: 12px; flex: 1; min-width: 0; }
+    .game-status-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      background: #0d1727; border: 1px solid #1e3352; border-radius: 12px; padding: 18px 22px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+    .game-status-bar h3 { font-size: 0.95rem; color: #e2e8f0; font-weight: 700; }
+    .game-status-bar h3 span { color: #3b82f6; font-size: 1.15rem; margin-left: 4px; }
+    .status-mini { display: flex; gap: 10px; flex-wrap: wrap; }
+    .status-pill {
+      padding: 7px 12px; border-radius: 999px; background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.22); color: #93c5fd; font-size: 0.74rem; font-weight: 700;
+    }
+    .game-canvas-wrap {
+      position: relative; flex: 1; border-radius: 16px; overflow: hidden; background: #f8fafc;
+      border: 3px solid #3b82f6; box-shadow: 0 18px 50px rgba(2,12,27,0.28); min-width: 0;
+    }
+    .gb-controls {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      background: #0d1727; border: 1px solid #1e3352; border-radius: 12px; padding: 14px 18px;
+    }
+    .gb-left, .gb-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .gb-btn {
+      padding: 8px 14px; border-radius: 9px; border: 1px solid rgba(59,130,246,0.24);
+      background: #111f34; color: #e2e8f0; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+    }
+    .gb-btn:hover { border-color: #3b82f6; color: #93c5fd; }
+    .gb-chip {
+      padding: 7px 12px; border-radius: 999px; background: rgba(255,255,255,0.05);
+      border: 1px solid #1e3352; color: #94a3b8; font-size: 0.74rem; font-weight: 700;
+    }
+    .gb-select {
+      padding: 8px 12px; border-radius: 9px; background: #111f34; border: 1px solid #1e3352;
+      color: #e2e8f0; font-size: 0.8rem; outline: none;
+    }
+    .layer-guide {
+      margin-top: 16px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px;
+    }
+    .guide-card {
+      background: #162a46; border: 1px solid #1e3352; border-radius: 12px; padding: 18px;
+    }
+    .guide-card h4 { font-size: 0.84rem; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px; }
+    .guide-card p { font-size: 0.79rem; color: #94a3b8; line-height: 1.6; }
+    .stack-guide { display: grid; gap: 10px; }
+    .stack-row {
+      background: rgba(255,255,255,0.03); border: 1px solid #1e3352; border-radius: 10px; padding: 12px;
+    }
+    .stack-row strong { display: block; color: #e2e8f0; font-size: 0.82rem; margin-bottom: 5px; }
+    .stack-row span { display: block; color: #64748b; font-size: 0.73rem; margin-bottom: 6px; }
+    .stack-row p { font-size: 0.77rem; color: #94a3b8; line-height: 1.55; }
     #netCanvas { display: block; width: 100%; height: auto; }
-    .game-overlay { position: absolute; inset: 0; background: rgba(11,26,46,0.9); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 24px; }
+    .game-overlay {
+      position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,15,29,0.82), rgba(8,15,29,0.74));
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 24px;
+    }
     .game-overlay h3 { font-size: 1.4rem; color: #fbbf24; }
-    .game-overlay p { font-size: 0.85rem; color: #94a3b8; max-width: 360px; }
+    .game-overlay p { font-size: 0.84rem; color: #cbd5e1; max-width: 520px; line-height: 1.55; }
+    .slack-map {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px;
+      background: rgba(15,23,42,0.42); border: 1px solid rgba(148,163,184,0.16); border-radius: 12px; padding: 12px;
+      max-width: 720px;
+    }
+    .slack-map-item { text-align: left; font-size: 0.76rem; color: #cbd5e1; line-height: 1.5; }
+    .slack-map-item strong { color: #fbbf24; }
     .game-sidebar { width: 210px; flex-shrink: 0; display: flex; flex-direction: column; gap: 12px; }
     .gs-card { background: #162a46; border: 1px solid #1e3352; border-radius: 10px; padding: 14px; }
     .gs-card h4 { font-size: 0.75rem; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
@@ -431,6 +493,8 @@ search_exclude: true
       nav { display: none; }
       .mob-toggle { display: block; }
       .game-feature-grid { grid-template-columns: 1fr 1fr; }
+      .slack-map { grid-template-columns: 1fr; }
+      .layer-guide { grid-template-columns: 1fr; }
       .tiles { grid-template-columns: repeat(2, 1fr); }
       .news-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; }
@@ -739,7 +803,7 @@ search_exclude: true
 <div class="section" id="games">
   <div class="sec-head">
     <h2>&#127918; Net Patrol &mdash; CB Unit 4 Challenge Zone</h2>
-    <p>College Board Unit 4 networking, turned into a real project mission: route traffic from GitHub Pages to NGINX, Flask / Spring, and AWS while mastering OSI vs TCP/IP, encapsulation, and MTU.</p>
+    <p>College Board Unit 4 networking turned into a game-builder lesson: move traffic from GitHub Pages to NGINX, Flask / Spring, and AWS while clearly teaching OSI vs TCP/IP, encapsulation, request/response flow, and MTU.</p>
   </div>
   <div class="game-feature-grid">
     <div class="game-feature-card">
@@ -761,11 +825,20 @@ search_exclude: true
     </div>
     <div class="game-feature-card">
       <h4>Real Project Link</h4>
-      <p>Every packet mission connects back to GitHub Pages, HTTPS, NGINX, Flask / Spring, AWS EC2, and SQL so the lesson applies to actual deployment.</p>
+      <p>Every packet mission connects back to GitHub Pages, HTTPS, NGINX, Flask / Spring, AWS EC2, Docker, and SQL so the lesson applies to your real deployment instead of abstract notes.</p>
     </div>
     <div class="game-feature-card">
-      <h4>Teacher Notes</h4>
-      <p>The Java leaderboard is intentionally not part of this challenge. This section focuses on networking gameplay, learning checks, and deployment reasoning.</p>
+      <h4>Slack Concepts Used</h4>
+      <p>The Slack asks are shown directly: fun game, real deployment, OSI vs TCP/IP, MTU formation, request/response flow, pop-quiz review, and a clear player/NPC/AI NPC structure.</p>
+    </div>
+  </div>
+  <div class="game-feature-card" style="margin-bottom:18px">
+    <h4>How To Teach It</h4>
+    <div class="teach-list">
+      <div class="teach-step"><strong>1.</strong> Point to the board and say: these seven circles are the OSI layers we use to explain networking.</div>
+      <div class="teach-step"><strong>2.</strong> Point to the labels under them and say: TCP/IP combines some of those jobs into five practical layers.</div>
+      <div class="teach-step"><strong>3.</strong> Move the player and explain: our project traffic starts at GitHub Pages, then moves through HTTPS, TCP, IP, Ethernet, NGINX, Docker, and the backend.</div>
+      <div class="teach-step"><strong>4.</strong> Use an oversized packet to teach MTU and request/response flow: if the payload is too big, fragment it before delivery so the backend can answer cleanly.</div>
     </div>
   </div>
   <div class="game-tabs">
@@ -777,14 +850,48 @@ search_exclude: true
   <!-- TAB 1: Canvas Game -->
   <div class="gtab-panel" id="gtab-patrol">
     <div class="game-layout">
-      <div class="game-canvas-wrap">
-        <canvas id="netCanvas" width="780" height="440"></canvas>
-        <div class="game-overlay" id="gameOverlay">
+      <div class="game-canvas-stack">
+        <div class="gb-controls">
+          <div class="gb-left">
+            <button class="gb-btn" onclick="startNetGame()">▶ Play</button>
+            <button class="gb-btn" onclick="pauseNetGame()">⏸ Pause</button>
+            <button class="gb-btn" onclick="stopNetGame()">■ Stop</button>
+            <span class="gb-chip">Engine v1.1</span>
+          </div>
+          <div class="gb-right">
+            <select id="netLevelSelect" class="gb-select" onchange="setNetLevel(this.value)">
+              <option value="full">Select Level...</option>
+              <option value="application">HTTP/DNS (Application)</option>
+              <option value="transport">TCP/UDP (Transport)</option>
+              <option value="network">IP (Network)</option>
+              <option value="physical">Physical Layer</option>
+              <option value="full">Full Stack Mission</option>
+            </select>
+          </div>
+        </div>
+        <div class="game-status-bar">
+          <h3>Game Status: <span id="gameStatusHeadline">Not Started</span></h3>
+          <div class="status-mini">
+            <div class="status-pill">Teach OSI vs TCP/IP</div>
+            <div class="status-pill">Show MTU decisions</div>
+            <div class="status-pill">Connect to deployment</div>
+          </div>
+        </div>
+        <div class="game-canvas-wrap">
+          <canvas id="netCanvas" width="780" height="440"></canvas>
+          <div class="game-overlay" id="gameOverlay">
           <div style="font-size:2.8rem">&#128640;</div>
           <h3>Net Patrol Mission</h3>
-          <p>You are the network engineer moving live project traffic through the stack. Carry packets from the GitHub Pages app, survive Hacker H4X, check MTU before Transport, and deliver clean frames to Router Ron at the deployment edge.</p>
-          <p style="font-size:0.74rem;color:#64748b;margin-top:2px"><strong>&#8592;&#8594;</strong> Move &nbsp;|&nbsp; <strong>&#8593; / Space</strong> Jump &nbsp;|&nbsp; <strong>E</strong> Carry or rescue packet &nbsp;|&nbsp; <strong>F</strong> Fragment if payload &gt;1460B</p>
-          <button class="btn btn-gold" style="margin-top:10px" onclick="startNetGame()">Launch Mission</button>
+          <p>This board matches the CSSE game-builder idea: the OSI layers are the map, the arrows show packet flow, and the mission teaches exactly how our project traffic moves from the frontend to the backend.</p>
+          <p style="font-size:0.76rem;color:#e2e8f0;margin-top:2px"><strong>&#8592;&#8594;</strong> Move &nbsp;|&nbsp; <strong>&#8593; / Space</strong> Jump &nbsp;|&nbsp; <strong>E</strong> Pick up packet &nbsp;|&nbsp; <strong>F</strong> Fragment packet if it is too large</p>
+          <div class="slack-map">
+              <div class="slack-map-item"><strong>Fun:</strong> A live mission with a player, Router Ron as the NPC, and Hacker H4X as the AI NPC.</div>
+              <div class="slack-map-item"><strong>Real:</strong> The route follows our project deployment from GitHub Pages to NGINX, Docker, Flask or Spring, AWS EC2, and SQL.</div>
+              <div class="slack-map-item"><strong>Academic:</strong> OSI 7-layer language, TCP/IP 5-layer standard, MTU/MSS, and request/response flow are explained directly.</div>
+              <div class="slack-map-item"><strong>Teachable:</strong> The board, analyzer, quiz, and MTU lab all repeat the same lesson in simple words so it is easier to present.</div>
+            </div>
+            <button class="btn btn-gold" style="margin-top:10px" onclick="startNetGame()">Launch Mission</button>
+          </div>
         </div>
       </div>
       <div class="game-sidebar">
@@ -796,15 +903,15 @@ search_exclude: true
         </div>
         <div class="gs-card">
           <h4>&#127758; Current Layer</h4>
-          <p id="layerText">Start the game to see your current OSI layer here.</p>
+          <p id="layerText">Start the game to see which OSI layer your player is standing on.</p>
         </div>
         <div class="gs-card">
           <h4>&#128736; Controls</h4>
-          <p>&#8592;&#8594; Move &nbsp;|&nbsp; &#8593; Jump<br>E &mdash; Pick up, drop, or rescue packet<br>F &mdash; Fragment oversized payload<br><br>&#9733; <span style="color:#fbbf24">Gold engineer</span> = Player<br>&#128994; <span style="color:#34d399">Router Ron</span> = NPC coach<br>&#128308; <span style="color:#ef4444">Hacker H4X</span> = AI NPC attacker</p>
+          <p>&#8592;&#8594; Move &nbsp;|&nbsp; &#8593; Jump<br>E &mdash; Pick up or drop a packet<br>F &mdash; Split a packet that is too large<br><br>&#9733; <span style="color:#fbbf24">Player</span><br>&#128994; <span style="color:#34d399">Router Ron = NPC</span><br>&#128308; <span style="color:#ef4444">Hacker H4X = AI NPC</span></p>
         </div>
         <div class="gs-card">
           <h4>&#128218; Learning Goal</h4>
-          <p id="missionText">Use the 7-layer OSI model as a guideline to explain what the 5-layer TCP/IP model actually does in your deployment. Fragment any packet larger than 1460B before delivery to avoid MTU trouble.</p>
+          <p id="missionText">Teach this simply: OSI helps us explain networking, TCP/IP is what real internet traffic uses, and MTU tells us when a packet must be split.</p>
           <p id="routeDisplay" style="margin-top:10px;font-size:0.74rem;color:#64748b">Route: GitHub Pages fetch() &#8594; HTTPS/TLS &#8594; TCP &#8594; IP &#8594; Ethernet &#8594; NGINX &#8594; Flask / Spring &#8594; SQL</p>
         </div>
         <div class="gs-card">
@@ -815,6 +922,64 @@ search_exclude: true
             <div class="packet-metric"><span>Headers</span><span id="packetHeaders">-</span></div>
             <div class="packet-metric"><span>Fragments</span><span id="packetFragments">-</span></div>
             <div class="packet-metric"><span>Decision</span><span id="packetDecision">Launch mission</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="layer-guide">
+      <div class="guide-card">
+        <h4>Network Stack Lesson Guide</h4>
+        <div class="stack-guide">
+          <div class="stack-row">
+            <strong>HTTP/DNS (Application Layer)</strong>
+            <span>Frontend (GitHub Pages) -> Backend (AWS EC2 with Docker)</span>
+            <p>The frontend uses JavaScript <code>fetch()</code> to send HTTP(S) requests. DNS resolves the backend domain, and the backend builds request and response data for CRUD operations.</p>
+          </div>
+          <div class="stack-row">
+            <strong>Presentation + Session</strong>
+            <span>SSL/TLS, Certbot, and ongoing communication</span>
+            <p>Presentation handles encryption and translation. Session manages dialogues between apps, such as persistent connections and application conversations.</p>
+          </div>
+          <div class="stack-row">
+            <strong>TCP/UDP (Transport Layer)</strong>
+            <span>Request and response move as reliable segments</span>
+            <p>TCP breaks data into segments, often around 1460 bytes of payload. NGINX receives traffic and routes it to the correct backend service.</p>
+          </div>
+          <div class="stack-row">
+            <strong>IP (Network Layer)</strong>
+            <span>Request and response become routed packets</span>
+            <p>The TCP segment is wrapped in an IP packet with source and destination IP addresses. Routers move those packets across the internet to AWS.</p>
+          </div>
+          <div class="stack-row">
+            <strong>Data Link + Physical</strong>
+            <span>Ethernet/Wi-Fi frames and electrical or optical signals</span>
+            <p>The packet becomes a frame with MAC addresses and CRC, then moves as bits through cables, fiber, or wireless signals.</p>
+          </div>
+          <div class="stack-row">
+            <strong>NGINX as Orchestrator</strong>
+            <span>Traffic manager between internet and backend</span>
+            <p>NGINX acts as the orchestrator, connecting traffic from the internet to Flask or Spring containers and sending responses back out.</p>
+          </div>
+        </div>
+      </div>
+      <div class="guide-card">
+        <h4>College Board Requirement Match</h4>
+        <div class="stack-guide">
+          <div class="stack-row">
+            <strong>Fun and Gamified</strong>
+            <p>Player movement, packet pickup, fragmentation, rescue, and delivery turn Unit 4 into a game instead of a static note page.</p>
+          </div>
+          <div class="stack-row">
+            <strong>Real to Our Project</strong>
+            <p>The mission uses GitHub Pages, HTTPS, NGINX, Docker, Flask / Spring, AWS EC2, and SQL exactly like the blog and deployment stack.</p>
+          </div>
+          <div class="stack-row">
+            <strong>Academic</strong>
+            <p>The board shows the OSI 7-layer explanation and the TCP/IP 5-layer standard while the MTU lab teaches segmentation and framing.</p>
+          </div>
+          <div class="stack-row">
+            <strong>Required Game Parts</strong>
+            <p>Background: layer board. Player: frontend engineer. NPC: Router Ron. AI NPC: Hacker H4X. The Java leaderboard is excluded from the challenge.</p>
           </div>
         </div>
       </div>
@@ -1552,7 +1717,7 @@ function sendChat() {
     if (panel) panel.style.display = 'block';
     if (tab === 'quiz') initQuiz();
     if (tab === 'mtu') updateMTU();
-    if (tab !== 'patrol') { gameRunning = false; if (animId) cancelAnimationFrame(animId); }
+    if (tab !== 'patrol') { gameRunning = false; gamePaused = false; if (animId) cancelAnimationFrame(animId); }
   };
 
   /* ================================================================
@@ -1596,6 +1761,19 @@ function sendChat() {
   const routerNpc = { x: 650, y: 376, w: 44, h: 40, msg: '', msgT: 0 };
   let packets = [], fx = [];
   const keys = {};
+  let gamePaused = false;
+  let levelMode = 'full';
+  const spriteSources = {
+    player: '{{ site.baseurl }}/images/gamify/lessons/character.png',
+    npc: '{{ site.baseurl }}/images/gamify/wizard.png',
+    ai: '{{ site.baseurl }}/images/gamebuilder/sprites/slime.png'
+  };
+  const sprites = {};
+  ['player', 'npc', 'ai'].forEach(key => {
+    const img = new Image();
+    img.src = spriteSources[key];
+    sprites[key] = img;
+  });
 
   function rr(c, x, y, w, h, r) {
     c.beginPath();
@@ -1650,6 +1828,11 @@ function sendChat() {
 
   function setStatus(text) {
     if (el('statusDisplay')) el('statusDisplay').textContent = text;
+    if (el('gameStatusHeadline')) el('gameStatusHeadline').textContent = text;
+  }
+
+  function canDrawSprite(img) {
+    return img && img.complete && img.naturalWidth > 0;
   }
 
   function updateMissionText(packet, extra) {
@@ -1883,48 +2066,265 @@ function sendChat() {
   }
 
   function drawBg() {
-    ctx.fillStyle = '#0b1a2e';
+    ctx.fillStyle = '#f8fafc';
     ctx.fillRect(0, 0, 780, 440);
 
     const grad = ctx.createLinearGradient(0, 0, 780, 440);
-    grad.addColorStop(0, 'rgba(59,130,246,0.12)');
-    grad.addColorStop(1, 'rgba(15,23,42,0)');
+    grad.addColorStop(0, 'rgba(59,130,246,0.04)');
+    grad.addColorStop(1, 'rgba(148,163,184,0.02)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 780, 440);
 
-    OSI.forEach(l => {
-      ctx.fillStyle = l.col + '18';
-      ctx.fillRect(0, l.y, 780, l.h);
-      ctx.fillStyle = l.col + 'cc';
-      ctx.font = 'bold 10px monospace';
-      ctx.fillText('L' + l.id + ' ' + l.name, 8, l.y + l.h - 6);
-      ctx.fillStyle = '#64748b';
-      ctx.font = '8px monospace';
-      ctx.fillText('TCP/IP: ' + l.tcp, 142, l.y + l.h - 6);
-      ctx.strokeStyle = l.col + '35';
-      ctx.lineWidth = 1;
+    const layerNodes = [
+      { x: 88,  y: 236, title: 'Application', subtitle: 'Layer', icon: 'application' },
+      { x: 218, y: 310, title: 'Presentation', subtitle: 'Layer', icon: 'presentation' },
+      { x: 348, y: 220, title: 'Session', subtitle: 'Layer', icon: 'session' },
+      { x: 478, y: 310, title: 'Transport', subtitle: 'Layer', icon: 'transport' },
+      { x: 596, y: 220, title: 'Network', subtitle: 'Layer', icon: 'network' },
+      { x: 676, y: 308, title: 'Data Link', subtitle: 'Layer', icon: 'datalink' },
+      { x: 744, y: 218, title: 'Physical', subtitle: 'Layer', icon: 'physical' }
+    ];
+
+    function centerText(text, x, y, font, color) {
+      ctx.font = font;
+      ctx.fillStyle = color;
+      const w = ctx.measureText(text).width;
+      ctx.fillText(text, x - w / 2, y);
+    }
+
+    function drawNodeSymbol(type, x, y) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.lineWidth = 2.2;
+      ctx.strokeStyle = '#1f2937';
+      ctx.fillStyle = '#ef4444';
+
+      if (type === 'application') {
+        rr(ctx, -26, -18, 52, 38, 6);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#ef4444';
+        ctx.fillRect(-26, -18, 52, 8);
+        ctx.fillStyle = '#1f2937';
+        ctx.beginPath();
+        ctx.arc(15, -14, 1.5, 0, Math.PI * 2);
+        ctx.arc(20, -14, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+        rr(ctx, -8, -2, 16, 16, 3);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(0, 6, 4, 0, Math.PI * 2);
+        ctx.stroke();
+        for (let i = 0; i < 6; i++) {
+          const a = i * Math.PI / 3;
+          ctx.beginPath();
+          ctx.moveTo(Math.cos(a) * 6, Math.sin(a) * 6 + 6);
+          ctx.lineTo(Math.cos(a) * 9, Math.sin(a) * 9 + 6);
+          ctx.stroke();
+        }
+      } else if (type === 'presentation') {
+        rr(ctx, -24, -18, 48, 34, 4);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#ef4444';
+        ctx.fillRect(-24, 10, 48, 6);
+        ctx.beginPath();
+        ctx.moveTo(-14, 2);
+        ctx.lineTo(-6, -3);
+        ctx.lineTo(0, 5);
+        ctx.lineTo(8, -7);
+        ctx.lineTo(16, -1);
+        ctx.stroke();
+      } else if (type === 'session') {
+        ctx.beginPath();
+        ctx.arc(0, 0, 24, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath();
+        ctx.moveTo(-22, 0);
+        ctx.arc(-2, 0, 20, Math.PI / 2, Math.PI * 1.5, true);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(4, 0, 11, -Math.PI / 2, Math.PI / 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(8, -17);
+        ctx.lineTo(15, -10);
+        ctx.lineTo(11, -10);
+        ctx.moveTo(15, 10);
+        ctx.lineTo(8, 17);
+        ctx.lineTo(12, 17);
+        ctx.stroke();
+      } else if (type === 'transport') {
+        rr(ctx, -18, -10, 16, 12, 2);
+        rr(ctx, 4, 8, 16, 12, 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#ef4444';
+        ctx.fillRect(-18, -10, 16, 12);
+        ctx.fillRect(4, 8, 16, 12);
+        ctx.beginPath();
+        ctx.moveTo(-2, -4);
+        ctx.lineTo(-2, 10);
+        ctx.lineTo(4, 10);
+        ctx.moveTo(-12, 2);
+        ctx.lineTo(-12, 14);
+        ctx.lineTo(0, 14);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-5, 7);
+        ctx.lineTo(-2, 10);
+        ctx.lineTo(1, 7);
+        ctx.moveTo(-3, 11);
+        ctx.lineTo(0, 14);
+        ctx.lineTo(3, 11);
+        ctx.stroke();
+      } else if (type === 'network') {
+        rr(ctx, -20, -22, 28, 44, 5);
+        rr(ctx, -2, -16, 18, 32, 4);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#ef4444';
+        ctx.beginPath();
+        ctx.arc(-6, 0, 10, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(-6, 0, 10, 0, Math.PI * 2);
+        ctx.moveTo(-16, 0);
+        ctx.lineTo(4, 0);
+        ctx.moveTo(-6, -10);
+        ctx.lineTo(-6, 10);
+        ctx.moveTo(-13, -6);
+        ctx.quadraticCurveTo(-6, -10, 1, -6);
+        ctx.moveTo(-13, 6);
+        ctx.quadraticCurveTo(-6, 10, 1, 6);
+        ctx.stroke();
+      } else if (type === 'datalink') {
+        rr(ctx, -18, -10, 18, 14, 2);
+        rr(ctx, -4, 4, 18, 14, 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#ef4444';
+        ctx.fillRect(-18, -10, 18, 4);
+        ctx.fillRect(-4, 4, 18, 4);
+        ctx.beginPath();
+        ctx.moveTo(0, -3);
+        ctx.lineTo(0, 10);
+        ctx.moveTo(-8, 0);
+        ctx.lineTo(-8, 12);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(-3, 7);
+        ctx.lineTo(0, 10);
+        ctx.lineTo(3, 7);
+        ctx.moveTo(-11, 9);
+        ctx.lineTo(-8, 12);
+        ctx.lineTo(-5, 9);
+        ctx.stroke();
+      } else if (type === 'physical') {
+        ctx.beginPath();
+        ctx.moveTo(-16, 18);
+        ctx.lineTo(-16, -6);
+        ctx.moveTo(10, 18);
+        ctx.lineTo(10, -6);
+        ctx.stroke();
+        rr(ctx, -22, 10, 40, 12, 3);
+        ctx.fillStyle = '#ef4444';
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#1f2937';
+        ctx.beginPath();
+        ctx.arc(-14, 16, 1.5, 0, Math.PI * 2);
+        ctx.arc(-8, 16, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(0, -2, 5, -Math.PI / 2, Math.PI / 2);
+        ctx.arc(0, -2, 12, -Math.PI / 2, Math.PI / 2);
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
+    for (let i = 0; i < layerNodes.length - 1; i++) {
+      const from = layerNodes[i];
+      const to = layerNodes[i + 1];
+      const cx = (from.x + to.x) / 2;
+      const cy = Math.min(from.y, to.y) - 60;
+      ctx.strokeStyle = 'rgba(156,163,175,0.65)';
+      ctx.lineWidth = 10;
       ctx.beginPath();
-      ctx.moveTo(0, l.y + l.h);
-      ctx.lineTo(780, l.y + l.h);
+      ctx.moveTo(from.x + 40, from.y);
+      ctx.quadraticCurveTo(cx, cy, to.x - 40, to.y);
       ctx.stroke();
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = 'rgba(203,213,225,0.9)';
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(156,163,175,0.8)';
+      ctx.beginPath();
+      ctx.moveTo(to.x - 48, to.y - 8);
+      ctx.lineTo(to.x - 30, to.y);
+      ctx.lineTo(to.x - 48, to.y + 8);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    layerNodes.forEach((node, i) => {
+      const model = OSI[i];
+      ctx.strokeStyle = 'rgba(203,213,225,0.85)';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 54, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([3, 7]);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(203,213,225,0.75)';
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 63, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 44, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = model.col + '66';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      drawNodeSymbol(node.icon, node.x, node.y);
+
+      centerText(node.title, node.x, node.y - 92, 'bold 18px "Segoe UI", sans-serif', '#0f172a');
+      centerText(node.subtitle, node.x, node.y - 66, 'bold 18px "Segoe UI", sans-serif', '#0f172a');
     });
 
-    ctx.fillStyle = 'rgba(15,32,64,0.86)';
-    rr(ctx, 560, 350, 200, 64, 10);
+    ctx.fillStyle = '#ffffff';
+    rr(ctx, 544, 18, 214, 54, 14);
     ctx.fill();
-    ctx.strokeStyle = 'rgba(96,165,250,0.25)';
+    ctx.strokeStyle = '#dbeafe';
+    ctx.lineWidth = 2;
     ctx.stroke();
-    ctx.fillStyle = '#60a5fa';
-    ctx.font = 'bold 10px monospace';
-    ctx.fillText('DEPLOYMENT EDGE', 575, 368);
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '8px monospace';
-    ctx.fillText('NGINX -> Flask / Spring -> SQL', 575, 385);
-    ctx.fillText('Deliver clean traffic here', 575, 400);
+    ctx.fillStyle = '#1d4ed8';
+    ctx.font = 'bold 12px monospace';
+    ctx.fillText('Deployment Route', 560, 40);
+    ctx.fillStyle = '#64748b';
+    ctx.font = '10px monospace';
+    ctx.fillText('GitHub Pages -> NGINX -> Flask / Spring -> SQL', 560, 58);
 
-    ctx.strokeStyle = 'rgba(96,165,250,0.03)';
+    ctx.strokeStyle = 'rgba(148,163,184,0.12)';
     ctx.lineWidth = 1;
-    for (let x = 0; x < 780; x += 32) {
+    for (let x = 0; x < 780; x += 40) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
       ctx.lineTo(x, 440);
@@ -1935,18 +2335,25 @@ function sendChat() {
   function drawPlayer() {
     const { x, y, w, h } = player;
     if (player.invince > 0 && Math.floor(player.invince / 5) % 2) return;
+    if (canDrawSprite(sprites.player)) {
+      ctx.drawImage(sprites.player, x - 10, y - 12, 48, 54);
+      ctx.fillStyle = '#b91c1c';
+      ctx.font = 'bold 8px monospace';
+      ctx.fillText('PLAYER', x - 2, y - 6);
+      return;
+    }
     ctx.fillStyle = '#1e3a5f';
     ctx.fillRect(x + 4, y + 12, w - 8, h - 12);
     ctx.fillStyle = '#d4a574';
     ctx.beginPath();
     ctx.ellipse(x + w / 2, y + 7, 8, 8, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = '#0f2040';
+    ctx.fillStyle = '#dc2626';
     ctx.fillRect(x + 2, y - 1, w - 4, 9);
     ctx.fillRect(x - 1, y + 4, w + 2, 5);
-    ctx.fillStyle = '#fbbf24';
-    ctx.font = 'bold 13px serif';
-    ctx.fillText('★', x + 8, y + 26);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 11px monospace';
+    ctx.fillText('P1', x + 6, y + 26);
     ctx.fillStyle = '#1e3a5f';
     ctx.fillRect(x - 1, y + 16, 5, player.carrying ? 10 : 14);
     ctx.fillRect(x + w - 4, y + 16, 5, player.carrying ? 10 : 14);
@@ -1957,13 +2364,20 @@ function sendChat() {
 
   function drawHacker() {
     const { x, y, w, h } = hacker;
+    if (canDrawSprite(sprites.ai)) {
+      ctx.drawImage(sprites.ai, x - 10, y - 8, 44, 44);
+      ctx.fillStyle = hacker.stun > 0 ? '#cbd5e1' : '#ef4444';
+      ctx.font = 'bold 8px monospace';
+      ctx.fillText(hacker.stun > 0 ? 'STUN' : 'AI NPC', x - 2, y - 6);
+      return;
+    }
     ctx.fillStyle = hacker.stun > 0 ? '#4b5563' : '#7f1d1d';
     ctx.fillRect(x + 4, y + 12, w - 8, h - 12);
-    ctx.fillStyle = '#1c1c1c';
+    ctx.fillStyle = '#f8fafc';
     ctx.beginPath();
     ctx.ellipse(x + w / 2, y + 7, 8, 8, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = '#ef4444';
+    ctx.fillStyle = '#2563eb';
     ctx.fillRect(x + 3, y + 3, 5, 3);
     ctx.fillRect(x + w - 8, y + 3, 5, 3);
     ctx.fillStyle = hacker.stun > 0 ? '#cbd5e1' : '#ef4444';
@@ -1979,6 +2393,15 @@ function sendChat() {
 
   function drawRouter() {
     const { x, y, w, h } = routerNpc;
+    if (canDrawSprite(sprites.npc)) {
+      ctx.drawImage(sprites.npc, x - 8, y - 54, 72, 72);
+      ctx.fillStyle = '#34d399';
+      ctx.font = 'bold 8px monospace';
+      ctx.fillText('NPC', x + 9, y + 16);
+      ctx.fillStyle = '#64748b';
+      ctx.font = '7px monospace';
+      ctx.fillText('Router Ron', x + 1, y + 28);
+    } else {
     ctx.fillStyle = '#0f2040';
     ctx.strokeStyle = '#34d399';
     ctx.lineWidth = 2;
@@ -2000,7 +2423,7 @@ function sendChat() {
     });
     ctx.fillStyle = '#34d399';
     ctx.font = 'bold 8px monospace';
-    ctx.fillText('NGINX', x + 5, y + 16);
+    ctx.fillText('NPC', x + 9, y + 16);
     ctx.fillStyle = '#64748b';
     ctx.font = '7px monospace';
     ctx.fillText('Router Ron', x + 1, y + 28);
@@ -2008,6 +2431,7 @@ function sendChat() {
     ctx.beginPath();
     ctx.arc(x + 37, y + 10, 4, 0, Math.PI * 2);
     ctx.fill();
+    }
 
     if (routerNpc.msgT > 0 && routerNpc.msg) {
       routerNpc.msgT--;
@@ -2110,7 +2534,7 @@ function sendChat() {
   }
 
   function gameLoop() {
-    if (!gameRunning) return;
+    if (!gameRunning || gamePaused) return;
     ctx.clearRect(0, 0, 780, 440);
     drawBg();
     updatePlayer();
@@ -2197,18 +2621,33 @@ function sendChat() {
     Object.assign(gState, { score: 0, lives: 3, level: 1, delivered: 0, lost: 0, rescued: 0, streak: 0 });
     packets = [];
     fx = [];
-    Object.assign(player, { x: 80, y: 250, vx: 0, vy: 0, carrying: null, invince: 0 });
-    Object.assign(hacker, { x: 420, y: 50, vx: 1.2, vy: 0, carrying: null, stun: 0 });
+    Object.assign(player, { x: 78, y: 178, vx: 0, vy: 0, carrying: null, invince: 0 });
+    Object.assign(hacker, { x: 430, y: 82, vx: 1.2, vy: 0, carrying: null, stun: 0 });
     addScore(0);
     updateSidebar();
-    setStatus('Mission live');
+    setStatus('Running');
     updateMissionText(null);
     updateRouteText(null);
     updatePacketAnalyzer(null, 'Launch mission');
+    gamePaused = false;
 
     packets.push(mkPkt(180, 8, 860));
     packets.push(mkPkt(390, 8, 1240));
     packets.push(mkPkt(580, 8, 1900));
+
+    if (levelMode === 'application') {
+      Object.assign(player, { x: 74, y: 178 });
+      packets = [mkPkt(130, 120, 780)];
+    } else if (levelMode === 'transport') {
+      Object.assign(player, { x: 450, y: 250 });
+      packets = [mkPkt(430, 170, 1900)];
+    } else if (levelMode === 'network') {
+      Object.assign(player, { x: 574, y: 178 });
+      packets = [mkPkt(520, 155, 1280)];
+    } else if (levelMode === 'physical') {
+      Object.assign(player, { x: 718, y: 178 });
+      packets = [mkPkt(650, 250, 900)];
+    }
 
     const ov = el('gameOverlay');
     if (ov) ov.style.display = 'none';
@@ -2218,8 +2657,31 @@ function sendChat() {
     gameLoop();
   };
 
+  window.pauseNetGame = function () {
+    if (!gameRunning) return;
+    gamePaused = !gamePaused;
+    setStatus(gamePaused ? 'Paused' : 'Running');
+    if (!gamePaused) gameLoop();
+  };
+
+  window.stopNetGame = function () {
+    gameRunning = false;
+    gamePaused = false;
+    if (animId) cancelAnimationFrame(animId);
+    setStatus('Not Started');
+    const ov = el('gameOverlay');
+    if (ov) ov.style.display = 'flex';
+  };
+
+  window.setNetLevel = function (value) {
+    levelMode = value || 'full';
+    setStatus('Not Started');
+    updatePacketAnalyzer(null, 'Level: ' + levelMode);
+  };
+
   window.endNetGame = function () {
     gameRunning = false;
+    gamePaused = false;
     const ov = el('gameOverlay');
     if (!ov) return;
     const mastery = gState.score >= 900 ? 'Unit 4 mastered' : gState.score >= 500 ? 'Solid review run' : 'Needs another practice round';
@@ -2234,6 +2696,7 @@ function sendChat() {
       '<p>Score: <strong>' + gState.score + '</strong> &nbsp;|&nbsp; Delivered: <strong>' + gState.delivered + '</strong> &nbsp;|&nbsp; Rescued: <strong>' + gState.rescued + '</strong></p>' +
       '<p style="font-size:0.76rem;color:#94a3b8">Packets Lost: ' + gState.lost + ' &nbsp;|&nbsp; Max Level: ' + gState.level + ' &nbsp;|&nbsp; ' + mastery + '</p>' +
       '<button class="btn btn-gold" style="margin-top:12px" onclick="startNetGame()">Replay Mission</button>';
+    setStatus('Complete');
   };
 
   /* ================================================================
