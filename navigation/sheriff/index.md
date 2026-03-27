@@ -860,9 +860,9 @@ search_exclude: true
     </div>
   </div>
   <div class="game-tabs">
-    <button class="gtab active" onclick="switchGameTab(event,'patrol')">&#127914; Net Patrol Mission</button>
-    <button class="gtab" onclick="switchGameTab(event,'quiz')">&#9997;&#65039; Pop Quiz Review</button>
-    <button class="gtab" onclick="switchGameTab(event,'mtu')">&#128202; MTU Lab</button>
+    <button class="gtab active" onclick="switchGameTab(this,'patrol')">&#127914; Net Patrol Mission</button>
+    <button class="gtab" onclick="switchGameTab(this,'quiz')">&#9997;&#65039; Pop Quiz Review</button>
+    <button class="gtab" onclick="switchGameTab(this,'mtu')">&#128202; MTU Lab</button>
   </div>
 
   <!-- TAB 1: Canvas Game -->
@@ -1511,7 +1511,7 @@ document.querySelectorAll('.faq-tag').forEach(t => t.addEventListener('click', f
   filterFaqByCategory(this.dataset.c);
 }));
 
-el('faqSearch').addEventListener('input', function() {
+el('faqSearch')?.addEventListener('input', function() {
   filterFaqBySearch(this.value);
 });
 
@@ -1554,11 +1554,13 @@ function handleSearchItemClick(item, dropdown) {
   scrollTo(item.dataset.target);
   if (item.dataset.detail) setTimeout(() => openDetail(item.dataset.detail), 400);
   dropdown.classList.remove('open');
-  el('searchInput').value = '';
+  const si = el('searchInput');
+  if (si) si.value = '';
 }
 
-el('searchInput').addEventListener('input', function() {
+el('searchInput')?.addEventListener('input', function() {
   const q = this.value.trim(), drop = el('searchDrop');
+  if (!drop) return;
   if (q.length < 2) { drop.classList.remove('open'); return; }
   const hits = findSearchMatches(q);
   if (!hits.length) { drop.classList.remove('open'); return; }
@@ -1574,7 +1576,8 @@ el('searchInput').addEventListener('input', function() {
    ================================================================ */
 
 function closeDropdownsOnClickAway(e) {
-  if (!e.target.closest('.search-box')) el('searchDrop').classList.remove('open');
+  const drop = el('searchDrop');
+  if (drop && !e.target.closest('.search-box')) drop.classList.remove('open');
   if (!e.target.closest('.user-area')) el('userPanel')?.classList.remove('open');
 }
 
@@ -1798,9 +1801,10 @@ function sendChat() {
 (function () {
 
   /* ---- TAB SWITCHING ---- */
-  window.switchGameTab = function (e, tab) {
+  window.switchGameTab = function (evtOrEl, tab) {
     document.querySelectorAll('.gtab').forEach(t => t.classList.remove('active'));
-    e.currentTarget.classList.add('active');
+    const btn = evtOrEl?.currentTarget || evtOrEl || window.event?.currentTarget;
+    if (btn && btn.classList) btn.classList.add('active');
     document.querySelectorAll('.gtab-panel').forEach(p => p.style.display = 'none');
     const panel = el('gtab-' + tab);
     if (panel) panel.style.display = 'block';
