@@ -487,6 +487,24 @@ search_exclude: true
     .mtu-warn { background: rgba(245,158,11,0.1); border: 1px solid #d97706; border-radius: 8px; padding: 10px 14px; font-size: 0.82rem; color: #fbbf24; display: none; }
     .mtu-warn.show { display: block; }
 
+    /* Model comparison (quiz tab) */
+    .model-compare { display: flex; gap: 10px; margin-bottom: 20px; }
+    .model-col { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .model-title { font-size: 0.74rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 0 8px; border-bottom: 1px solid #1e3352; margin-bottom: 4px; }
+    .ml { padding: 7px 10px; font-size: 0.76rem; color: #cbd5e1; border-radius: 0 6px 6px 0; line-height: 1.4; border-left: 3px solid; cursor: default; transition: all 0.15s; }
+    .ml:hover { filter: brightness(1.25); color: #fff; }
+    .ml.span3 { min-height: 76px; display: flex; align-items: center; }
+    .ml.span2 { min-height: 50px; display: flex; align-items: center; }
+    .model-vs { display: flex; align-items: center; justify-content: center; font-weight: 800; color: #334155; font-size: 1.1rem; flex-shrink: 0; width: 26px; }
+    /* Request journey (MTU tab) */
+    .journey { display: flex; flex-direction: column; gap: 0; margin: 16px 0; border-left: 2px solid #1e3352; padding-left: 16px; }
+    .journey-step { padding: 10px 14px; border-left: 3px solid; margin-bottom: 3px; background: rgba(255,255,255,0.02); border-radius: 0 8px 8px 0; transition: background 0.2s; }
+    .journey-step:hover { background: rgba(255,255,255,0.05); }
+    .journey-step h5 { font-size: 0.8rem; color: #e2e8f0; margin: 0 0 3px; }
+    .journey-step p  { font-size: 0.74rem; color: #64748b; margin: 0; line-height: 1.5; }
+    .journey-step .js-bytes { font-size: 0.72rem; font-weight: 700; float: right; opacity: 0.8; }
+    .js-arrow { text-align: left; color: #1e3352; font-size: 0.85rem; padding: 2px 0 2px 4px; }
+
     /* Mobile */
     .mob-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.4rem; cursor: pointer; }
     @media (max-width: 900px) {
@@ -993,11 +1011,30 @@ search_exclude: true
 
   <!-- TAB 2: Quiz -->
   <div class="gtab-panel" id="gtab-quiz" style="display:none">
-    <div class="game-feature-card" style="max-width:720px;margin:0 auto 14px">
-      <h4>Pop Quiz Purpose</h4>
-      <p>This is built like a Wednesday review check: model comparison, deployment application, and MTU math instead of only vocabulary memorization.</p>
+    <div class="model-compare" style="max-width:760px;margin:0 auto 18px">
+      <div class="model-col">
+        <div class="model-title">OSI Model &mdash; 7 Layers <span style="font-weight:400;font-size:0.75rem;color:#94a3b8">(Guideline)</span></div>
+        <div class="ml" style="border-color:#f59e0b;background:rgba(245,158,11,0.10)">L7 &mdash; Application<br><span>HTTP, DNS, fetch() from GitHub Pages</span></div>
+        <div class="ml" style="border-color:#d97706;background:rgba(217,119,6,0.08)">L6 &mdash; Presentation<br><span>TLS/SSL encrypts data &rarr; HTTPS</span></div>
+        <div class="ml" style="border-color:#b45309;background:rgba(180,83,9,0.08)">L5 &mdash; Session<br><span>Manages socket &amp; keep-alive state</span></div>
+        <div class="ml" style="border-color:#3b82f6;background:rgba(59,130,246,0.08)">L4 &mdash; Transport<br><span>TCP ports, seq#, MSS = 1460 B</span></div>
+        <div class="ml" style="border-color:#10b981;background:rgba(16,185,129,0.08)">L3 &mdash; Network<br><span>IP addresses, routing to EC2</span></div>
+        <div class="ml" style="border-color:#8b5cf6;background:rgba(139,92,246,0.08)">L2 &mdash; Data Link<br><span>Ethernet frames, MAC, FCS/CRC</span></div>
+        <div class="ml" style="border-color:#475569;background:rgba(71,85,105,0.08)">L1 &mdash; Physical<br><span>Electrical/optical/radio signals</span></div>
+      </div>
+      <div class="model-vs">vs</div>
+      <div class="model-col">
+        <div class="model-title">TCP/IP Model &mdash; 5 Layers <span style="font-weight:400;font-size:0.75rem;color:#94a3b8">(Standard)</span></div>
+        <div class="ml span3" style="border-color:#f59e0b;background:rgba(245,158,11,0.10)">Application (L7 + L6 + L5 merged)<br><span>HTTP, TLS, Sessions all live here</span></div>
+        <div class="ml" style="border-color:#3b82f6;background:rgba(59,130,246,0.08)">Transport<br><span>TCP/UDP, ports, MSS = 1460 B</span></div>
+        <div class="ml" style="border-color:#10b981;background:rgba(16,185,129,0.08)">Internet<br><span>IP packets, routing, TTL</span></div>
+        <div class="ml span2" style="border-color:#8b5cf6;background:rgba(139,92,246,0.08)">Link (L2 + L1 merged)<br><span>Ethernet, MAC, Wi-Fi &amp; physical signals</span></div>
+      </div>
     </div>
-    <div id="quizContainer" style="max-width:720px;margin:0 auto"></div>
+    <div style="max-width:760px;margin:0 auto 14px;padding:10px 14px;background:rgba(251,191,36,0.07);border-left:3px solid #fbbf24;border-radius:6px;font-size:0.8rem;color:#cbd5e1">
+      <strong style="color:#fbbf24">Key Distinction:</strong> OSI is a 7-layer <em>reference guideline</em> used for teaching and troubleshooting. TCP/IP is the 5-layer <em>practical standard</em> the internet actually runs on. They differ at the top (OSI splits App/Presentation/Session; TCP/IP merges them) and at the bottom (OSI splits Data Link/Physical; TCP/IP merges them as &ldquo;Link&rdquo;).
+    </div>
+    <div id="quizContainer" style="max-width:760px;margin:0 auto"></div>
   </div>
 
   <!-- TAB 3: MTU Explorer -->
@@ -1026,6 +1063,53 @@ search_exclude: true
         <div class="mtu-ic"><h5>Our Deployment Stack</h5><p>GitHub Pages JS <code>fetch()</code><br>&#8594; HTTPS via Certbot/TLS<br>&#8594; TCP &#8594; IP &#8594; Ethernet<br>&#8594; NGINX &#8594; Flask / Spring on EC2</p></div>
         <div class="mtu-ic"><h5>OSI Model (7 layers)</h5><p>7: Application (HTTP/DNS)<br>6: Presentation (TLS/SSL)<br>5: Session (WebSocket)<br>4: Transport (TCP/UDP)<br>3: Network (IP routing)<br>2: Data Link (Ethernet)<br>1: Physical (signals)</p></div>
         <div class="mtu-ic"><h5>TCP/IP Model (5 layers)</h5><p>5: Application (L5+L6+L7)<br>4: Transport (TCP/UDP)<br>3: Internet (IP)<br>2: Link (Ethernet/Wi-Fi)<br>1: Physical (bits/signals)<br><br><em>OSI is a guideline (7);<br>TCP/IP is the standard (5).</em></p></div>
+      </div>
+
+      <!-- Step-by-step Request Journey -->
+      <h4 style="color:#fbbf24;margin:22px 0 10px;font-size:0.95rem;letter-spacing:0.04em;text-transform:uppercase">Request Journey: GitHub Pages &rarr; AWS EC2</h4>
+      <p style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px">Trace a single <code>fetch()</code> call through every layer. Each step wraps the previous in a new header — this is <strong>encapsulation</strong>.</p>
+      <div class="journey">
+        <div class="journey-step" style="border-color:#f59e0b">
+          <div style="font-size:0.7rem;color:#f59e0b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L7 / TCP/IP Application</div>
+          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">HTTP Request Generated</div>
+          <div style="font-size:0.78rem;color:#94a3b8"><code>fetch("https://api.ec2.example/data")</code> creates an HTTP GET with headers. DNS resolves the hostname to the EC2 IP address first.</div>
+        </div>
+        <div class="js-arrow">&#8595;</div>
+        <div class="journey-step" style="border-color:#d97706">
+          <div style="font-size:0.7rem;color:#d97706;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L6 / TCP/IP Application (TLS)</div>
+          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">TLS Encryption (HTTPS)</div>
+          <div style="font-size:0.78rem;color:#94a3b8">Certbot/Let&rsquo;s Encrypt cert activates. The HTTP plaintext is encrypted into a TLS record. Nobody in transit can read the payload.</div>
+        </div>
+        <div class="js-arrow">&#8595;</div>
+        <div class="journey-step" style="border-color:#3b82f6">
+          <div style="font-size:0.7rem;color:#3b82f6;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L4 / TCP/IP Transport</div>
+          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">TCP Segment (MSS = 1460 B)</div>
+          <div style="font-size:0.78rem;color:#94a3b8">TLS record is handed to TCP. A 20 B TCP header is added (src port, dst port :443, seq#, ack#, flags). If encrypted payload &gt; 1460 B, TCP splits it across multiple segments.</div>
+        </div>
+        <div class="js-arrow">&#8595;</div>
+        <div class="journey-step" style="border-color:#10b981">
+          <div style="font-size:0.7rem;color:#10b981;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L3 / TCP/IP Internet</div>
+          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">IP Packet (MTU = 1500 B)</div>
+          <div style="font-size:0.78rem;color:#94a3b8">20 B IP header wraps the TCP segment (src IP = client, dst IP = EC2 public IP, TTL, protocol=6/TCP). Total IP payload cannot exceed 1500 B (MTU).</div>
+        </div>
+        <div class="js-arrow">&#8595;</div>
+        <div class="journey-step" style="border-color:#8b5cf6">
+          <div style="font-size:0.7rem;color:#8b5cf6;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L2 / TCP/IP Link</div>
+          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">Ethernet Frame (max 1518 B)</div>
+          <div style="font-size:0.78rem;color:#94a3b8">14 B Ethernet header (src MAC, dst MAC, EtherType 0x0800) + IP packet + 4 B FCS/CRC trailer. ARP resolved the next-hop MAC. Frame max = 1518 B.</div>
+        </div>
+        <div class="js-arrow">&#8595;</div>
+        <div class="journey-step" style="border-color:#475569">
+          <div style="font-size:0.7rem;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L1 / TCP/IP Physical</div>
+          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">Bits on the Wire</div>
+          <div style="font-size:0.78rem;color:#94a3b8">Frame is converted to electrical (copper), optical (fiber), or radio (Wi-Fi) signals and transmitted across the physical medium to the next hop.</div>
+        </div>
+        <div class="js-arrow">&#8595;</div>
+        <div class="journey-step" style="border-color:#fbbf24;background:rgba(251,191,36,0.06)">
+          <div style="font-size:0.7rem;color:#fbbf24;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">AWS EC2 &mdash; NGINX Reverse Proxy</div>
+          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">Decapsulation + Routing</div>
+          <div style="font-size:0.78rem;color:#94a3b8">EC2 reassembles frames &rarr; IP packet &rarr; TCP stream &rarr; decrypts TLS &rarr; HTTP request. NGINX inspects the Host header and proxies the request to the correct Docker container (Flask or Spring).</div>
+        </div>
       </div>
     </div>
   </div>
@@ -2125,24 +2209,97 @@ function sendChat() {
   }
 
   function drawBg() {
-    ctx.fillStyle = '#f8fafc';
+    // ── Dark base ──────────────────────────────────────────────────────────
+    ctx.fillStyle = '#060e1a';
     ctx.fillRect(0, 0, 780, 440);
 
-    const grad = ctx.createLinearGradient(0, 0, 780, 440);
-    grad.addColorStop(0, 'rgba(59,130,246,0.04)');
-    grad.addColorStop(1, 'rgba(148,163,184,0.02)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 780, 440);
+    // Subtle vertical grid
+    ctx.strokeStyle = 'rgba(59,130,246,0.04)';
+    ctx.lineWidth = 1;
+    for (let gx = 0; gx < 780; gx += 40) {
+      ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, 440); ctx.stroke();
+    }
 
-    const layerNodes = [
-      { x: 88,  y: 236, title: 'Application', subtitle: 'Layer', icon: 'application' },
-      { x: 218, y: 310, title: 'Presentation', subtitle: 'Layer', icon: 'presentation' },
-      { x: 348, y: 220, title: 'Session', subtitle: 'Layer', icon: 'session' },
-      { x: 478, y: 310, title: 'Transport', subtitle: 'Layer', icon: 'transport' },
-      { x: 596, y: 220, title: 'Network', subtitle: 'Layer', icon: 'network' },
-      { x: 676, y: 308, title: 'Data Link', subtitle: 'Layer', icon: 'datalink' },
-      { x: 744, y: 218, title: 'Physical', subtitle: 'Layer', icon: 'physical' }
-    ];
+    // Animated data "bits" flowing downward — represent packets in transit
+    const t = Date.now();
+    [80, 195, 330, 480, 605, 715].forEach((bx, i) => {
+      const by = (t / (180 + i * 25) + i * 73) % 450;
+      ctx.fillStyle = 'rgba(96,165,250,0.18)';
+      ctx.beginPath(); ctx.arc(bx, by, 2, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(96,165,250,0.1)';
+      ctx.beginPath(); ctx.arc(bx, (by + 110) % 450, 1.5, 0, Math.PI * 2); ctx.fill();
+    });
+
+    // ── Highlight the layer the player is currently standing in ────────────
+    const activeLay = gameRunning ? layerAt(player.y) : null;
+
+    // ── Draw all 7 OSI layer bands (horizontal zones) ──────────────────────
+    OSI.forEach(layer => {
+      const isActive = !!(activeLay && activeLay.id === layer.id);
+
+      // Band gradient fill — active zone gets brighter tint
+      const g = ctx.createLinearGradient(0, layer.y, 780, layer.y + layer.h);
+      g.addColorStop(0, layer.col + (isActive ? '42' : '18'));
+      g.addColorStop(1, 'rgba(6,14,26,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, layer.y, 780, layer.h);
+
+      // Active zone: glowing border outline
+      if (isActive) {
+        ctx.strokeStyle = layer.col;
+        ctx.lineWidth = 2;
+        ctx.globalAlpha = 0.6;
+        ctx.strokeRect(1, layer.y + 1, 778, layer.h - 2);
+        ctx.globalAlpha = 1;
+      }
+
+      // Top border line of zone
+      ctx.strokeStyle = layer.col;
+      ctx.globalAlpha = isActive ? 0.9 : 0.38;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(0, layer.y); ctx.lineTo(780, layer.y); ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      // Left: layer number (prominent)
+      ctx.fillStyle = layer.col;
+      ctx.globalAlpha = isActive ? 1.0 : 0.72;
+      ctx.font = 'bold 14px monospace';
+      ctx.fillText('L' + layer.id, 5, layer.y + 16);
+      // Left: layer name
+      ctx.font = 'bold 9px monospace';
+      ctx.fillText(layer.name.toUpperCase(), 5, layer.y + 28);
+      ctx.globalAlpha = 1;
+
+      // Center: short concept description — brighter when active
+      ctx.fillStyle = isActive ? 'rgba(226,232,240,0.9)' : 'rgba(100,116,139,0.52)';
+      ctx.font = isActive ? 'bold 9px sans-serif' : '9px sans-serif';
+      ctx.fillText(layer.desc, 92, layer.y + 16);
+
+      // Right: TCP/IP model mapping label
+      ctx.fillStyle = layer.col;
+      ctx.globalAlpha = isActive ? 0.95 : 0.45;
+      ctx.font = 'bold 8px monospace';
+      const tcpLabel = 'TCP/IP: ' + layer.tcp;
+      ctx.fillText(tcpLabel, 775 - ctx.measureText(tcpLabel).width, layer.y + layer.h - 5);
+      ctx.globalAlpha = 1;
+
+      // Dashed floor line between zones (the "platform" the character walks on)
+      ctx.strokeStyle = layer.col + '3a';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 7]);
+      ctx.beginPath(); ctx.moveTo(92, layer.y + layer.h); ctx.lineTo(680, layer.y + layer.h); ctx.stroke();
+      ctx.setLineDash([]);
+    });
+
+    // ── Deployment flow banner at very top ─────────────────────────────────
+    ctx.fillStyle = 'rgba(6,14,26,0.88)';
+    ctx.fillRect(0, 0, 780, 14);
+    ctx.fillStyle = '#334155';
+    ctx.font = '8px monospace';
+    ctx.fillText('DEPLOYMENT: GitHub Pages fetch()  →  HTTPS/TLS  →  TCP  →  IP  →  Ethernet  →  NGINX  →  Flask/Spring  →  AWS EC2  →  SQL', 4, 11);
+
+    // Old circle-node diagram removed — replaced by the dark horizontal band layout above.
+    if (false) { const layerNodes = [
 
     function centerText(text, x, y, font, color) {
       ctx.font = font;
@@ -2379,16 +2536,7 @@ function sendChat() {
     ctx.fillText('Deployment Route', 560, 40);
     ctx.fillStyle = '#64748b';
     ctx.font = '10px monospace';
-    ctx.fillText('GitHub Pages -> NGINX -> Flask / Spring -> SQL', 560, 58);
-
-    ctx.strokeStyle = 'rgba(148,163,184,0.12)';
-    ctx.lineWidth = 1;
-    for (let x = 0; x < 780; x += 40) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, 440);
-      ctx.stroke();
-    }
+    ctx.fillText('GitHub Pages -> NGINX -> Flask / Spring -> SQL', 560, 58); } // end dead-code block
   }
 
   function drawPlayer() {
@@ -2568,28 +2716,39 @@ function sendChat() {
 
   function drawHUD() {
     const lay = layerAt(player.y);
-    if (lay) {
-      ctx.fillStyle = 'rgba(15,32,64,0.88)';
-      rr(ctx, 584, 5, 188, 40, 6);
-      ctx.fill();
+
+    // ── Current layer panel (top-left) — prominent label that changes as you move ──
+    if (lay && gameRunning) {
+      ctx.fillStyle = 'rgba(6,14,26,0.93)';
+      ctx.strokeStyle = lay.col;
+      ctx.lineWidth = 1.5;
+      rr(ctx, 5, 16, 318, 42, 5); ctx.fill(); ctx.stroke();
       ctx.fillStyle = lay.col;
-      ctx.font = 'bold 10px monospace';
-      ctx.fillText('Layer ' + lay.id + ': ' + lay.name, 592, 20);
+      ctx.font = 'bold 11px monospace';
+      ctx.fillText('Layer ' + lay.id + ' — ' + lay.name + '  ·  TCP/IP: ' + lay.tcp, 11, 31);
       ctx.fillStyle = '#94a3b8';
-      ctx.font = '9px monospace';
-      ctx.fillText('TCP/IP -> ' + lay.tcp, 592, 35);
+      ctx.font = '8.5px sans-serif';
+      const desc = lay.desc.length > 60 ? lay.desc.slice(0, 60) + '…' : lay.desc;
+      ctx.fillText(desc, 11, 48);
     }
 
-    ctx.fillStyle = 'rgba(15,32,64,0.8)';
-    rr(ctx, 5, 5, 228, 24, 5);
-    ctx.fill();
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '9px monospace';
-    ctx.fillText('Active: ' + packets.filter(p => !p.done && !p.stolen).length + ' | Delivered: ' + gState.delivered + ' | Rescued: ' + gState.rescued, 10, 19);
+    // ── Score / delivery panel (top-right) ────────────────────────────────────
+    ctx.fillStyle = 'rgba(6,14,26,0.9)';
+    ctx.strokeStyle = '#1e3352'; ctx.lineWidth = 1;
+    rr(ctx, 594, 16, 180, 42, 5); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#fbbf24';
+    ctx.font = 'bold 11px monospace';
+    ctx.fillText('Score: ' + gState.score, 600, 31);
+    ctx.fillStyle = '#64748b';
+    ctx.font = '8.5px monospace';
+    ctx.fillText('Active: ' + packets.filter(p => !p.done && !p.stolen).length + '  Del: ' + gState.delivered + '  Lvl: ' + gState.level, 600, 47);
 
-    ctx.fillStyle = '#1e3352';
+    // ── Bottom info bar — always visible reference ─────────────────────────────
+    ctx.fillStyle = 'rgba(6,14,26,0.92)';
+    ctx.fillRect(0, 425, 780, 15);
+    ctx.fillStyle = '#2d3a4f';
     ctx.font = '8px monospace';
-    ctx.fillText('MTU=1500B  MSS=1460B  Ethernet frame max=1518B', 6, 437);
+    ctx.fillText('MTU 1500B | TCP MSS 1460B | Ethernet frame max 1518B | OSI = 7-layer guideline | TCP/IP = 5-layer standard used in deployment', 4, 435);
   }
 
   function gameLoop() {
