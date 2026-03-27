@@ -907,12 +907,17 @@ search_exclude: true
         </div>
         <div class="gs-card">
           <h4>&#128736; Controls</h4>
-          <p>&#8592;&#8594; Move &nbsp;|&nbsp; &#8593; Jump<br>E &mdash; Pick up or drop a packet<br>F &mdash; Split a packet that is too large<br><br>&#9733; <span style="color:#fbbf24">Player</span><br>&#128994; <span style="color:#34d399">Router Ron = NPC</span><br>&#128308; <span style="color:#ef4444">Hacker H4X = AI NPC</span></p>
+          <p>&#8592;&#8594; Move &nbsp;|&nbsp; &#8593; Jump<br>E &mdash; Pick up, drop, or talk to Router Ron<br>F &mdash; Split a packet that is too large<br><br>&#9733; <span style="color:#fbbf24">Player</span><br>&#128994; <span style="color:#34d399">Router Ron = NPC</span><br>&#128308; <span style="color:#ef4444">Hacker H4X = AI NPC</span></p>
         </div>
         <div class="gs-card">
           <h4>&#128218; Learning Goal</h4>
           <p id="missionText">Teach this simply: OSI helps us explain networking, TCP/IP is what real internet traffic uses, and MTU tells us when a packet must be split.</p>
           <p id="routeDisplay" style="margin-top:10px;font-size:0.74rem;color:#64748b">Route: GitHub Pages fetch() &#8594; HTTPS/TLS &#8594; TCP &#8594; IP &#8594; Ethernet &#8594; NGINX &#8594; Flask / Spring &#8594; SQL</p>
+        </div>
+        <div class="gs-card">
+          <h4>&#128172; Router Ron</h4>
+          <p id="npcPrompt">Walk near Router Ron and press E to talk.</p>
+          <p id="npcDialogue" style="margin-top:10px;color:#cbd5e1">Ron will coach you on OSI, TCP/IP, MTU, and how this game matches your deployment.</p>
         </div>
         <div class="gs-card">
           <h4>&#128270; Packet Analyzer</h4>
@@ -1749,6 +1754,29 @@ function sendChat() {
     'SQL'
   ];
 
+  const ROUTER_DIALOGUE = [
+    {
+      prompt: 'OSI is our teaching map. TCP/IP is the practical model your deployment really uses.',
+      route: 'Talk it through as: Application -> Transport -> Internet -> Link -> Physical.',
+      analyzer: 'NPC lesson: OSI vs TCP/IP'
+    },
+    {
+      prompt: 'Your frontend starts the trip with fetch() and HTTP or HTTPS from GitHub Pages.',
+      route: 'Then NGINX routes traffic to Flask or Spring on AWS EC2 through Docker.',
+      analyzer: 'NPC lesson: deployment route'
+    },
+    {
+      prompt: 'MTU matters because Ethernet is usually 1500 bytes, so TCP payload should stay near 1460 bytes.',
+      route: 'If the packet is too large, fragment it before delivery so the request and response still work cleanly.',
+      analyzer: 'NPC lesson: MTU and MSS'
+    },
+    {
+      prompt: 'Presentation handles encryption like TLS, and Session manages the dialogue between applications.',
+      route: 'That is why HTTPS and ongoing app communication belong in the lesson too.',
+      analyzer: 'NPC lesson: Presentation and Session'
+    }
+  ];
+
   const PACKET_SCENARIOS = [
     { label: 'GET /api/sheriff/id', protocol: 'HTTP', app: 'fetch()', target: 'NGINX -> Flask', prompt: 'Use OSI to explain how a frontend request reaches your backend.' },
     { label: 'POST /api/authenticate', protocol: 'HTTPS', app: 'login form', target: 'Certbot TLS -> Flask', prompt: 'This packet should remind you why Presentation and Session matter.' },
@@ -1763,6 +1791,7 @@ function sendChat() {
   const keys = {};
   let gamePaused = false;
   let levelMode = 'full';
+  let routerDialogIndex = 0;
   const spriteSources = {
     player: '{{ site.baseurl }}/images/gamify/lessons/character.png',
     npc: '{{ site.baseurl }}/images/gamify/wizard.png',
@@ -1868,6 +1897,29 @@ function sendChat() {
     if (el('packetDecision')) el('packetDecision').textContent = decision || 'Launch mission';
   }
 
+  function isNearRouter() {
+    const px = player.x + player.w / 2;
+    const py = player.y + player.h / 2;
+    const rx = routerNpc.x + routerNpc.w / 2;
+    const ry = routerNpc.y + routerNpc.h / 2;
+    return Math.hypot(px - rx, py - ry) < 86;
+  }
+
+  function setNpcDialogue(prompt, detail) {
+    if (el('npcPrompt')) el('npcPrompt').textContent = prompt;
+    if (el('npcDialogue')) el('npcDialogue').textContent = detail;
+  }
+
+  function talkToRouter() {
+    const lesson = ROUTER_DIALOGUE[routerDialogIndex % ROUTER_DIALOGUE.length];
+    routerDialogIndex++;
+    setRouterMsg(lesson.prompt);
+    setNpcDialogue('Router Ron says:', lesson.prompt + ' ' + lesson.route);
+    updateMissionText(null, lesson.prompt);
+    updatePacketAnalyzer(null, lesson.analyzer);
+    setStatus('Talking to Router Ron');
+  }
+
   function physics(e) {
     e.vy = Math.min(e.vy + 0.48, 14);
     e.x += e.vx;
@@ -1918,6 +1970,13 @@ function sendChat() {
     const lay = layerAt(player.y);
     if (lay && el('layerText')) {
       el('layerText').innerHTML = '<strong>OSI Layer ' + lay.id + ': ' + lay.name + '</strong><br>TCP/IP: ' + lay.tcp + '<br><span style="color:#64748b">' + lay.desc + '</span>';
+    }
+    if (!player.carrying) {
+      if (isNearRouter()) {
+        setNpcDialogue('Press E to talk.', 'Router Ron can explain OSI vs TCP/IP, deployment flow, MTU, and request/response ideas.');
+      } else if (el('npcPrompt') && el('npcPrompt').textContent.indexOf('Press E to talk.') === 0) {
+        setNpcDialogue('Walk near Router Ron and press E to talk.', 'Ron will coach you on OSI, TCP/IP, MTU, and how this game matches your deployment.');
+      }
     }
     updateRouteText(player.carrying, lay);
     if (player.carrying) {
@@ -2571,6 +2630,11 @@ function sendChat() {
   });
 
   function doInteract() {
+    if (!player.carrying && isNearRouter()) {
+      talkToRouter();
+      return;
+    }
+
     if (player.carrying) {
       player.carrying.escore = false;
       player.carrying.vy = 0.5;
@@ -2629,6 +2693,8 @@ function sendChat() {
     updateMissionText(null);
     updateRouteText(null);
     updatePacketAnalyzer(null, 'Launch mission');
+    routerDialogIndex = 0;
+    setNpcDialogue('Walk near Router Ron and press E to talk.', 'Ron will coach you on OSI, TCP/IP, MTU, and how this game matches your deployment.');
     gamePaused = false;
 
     packets.push(mkPkt(180, 8, 860));
