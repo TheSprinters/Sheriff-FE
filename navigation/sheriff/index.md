@@ -1259,539 +1259,8 @@ function apiRequest(path, method, body) {
     if (!r.ok) return r.json().then(d => { throw new Error(d.message || d.error || 'Request failed'); });
     return r.json();
   });
-}
 
-/* ================================================================
-   DETAIL PANELS — open / close inline resource panels
-   ================================================================ */
 
-function closeAllDetailPanels() {
-  document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('open'));
-}
-
-function openDetail(id) {
-  closeAllDetailPanels();
-  const panel = el('dp-' + id);
-  if (panel) {
-    panel.classList.add('open');
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
-
-function closeDetail(id) {
-  el('dp-' + id)?.classList.remove('open');
-}
-
-/* ================================================================
-   RSVP — mark an event button as RSVP'd
-   ================================================================ */
-
-function rsvp(btn) {
-  btn.textContent = '\u2713 RSVP\'d';
-  btn.classList.add('done');
-}
-
-/* ================================================================
-   EVENTS CALENDAR — interactive month view + day detail
-   ================================================================ */
-
-const eventData = [
-  { title: 'Board of Directors Meeting', date: '2026-04-02', time: '6:00 PM', location: 'DSA Headquarters, Poway' },
-  { title: 'Annual Family Picnic', date: '2026-04-12', time: '11:00 AM', location: 'Poway Community Park' },
-  { title: 'Wellness Workshop: Stress Management', date: '2026-04-18', time: '2:00 PM', location: 'Virtual Event' },
-  { title: 'Deputy of the Year Awards', date: '2026-05-01', time: '7:00 PM', location: 'Hilton San Diego' },
-  {
-    title: 'Charity Golf Tournament', date: '2026-05-15', time: '8:00 AM', location: 'Morgan Run Club & Resort',
-    image: '{{ site.baseurl }}/images/dsa/golf-tournament-flyer.png', imageAlt: 'Golf Tournament'
-  },
-  {
-    title: 'Law Enforcement Memorial', date: '2026-05-22', time: '10:00 AM', location: 'County Admin Center',
-    image: '{{ site.baseurl }}/images/dsa/memorial-line-of-duty.png', imageAlt: 'Line of Duty Memorial'
-  },
-];
-
-const eventMap = buildEventMap(eventData);
-let selectedDateKey = null;
-let calendarMonth = getInitialCalendarMonth(eventData);
-
-function buildEventMap(events) {
-  const map = new Map();
-  events.forEach(e => {
-    const key = e.date;
-    if (!map.has(key)) map.set(key, []);
-    map.get(key).push(e);
-  });
-  return map;
-}
-
-function parseDateKey(key) {
-  const [y, m, d] = key.split('-').map(Number);
-  return new Date(y, m - 1, d);
-}
-
-function formatMonthYear(date) {
-  return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
-}
-
-function formatDisplayDate(date) {
-  return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-}
-
-function dateKey(date) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
-}
-
-function getInitialCalendarMonth(events) {
-  if (!events.length) return new Date();
-  const sorted = [...events].sort((a, b) => a.date.localeCompare(b.date));
-  const today = new Date();
-  const todayKey = dateKey(today);
-  const upcoming = sorted.find(e => e.date >= todayKey) || sorted[0];
-  return new Date(parseDateKey(upcoming.date).getFullYear(), parseDateKey(upcoming.date).getMonth(), 1);
-}
-
-function getEventKeysInMonth(year, month) {
-  return [...eventMap.keys()]
-    .filter(k => {
-      const d = parseDateKey(k);
-      return d.getFullYear() === year && d.getMonth() === month;
-    })
-    .sort();
-}
-
-function renderCalendar() {
-  const monthLabel = el('evCalMonth');
-  const daysGrid = el('evCalDays');
-  if (!monthLabel || !daysGrid) return;
-
-  monthLabel.textContent = formatMonthYear(calendarMonth);
-
-  const year = calendarMonth.getFullYear();
-  const month = calendarMonth.getMonth();
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const prevMonthLast = new Date(year, month, 0);
-
-  const startOffset = firstDay.getDay();
-  const totalDays = lastDay.getDate();
-  const prevMonthDays = prevMonthLast.getDate();
-  const cells = [];
-
-  for (let i = 0; i < startOffset; i++) {
-    const day = prevMonthDays - startOffset + i + 1;
-    cells.push({ date: new Date(year, month - 1, day), isOut: true });
-  }
-
-  for (let day = 1; day <= totalDays; day++) {
-    cells.push({ date: new Date(year, month, day), isOut: false });
-  }
-
-  while (cells.length % 7 !== 0) {
-    const day = cells.length - (startOffset + totalDays) + 1;
-    cells.push({ date: new Date(year, month + 1, day), isOut: true });
-  }
-
-  const todayKey = dateKey(new Date());
-
-  daysGrid.innerHTML = cells.map(c => {
-    const key = dateKey(c.date);
-    const count = eventMap.get(key)?.length || 0;
-    const classes = [
-      'ev-day',
-      c.isOut ? 'is-out' : '',
-      count ? 'has-event' : '',
-      key === todayKey ? 'is-today' : '',
-      key === selectedDateKey ? 'selected' : '',
-    ].filter(Boolean).join(' ');
-    return `
-      <button class="${classes}" type="button" data-date="${key}">
-        <span class="num">${c.date.getDate()}</span>
-        ${count ? `<span class="ev-badge">${count}</span>` : ''}
-      </button>
-    `;
-  }).join('');
-
-  daysGrid.querySelectorAll('.ev-day').forEach(btn => {
-    btn.addEventListener('click', () => selectDate(btn.dataset.date));
-  });
-
-  if (!selectedDateKey || parseDateKey(selectedDateKey).getMonth() !== month || parseDateKey(selectedDateKey).getFullYear() !== year) {
-    const keysInMonth = getEventKeysInMonth(year, month);
-    const fallbackKey = keysInMonth[0] || dateKey(new Date(year, month, 1));
-    selectDate(fallbackKey, false);
-  } else {
-    renderDayDetail(selectedDateKey);
-  }
-}
-
-function renderDayDetail(key) {
-  const title = el('evCalDetailTitle');
-  const list = el('evCalList');
-  if (!title || !list) return;
-
-  const date = parseDateKey(key);
-  title.textContent = formatDisplayDate(date);
-
-  const events = eventMap.get(key) || [];
-  if (!events.length) {
-    list.innerHTML = `<div class="ev-empty">No events scheduled for this date.</div>`;
-    return;
-  }
-
-  list.innerHTML = events.map(e => `
-    <div class="ev-card">
-      <div class="ev-card-main">
-        <div class="ev-card-info">
-          <h4>${e.title}</h4>
-          <p>${e.location} &mdash; ${e.time}</p>
-        </div>
-        ${e.image ? `<img class="ev-card-img" src="${e.image}" alt="${e.imageAlt || e.title}">` : ''}
-      </div>
-      <button class="ev-rsvp" onclick="rsvp(this)">RSVP</button>
-    </div>
-  `).join('');
-}
-
-function selectDate(key, rerender = true) {
-  selectedDateKey = key;
-  if (rerender) { renderCalendar(); return; }
-  renderDayDetail(key);
-}
-
-function shiftCalendarMonth(delta) {
-  calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + delta, 1);
-  renderCalendar();
-}
-
-function goToToday() {
-  const today = new Date();
-  calendarMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  selectedDateKey = dateKey(today);
-  renderCalendar();
-}
-
-el('evPrev')?.addEventListener('click', () => shiftCalendarMonth(-1));
-el('evNext')?.addEventListener('click', () => shiftCalendarMonth(1));
-el('evToday')?.addEventListener('click', goToToday);
-
-renderCalendar();
-
-/* ================================================================
-   FAQ — toggle answers and filter by category / search
-   ================================================================ */
-
-function toggleFaqAnswer(questionEl) {
-  questionEl.classList.toggle('open');
-  questionEl.nextElementSibling.classList.toggle('open');
-}
-
-function filterFaqByCategory(category) {
-  document.querySelectorAll('.fq').forEach(f => {
-    f.style.display = (category === 'all' || f.dataset.c === category) ? '' : 'none';
-  });
-}
-
-function filterFaqBySearch(query) {
-  const q = query.toLowerCase();
-  document.querySelectorAll('.fq').forEach(f => {
-    f.style.display = f.textContent.toLowerCase().includes(q) ? '' : 'none';
-  });
-}
-
-function setActiveFaqTag(activeTag) {
-  document.querySelectorAll('.faq-tag').forEach(x => x.classList.remove('on'));
-  activeTag.classList.add('on');
-}
-
-document.querySelectorAll('.faq-tag').forEach(t => t.addEventListener('click', function() {
-  setActiveFaqTag(this);
-  filterFaqByCategory(this.dataset.c);
-}));
-
-el('faqSearch')?.addEventListener('input', function() {
-  filterFaqBySearch(this.value);
-});
-
-/* ================================================================
-   SEARCH — autocomplete dropdown that scrolls to sections
-   ================================================================ */
-
-const searchMap = [
-  { label: 'Benefits & Insurance', target: '#dashboard', detail: 'benefits' },
-  { label: 'Legal Defense',        target: '#dashboard', detail: 'legal' },
-  { label: 'Wellness Programs',    target: '#dashboard', detail: 'wellness' },
-  { label: 'Forms & Documents',    target: '#dashboard', detail: 'forms' },
-  { label: 'Newsletters',          target: '#dashboard', detail: 'newsletters' },
-  { label: 'Political Action',     target: '#dashboard', detail: 'pac' },
-  { label: 'Events Calendar',      target: '#events' },
-  { label: 'DSA Store',            target: '#store' },
-  { label: 'FAQ',                  target: '#faq' },
-  { label: 'Contact Us',           target: '#contact' },
-  { label: 'About DSA',            target: '#about' },
-  { label: 'Latest News',          target: '#news' },
-  { label: 'Membership',           target: '#faq' },
-  { label: 'Games',               target: '#games' },
-  { label: 'Net Patrol Mission',  target: '#games' },
-  { label: 'Networking Game',     target: '#games' },
-  { label: 'Pop Quiz Review',     target: '#games' },
-  { label: 'MTU Lab',             target: '#games' },
-];
-
-function findSearchMatches(query) {
-  return searchMap.filter(s => s.label.toLowerCase().includes(query.toLowerCase()));
-}
-
-function renderSearchDropdown(hits, dropdown) {
-  dropdown.innerHTML = hits.map(h =>
-    `<div class="search-item" data-target="${h.target}" data-detail="${h.detail || ''}">${h.label}</div>`
-  ).join('');
-}
-
-function handleSearchItemClick(item, dropdown) {
-  scrollTo(item.dataset.target);
-  if (item.dataset.detail) setTimeout(() => openDetail(item.dataset.detail), 400);
-  dropdown.classList.remove('open');
-  const si = el('searchInput');
-  if (si) si.value = '';
-}
-
-el('searchInput')?.addEventListener('input', function() {
-  const q = this.value.trim(), drop = el('searchDrop');
-  if (!drop) return;
-  if (q.length < 2) { drop.classList.remove('open'); return; }
-  const hits = findSearchMatches(q);
-  if (!hits.length) { drop.classList.remove('open'); return; }
-  renderSearchDropdown(hits, drop);
-  drop.classList.add('open');
-  drop.querySelectorAll('.search-item').forEach(it =>
-    it.addEventListener('click', function() { handleSearchItemClick(this, drop); })
-  );
-});
-
-/* ================================================================
-   CLICK-AWAY — close dropdowns when clicking outside
-   ================================================================ */
-
-function closeDropdownsOnClickAway(e) {
-  const drop = el('searchDrop');
-  if (drop && !e.target.closest('.search-box')) drop.classList.remove('open');
-  if (!e.target.closest('.user-area')) el('userPanel')?.classList.remove('open');
-}
-
-document.addEventListener('click', closeDropdownsOnClickAway);
-
-/* ================================================================
-   NAV HIGHLIGHT — highlight the active nav link on scroll
-   ================================================================ */
-
-const sectionIds = ['dashboard', 'news', 'events', 'about', 'store', 'games', 'faq', 'contact'];
-
-function getActiveSection() {
-  const y = window.scrollY + 120;
-  let active = '';
-  sectionIds.forEach(s => {
-    const section = el(s);
-    if (section && section.offsetTop <= y) active = s;
-  });
-  return active;
-}
-
-function highlightActiveNavLink() {
-  const active = getActiveSection();
-  document.querySelectorAll('.nav-link').forEach(l => {
-    l.classList.toggle('active', l.getAttribute('onclick')?.includes(active));
-  });
-}
-
-window.addEventListener('scroll', highlightActiveNavLink);
-
-/* ================================================================
-   MODAL — open / close / tab switching for login/signup
-   ================================================================ */
-
-function openModal(tab) {
-  el('modalBg').classList.add('open');
-  switchModalTab(tab || 'login');
-}
-
-function closeModal() {
-  el('modalBg').classList.remove('open');
-  hideError('lErr');
-  hideError('sErr');
-}
-
-function switchModalTab(t) {
-  const isLogin = (t === 'login');
-  el('tLog').classList.toggle('on', isLogin);
-  el('tSign').classList.toggle('on', !isLogin);
-  el('fLogin').style.display = isLogin ? 'block' : 'none';
-  el('fSign').style.display = isLogin ? 'none' : 'block';
-  el('mTitle').textContent = isLogin ? 'Member Login' : 'Create Account';
-  el('mSub').textContent = isLogin ? 'Access your DSA portal' : 'Register as a DSA member';
-}
-
-// kept as global alias so onclick="mTab(...)" in HTML still works
-function mTab(t) { switchModalTab(t); }
-
-/* ================================================================
-   AUTH — login, signup, logout, session check
-   ================================================================ */
-
-function getLoginCredentials() {
-  return { uid: el('lUid').value, password: el('lPw').value };
-}
-
-function getSignupData() {
-  return {
-    name: el('sName').value, uid: el('sUid').value,
-    sheriff_id: el('sSid').value, email: el('sEmail').value,
-    rank: el('sRank').value, station: el('sStation').value,
-    phone: el('sPhone').value, password: el('sPw').value,
-  };
-}
-
-function doLogin(e) {
-  e.preventDefault();
-  apiRequest('/api/sheriff/authenticate', 'POST', getLoginCredentials())
-    .then(d => { user = d.user; closeModal(); updateUI(); })
-    .catch(err => showError('lErr', err.message));
-}
-
-function doSignup(e) {
-  e.preventDefault();
-  const body = getSignupData();
-  apiRequest('/api/sheriff/user', 'POST', body)
-    .then(() => { switchModalTab('login'); el('lUid').value = body.uid; alert('Account created! Please log in.'); })
-    .catch(err => showError('sErr', err.message));
-}
-
-function logout() {
-  apiRequest('/api/sheriff/authenticate', 'DELETE')
-    .finally(() => { user = null; updateUI(); el('userPanel').classList.remove('open'); });
-}
-
-/* ================================================================
-   UI STATE — update header to reflect logged-in / logged-out
-   ================================================================ */
-
-function showLoggedInUI() {
-  el('authBtns').style.display = 'none';
-  el('userArea').classList.add('active');
-  el('uName').textContent = user.name.split(' ')[0];
-  el('upName').textContent = user.name;
-  el('upBadge').textContent = 'Badge: ' + user.sheriff_id;
-  el('upRank').textContent = 'Rank: ' + user.rank;
-  el('upStation').textContent = 'Station: ' + user.station;
-  el('adminBtn').style.display = user.role === 'Admin' ? 'block' : 'none';
-}
-
-function showLoggedOutUI() {
-  el('authBtns').style.display = 'flex';
-  el('userArea').classList.remove('active');
-  el('adminSection').classList.remove('open');
-}
-
-function updateUI() {
-  user ? showLoggedInUI() : showLoggedOutUI();
-}
-
-/* ================================================================
-   ADMIN PANEL — toggle and load member table
-   ================================================================ */
-
-function toggleAdmin() {
-  const s = el('adminSection');
-  s.classList.toggle('open');
-  if (s.classList.contains('open')) loadAdmin();
-  el('userPanel').classList.remove('open');
-  if (s.classList.contains('open')) setTimeout(() => s.scrollIntoView({ behavior: 'smooth' }), 100);
-}
-
-function renderAdminRow(u) {
-  return `<tr><td>${u.name}</td><td>${u.uid}</td><td>${u.sheriff_id}</td><td>${u.rank}</td><td>${u.station}</td><td>${u.email}</td><td><span class="badge-s badge-active">${u.status}</span></td></tr>`;
-}
-
-function loadAdmin() {
-  fetch(`${API}/api/sheriff/user`, { credentials: 'include' })
-    .then(r => r.json())
-    .then(users => { el('adminBody').innerHTML = users.map(renderAdminRow).join(''); })
-    .catch(e => console.error(e));
-}
-
-/* ================================================================
-   CHATBOT — AI-powered DSA FAQ assistant
-   ================================================================ */
-
-let chatHist = [];
-
-function getChatInput() {
-  const inp = el('cbIn');
-  const msg = inp.value.trim();
-  inp.value = '';
-  return msg;
-}
-
-function addChatMessage(text, sender) {
-  const container = el('cbMsgs');
-  const div = document.createElement('div');
-  div.className = 'cm ' + sender;
-  div.innerHTML = '<div class="cb">' + sanitizeHTML(text) + '</div>';
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-}
-
-function showTypingIndicator() {
-  const container = el('cbMsgs');
-  const div = document.createElement('div');
-  const id = 't' + Date.now();
-  div.id = id;
-  div.className = 'cm bot';
-  div.innerHTML = '<div class="cb typing-dots"><span></span><span></span><span></span></div>';
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-  return id;
-}
-
-function removeTypingIndicator(id) {
-  el(id)?.remove();
-}
-
-function disableChatSend() {
-  const btn = el('cbSend');
-  btn.disabled = true;
-  btn.textContent = '...';
-}
-
-function enableChatSend() {
-  const btn = el('cbSend');
-  btn.disabled = false;
-  btn.textContent = 'Send';
-}
-
-function sendChat() {
-  const msg = getChatInput();
-  if (!msg) return;
-
-  addChatMessage(msg, 'user');
-  chatHist.push({ role: 'user', content: msg });
-
-  const typingId = showTypingIndicator();
-  disableChatSend();
-
-  apiRequest('/api/sheriff/chat', 'POST', { message: msg, history: chatHist.slice(-10) })
-    .then(d => {
-      removeTypingIndicator(typingId);
-      addChatMessage(d.reply, 'bot');
-      chatHist.push({ role: 'assistant', content: d.reply });
-    })
-    .catch(() => {
-      removeTypingIndicator(typingId);
-      addChatMessage("Sorry, I can't connect right now. Call (858) 486-9009 or email info@dsasd.org.", 'bot');
-    })
-    .finally(enableChatSend);
 }
 
 /* ================================================================
@@ -2942,6 +2411,541 @@ function sendChat() {
   });
 
 })();
+
+/* ================================================================
+   DETAIL PANELS — open / close inline resource panels
+   ================================================================ */
+
+function closeAllDetailPanels() {
+  document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('open'));
+}
+
+function openDetail(id) {
+  closeAllDetailPanels();
+  const panel = el('dp-' + id);
+  if (panel) {
+    panel.classList.add('open');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function closeDetail(id) {
+  el('dp-' + id)?.classList.remove('open');
+}
+
+/* ================================================================
+   RSVP — mark an event button as RSVP'd
+   ================================================================ */
+
+function rsvp(btn) {
+  btn.textContent = '\u2713 RSVP\'d';
+  btn.classList.add('done');
+}
+
+/* ================================================================
+   EVENTS CALENDAR — interactive month view + day detail
+   ================================================================ */
+
+const eventData = [
+  { title: 'Board of Directors Meeting', date: '2026-04-02', time: '6:00 PM', location: 'DSA Headquarters, Poway' },
+  { title: 'Annual Family Picnic', date: '2026-04-12', time: '11:00 AM', location: 'Poway Community Park' },
+  { title: 'Wellness Workshop: Stress Management', date: '2026-04-18', time: '2:00 PM', location: 'Virtual Event' },
+  { title: 'Deputy of the Year Awards', date: '2026-05-01', time: '7:00 PM', location: 'Hilton San Diego' },
+  {
+    title: 'Charity Golf Tournament', date: '2026-05-15', time: '8:00 AM', location: 'Morgan Run Club & Resort',
+    image: '{{ site.baseurl }}/images/dsa/golf-tournament-flyer.png', imageAlt: 'Golf Tournament'
+  },
+  {
+    title: 'Law Enforcement Memorial', date: '2026-05-22', time: '10:00 AM', location: 'County Admin Center',
+    image: '{{ site.baseurl }}/images/dsa/memorial-line-of-duty.png', imageAlt: 'Line of Duty Memorial'
+  },
+];
+
+const eventMap = buildEventMap(eventData);
+let selectedDateKey = null;
+let calendarMonth = getInitialCalendarMonth(eventData);
+
+function buildEventMap(events) {
+  const map = new Map();
+  events.forEach(e => {
+    const key = e.date;
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(e);
+  });
+  return map;
+}
+
+function parseDateKey(key) {
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function formatMonthYear(date) {
+  return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+}
+
+function formatDisplayDate(date) {
+  return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+function dateKey(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function getInitialCalendarMonth(events) {
+  if (!events.length) return new Date();
+  const sorted = [...events].sort((a, b) => a.date.localeCompare(b.date));
+  const today = new Date();
+  const todayKey = dateKey(today);
+  const upcoming = sorted.find(e => e.date >= todayKey) || sorted[0];
+  return new Date(parseDateKey(upcoming.date).getFullYear(), parseDateKey(upcoming.date).getMonth(), 1);
+}
+
+function getEventKeysInMonth(year, month) {
+  return [...eventMap.keys()]
+    .filter(k => {
+      const d = parseDateKey(k);
+      return d.getFullYear() === year && d.getMonth() === month;
+    })
+    .sort();
+}
+
+function renderCalendar() {
+  const monthLabel = el('evCalMonth');
+  const daysGrid = el('evCalDays');
+  if (!monthLabel || !daysGrid) return;
+
+  monthLabel.textContent = formatMonthYear(calendarMonth);
+
+  const year = calendarMonth.getFullYear();
+  const month = calendarMonth.getMonth();
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const prevMonthLast = new Date(year, month, 0);
+
+  const startOffset = firstDay.getDay();
+  const totalDays = lastDay.getDate();
+  const prevMonthDays = prevMonthLast.getDate();
+  const cells = [];
+
+  for (let i = 0; i < startOffset; i++) {
+    const day = prevMonthDays - startOffset + i + 1;
+    cells.push({ date: new Date(year, month - 1, day), isOut: true });
+  }
+
+  for (let day = 1; day <= totalDays; day++) {
+    cells.push({ date: new Date(year, month, day), isOut: false });
+  }
+
+  while (cells.length % 7 !== 0) {
+    const day = cells.length - (startOffset + totalDays) + 1;
+    cells.push({ date: new Date(year, month + 1, day), isOut: true });
+  }
+
+  const todayKey = dateKey(new Date());
+
+  daysGrid.innerHTML = cells.map(c => {
+    const key = dateKey(c.date);
+    const count = eventMap.get(key)?.length || 0;
+    const classes = [
+      'ev-day',
+      c.isOut ? 'is-out' : '',
+      count ? 'has-event' : '',
+      key === todayKey ? 'is-today' : '',
+      key === selectedDateKey ? 'selected' : '',
+    ].filter(Boolean).join(' ');
+    return `
+      <button class="${classes}" type="button" data-date="${key}">
+        <span class="num">${c.date.getDate()}</span>
+        ${count ? `<span class="ev-badge">${count}</span>` : ''}
+      </button>
+    `;
+  }).join('');
+
+  daysGrid.querySelectorAll('.ev-day').forEach(btn => {
+    btn.addEventListener('click', () => selectDate(btn.dataset.date));
+  });
+
+  if (!selectedDateKey || parseDateKey(selectedDateKey).getMonth() !== month || parseDateKey(selectedDateKey).getFullYear() !== year) {
+    const keysInMonth = getEventKeysInMonth(year, month);
+    const fallbackKey = keysInMonth[0] || dateKey(new Date(year, month, 1));
+    selectDate(fallbackKey, false);
+  } else {
+    renderDayDetail(selectedDateKey);
+  }
+}
+
+function renderDayDetail(key) {
+  const title = el('evCalDetailTitle');
+  const list = el('evCalList');
+  if (!title || !list) return;
+
+  const date = parseDateKey(key);
+  title.textContent = formatDisplayDate(date);
+
+  const events = eventMap.get(key) || [];
+  if (!events.length) {
+    list.innerHTML = `<div class="ev-empty">No events scheduled for this date.</div>`;
+    return;
+  }
+
+  list.innerHTML = events.map(e => `
+    <div class="ev-card">
+      <div class="ev-card-main">
+        <div class="ev-card-info">
+          <h4>${e.title}</h4>
+          <p>${e.location} &mdash; ${e.time}</p>
+        </div>
+        ${e.image ? `<img class="ev-card-img" src="${e.image}" alt="${e.imageAlt || e.title}">` : ''}
+      </div>
+      <button class="ev-rsvp" onclick="rsvp(this)">RSVP</button>
+    </div>
+  `).join('');
+}
+
+function selectDate(key, rerender = true) {
+  selectedDateKey = key;
+  if (rerender) { renderCalendar(); return; }
+  renderDayDetail(key);
+}
+
+function shiftCalendarMonth(delta) {
+  calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + delta, 1);
+  renderCalendar();
+}
+
+function goToToday() {
+  const today = new Date();
+  calendarMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  selectedDateKey = dateKey(today);
+  renderCalendar();
+}
+
+el('evPrev')?.addEventListener('click', () => shiftCalendarMonth(-1));
+el('evNext')?.addEventListener('click', () => shiftCalendarMonth(1));
+el('evToday')?.addEventListener('click', goToToday);
+
+renderCalendar();
+
+/* ================================================================
+   FAQ — toggle answers and filter by category / search
+   ================================================================ */
+
+function toggleFaqAnswer(questionEl) {
+  questionEl.classList.toggle('open');
+  questionEl.nextElementSibling.classList.toggle('open');
+}
+
+function filterFaqByCategory(category) {
+  document.querySelectorAll('.fq').forEach(f => {
+    f.style.display = (category === 'all' || f.dataset.c === category) ? '' : 'none';
+  });
+}
+
+function filterFaqBySearch(query) {
+  const q = query.toLowerCase();
+  document.querySelectorAll('.fq').forEach(f => {
+    f.style.display = f.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+function setActiveFaqTag(activeTag) {
+  document.querySelectorAll('.faq-tag').forEach(x => x.classList.remove('on'));
+  activeTag.classList.add('on');
+}
+
+document.querySelectorAll('.faq-tag').forEach(t => t.addEventListener('click', function() {
+  setActiveFaqTag(this);
+  filterFaqByCategory(this.dataset.c);
+}));
+
+el('faqSearch')?.addEventListener('input', function() {
+  filterFaqBySearch(this.value);
+});
+
+/* ================================================================
+   SEARCH — autocomplete dropdown that scrolls to sections
+   ================================================================ */
+
+const searchMap = [
+  { label: 'Benefits & Insurance', target: '#dashboard', detail: 'benefits' },
+  { label: 'Legal Defense',        target: '#dashboard', detail: 'legal' },
+  { label: 'Wellness Programs',    target: '#dashboard', detail: 'wellness' },
+  { label: 'Forms & Documents',    target: '#dashboard', detail: 'forms' },
+  { label: 'Newsletters',          target: '#dashboard', detail: 'newsletters' },
+  { label: 'Political Action',     target: '#dashboard', detail: 'pac' },
+  { label: 'Events Calendar',      target: '#events' },
+  { label: 'DSA Store',            target: '#store' },
+  { label: 'FAQ',                  target: '#faq' },
+  { label: 'Contact Us',           target: '#contact' },
+  { label: 'About DSA',            target: '#about' },
+  { label: 'Latest News',          target: '#news' },
+  { label: 'Membership',           target: '#faq' },
+  { label: 'Games',               target: '#games' },
+  { label: 'Net Patrol Mission',  target: '#games' },
+  { label: 'Networking Game',     target: '#games' },
+  { label: 'Pop Quiz Review',     target: '#games' },
+  { label: 'MTU Lab',             target: '#games' },
+];
+
+function findSearchMatches(query) {
+  return searchMap.filter(s => s.label.toLowerCase().includes(query.toLowerCase()));
+}
+
+function renderSearchDropdown(hits, dropdown) {
+  dropdown.innerHTML = hits.map(h =>
+    `<div class="search-item" data-target="${h.target}" data-detail="${h.detail || ''}">${h.label}</div>`
+  ).join('');
+}
+
+function handleSearchItemClick(item, dropdown) {
+  scrollTo(item.dataset.target);
+  if (item.dataset.detail) setTimeout(() => openDetail(item.dataset.detail), 400);
+  dropdown.classList.remove('open');
+  const si = el('searchInput');
+  if (si) si.value = '';
+}
+
+el('searchInput')?.addEventListener('input', function() {
+  const q = this.value.trim(), drop = el('searchDrop');
+  if (!drop) return;
+  if (q.length < 2) { drop.classList.remove('open'); return; }
+  const hits = findSearchMatches(q);
+  if (!hits.length) { drop.classList.remove('open'); return; }
+  renderSearchDropdown(hits, drop);
+  drop.classList.add('open');
+  drop.querySelectorAll('.search-item').forEach(it =>
+    it.addEventListener('click', function() { handleSearchItemClick(this, drop); })
+  );
+});
+
+/* ================================================================
+   CLICK-AWAY — close dropdowns when clicking outside
+   ================================================================ */
+
+function closeDropdownsOnClickAway(e) {
+  const drop = el('searchDrop');
+  if (drop && !e.target.closest('.search-box')) drop.classList.remove('open');
+  if (!e.target.closest('.user-area')) el('userPanel')?.classList.remove('open');
+}
+
+document.addEventListener('click', closeDropdownsOnClickAway);
+
+/* ================================================================
+   NAV HIGHLIGHT — highlight the active nav link on scroll
+   ================================================================ */
+
+const sectionIds = ['dashboard', 'news', 'events', 'about', 'store', 'games', 'faq', 'contact'];
+
+function getActiveSection() {
+  const y = window.scrollY + 120;
+  let active = '';
+  sectionIds.forEach(s => {
+    const section = el(s);
+    if (section && section.offsetTop <= y) active = s;
+  });
+  return active;
+}
+
+function highlightActiveNavLink() {
+  const active = getActiveSection();
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.classList.toggle('active', l.getAttribute('onclick')?.includes(active));
+  });
+}
+
+window.addEventListener('scroll', highlightActiveNavLink);
+
+/* ================================================================
+   MODAL — open / close / tab switching for login/signup
+   ================================================================ */
+
+function openModal(tab) {
+  el('modalBg').classList.add('open');
+  switchModalTab(tab || 'login');
+}
+
+function closeModal() {
+  el('modalBg').classList.remove('open');
+  hideError('lErr');
+  hideError('sErr');
+}
+
+function switchModalTab(t) {
+  const isLogin = (t === 'login');
+  el('tLog').classList.toggle('on', isLogin);
+  el('tSign').classList.toggle('on', !isLogin);
+  el('fLogin').style.display = isLogin ? 'block' : 'none';
+  el('fSign').style.display = isLogin ? 'none' : 'block';
+  el('mTitle').textContent = isLogin ? 'Member Login' : 'Create Account';
+  el('mSub').textContent = isLogin ? 'Access your DSA portal' : 'Register as a DSA member';
+}
+
+// kept as global alias so onclick="mTab(...)" in HTML still works
+function mTab(t) { switchModalTab(t); }
+
+/* ================================================================
+   AUTH — login, signup, logout, session check
+   ================================================================ */
+
+function getLoginCredentials() {
+  return { uid: el('lUid').value, password: el('lPw').value };
+}
+
+function getSignupData() {
+  return {
+    name: el('sName').value, uid: el('sUid').value,
+    sheriff_id: el('sSid').value, email: el('sEmail').value,
+    rank: el('sRank').value, station: el('sStation').value,
+    phone: el('sPhone').value, password: el('sPw').value,
+  };
+}
+
+function doLogin(e) {
+  e.preventDefault();
+  apiRequest('/api/sheriff/authenticate', 'POST', getLoginCredentials())
+    .then(d => { user = d.user; closeModal(); updateUI(); })
+    .catch(err => showError('lErr', err.message));
+}
+
+function doSignup(e) {
+  e.preventDefault();
+  const body = getSignupData();
+  apiRequest('/api/sheriff/user', 'POST', body)
+    .then(() => { switchModalTab('login'); el('lUid').value = body.uid; alert('Account created! Please log in.'); })
+    .catch(err => showError('sErr', err.message));
+}
+
+function logout() {
+  apiRequest('/api/sheriff/authenticate', 'DELETE')
+    .finally(() => { user = null; updateUI(); el('userPanel').classList.remove('open'); });
+}
+
+/* ================================================================
+   UI STATE — update header to reflect logged-in / logged-out
+   ================================================================ */
+
+function showLoggedInUI() {
+  el('authBtns').style.display = 'none';
+  el('userArea').classList.add('active');
+  el('uName').textContent = user.name.split(' ')[0];
+  el('upName').textContent = user.name;
+  el('upBadge').textContent = 'Badge: ' + user.sheriff_id;
+  el('upRank').textContent = 'Rank: ' + user.rank;
+  el('upStation').textContent = 'Station: ' + user.station;
+  el('adminBtn').style.display = user.role === 'Admin' ? 'block' : 'none';
+}
+
+function showLoggedOutUI() {
+  el('authBtns').style.display = 'flex';
+  el('userArea').classList.remove('active');
+  el('adminSection').classList.remove('open');
+}
+
+function updateUI() {
+  user ? showLoggedInUI() : showLoggedOutUI();
+}
+
+/* ================================================================
+   ADMIN PANEL — toggle and load member table
+   ================================================================ */
+
+function toggleAdmin() {
+  const s = el('adminSection');
+  s.classList.toggle('open');
+  if (s.classList.contains('open')) loadAdmin();
+  el('userPanel').classList.remove('open');
+  if (s.classList.contains('open')) setTimeout(() => s.scrollIntoView({ behavior: 'smooth' }), 100);
+}
+
+function renderAdminRow(u) {
+  return `<tr><td>${u.name}</td><td>${u.uid}</td><td>${u.sheriff_id}</td><td>${u.rank}</td><td>${u.station}</td><td>${u.email}</td><td><span class="badge-s badge-active">${u.status}</span></td></tr>`;
+}
+
+function loadAdmin() {
+  fetch(`${API}/api/sheriff/user`, { credentials: 'include' })
+    .then(r => r.json())
+    .then(users => { el('adminBody').innerHTML = users.map(renderAdminRow).join(''); })
+    .catch(e => console.error(e));
+}
+
+/* ================================================================
+   CHATBOT — AI-powered DSA FAQ assistant
+   ================================================================ */
+
+let chatHist = [];
+
+function getChatInput() {
+  const inp = el('cbIn');
+  const msg = inp.value.trim();
+  inp.value = '';
+  return msg;
+}
+
+function addChatMessage(text, sender) {
+  const container = el('cbMsgs');
+  const div = document.createElement('div');
+  div.className = 'cm ' + sender;
+  div.innerHTML = '<div class="cb">' + sanitizeHTML(text) + '</div>';
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTypingIndicator() {
+  const container = el('cbMsgs');
+  const div = document.createElement('div');
+  const id = 't' + Date.now();
+  div.id = id;
+  div.className = 'cm bot';
+  div.innerHTML = '<div class="cb typing-dots"><span></span><span></span><span></span></div>';
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  return id;
+}
+
+function removeTypingIndicator(id) {
+  el(id)?.remove();
+}
+
+function disableChatSend() {
+  const btn = el('cbSend');
+  btn.disabled = true;
+  btn.textContent = '...';
+}
+
+function enableChatSend() {
+  const btn = el('cbSend');
+  btn.disabled = false;
+  btn.textContent = 'Send';
+}
+
+function sendChat() {
+  const msg = getChatInput();
+  if (!msg) return;
+
+  addChatMessage(msg, 'user');
+  chatHist.push({ role: 'user', content: msg });
+
+  const typingId = showTypingIndicator();
+  disableChatSend();
+
+  apiRequest('/api/sheriff/chat', 'POST', { message: msg, history: chatHist.slice(-10) })
+    .then(d => {
+      removeTypingIndicator(typingId);
+      addChatMessage(d.reply, 'bot');
+      chatHist.push({ role: 'assistant', content: d.reply });
+    })
+    .catch(() => {
+      removeTypingIndicator(typingId);
+      addChatMessage("Sorry, I can't connect right now. Call (858) 486-9009 or email info@dsasd.org.", 'bot');
+    })
+    .finally(enableChatSend);
+}
+
+
 
 /* ================================================================
    INIT — check auth session on page load
