@@ -1,14 +1,24 @@
 ---
-layout: opencs
+layout: none
 title: Logout
 permalink: /logout
 search_exclude: true
 ---
-
+<html>
+<head><title>Logging out...</title></head>
+<body>
+<p>Logging out...</p>
 <script type="module">
-    import { handleLogout } from '{{site.baseurl}}/assets/js/api/logout.js';
-    // logout
-    await handleLogout();
-    // redirect to login page
-    window.location.href = "{{site.baseurl}}/login";
+    import { pythonURI, fetchOptions } from '{{site.baseurl}}/assets/js/api/config.js';
+    try {
+        await fetch(pythonURI + '/api/sheriff/authenticate', {
+            ...fetchOptions,
+            method: 'DELETE'
+        });
+    } catch (e) {
+        console.error('Logout error:', e);
+    }
+    window.location.href = "{{site.baseurl}}/sheriff/";
 </script>
+</body>
+</html>
