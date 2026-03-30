@@ -120,6 +120,44 @@
     </div>
   </div>
 
+  <!-- Wow Factor & Customer Pitch -->
+  <div class="dsa-wow-section">
+    <div class="dsa-wow-badge">Checkpoint #2 — Wow Factor &amp; Pitch</div>
+    <h2 class="dsa-wow-headline">{{ data.WowPitch.headline }}</h2>
+    <p class="dsa-wow-pitch">{{ data.WowPitch.pitch }}</p>
+    <div class="dsa-wow-grid">
+      {% for factor in data.WowPitch.wow_factors %}
+      <div class="dsa-wow-card">
+        <div class="dsa-wow-icon">{{ factor.icon }}</div>
+        <div class="dsa-wow-title">{{ factor.title }}</div>
+        <div class="dsa-wow-detail">{{ factor.detail }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Deployment Links -->
+  <div class="dsa-deploy-section">
+    <div class="dsa-deploy-header">
+      <span class="dsa-deploy-badge dsa-deploy-badge--{{ data.Deployment.status | downcase | replace: ' ', '-' }}">{{ data.Deployment.status }}</span>
+      <h2 class="dsa-deploy-title">Project Deployment</h2>
+    </div>
+    <div class="dsa-deploy-links">
+      <a href="{{ site.baseurl }}{{ data.Deployment.live_url }}" class="dsa-deploy-btn dsa-deploy-btn--live">
+        <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0zm4.879-2.773 4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559V5.442a.25.25 0 0 1 .379-.215z"/></svg>
+        {{ data.Deployment.live_label }}
+      </a>
+      <a href="{{ data.Deployment.repo_front }}" target="_blank" rel="noopener noreferrer" class="dsa-deploy-btn dsa-deploy-btn--repo">
+        <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        Frontend Repo
+      </a>
+      <a href="{{ data.Deployment.repo_back }}" target="_blank" rel="noopener noreferrer" class="dsa-deploy-btn dsa-deploy-btn--repo">
+        <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        Backend Repo
+      </a>
+    </div>
+  </div>
+
   <!-- External Website Link -->
   <div class="dsa-website-link">
     <span class="dsa-website-label">Official Website</span>
@@ -127,4 +165,118 @@
       Visit dsasd.org ↗
     </a>
   </div>
+
+  <style>
+    .dsa-wow-section {
+      margin: 2.5rem 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #0d2137 0%, #12314d 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(251, 191, 36, 0.25);
+    }
+    .dsa-wow-badge {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.15);
+      color: #fbbf24;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      margin-bottom: 1rem;
+    }
+    .dsa-wow-headline {
+      color: #fbbf24;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin: 0 0 0.75rem;
+    }
+    .dsa-wow-pitch {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .dsa-wow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .dsa-wow-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(251, 191, 36, 0.15);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .dsa-wow-icon { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    .dsa-wow-title { color: #f1f5f9; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.35rem; }
+    .dsa-wow-detail { color: #94a3b8; font-size: 0.82rem; line-height: 1.5; }
+
+    .dsa-deploy-section {
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+    }
+    .dsa-deploy-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .dsa-deploy-title {
+      color: #f1f5f9;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .dsa-deploy-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+    }
+    .dsa-deploy-badge--deployed {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+    .dsa-deploy-badge--in-progress {
+      background: rgba(251, 191, 36, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+    .dsa-deploy-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .dsa-deploy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      text-decoration: none !important;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .dsa-deploy-btn:hover { transform: translateY(-2px); }
+    .dsa-deploy-btn--live {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    }
+    .dsa-deploy-btn--repo {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: #e2e8f0 !important;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+  </style>
 </div>

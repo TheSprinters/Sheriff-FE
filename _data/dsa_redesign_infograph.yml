@@ -92,3 +92,27 @@ Topics:
       - "Moiz — Information Architecture & Design"
       - "Akhil — Responsive Frontend Build"
       - "Neil — Search & Accessibility"
+
+Deployment:
+  live_url: "/sheriff/"
+  live_label: "Live Prototype — DSA Portal"
+  repo_front: "https://github.com/TheSprinters/cap_front"
+  repo_back: "https://github.com/TheSprinters/cap_back"
+  status: "Deployed"
+
+WowPitch:
+  headline: "Why DSA Members Will Love This"
+  pitch: "DSA's 4,229+ members currently navigate 9+ menu items across multiple pages to find basic resources. TheSprinters built a working prototype that consolidates everything into one personalized portal — find any resource in a single click, get instant FAQ answers, and navigate the full site from a mega menu built for mobile. We're giving the DSA a modern digital experience worthy of their 70 years of service."
+  wow_factors:
+    - icon: "⚡"
+      title: "1-Click Resource Access"
+      detail: "Dashboard replaces 4-page journeys with a single consolidated hub"
+    - icon: "🔍"
+      title: "Instant Smart Search"
+      detail: "Fuzzy search with autocomplete across all site content and FAQs"
+    - icon: "📱"
+      title: "Mobile-First Design"
+      detail: "Full mega menu and responsive layout for 50%+ of members on phones"
+    - icon: "💬"
+      title: "Live Chat Fallback"
+      detail: "If FAQ can't answer it, live chat routes directly to support"

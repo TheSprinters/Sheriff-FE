@@ -93,3 +93,27 @@ Topics:
       - "Moiz — Content Gathering & Page Copy"
       - "Akhil — Registration Form & Backend"
       - "Neil — Photo Gallery & Page Template"
+
+Deployment:
+  live_url: "https://github.com/TheSprinters/cap_front"
+  live_label: "View Repository & Prototype"
+  repo_front: "https://github.com/TheSprinters/cap_front"
+  repo_back: "https://github.com/TheSprinters/cap_back"
+  status: "In Progress"
+
+WowPitch:
+  headline: "Why D.A.D. Will Love This"
+  pitch: "D.A.D.'s current website is a wall of text with no impact numbers, no program photos, and a donate button that sends visitors to an external page with zero storytelling. TheSprinters built a redesign that transforms the first impression in under 3 seconds — animated impact counters, visual program cards, a donation flow with impact tiers showing exactly what each gift accomplishes, and self-service registration so families never have to call. This turns D.A.D.'s inspiring mission into a digital story that converts visitors into donors and volunteers."
+  wow_factors:
+    - icon: "✨"
+      title: "Animated Impact Counters"
+      detail: "Instantly shows youth served, programs running, and years of impact"
+    - icon: "💰"
+      title: "Impact-Tier Donation Flow"
+      detail: "Donors see exactly what $25, $50, $100+ accomplishes — drives 5x recurring value"
+    - icon: "📋"
+      title: "Self-Service Program Registration"
+      detail: "Families discover and register online — no calls or emails required"
+    - icon: "📸"
+      title: "Photo Gallery & Testimonials"
+      detail: "Visual proof of impact builds emotional connection that drives giving"
