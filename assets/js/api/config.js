@@ -7,9 +7,9 @@ export const baseurl = "{{ site.baseurl }}";
 
 export var pythonURI;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-    pythonURI = "http://localhost:8587";
+    pythonURI = "http://localhost:8325";
 } else {
-    pythonURI = "https://flask.opencodingsociety.com";
+    pythonURI = "https://sheriff.opencodingsociety.com";
 }
 
 export const fetchOptions = {
