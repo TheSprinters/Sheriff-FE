@@ -363,9 +363,6 @@ search_exclude: true
     .modal-err { color: #ef4444; font-size: 0.8rem; margin-top: 8px; display: none; }
 
     /* Pathway guide */
-    .pw-locked { text-align: center; padding: 40px 20px; }
-    .pw-locked p { color: #64748b; font-size: 0.9rem; margin-bottom: 14px; }
-    .pw-locked .btn { display: inline-block; }
     .pw-step { display: none; }
     .pw-step.active { display: block; }
     .pw-progress { display: flex; gap: 6px; margin-bottom: 24px; }
@@ -869,14 +866,13 @@ search_exclude: true
     <p>Answer a few questions and get a personalized plan to advance your career</p>
   </div>
 
-  <!-- Locked state (not logged in) -->
-  <div id="pwLocked" class="pw-locked">
-    <p>Log in to your DSA account to access your personalized rank pathway guide.</p>
-    <button class="btn btn-gold" onclick="openModal('login')">Log In to Get Started</button>
+  <!-- Hint for guests -->
+  <div id="pwGuest" style="display:none;text-align:center;margin-bottom:16px">
+    <p style="font-size:0.82rem;color:#94a3b8"><a href="#" onclick="openModal('login');return false" style="color:#fbbf24;font-weight:600">Log in</a> to auto-fill your current rank, or just start below as a guest.</p>
   </div>
 
-  <!-- Active state (logged in) -->
-  <div id="pwActive" style="display:none">
+  <!-- Active state (always visible) -->
+  <div id="pwActive">
 
     <!-- Current rank display -->
     <div class="pw-rank-display">
@@ -1922,18 +1918,22 @@ const FOCUS_ACTIVITIES = {
 let pwAnswers = {};
 
 function pwInit() {
-  if (!user) {
-    el('pwLocked').style.display = 'block';
-    el('pwActive').style.display = 'none';
-    return;
-  }
-  el('pwLocked').style.display = 'none';
   el('pwActive').style.display = 'block';
 
-  const rank = user.rank || 'Deputy';
-  el('pwCurrentRank').textContent = rank;
-  el('pwBadge').textContent = RANK_BADGES[rank] || rank[0];
-  el('pwCurrentDetail').textContent = 'Your current rank: ' + rank + ' at ' + (user.station || 'your station');
+  if (!user) {
+    // Guest mode — show hint and default to Deputy
+    el('pwGuest').style.display = 'block';
+    var rank = 'Deputy';
+    el('pwCurrentRank').textContent = rank;
+    el('pwBadge').textContent = RANK_BADGES[rank] || 'D';
+    el('pwCurrentDetail').textContent = 'Starting rank: Deputy (log in to use your actual rank)';
+  } else {
+    el('pwGuest').style.display = 'none';
+    var rank = user.rank || 'Deputy';
+    el('pwCurrentRank').textContent = rank;
+    el('pwBadge').textContent = RANK_BADGES[rank] || rank[0];
+    el('pwCurrentDetail').textContent = 'Your current rank: ' + rank + ' at ' + (user.station || 'your station');
+  }
 
   // Populate goal dropdown with ranks above current
   const idx = RANKS.indexOf(rank);
