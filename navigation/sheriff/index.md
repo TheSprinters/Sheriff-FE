@@ -490,22 +490,22 @@ search_exclude: true
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <div class="logo" onclick="scrollTo('#top')">
+    <div class="logo" onclick="scrollToSection('#top')">
       <img src="{{ site.baseurl }}/images/dsa/dsa-logo.png" alt="DSA Logo" style="width:42px;height:auto;">
       <div><div class="logo-text">Deputy Sheriffs' Assoc.</div><div class="logo-sub">San Diego County</div></div>
     </div>
     <nav>
-      <div class="nav-link" onclick="scrollTo('#dashboard')">Resources</div>
-      <div class="nav-link" onclick="scrollTo('#news')">News</div>
-      <div class="nav-link" onclick="scrollTo('#events')">Events</div>
+      <div class="nav-link" onclick="scrollToSection('#dashboard')">Resources</div>
+      <div class="nav-link" onclick="scrollToSection('#news')">News</div>
+      <div class="nav-link" onclick="scrollToSection('#events')">Events</div>
       <div class="nav-sep"></div>
-      <div class="nav-link" onclick="scrollTo('#about')">About</div>
-      <div class="nav-link" onclick="scrollTo('#store')">Store</div>
-      <div class="nav-link" onclick="scrollTo('#faq')">FAQ</div>
+      <div class="nav-link" onclick="scrollToSection('#about')">About</div>
+      <div class="nav-link" onclick="scrollToSection('#store')">Store</div>
+      <div class="nav-link" onclick="scrollToSection('#faq')">FAQ</div>
       <div class="nav-sep"></div>
-      <div class="nav-link" onclick="scrollTo('#pathway')">Pathway</div>
-      <div class="nav-link" onclick="scrollTo('#contact')">Contact</div>
-      <div class="nav-link" onclick="scrollTo('#games')">Games</div>
+      <div class="nav-link" onclick="scrollToSection('#pathway')">Pathway</div>
+      <div class="nav-link" onclick="scrollToSection('#contact')">Contact</div>
+      <div class="nav-link" onclick="scrollToSection('#games')">Games</div>
     </nav>
     <div class="header-right">
       <div class="search-box">
@@ -536,17 +536,17 @@ search_exclude: true
 
 <!-- MOBILE MENU -->
 <div class="mob-menu" id="mobMenu">
-  <div class="nav-link" onclick="scrollTo('#dashboard');document.getElementById('mobMenu').classList.remove('open')">Resources</div>
-  <div class="nav-link" onclick="scrollTo('#news');document.getElementById('mobMenu').classList.remove('open')">News</div>
-  <div class="nav-link" onclick="scrollTo('#events');document.getElementById('mobMenu').classList.remove('open')">Events</div>
+  <div class="nav-link" onclick="scrollToSection('#dashboard');document.getElementById('mobMenu').classList.remove('open')">Resources</div>
+  <div class="nav-link" onclick="scrollToSection('#news');document.getElementById('mobMenu').classList.remove('open')">News</div>
+  <div class="nav-link" onclick="scrollToSection('#events');document.getElementById('mobMenu').classList.remove('open')">Events</div>
   <div class="nav-sep"></div>
-  <div class="nav-link" onclick="scrollTo('#about');document.getElementById('mobMenu').classList.remove('open')">About</div>
-  <div class="nav-link" onclick="scrollTo('#store');document.getElementById('mobMenu').classList.remove('open')">Store</div>
-  <div class="nav-link" onclick="scrollTo('#faq');document.getElementById('mobMenu').classList.remove('open')">FAQ</div>
+  <div class="nav-link" onclick="scrollToSection('#about');document.getElementById('mobMenu').classList.remove('open')">About</div>
+  <div class="nav-link" onclick="scrollToSection('#store');document.getElementById('mobMenu').classList.remove('open')">Store</div>
+  <div class="nav-link" onclick="scrollToSection('#faq');document.getElementById('mobMenu').classList.remove('open')">FAQ</div>
   <div class="nav-sep"></div>
-  <div class="nav-link" onclick="scrollTo('#pathway');document.getElementById('mobMenu').classList.remove('open')">Pathway</div>
-  <div class="nav-link" onclick="scrollTo('#contact');document.getElementById('mobMenu').classList.remove('open')">Contact</div>
-  <div class="nav-link" onclick="scrollTo('#games');document.getElementById('mobMenu').classList.remove('open')">Games</div>
+  <div class="nav-link" onclick="scrollToSection('#pathway');document.getElementById('mobMenu').classList.remove('open')">Pathway</div>
+  <div class="nav-link" onclick="scrollToSection('#contact');document.getElementById('mobMenu').classList.remove('open')">Contact</div>
+  <div class="nav-link" onclick="scrollToSection('#games');document.getElementById('mobMenu').classList.remove('open')">Games</div>
 </div>
 
 <!-- HERO -->
@@ -556,8 +556,8 @@ search_exclude: true
     <h2>The Strength Behind the Badge</h2>
     <p>Representing the dedicated officers of the San Diego County Sheriff's Department since 1955. Benefits, legal defense, events, and advocacy &mdash; all in one place.</p>
     <div class="hero-cta">
-      <button class="btn btn-gold" onclick="scrollTo('#dashboard')">Explore Resources</button>
-      <button class="btn btn-outline" onclick="scrollTo('#about')">Learn About DSA</button>
+      <button class="btn btn-gold" onclick="scrollToSection('#dashboard')">Explore Resources</button>
+      <button class="btn btn-outline" onclick="scrollToSection('#about')">Learn About DSA</button>
       <a href="{{ site.baseurl }}/sheriff/info" class="btn btn-outline" style="text-decoration:none">Full DSA Info Page</a>
     </div>
     <div class="stats">
@@ -577,8 +577,8 @@ search_exclude: true
     <div class="tile" onclick="openDetail('legal')"><div class="tile-icon">&#128272;</div><div class="tile-title">Legal Defense</div><div class="tile-desc">Representation & defense fund</div></div>
     <div class="tile" onclick="openDetail('wellness')"><div class="tile-icon">&#127891;</div><div class="tile-title">Wellness</div><div class="tile-desc">Peer support & mental health</div></div>
     <div class="tile" onclick="openDetail('forms')"><div class="tile-icon">&#128196;</div><div class="tile-title">Forms & Docs</div><div class="tile-desc">Contracts, forms & downloads</div></div>
-    <div class="tile" onclick="scrollTo('#events')"><div class="tile-icon">&#128197;</div><div class="tile-title">Events</div><div class="tile-desc">Upcoming meetings & social events</div></div>
-    <div class="tile" onclick="scrollTo('#store')"><div class="tile-icon">&#128176;</div><div class="tile-title">DSA Store</div><div class="tile-desc">Official merch & apparel</div></div>
+    <div class="tile" onclick="scrollToSection('#events')"><div class="tile-icon">&#128197;</div><div class="tile-title">Events</div><div class="tile-desc">Upcoming meetings & social events</div></div>
+    <div class="tile" onclick="scrollToSection('#store')"><div class="tile-icon">&#128176;</div><div class="tile-title">DSA Store</div><div class="tile-desc">Official merch & apparel</div></div>
     <div class="tile" onclick="openDetail('newsletters')"><div class="tile-icon">&#128240;</div><div class="tile-title">Newsletters</div><div class="tile-desc">Monthly publications & minutes</div></div>
     <div class="tile" onclick="openDetail('pac')"><div class="tile-icon">&#127937;</div><div class="tile-title">Political Action</div><div class="tile-desc">PAC updates & endorsements</div></div>
   </div>
@@ -963,7 +963,7 @@ search_exclude: true
       <div id="pwResults"></div>
       <div class="pw-nav" style="margin-top:24px">
         <button class="btn btn-outline" onclick="pwReset()">Start Over</button>
-        <button class="btn btn-gold" onclick="scrollTo('#pathway')">Back to Top</button>
+        <button class="btn btn-gold" onclick="scrollToSection('#pathway')">Back to Top</button>
       </div>
     </div>
 
@@ -1003,7 +1003,7 @@ search_exclude: true
 </footer>
 
 <!-- SCROLL TO TOP -->
-<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollToSection({top:0,behavior:'smooth'})">&#8593;</button>
 
 <!-- CHATBOT -->
 <button class="cb-trigger" onclick="document.getElementById('cbWin').classList.toggle('open')">&#128172;</button>
@@ -1056,7 +1056,7 @@ let user = null;
    ================================================================ */
 
 /** Scroll the viewport to the element matching `sel`. */
-function scrollTo(sel) {
+function scrollToSection(sel) {
   document.querySelector(sel)?.scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -1389,7 +1389,7 @@ function renderSearchDropdown(hits, dropdown) {
 }
 
 function handleSearchItemClick(item, dropdown) {
-  scrollTo(item.dataset.target);
+  scrollToSection(item.dataset.target);
   if (item.dataset.detail) setTimeout(() => openDetail(item.dataset.detail), 400);
   dropdown.classList.remove('open');
   const si = el('searchInput');
