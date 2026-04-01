@@ -71,10 +71,11 @@ comments: false
 <p class="sub">Rebuilt <a href="https://dsasd.org" target="_blank">dsasd.org</a> as a full-stack single-page app with authentication, AI chatbot, interactive games, and a modern dark UI. <br>Live at: <a href="https://dsasd.opencodingsociety.com/sheriff/" target="_blank">dsasd.opencodingsociety.com/sheriff</a></p>
 
 <div class="sb">
-  <div class="si"><div class="n">9</div><div class="l">Page Sections</div></div>
+  <div class="si"><div class="n">10</div><div class="l">Page Sections</div></div>
   <div class="si"><div class="n">7</div><div class="l">API Endpoints</div></div>
   <div class="si"><div class="n">6</div><div class="l">DB Tables</div></div>
   <div class="si"><div class="n">3</div><div class="l">Game Modes</div></div>
+  <div class="si"><div class="n">2</div><div class="l">Pages</div></div>
   <div class="si"><div class="n">11</div><div class="l">Custom Images</div></div>
 </div>
 
@@ -99,6 +100,9 @@ comments: false
       <li>Mobile menu overlay + responsive breakpoints</li>
       <li>Section dividers, scroll-to-top, active nav highlighting</li>
       <li>Net Patrol canvas game, Pop Quiz, and MTU Explorer lab</li>
+      <li>Rank Pathway Guide: 4-step quiz, personalized results, interactive checklists</li>
+      <li>Full DSA Info sub-page (`/sheriff/info`) with org structure, rank table, stations</li>
+      <li>Cross-page navigation (hero CTA, about section link, search integration)</li>
       <li>All custom images and visual assets</li>
     </ul>
   </div>
@@ -202,8 +206,8 @@ comments: false
 ### Header & Navigation
 - Sticky frosted-glass header with `backdrop-filter: blur(12px)`
 - DSA logo + text branding
-- 9 nav links grouped with subtle vertical separators
-- Real-time search bar — type 2+ characters and a dropdown shows matching sections (Resources, News, Events, FAQ, Store, Games, etc.)
+- 10 nav links grouped with subtle vertical separators (Resources, News, Events, About, Store, FAQ, Pathway, Contact, Games)
+- Real-time search bar — type 2+ characters and a dropdown shows matching sections (Resources, News, Events, FAQ, Store, Games, Pathway, DSA Info, etc.)
 - Login / Join buttons swap to user chip when authenticated
 - User dropdown panel: name, badge, rank, station, admin toggle, logout
 - Full-screen mobile overlay menu with grouped links and auto-close
@@ -211,7 +215,7 @@ comments: false
 ### Hero Section
 - Background image overlay (`store-uniforms.jpg`) at 12% opacity
 - Radial gold glow effect
-- DSA logo badge, headline, subtitle, two CTA buttons
+- DSA logo badge, headline, subtitle, three CTA buttons (Explore Resources, Learn About DSA, Full DSA Info Page)
 - Stats bar: 4,229 Active Members / 70+ Years / 12 Stations / 24/7 Support
 
 ### Member Resources (Dashboard)
@@ -296,6 +300,37 @@ comments: false
 - 6 category filter tags: All, Membership, Benefits, Legal, Events, Store
 - 9 accordion Q&A items covering: joining, dues, Weingarten rights, insurance, open enrollment, legal defense, critical incidents, RSVP, merchandise
 - Linked to AI chatbot for questions not covered
+
+### Rank Pathway Guide (NEW)
+- Gamified career advancement planner tied to the user's logged-in account
+- **Locked state:** prompts users to log in before access
+- **Step 1 — Goal Rank:** auto-detects current rank from user profile, shows only higher ranks in a dropdown
+- **Step 2 — Experience Assessment:** years in current rank (4 options) + primary focus area (Patrol, Investigations, Specialized, Detention, Admin)
+- **Step 3 — Skills & Challenges:** leadership self-assessment (4 levels) + biggest promotion challenge (exam, experience, education, interview, networking)
+- **Step 4 — Personalized Results:** generated based on all quiz answers:
+  - **Pathway summary** with estimated timeline (e.g., "Deputy to Sergeant: 5-8 years")
+  - **Personalized notes** based on years served and leadership level
+  - **Requirements checklist** for the target rank
+  - **Career timeline** with milestone markers (Year 1, Year 3, Test Window, etc.)
+  - **Interactive activity checklists** (click to check off) for their primary challenge area
+  - **Secondary activity set** for well-rounded development
+  - **Focus-specific activities** tailored to their assignment area (e.g., K-9 certifications for specialized unit members)
+- Covers all 10 rank combinations (Deputy-to-Corporal through Lieutenant-to-Captain)
+- Progress bar showing quiz completion (4 dots)
+- Activities tagged as Required, Recommended, or Focus
+
+### Full DSA Info Page (NEW — `/sheriff/info`)
+- Dedicated sub-page accessible via hero CTA and About section link
+- Comprehensive DSA organizational info:
+  - Mission statement and core services
+  - Organizational structure (Board, HQ Staff, Shop Stewards, PAC)
+  - Full rank structure table (Deputy through Captain with responsibilities)
+  - All patrol stations (12), detention facilities (6), and specialized units (9)
+  - Member benefits: health/insurance, legal defense, wellness, publications
+  - History timeline from 1955 to present
+  - Contact cards (address, phone, email)
+- Link back to portal + link to official dsasd.org
+- Consistent dark navy/gold design matching the main portal
 
 ### Contact Section
 - 3 staff/board member circular photos with labels
@@ -420,7 +455,10 @@ dsasd.opencodingsociety.com    -->   sheriff.opencodingsociety.com
 - **No AI to AI chatbot** — Claude-powered FAQ assistant
 - **Basic to modern UI** — dark navy/gold, glassmorphism, responsive mobile menu
 - **No data to 6 DB tables** — full personnel tracking with training, certs, commendations
+- **No career tools to gamified Rank Pathway** — personalized quiz, timeline, interactive checklists
+- **Single page to multi-page** — dedicated DSA Info sub-page at `/sheriff/info` with full org details
 - **11 custom images** across hero, news, about, store, events, and contact
+- **2 pages** — main portal + DSA info page, linked with minimal clicks
 
 <p style="text-align:center;color:#475569;font-size:0.8rem;margin-top:40px">Published March 31, 2026 &mdash; <a href="{{ site.baseurl }}/sheriff/">Visit the DSA Portal</a></p>
 

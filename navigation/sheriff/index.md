@@ -506,6 +506,80 @@ search_exclude: true
     .journey-step .js-bytes { font-size: 0.72rem; font-weight: 700; float: right; opacity: 0.8; }
     .js-arrow { text-align: left; color: #1e3352; font-size: 0.85rem; padding: 2px 0 2px 4px; }
 
+    /* Pathway guide */
+    .pw-locked { text-align: center; padding: 40px 20px; }
+    .pw-locked p { color: #64748b; font-size: 0.9rem; margin-bottom: 14px; }
+    .pw-locked .btn { display: inline-block; }
+    .pw-step { display: none; }
+    .pw-step.active { display: block; }
+    .pw-progress { display: flex; gap: 6px; margin-bottom: 24px; }
+    .pw-dot { flex: 1; height: 5px; border-radius: 3px; background: #1e3352; transition: background 0.3s; }
+    .pw-dot.done { background: #fbbf24; }
+    .pw-dot.now { background: #60a5fa; }
+    .pw-rank-display {
+      display: flex; align-items: center; gap: 16px; background: rgba(251,191,36,0.05);
+      border: 1px solid rgba(251,191,36,0.15); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px;
+    }
+    .pw-rank-badge {
+      width: 56px; height: 56px; background: linear-gradient(135deg,#fbbf24,#d97706); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; color: #1e3a5f; flex-shrink: 0;
+    }
+    .pw-rank-info h3 { font-size: 1.1rem; color: #fbbf24; margin: 0 0 2px; }
+    .pw-rank-info p { font-size: 0.82rem; color: #94a3b8; margin: 0; }
+    .pw-question { margin-bottom: 18px; }
+    .pw-question label { display: block; font-size: 0.92rem; color: #e2e8f0; font-weight: 600; margin-bottom: 10px; }
+    .pw-opts { display: grid; gap: 8px; }
+    .pw-opt {
+      padding: 12px 16px; border-radius: 10px; border: 1px solid #1e3352; background: rgba(255,255,255,0.02);
+      color: #94a3b8; cursor: pointer; font-size: 0.85rem; transition: all 0.15s; text-align: left;
+    }
+    .pw-opt:hover { border-color: #3b82f6; color: #e2e8f0; background: rgba(59,130,246,0.06); }
+    .pw-opt.selected { border-color: #fbbf24; color: #fbbf24; background: rgba(251,191,36,0.08); }
+    .pw-goal-sel {
+      width: 100%; padding: 12px 16px; background: #162a46; border: 1px solid #1e3352; border-radius: 10px;
+      color: #e2e8f0; font-size: 0.9rem; outline: none; cursor: pointer;
+    }
+    .pw-goal-sel:focus { border-color: #fbbf24; }
+    .pw-goal-sel option { background: #162a46; }
+    .pw-nav { display: flex; gap: 10px; margin-top: 20px; }
+    .pw-nav .btn { flex: 1; text-align: center; }
+    .pw-result-card {
+      background: #162a46; border: 1px solid #1e3352; border-radius: 14px; padding: 24px; margin-bottom: 16px;
+    }
+    .pw-result-card h3 { font-size: 1.1rem; color: #fbbf24; margin-bottom: 12px; }
+    .pw-result-card h4 { font-size: 0.92rem; color: #60a5fa; margin: 14px 0 8px; }
+    .pw-result-card p { font-size: 0.84rem; color: #94a3b8; line-height: 1.6; }
+    .pw-result-card ul { padding-left: 18px; margin: 6px 0; }
+    .pw-result-card li { font-size: 0.84rem; color: #cbd5e1; margin-bottom: 5px; line-height: 1.5; }
+    .pw-result-card .highlight { color: #fbbf24; font-weight: 700; }
+    .pw-act {
+      background: rgba(59,130,246,0.04); border: 1px solid rgba(59,130,246,0.15); border-radius: 12px;
+      padding: 18px; margin-bottom: 12px;
+    }
+    .pw-act h4 { font-size: 0.9rem; color: #60a5fa; margin: 0 0 6px; }
+    .pw-act p { font-size: 0.82rem; color: #94a3b8; margin: 0 0 8px; }
+    .pw-act .tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 6px; }
+    .pw-act .tag-req { background: rgba(251,191,36,0.1); color: #fbbf24; }
+    .pw-act .tag-rec { background: rgba(52,211,153,0.1); color: #34d399; }
+    .pw-act .tag-opt { background: rgba(96,165,250,0.1); color: #60a5fa; }
+    .pw-act .checklist { padding-left: 0; list-style: none; margin: 8px 0 0; }
+    .pw-act .checklist li { font-size: 0.82rem; color: #cbd5e1; padding: 6px 0; border-bottom: 1px solid #1e3352; cursor: pointer; }
+    .pw-act .checklist li:last-child { border-bottom: none; }
+    .pw-act .checklist li::before { content: '\\2610 '; color: #475569; margin-right: 6px; }
+    .pw-act .checklist li.checked::before { content: '\\2611 '; color: #34d399; }
+    .pw-act .checklist li.checked { color: #64748b; text-decoration: line-through; }
+    .pw-timeline {
+      position: relative; padding-left: 24px; margin: 16px 0;
+      border-left: 2px solid rgba(251,191,36,0.2);
+    }
+    .pw-tl-item { margin-bottom: 18px; position: relative; }
+    .pw-tl-item::before {
+      content: ''; position: absolute; left: -29px; top: 4px; width: 10px; height: 10px;
+      background: #fbbf24; border-radius: 50%;
+    }
+    .pw-tl-item h4 { font-size: 0.88rem; color: #e2e8f0; margin: 0 0 4px; }
+    .pw-tl-item p { font-size: 0.8rem; color: #94a3b8; margin: 0; }
+
     /* Section divider */
     .sec-divider { max-width: 1100px; margin: 0 auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(251,191,36,0.15), transparent); }
 
@@ -576,6 +650,7 @@ search_exclude: true
       <div class="nav-link" onclick="scrollTo('#store')">Store</div>
       <div class="nav-link" onclick="scrollTo('#faq')">FAQ</div>
       <div class="nav-sep"></div>
+      <div class="nav-link" onclick="scrollTo('#pathway')">Pathway</div>
       <div class="nav-link" onclick="scrollTo('#contact')">Contact</div>
       <div class="nav-link" onclick="scrollTo('#games')">Games</div>
     </nav>
@@ -616,6 +691,7 @@ search_exclude: true
   <div class="nav-link" onclick="scrollTo('#store');document.getElementById('mobMenu').classList.remove('open')">Store</div>
   <div class="nav-link" onclick="scrollTo('#faq');document.getElementById('mobMenu').classList.remove('open')">FAQ</div>
   <div class="nav-sep"></div>
+  <div class="nav-link" onclick="scrollTo('#pathway');document.getElementById('mobMenu').classList.remove('open')">Pathway</div>
   <div class="nav-link" onclick="scrollTo('#contact');document.getElementById('mobMenu').classList.remove('open')">Contact</div>
   <div class="nav-link" onclick="scrollTo('#games');document.getElementById('mobMenu').classList.remove('open')">Games</div>
 </div>
@@ -629,6 +705,7 @@ search_exclude: true
     <div class="hero-cta">
       <button class="btn btn-gold" onclick="scrollTo('#dashboard')">Explore Resources</button>
       <button class="btn btn-outline" onclick="scrollTo('#about')">Learn About DSA</button>
+      <a href="{{ site.baseurl }}/sheriff/info" class="btn btn-outline" style="text-decoration:none">Full DSA Info Page</a>
     </div>
     <div class="stats">
       <div><div class="stat-num">4,229</div><div class="stat-label">Active Members</div></div>
@@ -819,6 +896,7 @@ search_exclude: true
       <h3>Our Mission</h3>
       <p>The Deputy Sheriffs' Association of San Diego County is the labor union representing all sworn personnel of the San Diego County Sheriff's Department. Founded in 1955, we negotiate contracts, provide legal defense, support political action, and deliver member benefits and wellness programs for over 4,229 members.</p>
       <p style="margin-top:10px">As the exclusive collective bargaining unit, the DSA negotiates Memoranda of Understanding (MOUs) covering wages, benefits, working conditions, overtime, and retirement with the County of San Diego.</p>
+      <a href="{{ site.baseurl }}/sheriff/info" style="display:inline-block;margin-top:12px;padding:8px 18px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.3);border-radius:8px;color:#fbbf24;font-size:0.82rem;font-weight:600;text-decoration:none">Read Full DSA History & Details &rarr;</a>
     </div>
     <div class="about-card">
       <h3>Stations We Cover</h3>
@@ -1197,6 +1275,120 @@ search_exclude: true
 
 <div class="sec-divider"></div>
 
+<!-- RANK PATHWAY GUIDE -->
+<div class="section" id="pathway">
+  <div class="sec-head">
+    <h2>Rank Pathway Guide</h2>
+    <p>Answer a few questions and get a personalized plan to advance your career</p>
+  </div>
+
+  <!-- Locked state (not logged in) -->
+  <div id="pwLocked" class="pw-locked">
+    <p>Log in to your DSA account to access your personalized rank pathway guide.</p>
+    <button class="btn btn-gold" onclick="openModal('login')">Log In to Get Started</button>
+  </div>
+
+  <!-- Active state (logged in) -->
+  <div id="pwActive" style="display:none">
+
+    <!-- Current rank display -->
+    <div class="pw-rank-display">
+      <div class="pw-rank-badge" id="pwBadge">D</div>
+      <div class="pw-rank-info">
+        <h3 id="pwCurrentRank">Deputy</h3>
+        <p id="pwCurrentDetail">Your current rank based on your account profile</p>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="pw-progress">
+      <div class="pw-dot done" id="pwD1"></div>
+      <div class="pw-dot" id="pwD2"></div>
+      <div class="pw-dot" id="pwD3"></div>
+      <div class="pw-dot" id="pwD4"></div>
+    </div>
+
+    <!-- STEP 1: Goal rank -->
+    <div class="pw-step active" id="pwStep1">
+      <div class="pw-question">
+        <label>What rank do you want to reach?</label>
+        <select class="pw-goal-sel" id="pwGoal">
+          <option value="">-- Select your goal rank --</option>
+        </select>
+      </div>
+      <div class="pw-nav">
+        <button class="btn btn-gold" onclick="pwNext(1)" id="pwNext1" disabled>Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Experience questions -->
+    <div class="pw-step" id="pwStep2">
+      <div class="pw-question">
+        <label>How many years have you served in your current rank?</label>
+        <div class="pw-opts" id="pwYearsOpts">
+          <div class="pw-opt" data-val="0-2" onclick="pwSelect(this,'pwYears')">0 &ndash; 2 years</div>
+          <div class="pw-opt" data-val="3-5" onclick="pwSelect(this,'pwYears')">3 &ndash; 5 years</div>
+          <div class="pw-opt" data-val="6-10" onclick="pwSelect(this,'pwYears')">6 &ndash; 10 years</div>
+          <div class="pw-opt" data-val="10+" onclick="pwSelect(this,'pwYears')">10+ years</div>
+        </div>
+      </div>
+      <div class="pw-question">
+        <label>Which area best describes your primary focus?</label>
+        <div class="pw-opts" id="pwFocusOpts">
+          <div class="pw-opt" data-val="patrol" onclick="pwSelect(this,'pwFocus')">Patrol / Field Operations</div>
+          <div class="pw-opt" data-val="investigations" onclick="pwSelect(this,'pwFocus')">Investigations / Detective</div>
+          <div class="pw-opt" data-val="specialized" onclick="pwSelect(this,'pwFocus')">Specialized Unit (K-9, SWAT, Traffic, etc.)</div>
+          <div class="pw-opt" data-val="detention" onclick="pwSelect(this,'pwFocus')">Detention / Court Services</div>
+          <div class="pw-opt" data-val="admin" onclick="pwSelect(this,'pwFocus')">Administration / Support</div>
+        </div>
+      </div>
+      <div class="pw-nav">
+        <button class="btn btn-outline" onclick="pwBack(2)">&larr; Back</button>
+        <button class="btn btn-gold" onclick="pwNext(2)" id="pwNext2" disabled>Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Skills self-assessment -->
+    <div class="pw-step" id="pwStep3">
+      <div class="pw-question">
+        <label>Rate your leadership experience:</label>
+        <div class="pw-opts" id="pwLeadOpts">
+          <div class="pw-opt" data-val="none" onclick="pwSelect(this,'pwLead')">Minimal &mdash; I mostly follow direction from supervisors</div>
+          <div class="pw-opt" data-val="some" onclick="pwSelect(this,'pwLead')">Some &mdash; I've led small teams or trained newer deputies</div>
+          <div class="pw-opt" data-val="moderate" onclick="pwSelect(this,'pwLead')">Moderate &mdash; I regularly take charge of scenes or shifts</div>
+          <div class="pw-opt" data-val="strong" onclick="pwSelect(this,'pwLead')">Strong &mdash; I've supervised units, managed budgets, or led operations</div>
+        </div>
+      </div>
+      <div class="pw-question">
+        <label>What's your biggest challenge for promotion?</label>
+        <div class="pw-opts" id="pwChalOpts">
+          <div class="pw-opt" data-val="exam" onclick="pwSelect(this,'pwChal')">Passing the promotional exam</div>
+          <div class="pw-opt" data-val="experience" onclick="pwSelect(this,'pwChal')">Getting the right experience / assignments</div>
+          <div class="pw-opt" data-val="education" onclick="pwSelect(this,'pwChal')">Education requirements (degree, certifications)</div>
+          <div class="pw-opt" data-val="interview" onclick="pwSelect(this,'pwChal')">Oral interview / board assessment</div>
+          <div class="pw-opt" data-val="network" onclick="pwSelect(this,'pwChal')">Building relationships with leadership</div>
+        </div>
+      </div>
+      <div class="pw-nav">
+        <button class="btn btn-outline" onclick="pwBack(3)">&larr; Back</button>
+        <button class="btn btn-gold" onclick="pwGenerate()">Generate My Pathway</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Results -->
+    <div class="pw-step" id="pwStep4">
+      <div id="pwResults"></div>
+      <div class="pw-nav" style="margin-top:24px">
+        <button class="btn btn-outline" onclick="pwReset()">Start Over</button>
+        <button class="btn btn-gold" onclick="scrollTo('#pathway')">Back to Top</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="sec-divider"></div>
+
 <!-- CONTACT -->
 <div class="section" id="contact">
   <div class="sec-head"><h2>Contact Us</h2></div>
@@ -1222,7 +1414,7 @@ search_exclude: true
 <footer>
   <div class="ft-inner">
     <div class="ft-col"><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px"><img src="{{ site.baseurl }}/images/dsa/dsa-logo.png" alt="DSA" style="width:50px;height:auto;opacity:0.8"><h4 style="margin:0">Deputy Sheriffs' Association</h4></div><p>13881 Danielson Street, Poway, CA 92064</p><p>(858) 486-9009 &middot; info@dsasd.org</p><p style="margin-top:8px;color:#1e3352">&copy; 2026 DSA San Diego County</p></div>
-    <div class="ft-col"><h4>Navigate</h4><a href="#dashboard">Resources</a><a href="#news">News</a><a href="#events">Events</a><a href="#store">Store</a><a href="#faq">FAQ</a></div>
+    <div class="ft-col"><h4>Navigate</h4><a href="#dashboard">Resources</a><a href="#news">News</a><a href="#events">Events</a><a href="#store">Store</a><a href="#faq">FAQ</a><a href="#pathway">Pathway</a></div>
     <div class="ft-col"><h4>Support</h4><a href="#contact">Contact</a><a href="javascript:void(0)" onclick="openDetail('legal')">Legal Defense</a><a href="javascript:void(0)" onclick="openDetail('wellness')">Wellness</a><a href="javascript:void(0)" onclick="openDetail('forms')">Forms</a></div>
   </div>
 </footer>
@@ -2747,6 +2939,9 @@ const searchMap = [
   { label: 'Networking Game',     target: '#games' },
   { label: 'Pop Quiz Review',     target: '#games' },
   { label: 'MTU Lab',             target: '#games' },
+  { label: 'Rank Pathway Guide',  target: '#pathway' },
+  { label: 'Career Advancement',  target: '#pathway' },
+  { label: 'Full DSA Info',       target: '{{ site.baseurl }}/sheriff/info' },
 ];
 
 function findSearchMatches(query) {
@@ -2796,7 +2991,7 @@ document.addEventListener('click', closeDropdownsOnClickAway);
    NAV HIGHLIGHT — highlight the active nav link on scroll
    ================================================================ */
 
-const sectionIds = ['dashboard', 'news', 'events', 'about', 'store', 'games', 'faq', 'contact'];
+const sectionIds = ['dashboard', 'news', 'events', 'about', 'store', 'games', 'faq', 'pathway', 'contact'];
 
 function getActiveSection() {
   const y = window.scrollY + 120;
@@ -3019,6 +3214,455 @@ function checkExistingSession() {
 checkExistingSession();
 
 /* ================================================================
+   RANK PATHWAY GUIDE — gamified career advancement planner
+   ================================================================ */
+
+const RANKS = ['Deputy','Corporal','Sergeant','Lieutenant','Captain'];
+const RANK_BADGES = { Deputy:'D', Corporal:'C', Sergeant:'S', Lieutenant:'L', Captain:'Cpt' };
+
+const RANK_DATA = {
+  'Deputy-Corporal': {
+    timeline: '2-4 years',
+    summary: 'Focus on field experience, FTO certification, and demonstrating leadership on patrol before testing for Corporal.',
+    requirements: [
+      'Minimum 3 years as Deputy (typical)',
+      'Pass Corporal promotional exam (written + oral)',
+      'No sustained disciplinary actions in prior 12 months',
+      'Documented field training or mentorship of newer deputies',
+      'Positive performance evaluations from supervising Sergeant',
+    ],
+    milestones: [
+      { label: 'Year 1', text: 'Master patrol fundamentals, earn high marks on evaluations, volunteer for extra assignments' },
+      { label: 'Year 2', text: 'Become a Field Training Officer (FTO), mentor a trainee through probation, join a station committee' },
+      { label: 'Year 3', text: 'Study for promotional exam, take practice tests, participate in oral board prep sessions' },
+      { label: 'Test Window', text: 'Take promotional exam when announced, score in top tier, await selection from eligibility list' },
+    ],
+  },
+  'Deputy-Sergeant': {
+    timeline: '5-8 years',
+    summary: 'A jump to Sergeant means proving supervisory ability, deep policy knowledge, and consistent leadership across assignments.',
+    requirements: [
+      'Minimum 5 years sworn experience (typical)',
+      'Pass Sergeant promotional exam (written, oral, assessment center)',
+      'Demonstrated supervisory aptitude (FTO, acting roles, team leads)',
+      'Strong knowledge of department policy, MOU, and labor law',
+      'Recommended: Associate\'s or Bachelor\'s degree in Criminal Justice or related field',
+    ],
+    milestones: [
+      { label: 'Years 1-2', text: 'Build patrol excellence, earn FTO certification, complete advanced officer training' },
+      { label: 'Years 3-4', text: 'Seek specialized assignments (investigations, traffic, K-9), develop policy expertise' },
+      { label: 'Years 4-5', text: 'Take acting Sergeant roles when available, lead station projects, pursue degree credits' },
+      { label: 'Years 5-6', text: 'Intensive exam prep, oral board practice, assessment center scenarios, apply for promotion' },
+    ],
+  },
+  'Deputy-Lieutenant': {
+    timeline: '10-15 years',
+    summary: 'Reaching Lieutenant requires sustained excellence through multiple ranks plus advanced education and command experience.',
+    requirements: [
+      'Minimum 8-10 years sworn experience',
+      'Prior service as Corporal and/or Sergeant strongly expected',
+      'Pass Lieutenant promotional exam and command assessment',
+      'Bachelor\'s degree strongly recommended; Master\'s advantageous',
+      'Proven record of unit management, budget oversight, inter-agency work',
+    ],
+    milestones: [
+      { label: 'Years 1-4', text: 'Establish patrol excellence, earn FTO certification, complete Corporal promotion' },
+      { label: 'Years 4-7', text: 'Serve as Sergeant, lead a squad, manage schedules and evaluations, build command skills' },
+      { label: 'Years 7-10', text: 'Pursue higher education, attend leadership academies (POST, FBI LEEDA), seek inter-agency roles' },
+      { label: 'Years 10+', text: 'Command-level exam prep, assessment center scenarios, executive interview, apply for Lieutenant' },
+    ],
+  },
+  'Deputy-Captain': {
+    timeline: '15-20+ years',
+    summary: 'Captain is a senior executive rank requiring decades of experience, advanced education, and proven departmental leadership.',
+    requirements: [
+      'Minimum 15 years sworn experience (typical)',
+      'Progressive promotion through Corporal, Sergeant, Lieutenant',
+      'Master\'s degree or equivalent education strongly preferred',
+      'Executive development programs (POST Command College, FBI National Academy, etc.)',
+      'Demonstrated success commanding stations, divisions, or major operations',
+    ],
+    milestones: [
+      { label: 'Years 1-5', text: 'Patrol mastery, FTO, Corporal promotion, build foundation' },
+      { label: 'Years 5-10', text: 'Sergeant promotion, squad leadership, specialized unit experience, begin advanced degree' },
+      { label: 'Years 10-15', text: 'Lieutenant promotion, station/division command, executive leadership programs, policy development' },
+      { label: 'Years 15+', text: 'Captain assessment, executive interview, department-wide impact, strategic vision, apply for command' },
+    ],
+  },
+  'Corporal-Sergeant': {
+    timeline: '3-5 years',
+    summary: 'Build on your FTO and team-lead experience to demonstrate full supervisory capability for the Sergeant exam.',
+    requirements: [
+      'Minimum 2-3 years as Corporal',
+      'Pass Sergeant promotional exam (written, oral, assessment center)',
+      'Demonstrated supervisory performance as Corporal',
+      'Strong policy and MOU knowledge',
+      'Recommended: progress toward Bachelor\'s degree',
+    ],
+    milestones: [
+      { label: 'Year 1', text: 'Excel as Corporal, document your FTO and mentoring outcomes, take on shift-lead responsibilities' },
+      { label: 'Year 2', text: 'Seek acting Sergeant assignments, attend POST supervisory courses, build policy expertise' },
+      { label: 'Year 3', text: 'Exam prep: written study groups, oral board mock interviews, assessment center practice' },
+      { label: 'Test Window', text: 'Take Sergeant promotional exam, score competitively, await selection' },
+    ],
+  },
+  'Corporal-Lieutenant': {
+    timeline: '7-12 years',
+    summary: 'Moving from Corporal to Lieutenant means first serving as Sergeant, then developing command-level skills.',
+    requirements: [
+      'Promotion to Sergeant first (typical path)',
+      'Pass Lieutenant promotional exam after Sergeant service',
+      'Bachelor\'s degree strongly recommended',
+      'Leadership academy attendance',
+      'Proven management of teams, budgets, and operations',
+    ],
+    milestones: [
+      { label: 'Years 1-3', text: 'Excel as Corporal, prepare for and pass Sergeant exam' },
+      { label: 'Years 3-6', text: 'Serve as Sergeant, lead squads, manage evaluations, attend POST supervisory courses' },
+      { label: 'Years 6-9', text: 'Pursue degree, attend leadership academies, seek specialized or inter-agency assignments' },
+      { label: 'Years 9+', text: 'Lieutenant exam prep, command assessment, executive interview' },
+    ],
+  },
+  'Corporal-Captain': {
+    timeline: '12-18 years',
+    summary: 'Long-term plan through Sergeant and Lieutenant before reaching Captain-level executive command.',
+    requirements: [
+      'Progressive promotion: Sergeant then Lieutenant first',
+      'Advanced education (Master\'s preferred)',
+      'Executive development programs',
+      'Broad departmental experience across assignments',
+      'Strategic leadership and policy development track record',
+    ],
+    milestones: [
+      { label: 'Years 1-3', text: 'Sergeant promotion, supervisory excellence' },
+      { label: 'Years 3-8', text: 'Lieutenant promotion, division command, advanced degree, leadership academies' },
+      { label: 'Years 8-12', text: 'Executive roles, department-wide projects, policy authorship' },
+      { label: 'Years 12+', text: 'Captain assessment, station command, executive leadership' },
+    ],
+  },
+  'Sergeant-Lieutenant': {
+    timeline: '4-7 years',
+    summary: 'Leverage your supervisory track record and pursue command-level education and assignments.',
+    requirements: [
+      'Minimum 3-4 years as Sergeant',
+      'Pass Lieutenant promotional exam and command assessment',
+      'Bachelor\'s degree (Master\'s advantageous)',
+      'POST Management Course or equivalent',
+      'Inter-agency coordination experience',
+    ],
+    milestones: [
+      { label: 'Years 1-2', text: 'Demonstrate excellent Sergeant performance, pursue advanced training, start or finish degree' },
+      { label: 'Years 2-4', text: 'Attend POST Management Course, seek acting Lieutenant roles, manage station operations' },
+      { label: 'Years 4-5', text: 'Exam prep, command assessment practice, build inter-agency network' },
+      { label: 'Test Window', text: 'Lieutenant promotional exam, command assessment, executive oral board' },
+    ],
+  },
+  'Sergeant-Captain': {
+    timeline: '10-15 years',
+    summary: 'Two-step advancement through Lieutenant to Captain requires sustained executive development.',
+    requirements: [
+      'Lieutenant promotion first (typical path)',
+      'Advanced education and executive programs',
+      'Station or division command experience as Lieutenant',
+      'Department-wide policy and strategic planning experience',
+      'FBI National Academy, POST Command College, or similar',
+    ],
+    milestones: [
+      { label: 'Years 1-4', text: 'Lieutenant promotion via exam and command assessment' },
+      { label: 'Years 4-8', text: 'Station/division command, advanced degree, executive programs' },
+      { label: 'Years 8-10', text: 'Department-wide leadership roles, strategic initiatives, policy development' },
+      { label: 'Years 10+', text: 'Captain assessment, executive interview, senior command' },
+    ],
+  },
+  'Lieutenant-Captain': {
+    timeline: '4-8 years',
+    summary: 'Final step to senior command. Demonstrate strategic vision and executive leadership.',
+    requirements: [
+      'Minimum 3-5 years as Lieutenant',
+      'Executive assessment and interview',
+      'Master\'s degree preferred',
+      'Completion of executive leadership programs',
+      'Station or major division command experience',
+    ],
+    milestones: [
+      { label: 'Years 1-2', text: 'Excel in station/division command, attend executive programs, pursue Master\'s if not complete' },
+      { label: 'Years 2-4', text: 'Lead department-wide initiatives, inter-agency partnerships, community engagement at executive level' },
+      { label: 'Years 4-5', text: 'Captain executive assessment, strategic vision presentation, board interview' },
+      { label: 'Selection', text: 'Appointment by Sheriff from qualified candidates, assume station command' },
+    ],
+  },
+};
+
+/* Activities database by challenge area */
+const ACTIVITIES = {
+  exam: {
+    title: 'Promotional Exam Preparation',
+    items: [
+      { text: 'Get the official study guide and exam bibliography from HR', required: true },
+      { text: 'Form or join a study group with other candidates', required: true },
+      { text: 'Complete at least 3 full-length practice exams under timed conditions', required: true },
+      { text: 'Review department General Orders, Policy Manual, and current MOU', required: true },
+      { text: 'Study California Penal Code sections most tested on promotional exams', rec: true },
+      { text: 'Attend DSA-sponsored promotional exam prep workshop (if offered)', rec: true },
+    ]
+  },
+  experience: {
+    title: 'Building the Right Experience',
+    items: [
+      { text: 'Request a transfer to a high-activity station for broader exposure', required: true },
+      { text: 'Volunteer for special assignments (task forces, event command, etc.)', required: true },
+      { text: 'Become a Field Training Officer (FTO) to build mentoring skills', required: true },
+      { text: 'Take acting roles at the next rank whenever available', rec: true },
+      { text: 'Join a specialized unit to diversify your experience (investigations, traffic, K-9)', rec: true },
+      { text: 'Document your accomplishments and project outcomes for your promotional file', rec: true },
+    ]
+  },
+  education: {
+    title: 'Education & Certification',
+    items: [
+      { text: 'Enroll in a Criminal Justice or Public Admin degree program', required: true },
+      { text: 'Complete POST Supervisory or Management Course (rank-appropriate)', required: true },
+      { text: 'Earn POST Advanced or Supervisory Certificate', required: true },
+      { text: 'Attend leadership academy (FBI LEEDA, POST Command College, etc.)', rec: true },
+      { text: 'Take elective courses in budgeting, HR management, or public policy', rec: true },
+      { text: 'Pursue instructor certifications (defensive tactics, firearms, etc.)', rec: true },
+    ]
+  },
+  interview: {
+    title: 'Oral Board & Interview Skills',
+    items: [
+      { text: 'Practice with mock oral boards (ask senior officers to serve as panelists)', required: true },
+      { text: 'Prepare structured responses using the STAR method (Situation, Task, Action, Result)', required: true },
+      { text: 'Study common promotional interview scenarios and practice articulating your approach', required: true },
+      { text: 'Record yourself answering practice questions and review for clarity and confidence', rec: true },
+      { text: 'Research current department priorities and be ready to discuss your ideas for them', rec: true },
+      { text: 'Develop a brief leadership philosophy statement you can deliver clearly', rec: true },
+    ]
+  },
+  network: {
+    title: 'Building Leadership Relationships',
+    items: [
+      { text: 'Volunteer for station or department-wide committees', required: true },
+      { text: 'Introduce yourself to command staff at events and meetings', required: true },
+      { text: 'Seek a mentor at the rank you aspire to reach', required: true },
+      { text: 'Participate in DSA events, board meetings, and community outreach', rec: true },
+      { text: 'Attend inter-agency meetings or conferences to broaden your network', rec: true },
+      { text: 'Write for the Silver Star Newsletter or volunteer for DSA committees', rec: true },
+    ]
+  },
+};
+
+/* Focus-specific bonus activities */
+const FOCUS_ACTIVITIES = {
+  patrol: [
+    'Pursue advanced patrol tactics certifications (vehicle pursuit, crisis intervention)',
+    'Seek Field Training Officer (FTO) assignment to demonstrate leadership on patrol',
+    'Volunteer for community policing programs and neighborhood outreach events',
+  ],
+  investigations: [
+    'Complete POST Investigations Certificate and detective-level training courses',
+    'Build case management skills: document complex case outcomes for your file',
+    'Seek inter-agency task force assignments (FBI, DEA, regional teams)',
+  ],
+  specialized: [
+    'Earn unit-specific certifications (K-9 handler, SWAT operator, bomb tech, etc.)',
+    'Take on team-lead or instructor roles within your specialized unit',
+    'Cross-train in a secondary specialty to broaden your command versatility',
+  ],
+  detention: [
+    'Complete POST Detention Certificate and facility management coursework',
+    'Seek rotational assignments between detention and patrol to broaden experience',
+    'Pursue crisis intervention and de-escalation certifications',
+  ],
+  admin: [
+    'Complete coursework in public administration, budgeting, or organizational management',
+    'Seek project management roles for department-wide technology or process initiatives',
+    'Build relationships across divisions by supporting cross-functional projects',
+  ],
+};
+
+let pwAnswers = {};
+
+function pwInit() {
+  if (!user) {
+    el('pwLocked').style.display = 'block';
+    el('pwActive').style.display = 'none';
+    return;
+  }
+  el('pwLocked').style.display = 'none';
+  el('pwActive').style.display = 'block';
+
+  const rank = user.rank || 'Deputy';
+  el('pwCurrentRank').textContent = rank;
+  el('pwBadge').textContent = RANK_BADGES[rank] || rank[0];
+  el('pwCurrentDetail').textContent = 'Your current rank: ' + rank + ' at ' + (user.station || 'your station');
+
+  // Populate goal dropdown with ranks above current
+  const idx = RANKS.indexOf(rank);
+  const goalSel = el('pwGoal');
+  goalSel.innerHTML = '<option value="">-- Select your goal rank --</option>';
+  for (let i = idx + 1; i < RANKS.length; i++) {
+    goalSel.innerHTML += '<option value="' + RANKS[i] + '">' + RANKS[i] + '</option>';
+  }
+  goalSel.onchange = function() {
+    el('pwNext1').disabled = !this.value;
+    pwAnswers.goal = this.value;
+  };
+
+  pwAnswers = {};
+  pwShowStep(1);
+}
+
+function pwSelect(optEl, key) {
+  optEl.parentElement.querySelectorAll('.pw-opt').forEach(o => o.classList.remove('selected'));
+  optEl.classList.add('selected');
+  pwAnswers[key] = optEl.dataset.val;
+  // Enable next button if all questions on current step are answered
+  if (key === 'pwYears' || key === 'pwFocus') {
+    el('pwNext2').disabled = !(pwAnswers.pwYears && pwAnswers.pwFocus);
+  }
+}
+
+function pwShowStep(n) {
+  document.querySelectorAll('.pw-step').forEach(s => s.classList.remove('active'));
+  el('pwStep' + n)?.classList.add('active');
+  // Update progress dots
+  for (let i = 1; i <= 4; i++) {
+    const dot = el('pwD' + i);
+    if (!dot) continue;
+    dot.className = 'pw-dot' + (i < n ? ' done' : i === n ? ' now' : '');
+  }
+}
+
+function pwNext(from) {
+  if (from === 1 && !pwAnswers.goal) return;
+  if (from === 2 && !(pwAnswers.pwYears && pwAnswers.pwFocus)) return;
+  pwShowStep(from + 1);
+}
+
+function pwBack(from) {
+  pwShowStep(from - 1);
+}
+
+function pwReset() {
+  pwAnswers = {};
+  document.querySelectorAll('.pw-opt').forEach(o => o.classList.remove('selected'));
+  el('pwGoal').value = '';
+  el('pwNext1').disabled = true;
+  el('pwNext2').disabled = true;
+  pwShowStep(1);
+}
+
+function pwGenerate() {
+  const currentRank = user.rank || 'Deputy';
+  const goalRank = pwAnswers.goal;
+  const key = currentRank + '-' + goalRank;
+  const data = RANK_DATA[key];
+
+  if (!data) { pwShowStep(4); el('pwResults').innerHTML = '<p>No pathway data available for this combination.</p>'; return; }
+
+  const challenge = pwAnswers.pwChal || 'exam';
+  const focus = pwAnswers.pwFocus || 'patrol';
+  const lead = pwAnswers.pwLead || 'none';
+  const years = pwAnswers.pwYears || '0-2';
+
+  let html = '';
+
+  // 1. Summary card
+  html += '<div class="pw-result-card">';
+  html += '<h3>Your Pathway: ' + currentRank + ' &rarr; ' + goalRank + '</h3>';
+  html += '<p><span class="highlight">Estimated timeline:</span> ' + data.timeline + '</p>';
+  html += '<p>' + data.summary + '</p>';
+
+  // Personalized note based on experience
+  if (years === '10+') {
+    html += '<p style="color:#34d399">With 10+ years in rank, you have substantial experience. Focus on exam preparation and building your promotional file.</p>';
+  } else if (years === '0-2') {
+    html += '<p style="color:#60a5fa">You\'re early in your current rank. Use this time to build a strong foundation of experience before testing.</p>';
+  }
+
+  // Leadership note
+  if (lead === 'none' || lead === 'some') {
+    html += '<p style="color:#f59e0b">Developing leadership experience should be a priority. Seek FTO, acting roles, and team lead opportunities.</p>';
+  }
+
+  html += '</div>';
+
+  // 2. Requirements card
+  html += '<div class="pw-result-card">';
+  html += '<h3>Requirements for ' + goalRank + '</h3>';
+  html += '<ul>';
+  data.requirements.forEach(r => { html += '<li>' + r + '</li>'; });
+  html += '</ul>';
+  html += '</div>';
+
+  // 3. Timeline milestones
+  html += '<div class="pw-result-card">';
+  html += '<h3>Your Career Timeline</h3>';
+  html += '<div class="pw-timeline">';
+  data.milestones.forEach(m => {
+    html += '<div class="pw-tl-item"><h4>' + m.label + '</h4><p>' + m.text + '</p></div>';
+  });
+  html += '</div></div>';
+
+  // 4. Primary challenge activities (interactive checklist)
+  const challengeActs = ACTIVITIES[challenge];
+  if (challengeActs) {
+    html += '<div class="pw-act">';
+    html += '<h4>' + challengeActs.title + '</h4>';
+    html += '<p>Your primary focus area &mdash; complete these activities to address your biggest challenge:</p>';
+    html += '<ul class="checklist">';
+    challengeActs.items.forEach((item, i) => {
+      const tag = item.required ? '<span class="tag tag-req">Required</span>' : '<span class="tag tag-rec">Recommended</span>';
+      html += '<li onclick="this.classList.toggle(\'checked\')" id="pwCk' + challenge + i + '">' + tag + ' ' + item.text + '</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  // 5. Secondary challenge activity (give them a second area too)
+  const secondaryKey = challenge === 'experience' ? 'education' : 'experience';
+  const secondaryActs = ACTIVITIES[secondaryKey];
+  if (secondaryActs) {
+    html += '<div class="pw-act">';
+    html += '<h4>' + secondaryActs.title + ' <span class="tag tag-opt">Bonus</span></h4>';
+    html += '<p>Strengthen your overall profile with these additional activities:</p>';
+    html += '<ul class="checklist">';
+    secondaryActs.items.slice(0, 4).forEach((item, i) => {
+      const tag = item.required ? '<span class="tag tag-req">Core</span>' : '<span class="tag tag-rec">Recommended</span>';
+      html += '<li onclick="this.classList.toggle(\'checked\')" id="pwCk2' + i + '">' + tag + ' ' + item.text + '</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  // 6. Focus-specific activities
+  const focusActs = FOCUS_ACTIVITIES[focus];
+  if (focusActs) {
+    html += '<div class="pw-act">';
+    html += '<h4>Activities for Your Focus: ' + focus.charAt(0).toUpperCase() + focus.slice(1) + '</h4>';
+    html += '<p>Tailored to your current assignment area:</p>';
+    html += '<ul class="checklist">';
+    focusActs.forEach((item, i) => {
+      html += '<li onclick="this.classList.toggle(\'checked\')" id="pwCkF' + i + '"><span class="tag tag-opt">Focus</span> ' + item + '</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  el('pwResults').innerHTML = html;
+  pwShowStep(4);
+  setTimeout(() => el('pwStep4')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+/* Hook into the existing updateUI to init pathway when auth state changes */
+const _origUpdateUI = updateUI;
+function updateUI() {
+  _origUpdateUI();
+  pwInit();
+}
+
+/* Also init on page load if already authenticated */
+pwInit();
+
+/* ================================================================
    SCROLL-TO-TOP BUTTON & ACTIVE NAV HIGHLIGHTING
    ================================================================ */
 window.addEventListener('scroll', function() {
@@ -3026,7 +3670,7 @@ window.addEventListener('scroll', function() {
   if (btn) btn.classList.toggle('show', window.scrollY > 400);
 
   // Highlight active nav link based on scroll position
-  const sections = ['dashboard','news','events','about','store','faq','contact','games'];
+  const sections = ['dashboard','news','events','about','store','faq','pathway','contact','games'];
   let current = '';
   for (const id of sections) {
     const sec = document.getElementById(id);
