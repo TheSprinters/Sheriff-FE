@@ -1992,8 +1992,13 @@ function pwReset() {
 }
 
 function pwGenerate() {
-  const currentRank = user.rank || 'Deputy';
+  const currentRank = (user && user.rank) ? user.rank : 'Deputy';
   const goalRank = pwAnswers.goal;
+  if (!goalRank) {
+    el('pwResults').innerHTML = '<p>Please select your goal rank first.</p>';
+    pwShowStep(3);
+    return;
+  }
   const key = currentRank + '-' + goalRank;
   const data = RANK_DATA[key];
 
