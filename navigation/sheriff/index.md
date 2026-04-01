@@ -1213,8 +1213,8 @@ search_exclude: true
    CONFIG — single source for API base URL
    ================================================================ */
 const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-  ? 'http://localhost:8587'
-  : 'https://flask.opencodingsociety.com';
+  ? 'http://localhost:8325'
+  : 'https://sheriff.opencodingsociety.com';
 
 let user = null;
 
