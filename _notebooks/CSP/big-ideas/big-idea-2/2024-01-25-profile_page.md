@@ -9,7 +9,7 @@ courses: { csp: {week: 26} }
 
 ## Introduction
 
-In a web application, the **profile page** plays a crucial role in providing users with a personalized experience. It allows users to view and manage their personal information, update their credentials, and customize their account settings. In this tutorial, we'll explore how to create a dynamic and user-friendly profile page using Flask, a lightweight and versatile Python web framework.
+In a web application the **profile page** plays a crucial role in providing users with a personalized experience. It allows users to view and manage their personal information, update their credentials, and customize their account settings. In this tutorial, we'll explore how to create a dynamic and user-friendly profile page using Flask, a lightweight and versatile Python web framework.
 
 > Before the Lesson:
 
