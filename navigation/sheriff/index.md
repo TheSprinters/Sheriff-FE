@@ -31,6 +31,7 @@ search_exclude: true
     .logo-sub { font-size: 0.62rem; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px; }
 
     nav { display: flex; gap: 2px; align-items: center; }
+    .nav-sep { width: 1px; height: 18px; background: rgba(255,255,255,0.08); margin: 0 4px; }
     .nav-link {
       padding: 8px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 500; color: #94a3b8;
       cursor: pointer; transition: all 0.15s; white-space: nowrap;
@@ -505,6 +506,30 @@ search_exclude: true
     .journey-step .js-bytes { font-size: 0.72rem; font-weight: 700; float: right; opacity: 0.8; }
     .js-arrow { text-align: left; color: #1e3352; font-size: 0.85rem; padding: 2px 0 2px 4px; }
 
+    /* Section divider */
+    .sec-divider { max-width: 1100px; margin: 0 auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(251,191,36,0.15), transparent); }
+
+    /* Scroll-to-top */
+    .scroll-top {
+      position: fixed; bottom: 22px; right: 90px; width: 40px; height: 40px;
+      background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.3); border-radius: 50%;
+      color: #60a5fa; font-size: 1rem; cursor: pointer; z-index: 1099;
+      display: none; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .scroll-top:hover { background: #3b82f6; color: #fff; }
+    .scroll-top.show { display: flex; }
+
+    /* Mobile menu overlay */
+    .mob-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+      background: rgba(11,26,46,0.98); z-index: 999; flex-direction: column; padding: 24px;
+      gap: 4px; overflow-y: auto;
+    }
+    .mob-menu.open { display: flex; }
+    .mob-menu .nav-link { padding: 14px 18px; font-size: 1rem; border-radius: 10px; }
+    .mob-menu .nav-link:hover { background: rgba(251,191,36,0.08); }
+    .mob-menu .nav-sep { width: 100%; height: 1px; background: rgba(255,255,255,0.06); margin: 6px 0; }
+
     /* Mobile */
     .mob-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.4rem; cursor: pointer; }
     @media (max-width: 900px) {
@@ -546,11 +571,13 @@ search_exclude: true
       <div class="nav-link" onclick="scrollTo('#dashboard')">Resources</div>
       <div class="nav-link" onclick="scrollTo('#news')">News</div>
       <div class="nav-link" onclick="scrollTo('#events')">Events</div>
+      <div class="nav-sep"></div>
       <div class="nav-link" onclick="scrollTo('#about')">About</div>
       <div class="nav-link" onclick="scrollTo('#store')">Store</div>
       <div class="nav-link" onclick="scrollTo('#faq')">FAQ</div>
+      <div class="nav-sep"></div>
       <div class="nav-link" onclick="scrollTo('#contact')">Contact</div>
-      <div class="nav-link" onclick="scrollTo('#games')">&#127918; Games</div>
+      <div class="nav-link" onclick="scrollTo('#games')">Games</div>
     </nav>
     <div class="header-right">
       <div class="search-box">
@@ -574,10 +601,24 @@ search_exclude: true
           <div class="up-item" onclick="logout()" style="color:#ef4444">&#128682; Log Out</div>
         </div>
       </div>
-      <button class="mob-toggle" onclick="this.nextElementSibling?.classList.toggle('open')">&#9776;</button>
+      <button class="mob-toggle" id="mobBtn" onclick="document.getElementById('mobMenu').classList.toggle('open')">&#9776;</button>
     </div>
   </div>
 </header>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <div class="nav-link" onclick="scrollTo('#dashboard');document.getElementById('mobMenu').classList.remove('open')">Resources</div>
+  <div class="nav-link" onclick="scrollTo('#news');document.getElementById('mobMenu').classList.remove('open')">News</div>
+  <div class="nav-link" onclick="scrollTo('#events');document.getElementById('mobMenu').classList.remove('open')">Events</div>
+  <div class="nav-sep"></div>
+  <div class="nav-link" onclick="scrollTo('#about');document.getElementById('mobMenu').classList.remove('open')">About</div>
+  <div class="nav-link" onclick="scrollTo('#store');document.getElementById('mobMenu').classList.remove('open')">Store</div>
+  <div class="nav-link" onclick="scrollTo('#faq');document.getElementById('mobMenu').classList.remove('open')">FAQ</div>
+  <div class="nav-sep"></div>
+  <div class="nav-link" onclick="scrollTo('#contact');document.getElementById('mobMenu').classList.remove('open')">Contact</div>
+  <div class="nav-link" onclick="scrollTo('#games');document.getElementById('mobMenu').classList.remove('open')">Games</div>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -722,6 +763,8 @@ search_exclude: true
   <div class="dp-contact">PAC inquiries: pac@dsasd.org</div>
 </div></div>
 
+<div class="sec-divider"></div>
+
 <!-- NEWS -->
 <div class="section" id="news">
   <div class="sec-head"><h2>Latest News</h2></div>
@@ -731,6 +774,8 @@ search_exclude: true
     <div class="news-card"><div class="img-card"><img src="{{ site.baseurl }}/images/dsa/silver-star-newsletter.jpg" alt="Silver Star Newsletter"></div><span class="news-tag t-ben">Benefit</span><h3>New Dental Plan Options</h3><p>Expanded Delta Dental coverage now available. Open enrollment begins April 1st with improved major services rates.</p><div class="news-date">March 5, 2026</div></div>
   </div>
 </div>
+
+<div class="sec-divider"></div>
 
 <!-- EVENTS -->
 <div class="section" id="events">
@@ -762,6 +807,8 @@ search_exclude: true
     </div>
   </div>
 </div>
+
+<div class="sec-divider"></div>
 
 <!-- ABOUT -->
 <div class="section" id="about">
@@ -796,6 +843,8 @@ search_exclude: true
   </div>
 </div>
 
+<div class="sec-divider"></div>
+
 <!-- STORE -->
 <div class="section" id="store">
   <div class="sec-head"><h2>DSA Store</h2><p>Official merchandise &mdash; member discounts applied automatically</p></div>
@@ -816,6 +865,8 @@ search_exclude: true
   </div>
   <p style="text-align:center;margin-top:16px;color:#475569;font-size:0.8rem">Also available at DSA HQ, 13881 Danielson St, Poway &mdash; Online orders ship within 5-7 business days</p>
 </div>
+
+<div class="sec-divider"></div>
 
 <!-- GAMIFICATION -->
 <div class="section" id="games">
@@ -1115,6 +1166,8 @@ search_exclude: true
   </div>
 </div>
 
+<div class="sec-divider"></div>
+
 <!-- FAQ -->
 <div class="section" id="faq">
   <div class="sec-head"><h2>Frequently Asked Questions</h2><p>Search below or ask the AI chatbot (bottom right)</p></div>
@@ -1141,6 +1194,8 @@ search_exclude: true
     </div>
   </div>
 </div>
+
+<div class="sec-divider"></div>
 
 <!-- CONTACT -->
 <div class="section" id="contact">
@@ -1171,6 +1226,9 @@ search_exclude: true
     <div class="ft-col"><h4>Support</h4><a href="#contact">Contact</a><a href="javascript:void(0)" onclick="openDetail('legal')">Legal Defense</a><a href="javascript:void(0)" onclick="openDetail('wellness')">Wellness</a><a href="javascript:void(0)" onclick="openDetail('forms')">Forms</a></div>
   </div>
 </footer>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
 <!-- CHATBOT -->
 <button class="cb-trigger" onclick="document.getElementById('cbWin').classList.toggle('open')">&#128172;</button>
@@ -2959,6 +3017,26 @@ function checkExistingSession() {
 }
 
 checkExistingSession();
+
+/* ================================================================
+   SCROLL-TO-TOP BUTTON & ACTIVE NAV HIGHLIGHTING
+   ================================================================ */
+window.addEventListener('scroll', function() {
+  const btn = el('scrollTopBtn');
+  if (btn) btn.classList.toggle('show', window.scrollY > 400);
+
+  // Highlight active nav link based on scroll position
+  const sections = ['dashboard','news','events','about','store','faq','contact','games'];
+  let current = '';
+  for (const id of sections) {
+    const sec = document.getElementById(id);
+    if (sec && sec.getBoundingClientRect().top <= 120) current = id;
+  }
+  document.querySelectorAll('header .nav-link').forEach(link => {
+    const href = link.getAttribute('onclick') || '';
+    link.classList.toggle('active', href.includes(current) && current !== '');
+  });
+});
 </script>
 </body>
 </html>
