@@ -18,7 +18,7 @@ search_exclude: true
     } catch (e) {
         console.error('Logout error:', e);
     }
-    window.location.href = "{{site.baseurl}}/sheriff/";
+    window.location.href = "{{site.baseurl}}/";
 </script>
 </body>
 </html>

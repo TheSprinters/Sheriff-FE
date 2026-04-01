@@ -75,7 +75,7 @@ comments: false
   <div class="si"><div class="n">7</div><div class="l">API Endpoints</div></div>
   <div class="si"><div class="n">6</div><div class="l">DB Tables</div></div>
   <div class="si"><div class="n">3</div><div class="l">Game Modes</div></div>
-  <div class="si"><div class="n">2</div><div class="l">Pages</div></div>
+  <div class="si"><div class="n">3</div><div class="l">Pages</div></div>
   <div class="si"><div class="n">11</div><div class="l">Custom Images</div></div>
 </div>
 
@@ -444,6 +444,22 @@ dsasd.opencodingsociety.com    -->   sheriff.opencodingsociety.com
 - **Cookies:** `jwt_sheriff` set on `.opencodingsociety.com`, `SameSite=None`, `Secure=True`, `HttpOnly=True`
 - **SSL:** Certbot / Let's Encrypt for both subdomains
 
+### How We Deployed (Port 8325)
+
+- **Backend** runs on **AWS EC2** inside a Docker container on **port 8325**
+- **NGINX** reverse proxy listens on port 80/443 and forwards to `localhost:8325`
+- **Certbot** provisions SSL certificates for `sheriff.opencodingsociety.com` via Let's Encrypt
+- **Docker Compose** manages the Flask app container with MySQL database
+- **Frontend** is a Jekyll static site deployed to **GitHub Pages** at `dsasd.opencodingsociety.com`
+- **DNS** — both subdomains point to their respective hosts via A/CNAME records on `opencodingsociety.com`
+- **CORS setup** — Flask backend explicitly allows the frontend origin; `credentials: 'include'` on every `fetch()` call
+- **Cookie domain** — JWT cookie (`jwt_sheriff`) is scoped to `.opencodingsociety.com` so it works across subdomains
+- **Key debugging steps:**
+  - Fixed API URL from `flask.opencodingsociety.com` to `sheriff.opencodingsociety.com`
+  - Fixed CORS typo (`sheriff.opencoding.society.com` had an extra dot)
+  - Added `dsasd.opencodingsociety.com` to allowed CORS origins
+  - Corrected port from `8587` to `8325` in dev config
+
 ---
 
 ## Summary
@@ -456,10 +472,10 @@ dsasd.opencodingsociety.com    -->   sheriff.opencodingsociety.com
 - **Basic to modern UI** — dark navy/gold, glassmorphism, responsive mobile menu
 - **No data to 6 DB tables** — full personnel tracking with training, certs, commendations
 - **No career tools to gamified Rank Pathway** — personalized quiz, timeline, interactive checklists
-- **Single page to multi-page** — dedicated DSA Info sub-page at `/sheriff/info` with full org details
+- **Single page to multi-page** — dedicated DSA Info sub-page at `/sheriff/info`, games at `/games`
 - **11 custom images** across hero, news, about, store, events, and contact
-- **2 pages** — main portal + DSA info page, linked with minimal clicks
+- **3 pages** — main portal + DSA info page + games page, linked with minimal clicks
 
-<p style="text-align:center;color:#475569;font-size:0.8rem;margin-top:40px">Published March 31, 2026 &mdash; <a href="{{ site.baseurl }}/sheriff/">Visit the DSA Portal</a></p>
+<p style="text-align:center;color:#475569;font-size:0.8rem;margin-top:40px">Published March 31, 2026 &mdash; <a href="{{ site.baseurl }}/">Visit the DSA Portal</a></p>
 
 </div>

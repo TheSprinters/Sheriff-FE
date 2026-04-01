@@ -5,7 +5,7 @@ hide: true
 title: Open Coding Society
 description: An Open Pathway to Computer Science
 sprite: /images/mario_animation.png
-permalink: /
+permalink: /courses
 ---
 
 <!-- ================= LIQUID SETUP ================= -->
@@ -317,7 +317,7 @@ document.querySelectorAll("#controls button").forEach(btn => {
 
 <!-- DSA Portal Button -->
 <div style="text-align: center; margin: 30px 0;">
-  <a href="{{site.baseurl}}/sheriff/" style="
+  <a href="{{site.baseurl}}/" style="
     display: inline-block;
     padding: 16px 36px;
     background: linear-gradient(135deg, #f59e0b, #d97706);

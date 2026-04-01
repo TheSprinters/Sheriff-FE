@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     ${data.rank} &mdash; ${data.station}
                                 </div>
                                 <hr style="margin: 4px 0;">
-                                <a href="${baseurl}/sheriff/">DSA Portal</a>
+                                <a href="${baseurl}/">DSA Portal</a>
                                 <a href="#" id="sheriffLogoutLink">Logout</a>
                             </div>
                         </div>
@@ -51,26 +51,26 @@ document.addEventListener('DOMContentLoaded', function () {
                         logoutLink.addEventListener('click', async (e) => {
                             e.preventDefault();
                             try {
-                                await fetch(pythonURI + '/api/sheriff/authenticate', {
+                                await fetch(pythonURI + '/api/authenticate', {
                                     ...fetchOptions,
                                     method: 'DELETE'
                                 });
                             } catch (err) {
                                 console.error('Sheriff logout error:', err);
                             }
-                            window.location.href = baseurl + '/sheriff/';
+                            window.location.href = baseurl + '/';
                         });
                     }
                 } else {
                     // Not logged in — link to sheriff portal
-                    loginArea.innerHTML = `<a href="${baseurl}/sheriff/">Login</a>`;
+                    loginArea.innerHTML = `<a href="${baseurl}/">Login</a>`;
                 }
                 loginArea.style.opacity = "1";
             })
             .catch(err => {
                 console.error("Error fetching sheriff session:", err);
                 if (loginArea) {
-                    loginArea.innerHTML = `<a href="${baseurl}/sheriff/">Login</a>`;
+                    loginArea.innerHTML = `<a href="${baseurl}/">Login</a>`;
                 }
             });
     });
@@ -94,7 +94,7 @@ function waitForElement(selector, maxAttempts = 20, interval = 100) {
 }
 
 function getSheriffSession() {
-    const URL = pythonURI + '/api/sheriff/id';
+    const URL = pythonURI + '/api/id';
     return fetch(URL, fetchOptions)
         .then(response => {
             if (!response.ok) {

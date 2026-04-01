@@ -103,11 +103,11 @@ search_exclude: true
 
 <div class="topbar">
   <div class="topbar-inner">
-    <a href="{{ site.baseurl }}/sheriff/" class="logo" style="text-decoration:none">
+    <a href="{{ site.baseurl }}/" class="logo" style="text-decoration:none">
       <img src="{{ site.baseurl }}/images/dsa/dsa-logo.png" alt="DSA">
       <div><div class="logo-text">Deputy Sheriffs' Assoc.</div><div class="logo-sub">San Diego County</div></div>
     </a>
-    <a href="{{ site.baseurl }}/sheriff/" class="back-btn">&#8592; Back to Portal</a>
+    <a href="{{ site.baseurl }}/" class="back-btn">&#8592; Back to Portal</a>
   </div>
 </div>
 
@@ -300,7 +300,7 @@ search_exclude: true
 </div>
 
 <div class="cta-row" style="justify-content:center;margin-top:30px">
-  <a href="{{ site.baseurl }}/sheriff/" class="cta-btn cta-gold">Back to DSA Portal</a>
+  <a href="{{ site.baseurl }}/" class="cta-btn cta-gold">Back to DSA Portal</a>
   <a href="https://dsasd.org" target="_blank" class="cta-btn cta-outline">Visit Official dsasd.org</a>
 </div>
 
