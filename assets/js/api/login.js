@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         logoutLink.addEventListener('click', async (e) => {
                             e.preventDefault();
                             try {
-                                await fetch(pythonURI + '/api/authenticate', {
+                                await fetch(pythonURI + '/api/sheriff/authenticate', {
                                     ...fetchOptions,
                                     method: 'DELETE'
                                 });
@@ -94,7 +94,7 @@ function waitForElement(selector, maxAttempts = 20, interval = 100) {
 }
 
 function getSheriffSession() {
-    const URL = pythonURI + '/api/id';
+    const URL = pythonURI + '/api/sheriff/id';
     return fetch(URL, fetchOptions)
         .then(response => {
             if (!response.ok) {

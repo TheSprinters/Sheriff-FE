@@ -66,7 +66,7 @@ export function postUpdate(options) {
 }
 
 export async function logoutUser() {
-        const URL = pythonURI + '/api/authenticate'; // Adjusted endpoint for logout
+        const URL = pythonURI + '/api/sheriff/authenticate'; // Adjusted endpoint for logout
         
          const options = {
                 ...fetchOptions,
