@@ -535,10 +535,10 @@ search_exclude: true
     <p>News, events, the DSA story, and the store</p>
   </div>
   <div class="tiles">
-    <a class="tile" href="{{ site.baseurl }}/sheriff/info#news"><div class="tile-icon">&#128240;</div><div class="tile-title">News</div><div class="tile-desc">Latest updates &amp; announcements</div></a>
-    <a class="tile" href="{{ site.baseurl }}/sheriff/info#events"><div class="tile-icon">&#128197;</div><div class="tile-title">Events</div><div class="tile-desc">Calendar &amp; RSVP</div></a>
+    <a class="tile" href="{{ site.baseurl }}/sheriff/news"><div class="tile-icon">&#128240;</div><div class="tile-title">News</div><div class="tile-desc">Latest updates &amp; announcements</div></a>
+    <a class="tile" href="{{ site.baseurl }}/sheriff/events"><div class="tile-icon">&#128197;</div><div class="tile-title">Events</div><div class="tile-desc">Calendar &amp; RSVP</div></a>
     <a class="tile" href="{{ site.baseurl }}/sheriff/info#about"><div class="tile-icon">&#127963;</div><div class="tile-title">About DSA</div><div class="tile-desc">Mission, stations, history</div></a>
-    <a class="tile" href="{{ site.baseurl }}/sheriff/info#store"><div class="tile-icon">&#128176;</div><div class="tile-title">DSA Store</div><div class="tile-desc">Official merch &amp; apparel</div></a>
+    <a class="tile" href="{{ site.baseurl }}/sheriff/store"><div class="tile-icon">&#128176;</div><div class="tile-title">DSA Store</div><div class="tile-desc">Official merch &amp; apparel</div></a>
   </div>
 </div>
 
@@ -549,10 +549,10 @@ search_exclude: true
     <p>Grow your career and reach us anytime</p>
   </div>
   <div class="tiles">
-    <a class="tile" href="{{ site.baseurl }}/sheriff/info#pathway"><div class="tile-icon">&#127937;</div><div class="tile-title">Rank Pathway</div><div class="tile-desc">Personalized promotion plan</div></a>
-    <a class="tile" href="{{ site.baseurl }}/sheriff/info#faq"><div class="tile-icon">&#10067;</div><div class="tile-title">FAQ</div><div class="tile-desc">Common member questions</div></a>
+    <a class="tile" href="{{ site.baseurl }}/sheriff/pathway"><div class="tile-icon">&#127937;</div><div class="tile-title">Rank Pathway</div><div class="tile-desc">Personalized promotion plan</div></a>
+    <a class="tile" href="{{ site.baseurl }}/sheriff/faq"><div class="tile-icon">&#10067;</div><div class="tile-title">FAQ</div><div class="tile-desc">Common member questions</div></a>
     <div class="tile" onclick="document.getElementById('cbWin').classList.add('open')"><div class="tile-icon">&#128172;</div><div class="tile-title">AI Assistant</div><div class="tile-desc">Ask the DSA chatbot</div></div>
-    <a class="tile" href="{{ site.baseurl }}/sheriff/info#contact"><div class="tile-icon">&#128222;</div><div class="tile-title">Contact</div><div class="tile-desc">Visit, call, email</div></a>
+    <a class="tile" href="{{ site.baseurl }}/sheriff/contact"><div class="tile-icon">&#128222;</div><div class="tile-title">Contact</div><div class="tile-desc">Visit, call, email</div></a>
   </div>
 </div>
 
@@ -746,14 +746,14 @@ const searchMap = [
   { label: 'Legal Defense',        tab: 'services', detail: 'legal' },
   { label: 'Wellness',             tab: 'services', detail: 'wellness' },
   { label: 'Forms & Documents',    tab: 'services', detail: 'forms' },
-  { label: 'News',                 tab: 'community' },
-  { label: 'Events',               tab: 'community' },
-  { label: 'About DSA',            tab: 'community' },
-  { label: 'Store',                tab: 'community' },
-  { label: 'Rank Pathway',         tab: 'career' },
-  { label: 'FAQ',                  tab: 'career' },
+  { label: 'News',                 target: '{{ site.baseurl }}/sheriff/news' },
+  { label: 'Events',               target: '{{ site.baseurl }}/sheriff/events' },
+  { label: 'About DSA',            target: '{{ site.baseurl }}/sheriff/info#about' },
+  { label: 'Store',                target: '{{ site.baseurl }}/sheriff/store' },
+  { label: 'Rank Pathway',         target: '{{ site.baseurl }}/sheriff/pathway' },
+  { label: 'FAQ',                  target: '{{ site.baseurl }}/sheriff/faq' },
   { label: 'AI Assistant',         tab: 'career' },
-  { label: 'Contact',              tab: 'career' },
+  { label: 'Contact',              target: '{{ site.baseurl }}/sheriff/contact' },
   { label: 'ML Lab',               tab: 'ml' },
   { label: 'Call Priority Trainer', tab: 'ml' },
   { label: 'Gamification',         target: '#gamification' },
