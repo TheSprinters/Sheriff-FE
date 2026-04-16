@@ -792,7 +792,15 @@ function showError(id, msg) { const e = el(id); e.textContent = msg; e.style.dis
 function hideError(id) { el(id).style.display = 'none'; }
 function sanitizeHTML(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
 function apiRequest(path, method, body) {
-  const opts = { method, credentials: 'include', headers: { 'Content-Type': 'application/json' } };
+  const opts = { 
+    method, 
+    mode: 'cors',
+    credentials: 'include', 
+    headers: { 
+      'Content-Type': 'application/json',
+      'X-Origin': 'client'
+    } 
+  };
   if (body) opts.body = JSON.stringify(body);
   return fetch(`${API}${path}`, opts).then(r => {
     if (!r.ok) return r.json().then(d => { throw new Error(d.message || d.error || 'Request failed'); });
@@ -1114,7 +1122,15 @@ function sendChat() {
 /* ================================================================
    INIT — auth session
    ================================================================ */
-fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
+fetch(`${API}/api/sheriff/id`, { 
+  method: 'GET',
+  mode: 'cors',
+  credentials: 'include',
+  headers: { 
+    'Content-Type': 'application/json',
+    'X-Origin': 'client'
+  }
+})
   .then(r => { if (!r.ok) throw 0; return r.json(); })
   .then(d => { user = d; updateUI(); })
   .catch(() => {});
