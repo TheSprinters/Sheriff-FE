@@ -91,39 +91,69 @@ search_exclude: true
     }
     .mob-menu.open { display: flex; }
 
-    /* ===== HERO (compact) ===== */
+    /* ===== HERO with background slideshow ===== */
     .hero {
-      padding: 44px 24px 28px; text-align: center;
-      background: linear-gradient(170deg, rgba(15,40,71,0.92), rgba(11,26,46,0.96));
-      position: relative; overflow: hidden;
+      padding: 50px 24px 32px; text-align: center;
+      position: relative; overflow: hidden; min-height: 340px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .hero::after {
-      content: ''; position: absolute; top: 50%; left: 50%; width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(251,191,36,0.06) 0%, transparent 70%);
-      transform: translate(-50%,-50%); pointer-events: none; z-index: 0;
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
     }
-    .hero-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+    .hero-bg img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity 1.2s ease-in-out;
+    }
+    .hero-bg img.active { opacity: 1; }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(170deg, rgba(15,40,71,0.82), rgba(11,26,46,0.88));
+    }
+    .hero-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
     .hero-logo { width: 64px; height: auto; margin-bottom: 8px; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5)); }
     .hero h2 { font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg,#fbbf24,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; line-height: 1.2; }
-    .hero p { font-size: 0.88rem; color: #7f8ea3; margin-bottom: 14px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .hero p { font-size: 0.88rem; color: #c8d0dd; margin-bottom: 14px; max-width: 560px; margin-left: auto; margin-right: auto; }
 
     .hero-cta { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
     .hero-cta .btn { padding: 9px 20px; font-size: 0.82rem; border-radius: 10px; }
     .stats { display: flex; justify-content: center; gap: 28px; margin-top: 16px; flex-wrap: wrap; }
     .stat-num { font-size: 1.3rem; font-weight: 800; color: #fbbf24; }
-    .stat-label { font-size: 0.6rem; color: #475569; text-transform: uppercase; letter-spacing: 1px; }
+    .stat-label { font-size: 0.6rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* ===== TABS ===== */
-    .tabs-wrap { max-width: 1100px; margin: 0 auto; padding: 20px 24px 0; }
+    /* ===== QUICK NAV STRIP ===== */
+    .quick-nav {
+      max-width: 1100px; margin: -20px auto 0; padding: 0 24px; position: relative; z-index: 3;
+    }
+    .quick-nav-inner {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+      background: rgba(22,42,70,0.7); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px; padding: 10px; backdrop-filter: blur(8px);
+    }
+    .qn-item {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      padding: 10px 6px; border-radius: 10px; cursor: pointer; transition: all 0.2s;
+      text-decoration: none; color: #94a3b8; text-align: center;
+    }
+    .qn-item:hover { background: rgba(251,191,36,0.08); color: #fbbf24; }
+    .qn-icon { font-size: 1.3rem; }
+    .qn-label { font-size: 0.68rem; font-weight: 600; }
+
+    /* ===== MAIN CONTENT: 2-column layout ===== */
+    .main-content {
+      max-width: 1100px; margin: 20px auto 0; padding: 0 24px;
+      display: grid; grid-template-columns: 1fr 340px; gap: 20px;
+    }
+
+    /* Left column: tabs */
     .tabs-bar {
       display: flex; gap: 4px; background: rgba(22,42,70,0.5); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px; padding: 6px; overflow-x: auto; scrollbar-width: none;
+      border-radius: 12px; padding: 6px; overflow-x: auto; scrollbar-width: none; margin-bottom: 16px;
     }
     .tabs-bar::-webkit-scrollbar { display: none; }
     .tab-btn {
-      flex: 1; min-width: 120px;
-      padding: 10px 16px; border: none; background: transparent;
-      color: #94a3b8; font-size: 0.84rem; font-weight: 600; cursor: pointer;
+      flex: 1; min-width: 100px;
+      padding: 8px 14px; border: none; background: transparent;
+      color: #94a3b8; font-size: 0.82rem; font-weight: 600; cursor: pointer;
       border-radius: 8px; transition: all 0.2s; white-space: nowrap;
       display: flex; align-items: center; justify-content: center; gap: 6px;
     }
@@ -134,57 +164,107 @@ search_exclude: true
     }
     .tab-btn .tab-icon { font-size: 1rem; }
 
-    .tab-panel { display: none; max-width: 1100px; margin: 0 auto; padding: 24px 24px 10px; }
+    .tab-panel { display: none; }
     .tab-panel.active { display: block; animation: tabIn 0.3s ease; }
     @keyframes tabIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-    .panel-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
-    .panel-head h2 { font-size: 1.05rem; font-weight: 700; color: #fff; letter-spacing: 0.3px; }
-    .panel-head p { color: #64748b; font-size: 0.78rem; }
+    .panel-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+    .panel-head h2 { font-size: 1rem; font-weight: 700; color: #fff; letter-spacing: 0.3px; }
+    .panel-head p { color: #64748b; font-size: 0.75rem; }
 
     /* ===== TILES ===== */
-    .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .tile {
       background: rgba(22,42,70,0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;
-      padding: 16px; cursor: pointer; transition: all 0.2s; display: block; color: inherit;
+      padding: 14px; cursor: pointer; transition: all 0.2s; display: block; color: inherit;
     }
     .tile:hover { border-color: #fbbf24; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.3); }
-    .tile-icon { font-size: 1.4rem; margin-bottom: 6px; }
-    .tile-title { font-size: 0.88rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
-    .tile-desc { font-size: 0.72rem; color: #64748b; line-height: 1.4; }
+    .tile-icon { font-size: 1.3rem; margin-bottom: 4px; }
+    .tile-title { font-size: 0.85rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .tile-desc { font-size: 0.7rem; color: #64748b; line-height: 1.4; }
 
     /* Expandable detail panel for Member Services */
     .detail-panel {
-      display: none; margin: 12px 0 0;
+      display: none; margin: 10px 0 0;
       animation: panelIn 0.25s ease;
     }
     .detail-panel.open { display: block; }
     @keyframes panelIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
     .dp-card {
-      background: #162a46; border: 1px solid #1e3352; border-radius: 12px; padding: 22px 24px;
+      background: #162a46; border: 1px solid #1e3352; border-radius: 12px; padding: 18px 20px;
       position: relative;
     }
     .dp-close { position: absolute; top: 10px; right: 14px; background: none; border: none; color: #475569; font-size: 1.3rem; cursor: pointer; }
     .dp-close:hover { color: #ef4444; }
-    .dp-card h3 { font-size: 1.05rem; color: #fbbf24; margin-bottom: 10px; }
-    .dp-card p, .dp-card li { font-size: 0.84rem; color: #94a3b8; line-height: 1.6; }
-    .dp-card ul { padding-left: 20px; margin-top: 8px; }
-    .dp-card li { margin-bottom: 4px; }
-    .dp-card .dp-contact { margin-top: 12px; padding: 10px 14px; background: rgba(251,191,36,0.05); border-radius: 8px; font-size: 0.8rem; color: #cbd5e1; }
+    .dp-card h3 { font-size: 1rem; color: #fbbf24; margin-bottom: 8px; }
+    .dp-card p, .dp-card li { font-size: 0.82rem; color: #94a3b8; line-height: 1.55; }
+    .dp-card ul { padding-left: 18px; margin-top: 6px; }
+    .dp-card li { margin-bottom: 3px; }
+    .dp-card .dp-contact { margin-top: 10px; padding: 8px 12px; background: rgba(251,191,36,0.05); border-radius: 8px; font-size: 0.78rem; color: #cbd5e1; }
+
+    /* ===== RIGHT SIDEBAR ===== */
+    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+    /* Mini calendar */
+    .side-card {
+      background: rgba(22,42,70,0.6); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; padding: 16px; overflow: hidden;
+    }
+    .side-card h3 {
+      font-size: 0.88rem; font-weight: 700; color: #fbbf24; margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .side-card h3 a { font-size: 0.72rem; color: #60a5fa; font-weight: 500; }
+
+    .mini-cal-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 10px;
+    }
+    .mc-hdr { text-align: center; font-size: 0.6rem; color: #475569; font-weight: 700; padding: 2px; }
+    .mc-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; color: #64748b; border-radius: 4px; position: relative;
+    }
+    .mc-day.today { background: rgba(251,191,36,0.2); color: #fbbf24; font-weight: 700; }
+    .mc-day.has-event::after {
+      content: ''; position: absolute; bottom: 2px; width: 3px; height: 3px;
+      background: #f59e0b; border-radius: 50%;
+    }
+
+    /* Upcoming events mini-list */
+    .evt-item {
+      display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .evt-item:last-child { border-bottom: none; }
+    .evt-date-box {
+      min-width: 40px; text-align: center; background: rgba(251,191,36,0.08);
+      border-radius: 8px; padding: 4px 6px;
+    }
+    .evt-date-box .day { font-size: 1rem; font-weight: 800; color: #fbbf24; line-height: 1; }
+    .evt-date-box .mon { font-size: 0.58rem; color: #94a3b8; text-transform: uppercase; }
+    .evt-info .evt-title { font-size: 0.8rem; font-weight: 600; color: #e2e8f0; }
+    .evt-info .evt-meta { font-size: 0.68rem; color: #64748b; }
+
+    /* News preview */
+    .news-mini {
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .news-mini:last-child { border-bottom: none; }
+    .news-mini .nm-title { font-size: 0.8rem; font-weight: 600; color: #e2e8f0; margin-bottom: 2px; }
+    .news-mini .nm-date { font-size: 0.68rem; color: #64748b; }
 
     /* ===== ML LAB (Call Priority Trainer) ===== */
     .ml-intro {
       background: linear-gradient(135deg, rgba(22,42,70,0.8), rgba(11,26,46,0.8));
-      border: 1px solid #1e3352; border-radius: 12px; padding: 18px 22px; margin-bottom: 16px;
+      border: 1px solid #1e3352; border-radius: 12px; padding: 14px 18px; margin-bottom: 14px;
     }
-    .ml-intro h3 { color: #fbbf24; font-size: 1rem; margin-bottom: 6px; }
-    .ml-intro p { color: #94a3b8; font-size: 0.8rem; line-height: 1.5; }
+    .ml-intro h3 { color: #fbbf24; font-size: 0.95rem; margin-bottom: 4px; }
+    .ml-intro p { color: #94a3b8; font-size: 0.78rem; line-height: 1.5; }
 
-    .ml-stepper { display: flex; gap: 8px; margin-bottom: 16px; }
+    .ml-stepper { display: flex; gap: 6px; margin-bottom: 14px; }
     .ml-step-dot {
-      flex: 1; padding: 8px 12px; text-align: center;
+      flex: 1; padding: 6px 10px; text-align: center;
       background: rgba(22,42,70,0.6); border: 1px solid #1e3352; border-radius: 8px;
-      font-size: 0.72rem; color: #64748b; font-weight: 600;
+      font-size: 0.7rem; color: #64748b; font-weight: 600;
     }
     .ml-step-dot.active { background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.4); color: #fbbf24; }
     .ml-step-dot.done { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.3); color: #34d399; }
@@ -192,119 +272,80 @@ search_exclude: true
     .ml-stage { display: none; }
     .ml-stage.active { display: block; }
 
-    .ml-progress-bar {
-      height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;
-      margin-bottom: 14px;
-    }
-    .ml-progress-fill {
-      height: 100%; background: linear-gradient(90deg, #fbbf24, #f59e0b); width: 0%;
-      transition: width 0.3s ease;
-    }
+    .ml-progress-bar { height: 5px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; margin-bottom: 12px; }
+    .ml-progress-fill { height: 100%; background: linear-gradient(90deg, #fbbf24, #f59e0b); width: 0%; transition: width 0.3s ease; }
 
-    .ml-case {
-      background: #162a46; border: 1px solid #1e3352; border-radius: 12px;
-      padding: 16px 18px; margin-bottom: 10px; transition: all 0.2s;
-    }
+    .ml-case { background: #162a46; border: 1px solid #1e3352; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; transition: all 0.2s; }
     .ml-case.answered { border-color: rgba(52,211,153,0.3); background: rgba(22,42,70,0.8); }
-    .ml-case-num { font-size: 0.68rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-    .ml-case-desc { font-size: 0.88rem; color: #e2e8f0; margin-bottom: 10px; line-height: 1.45; }
-    .ml-case-features {
-      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;
-    }
-    .ml-feat-chip {
-      padding: 2px 8px; background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.2);
-      border-radius: 10px; font-size: 0.68rem; color: #93c5fd;
-    }
-    .ml-case-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    .ml-case-num { font-size: 0.65rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+    .ml-case-desc { font-size: 0.82rem; color: #e2e8f0; margin-bottom: 8px; line-height: 1.4; }
+    .ml-case-features { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+    .ml-feat-chip { padding: 2px 7px; background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.2); border-radius: 10px; font-size: 0.65rem; color: #93c5fd; }
+    .ml-case-btns { display: flex; gap: 5px; flex-wrap: wrap; }
     .ml-btn {
-      padding: 6px 14px; border: 1px solid #1e3352; background: rgba(22,42,70,0.4);
-      color: #94a3b8; border-radius: 8px; font-size: 0.78rem; font-weight: 600; cursor: pointer;
-      transition: all 0.15s;
+      padding: 5px 12px; border: 1px solid #1e3352; background: rgba(22,42,70,0.4);
+      color: #94a3b8; border-radius: 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
     }
     .ml-btn:hover { border-color: #fbbf24; color: #fbbf24; }
     .ml-btn.selected.p1 { background: rgba(239,68,68,0.15); border-color: #ef4444; color: #ef4444; }
     .ml-btn.selected.p2 { background: rgba(245,158,11,0.15); border-color: #f59e0b; color: #f59e0b; }
     .ml-btn.selected.p3 { background: rgba(52,211,153,0.15); border-color: #34d399; color: #34d399; }
 
-    .ml-actions { display: flex; gap: 10px; justify-content: space-between; margin-top: 16px; flex-wrap: wrap; }
+    .ml-actions { display: flex; gap: 10px; justify-content: space-between; margin-top: 14px; flex-wrap: wrap; }
     .ml-train-btn, .ml-reset-btn {
-      padding: 12px 28px; background: linear-gradient(135deg,#f59e0b,#d97706);
+      padding: 10px 24px; background: linear-gradient(135deg,#f59e0b,#d97706);
       color: #1e3a5f; border: none; border-radius: 10px;
-      font-weight: 800; font-size: 0.88rem; cursor: pointer;
-      transition: all 0.2s; letter-spacing: 0.3px;
+      font-weight: 800; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
     }
     .ml-train-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .ml-train-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,158,11,0.35); }
     .ml-reset-btn { background: transparent; border: 1px solid rgba(96,165,250,0.4); color: #60a5fa; }
     .ml-reset-btn:hover { background: rgba(96,165,250,0.08); }
 
-    .ml-loader {
-      text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 0.9rem;
-    }
+    .ml-loader { text-align: center; padding: 30px 16px; color: #94a3b8; font-size: 0.85rem; }
     .ml-loader .spinner {
-      display: inline-block; width: 32px; height: 32px;
+      display: inline-block; width: 28px; height: 28px;
       border: 3px solid rgba(251,191,36,0.15); border-top-color: #fbbf24;
-      border-radius: 50%; animation: spin 0.8s linear infinite;
-      margin-bottom: 10px;
+      border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 8px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .ml-score-card {
       background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(245,158,11,0.04));
       border: 1px solid rgba(251,191,36,0.25); border-radius: 14px;
-      padding: 24px; margin-bottom: 16px; text-align: center;
+      padding: 20px; margin-bottom: 14px; text-align: center;
     }
-    .ml-score-num {
-      font-size: 2.6rem; font-weight: 800; color: #fbbf24; line-height: 1;
-    }
-    .ml-score-label {
-      font-size: 0.72rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;
-    }
-    .ml-score-sub { font-size: 0.84rem; color: #94a3b8; margin-top: 10px; }
+    .ml-score-num { font-size: 2.2rem; font-weight: 800; color: #fbbf24; line-height: 1; }
+    .ml-score-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+    .ml-score-sub { font-size: 0.8rem; color: #94a3b8; margin-top: 8px; }
 
     .ml-result-row {
       background: #162a46; border: 1px solid #1e3352; border-radius: 10px;
-      padding: 12px 14px; margin-bottom: 8px;
-      display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center;
+      padding: 10px 12px; margin-bottom: 6px;
+      display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center;
     }
     .ml-result-row.correct { border-left: 3px solid #34d399; }
     .ml-result-row.wrong { border-left: 3px solid #ef4444; }
-    .ml-result-desc { font-size: 0.8rem; color: #cbd5e1; line-height: 1.4; }
-    .ml-result-pred {
-      font-size: 0.7rem; padding: 3px 10px; border-radius: 10px; font-weight: 700;
-      text-align: center; min-width: 64px;
-    }
+    .ml-result-desc { font-size: 0.78rem; color: #cbd5e1; line-height: 1.4; }
+    .ml-result-pred { font-size: 0.68rem; padding: 3px 8px; border-radius: 10px; font-weight: 700; text-align: center; min-width: 58px; }
     .ml-result-pred.p1 { background: rgba(239,68,68,0.12); color: #ef4444; }
     .ml-result-pred.p2 { background: rgba(245,158,11,0.12); color: #f59e0b; }
     .ml-result-pred.p3 { background: rgba(52,211,153,0.12); color: #34d399; }
-    .ml-result-icon { font-size: 1.1rem; }
+    .ml-result-icon { font-size: 1rem; }
     .ml-result-icon.correct { color: #34d399; }
     .ml-result-icon.wrong { color: #ef4444; }
 
     .ml-explain {
       background: #0d1727; border: 1px solid #1e3352; border-radius: 10px;
-      padding: 14px 16px; margin-top: 12px; font-size: 0.76rem; color: #94a3b8; line-height: 1.55;
+      padding: 12px 14px; margin-top: 10px; font-size: 0.74rem; color: #94a3b8; line-height: 1.5;
     }
     .ml-explain b { color: #fbbf24; }
 
-    /* ===== GAMIFICATION BUTTON ===== */
-    .gami-wrap { text-align: center; padding: 36px 24px 52px; }
-    .gami-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 18px 48px; font-size: 1.1rem; font-weight: 800; letter-spacing: 0.5px;
-      background: linear-gradient(135deg, #f59e0b, #d97706); color: #1e3a5f;
-      border-radius: 14px; text-decoration: none;
-      box-shadow: 0 6px 24px rgba(245,158,11,0.35);
-      transition: all 0.25s;
-    }
-    .gami-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(245,158,11,0.5); }
-    .gami-sub { display: block; margin-top: 10px; color: #64748b; font-size: 0.78rem; }
-
     /* ===== FOOTER ===== */
-    footer { background: #0a1524; padding: 28px 24px; border-top: 1px solid #1e3352; }
-    .ft-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 22px; }
-    .ft-col h4 { font-size: 0.85rem; color: #fbbf24; margin-bottom: 10px; }
-    .ft-col p, .ft-col a { font-size: 0.78rem; color: #64748b; display: block; line-height: 1.7; }
+    footer { background: #0a1524; padding: 24px 24px; border-top: 1px solid #1e3352; }
+    .ft-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 20px; }
+    .ft-col h4 { font-size: 0.82rem; color: #fbbf24; margin-bottom: 8px; }
+    .ft-col p, .ft-col a { font-size: 0.75rem; color: #64748b; display: block; line-height: 1.7; }
     .ft-col a:hover { color: #fbbf24; }
 
     /* ===== MODAL ===== */
@@ -343,8 +384,8 @@ search_exclude: true
       z-index: 1500;
     }
     .cb-win {
-      display: none; position: fixed; bottom: 90px; right: 24px; width: 340px; max-width: calc(100vw - 48px);
-      height: 440px; background: #162a46; border: 1px solid #1e3352; border-radius: 14px;
+      display: none; position: fixed; bottom: 90px; right: 24px; width: 360px; max-width: calc(100vw - 48px);
+      height: 480px; background: #162a46; border: 1px solid #1e3352; border-radius: 14px;
       box-shadow: 0 12px 40px rgba(0,0,0,0.5); flex-direction: column; overflow: hidden; z-index: 1500;
     }
     .cb-win.open { display: flex; }
@@ -362,12 +403,21 @@ search_exclude: true
     .cb-input input { flex: 1; padding: 8px 12px; background: #0d1727; border: 1px solid #1e3352; border-radius: 8px; color: #e2e8f0; font-size: 0.82rem; outline: none; }
     .cb-input button { padding: 8px 14px; background: linear-gradient(135deg,#f59e0b,#d97706); color: #1e3a5f; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.8rem; }
 
+    /* Quick-ask chips in chatbot */
+    .cb-chips { display: flex; flex-wrap: wrap; gap: 5px; padding: 6px 14px 0; }
+    .cb-chip {
+      padding: 4px 10px; background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2);
+      border-radius: 14px; font-size: 0.7rem; color: #fbbf24; cursor: pointer; transition: all 0.15s;
+    }
+    .cb-chip:hover { background: rgba(251,191,36,0.15); }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .tiles { grid-template-columns: repeat(2, 1fr); }
+      .main-content { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+      .quick-nav-inner { grid-template-columns: repeat(3, 1fr); }
       .ft-inner { grid-template-columns: 1fr; }
       .ml-result-row { grid-template-columns: 1fr auto; }
-      .ml-result-row .ml-result-icon { grid-column: 2; }
     }
     @media (max-width: 700px) {
       nav { display: none; }
@@ -376,8 +426,8 @@ search_exclude: true
       .hero h2 { font-size: 1.5rem; }
       .stats { gap: 20px; }
       .stat-num { font-size: 1.15rem; }
-      .tab-btn { min-width: 90px; font-size: 0.76rem; padding: 8px 10px; }
-      .ml-stepper { flex-wrap: wrap; }
+      .tiles { grid-template-columns: 1fr; }
+      .quick-nav-inner { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -391,13 +441,12 @@ search_exclude: true
       <div><div class="logo-text">Deputy Sheriffs' Assoc.</div><div class="logo-sub">San Diego County</div></div>
     </div>
     <nav>
-      <div class="nav-link" onclick="showTab('services')">Services</div>
+      <div class="nav-link active" onclick="showTab('services')">Services</div>
       <div class="nav-link" onclick="showTab('community')">Community</div>
       <div class="nav-link" onclick="showTab('career')">Career</div>
       <div class="nav-link" onclick="showTab('ml')">ML Lab</div>
       <div class="nav-sep"></div>
       <a href="{{ site.baseurl }}/sheriff/info" class="nav-link" style="text-decoration:none">Full Info</a>
-      <div class="nav-link" onclick="scrollToSection('#gamification')">Gamification</div>
     </nav>
     <div class="header-right">
       <div class="search-box">
@@ -433,11 +482,18 @@ search_exclude: true
   <div class="nav-link" onclick="showTab('career');document.getElementById('mobMenu').classList.remove('open')">Career</div>
   <div class="nav-link" onclick="showTab('ml');document.getElementById('mobMenu').classList.remove('open')">ML Lab</div>
   <a href="{{ site.baseurl }}/sheriff/info" class="nav-link">Full Info</a>
-  <div class="nav-link" onclick="scrollToSection('#gamification');document.getElementById('mobMenu').classList.remove('open')">Gamification</div>
 </div>
 
-<!-- HERO -->
+<!-- HERO with real DSA background images -->
 <section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="{{ site.baseurl }}/images/dsa/golf-tournament-photo.png" alt="" class="active">
+    <img src="{{ site.baseurl }}/images/dsa/memorial-line-of-duty.png" alt="">
+    <img src="{{ site.baseurl }}/images/dsa/staff-photo-1.png" alt="">
+    <img src="{{ site.baseurl }}/images/dsa/board-portrait.png" alt="">
+    <img src="{{ site.baseurl }}/images/dsa/staff-photo-2.png" alt="">
+  </div>
+  <div class="hero-overlay"></div>
   <div class="hero-inner">
     <img src="{{ site.baseurl }}/images/dsa/dsa-logo.png" alt="DSA Badge" class="hero-logo">
     <h2>The Strength Behind the Badge</h2>
@@ -455,164 +511,188 @@ search_exclude: true
   </div>
 </section>
 
-<!-- TABS -->
-<div class="tabs-wrap" id="tabsTop">
-  <div class="tabs-bar" role="tablist">
-    <button class="tab-btn active" data-tab="services" onclick="showTab('services')"><span class="tab-icon">&#128737;</span>Services</button>
-    <button class="tab-btn" data-tab="community" onclick="showTab('community')"><span class="tab-icon">&#127963;</span>Community</button>
-    <button class="tab-btn" data-tab="career" onclick="showTab('career')"><span class="tab-icon">&#127937;</span>Career</button>
-    <button class="tab-btn" data-tab="ml" onclick="showTab('ml')"><span class="tab-icon">&#129504;</span>ML Lab</button>
+<!-- QUICK NAVIGATION STRIP -->
+<div class="quick-nav">
+  <div class="quick-nav-inner">
+    <a class="qn-item" href="{{ site.baseurl }}/sheriff/events"><span class="qn-icon">&#128197;</span><span class="qn-label">Events</span></a>
+    <a class="qn-item" href="{{ site.baseurl }}/sheriff/news"><span class="qn-icon">&#128240;</span><span class="qn-label">News</span></a>
+    <div class="qn-item" onclick="showTab('services');openDetail('benefits')"><span class="qn-icon">&#128179;</span><span class="qn-label">Benefits</span></div>
+    <div class="qn-item" onclick="showTab('services');openDetail('legal')"><span class="qn-icon">&#128272;</span><span class="qn-label">Legal</span></div>
+    <a class="qn-item" href="{{ site.baseurl }}/sheriff/store"><span class="qn-icon">&#128176;</span><span class="qn-label">Store</span></a>
+    <a class="qn-item" href="{{ site.baseurl }}/sheriff/contact"><span class="qn-icon">&#128222;</span><span class="qn-label">Contact</span></a>
   </div>
 </div>
 
-<!-- TAB: SERVICES -->
-<div class="tab-panel active" id="tab-services">
-  <div class="panel-head">
-    <h2>Member Services</h2>
-    <p>Tap a tile to open details inline</p>
-  </div>
-  <div class="tiles">
-    <div class="tile" onclick="openDetail('benefits')"><div class="tile-icon">&#128179;</div><div class="tile-title">Benefits</div><div class="tile-desc">Health, dental, vision, life</div></div>
-    <div class="tile" onclick="openDetail('legal')"><div class="tile-icon">&#128272;</div><div class="tile-title">Legal Defense</div><div class="tile-desc">24/7 representation fund</div></div>
-    <div class="tile" onclick="openDetail('wellness')"><div class="tile-icon">&#127891;</div><div class="tile-title">Wellness</div><div class="tile-desc">Peer support &amp; mental health</div></div>
-    <div class="tile" onclick="openDetail('forms')"><div class="tile-icon">&#128196;</div><div class="tile-title">Forms &amp; Docs</div><div class="tile-desc">Contracts &amp; downloads</div></div>
-  </div>
+<!-- MAIN CONTENT: 2-column layout -->
+<div class="main-content" id="tabsTop">
 
-  <!-- Detail panels -->
-  <div class="detail-panel" id="dp-benefits"><div class="dp-card">
-    <button class="dp-close" onclick="closeDetail('benefits')">&times;</button>
-    <h3>Benefits &amp; Insurance</h3>
-    <ul>
-      <li><strong>Medical:</strong> Multiple plan options with low copays and broad network access.</li>
-      <li><strong>Dental:</strong> Delta Dental PPO &mdash; preventive care covered at 100%.</li>
-      <li><strong>Vision:</strong> VSP exams, frames, lenses, and contacts.</li>
-      <li><strong>Life &amp; Disability:</strong> Group term life and short/long-term disability.</li>
-    </ul>
-    <div class="dp-contact">Questions? Call (858) 486-9009 or email benefits@dsasd.org</div>
-  </div></div>
+  <!-- LEFT COLUMN: Tabs -->
+  <div class="left-col">
+    <div class="tabs-bar" role="tablist">
+      <button class="tab-btn active" data-tab="services" onclick="showTab('services')"><span class="tab-icon">&#128737;</span>Services</button>
+      <button class="tab-btn" data-tab="community" onclick="showTab('community')"><span class="tab-icon">&#127963;</span>Community</button>
+      <button class="tab-btn" data-tab="career" onclick="showTab('career')"><span class="tab-icon">&#127937;</span>Career</button>
+      <button class="tab-btn" data-tab="ml" onclick="showTab('ml')"><span class="tab-icon">&#129504;</span>ML Lab</button>
+    </div>
 
-  <div class="detail-panel" id="dp-legal"><div class="dp-card">
-    <button class="dp-close" onclick="closeDetail('legal')">&times;</button>
-    <h3>Legal Defense Fund</h3>
-    <ul>
-      <li><strong>Administrative Investigations:</strong> IA interviews &amp; Skelly hearings.</li>
-      <li><strong>Critical Incidents:</strong> 24/7 attorney response for officer-involved incidents.</li>
-      <li><strong>Civil Litigation:</strong> Defense for suits from on-duty actions.</li>
-      <li><strong>Coverage:</strong> Attorney fees, expert witnesses, court costs.</li>
-    </ul>
-    <div class="dp-contact">24/7 Legal Hotline: (858) 486-9009</div>
-  </div></div>
+    <!-- TAB: SERVICES -->
+    <div class="tab-panel active" id="tab-services">
+      <div class="panel-head">
+        <h2>Member Services</h2>
+        <p>Tap a tile for details</p>
+      </div>
+      <div class="tiles">
+        <div class="tile" onclick="openDetail('benefits')"><div class="tile-icon">&#128179;</div><div class="tile-title">Benefits</div><div class="tile-desc">Health, dental, vision, life</div></div>
+        <div class="tile" onclick="openDetail('legal')"><div class="tile-icon">&#128272;</div><div class="tile-title">Legal Defense</div><div class="tile-desc">24/7 representation fund</div></div>
+        <div class="tile" onclick="openDetail('wellness')"><div class="tile-icon">&#127891;</div><div class="tile-title">Wellness</div><div class="tile-desc">Peer support &amp; mental health</div></div>
+        <div class="tile" onclick="openDetail('forms')"><div class="tile-icon">&#128196;</div><div class="tile-title">Forms &amp; Docs</div><div class="tile-desc">Contracts &amp; downloads</div></div>
+      </div>
+      <div class="detail-panel" id="dp-benefits"><div class="dp-card">
+        <button class="dp-close" onclick="closeDetail('benefits')">&times;</button>
+        <h3>Benefits &amp; Insurance</h3>
+        <ul>
+          <li><strong>Medical:</strong> Multiple plan options with low copays and broad network access.</li>
+          <li><strong>Dental:</strong> Delta Dental PPO &mdash; preventive care covered at 100%.</li>
+          <li><strong>Vision:</strong> VSP exams, frames, lenses, and contacts.</li>
+          <li><strong>Life &amp; Disability:</strong> Group term life and short/long-term disability.</li>
+        </ul>
+        <div class="dp-contact">Questions? Call (858) 486-9009 or email benefits@dsasd.org</div>
+      </div></div>
+      <div class="detail-panel" id="dp-legal"><div class="dp-card">
+        <button class="dp-close" onclick="closeDetail('legal')">&times;</button>
+        <h3>Legal Defense Fund</h3>
+        <ul>
+          <li><strong>Administrative Investigations:</strong> IA interviews &amp; Skelly hearings.</li>
+          <li><strong>Critical Incidents:</strong> 24/7 attorney response for officer-involved incidents.</li>
+          <li><strong>Civil Litigation:</strong> Defense for suits from on-duty actions.</li>
+          <li><strong>Coverage:</strong> Attorney fees, expert witnesses, court costs.</li>
+        </ul>
+        <div class="dp-contact">24/7 Legal Hotline: (858) 486-9009</div>
+      </div></div>
+      <div class="detail-panel" id="dp-wellness"><div class="dp-card">
+        <button class="dp-close" onclick="closeDetail('wellness')">&times;</button>
+        <h3>Wellness &amp; Peer Support</h3>
+        <ul>
+          <li><strong>Peer Support Team:</strong> Trained deputy counselors, fully confidential.</li>
+          <li><strong>CISM Team:</strong> Critical Incident Stress Management debriefings.</li>
+          <li><strong>Mental Health Referrals:</strong> Therapists experienced with LE issues.</li>
+          <li><strong>Family Support:</strong> Resources for spouses and families.</li>
+        </ul>
+        <div class="dp-contact">Confidential line: (858) 486-9009 x wellness</div>
+      </div></div>
+      <div class="detail-panel" id="dp-forms"><div class="dp-card">
+        <button class="dp-close" onclick="closeDetail('forms')">&times;</button>
+        <h3>Forms &amp; Documents</h3>
+        <ul>
+          <li>Current MOU &amp; contract amendments</li>
+          <li>Benefits enrollment &amp; change forms</li>
+          <li>Legal defense fund request forms</li>
+          <li>Grievance and Weingarten templates</li>
+        </ul>
+        <div class="dp-contact">Request documents: info@dsasd.org</div>
+      </div></div>
+    </div>
 
-  <div class="detail-panel" id="dp-wellness"><div class="dp-card">
-    <button class="dp-close" onclick="closeDetail('wellness')">&times;</button>
-    <h3>Wellness &amp; Peer Support</h3>
-    <ul>
-      <li><strong>Peer Support Team:</strong> Trained deputy counselors, fully confidential.</li>
-      <li><strong>CISM Team:</strong> Critical Incident Stress Management debriefings.</li>
-      <li><strong>Mental Health Referrals:</strong> Therapists experienced with LE issues.</li>
-      <li><strong>Family Support:</strong> Resources for spouses and families.</li>
-    </ul>
-    <div class="dp-contact">Confidential line: (858) 486-9009 x wellness</div>
-  </div></div>
+    <!-- TAB: COMMUNITY -->
+    <div class="tab-panel" id="tab-community">
+      <div class="panel-head">
+        <h2>Community &amp; Information</h2>
+        <p>News, events, the DSA story, and the store</p>
+      </div>
+      <div class="tiles">
+        <a class="tile" href="{{ site.baseurl }}/sheriff/news"><div class="tile-icon">&#128240;</div><div class="tile-title">News</div><div class="tile-desc">Latest updates &amp; announcements</div></a>
+        <a class="tile" href="{{ site.baseurl }}/sheriff/events"><div class="tile-icon">&#128197;</div><div class="tile-title">Events</div><div class="tile-desc">Calendar &amp; RSVP</div></a>
+        <a class="tile" href="{{ site.baseurl }}/sheriff/info#about"><div class="tile-icon">&#127963;</div><div class="tile-title">About DSA</div><div class="tile-desc">Mission, stations, history</div></a>
+        <a class="tile" href="{{ site.baseurl }}/sheriff/store"><div class="tile-icon">&#128176;</div><div class="tile-title">DSA Store</div><div class="tile-desc">Official merch &amp; apparel</div></a>
+      </div>
+    </div>
 
-  <div class="detail-panel" id="dp-forms"><div class="dp-card">
-    <button class="dp-close" onclick="closeDetail('forms')">&times;</button>
-    <h3>Forms &amp; Documents</h3>
-    <ul>
-      <li>Current MOU &amp; contract amendments</li>
-      <li>Benefits enrollment &amp; change forms</li>
-      <li>Legal defense fund request forms</li>
-      <li>Grievance and Weingarten templates</li>
-    </ul>
-    <div class="dp-contact">Request documents: info@dsasd.org</div>
-  </div></div>
-</div>
+    <!-- TAB: CAREER -->
+    <div class="tab-panel" id="tab-career">
+      <div class="panel-head">
+        <h2>Career &amp; Support</h2>
+        <p>Grow your career and reach us anytime</p>
+      </div>
+      <div class="tiles">
+        <a class="tile" href="{{ site.baseurl }}/sheriff/pathway"><div class="tile-icon">&#127937;</div><div class="tile-title">Rank Pathway</div><div class="tile-desc">Personalized promotion plan</div></a>
+        <a class="tile" href="{{ site.baseurl }}/sheriff/faq"><div class="tile-icon">&#10067;</div><div class="tile-title">FAQ</div><div class="tile-desc">Common member questions</div></a>
+        <div class="tile" onclick="document.getElementById('cbWin').classList.add('open')"><div class="tile-icon">&#128172;</div><div class="tile-title">AI Assistant</div><div class="tile-desc">Ask the DSA chatbot</div></div>
+        <a class="tile" href="{{ site.baseurl }}/sheriff/contact"><div class="tile-icon">&#128222;</div><div class="tile-title">Contact</div><div class="tile-desc">Visit, call, email</div></a>
+      </div>
+    </div>
 
-<!-- TAB: COMMUNITY -->
-<div class="tab-panel" id="tab-community">
-  <div class="panel-head">
-    <h2>Community &amp; Information</h2>
-    <p>News, events, the DSA story, and the store</p>
-  </div>
-  <div class="tiles">
-    <a class="tile" href="{{ site.baseurl }}/sheriff/news"><div class="tile-icon">&#128240;</div><div class="tile-title">News</div><div class="tile-desc">Latest updates &amp; announcements</div></a>
-    <a class="tile" href="{{ site.baseurl }}/sheriff/events"><div class="tile-icon">&#128197;</div><div class="tile-title">Events</div><div class="tile-desc">Calendar &amp; RSVP</div></a>
-    <a class="tile" href="{{ site.baseurl }}/sheriff/info#about"><div class="tile-icon">&#127963;</div><div class="tile-title">About DSA</div><div class="tile-desc">Mission, stations, history</div></a>
-    <a class="tile" href="{{ site.baseurl }}/sheriff/store"><div class="tile-icon">&#128176;</div><div class="tile-title">DSA Store</div><div class="tile-desc">Official merch &amp; apparel</div></a>
-  </div>
-</div>
-
-<!-- TAB: CAREER -->
-<div class="tab-panel" id="tab-career">
-  <div class="panel-head">
-    <h2>Career &amp; Support</h2>
-    <p>Grow your career and reach us anytime</p>
-  </div>
-  <div class="tiles">
-    <a class="tile" href="{{ site.baseurl }}/sheriff/pathway"><div class="tile-icon">&#127937;</div><div class="tile-title">Rank Pathway</div><div class="tile-desc">Personalized promotion plan</div></a>
-    <a class="tile" href="{{ site.baseurl }}/sheriff/faq"><div class="tile-icon">&#10067;</div><div class="tile-title">FAQ</div><div class="tile-desc">Common member questions</div></a>
-    <div class="tile" onclick="document.getElementById('cbWin').classList.add('open')"><div class="tile-icon">&#128172;</div><div class="tile-title">AI Assistant</div><div class="tile-desc">Ask the DSA chatbot</div></div>
-    <a class="tile" href="{{ site.baseurl }}/sheriff/contact"><div class="tile-icon">&#128222;</div><div class="tile-title">Contact</div><div class="tile-desc">Visit, call, email</div></a>
-  </div>
-</div>
-
-<!-- TAB: ML LAB -->
-<div class="tab-panel" id="tab-ml">
-  <div class="panel-head">
-    <h2>&#129504; ML Lab &mdash; Call Priority Trainer</h2>
-    <p>Teach a KNN classifier to triage sheriff dispatch calls</p>
-  </div>
-
-  <div class="ml-intro">
-    <h3>What this is</h3>
-    <p>You are the data scientist. Label 8 real-world dispatch scenarios with a priority (P1 = emergency, P2 = urgent, P3 = routine). The browser trains a <b>k-Nearest-Neighbors</b> classifier on your labels, then tests it on 5 unseen calls. Your score is how many the AI gets right against the sheriff's expert-labeled ground truth.</p>
-  </div>
-
-  <div class="ml-stepper">
-    <div class="ml-step-dot active" id="mlDot1">1. Label Training</div>
-    <div class="ml-step-dot" id="mlDot2">2. Train &amp; Test</div>
-    <div class="ml-step-dot" id="mlDot3">3. Results</div>
-  </div>
-
-  <!-- STAGE 1: Training -->
-  <div class="ml-stage active" id="mlStage1">
-    <div class="ml-progress-bar"><div class="ml-progress-fill" id="mlProg"></div></div>
-    <div id="mlCases"></div>
-    <div class="ml-actions">
-      <button class="ml-reset-btn" onclick="mlAutoLabel()">&#9889; Use Suggested Labels</button>
-      <button class="ml-train-btn" id="mlTrainBtn" onclick="mlTrain()" disabled>Train Model &rarr;</button>
+    <!-- TAB: ML LAB -->
+    <div class="tab-panel" id="tab-ml">
+      <div class="panel-head">
+        <h2>&#129504; ML Lab &mdash; Call Priority Trainer</h2>
+        <p>Teach a KNN classifier to triage sheriff dispatch calls</p>
+      </div>
+      <div class="ml-intro">
+        <h3>What this is</h3>
+        <p>You are the data scientist. Label 8 real-world dispatch scenarios with a priority (P1 = emergency, P2 = urgent, P3 = routine). The browser trains a <b>k-Nearest-Neighbors</b> classifier on your labels, then tests it on 5 unseen calls.</p>
+      </div>
+      <div class="ml-stepper">
+        <div class="ml-step-dot active" id="mlDot1">1. Label</div>
+        <div class="ml-step-dot" id="mlDot2">2. Train</div>
+        <div class="ml-step-dot" id="mlDot3">3. Results</div>
+      </div>
+      <div class="ml-stage active" id="mlStage1">
+        <div class="ml-progress-bar"><div class="ml-progress-fill" id="mlProg"></div></div>
+        <div id="mlCases"></div>
+        <div class="ml-actions">
+          <button class="ml-reset-btn" onclick="mlAutoLabel()">&#9889; Use Suggested Labels</button>
+          <button class="ml-train-btn" id="mlTrainBtn" onclick="mlTrain()" disabled>Train Model &rarr;</button>
+        </div>
+      </div>
+      <div class="ml-stage" id="mlStage2">
+        <div class="ml-loader">
+          <div class="spinner"></div>
+          <div id="mlLoaderText">Encoding features &amp; training KNN (k=3)&hellip;</div>
+        </div>
+      </div>
+      <div class="ml-stage" id="mlStage3">
+        <div class="ml-score-card">
+          <div class="ml-score-num" id="mlScoreNum">0/5</div>
+          <div class="ml-score-label">Model Accuracy</div>
+          <div class="ml-score-sub" id="mlScoreSub"></div>
+        </div>
+        <h3 style="color:#fbbf24;font-size:0.88rem;margin:12px 0 6px">Test Call Predictions</h3>
+        <div id="mlResults"></div>
+        <div class="ml-explain" id="mlExplain"></div>
+        <div class="ml-actions">
+          <button class="ml-reset-btn" onclick="mlReset()">&#8635; Play Again</button>
+          <button class="ml-train-btn" onclick="mlReset()">New Dataset</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- STAGE 2: Training visual -->
-  <div class="ml-stage" id="mlStage2">
-    <div class="ml-loader">
-      <div class="spinner"></div>
-      <div id="mlLoaderText">Encoding features &amp; training KNN (k=3)&hellip;</div>
-    </div>
-  </div>
+  <!-- RIGHT SIDEBAR -->
+  <div class="sidebar">
 
-  <!-- STAGE 3: Results -->
-  <div class="ml-stage" id="mlStage3">
-    <div class="ml-score-card">
-      <div class="ml-score-num" id="mlScoreNum">0/5</div>
-      <div class="ml-score-label">Model Accuracy</div>
-      <div class="ml-score-sub" id="mlScoreSub">The AI matched your dispatch desk on this many test calls.</div>
+    <!-- Mini Events Calendar -->
+    <div class="side-card">
+      <h3>&#128197; Events <a href="{{ site.baseurl }}/sheriff/events">View All &rarr;</a></h3>
+      <div class="mini-cal-grid" id="miniCal"></div>
+      <div id="upcomingEvents"></div>
     </div>
-    <h3 style="color:#fbbf24;font-size:0.92rem;margin:16px 0 8px">Test Call Predictions</h3>
-    <div id="mlResults"></div>
-    <div class="ml-explain" id="mlExplain"></div>
-    <div class="ml-actions">
-      <button class="ml-reset-btn" onclick="mlReset()">&#8635; Play Again</button>
-      <button class="ml-train-btn" onclick="mlReset()">New Dataset</button>
-    </div>
-  </div>
-</div>
 
-<!-- GAMIFICATION -->
-<div class="gami-wrap" id="gamification">
-  <a href="{{ site.baseurl }}/games" class="gami-btn">&#127918; Gamification &rarr;</a>
-  <span class="gami-sub">Networking challenge zone &mdash; Net Patrol, Pop Quiz, and MTU Lab</span>
+    <!-- Latest News -->
+    <div class="side-card">
+      <h3>&#128240; News <a href="{{ site.baseurl }}/sheriff/news">More &rarr;</a></h3>
+      <div class="news-mini"><div class="nm-title">Contract Negotiations: Healthcare Benefits Progress</div><div class="nm-date">April 10, 2026</div></div>
+      <div class="news-mini"><div class="nm-title">New Legal Defense Fund Guidelines</div><div class="nm-date">April 8, 2026</div></div>
+      <div class="news-mini"><div class="nm-title">Spring BBQ Registration Open</div><div class="nm-date">April 5, 2026</div></div>
+    </div>
+
+    <!-- DSA Store Preview -->
+    <div class="side-card">
+      <h3>&#128176; Store <a href="{{ site.baseurl }}/sheriff/store">Shop &rarr;</a></h3>
+      <img src="{{ site.baseurl }}/images/dsa/store-relaunch-flyer.png" alt="DSA Store" style="width:100%;border-radius:8px;margin-bottom:8px;">
+      <p style="font-size:0.78rem;color:#94a3b8;margin:0">Official DSA merchandise, challenge coins, patches, and apparel. Member discounts available.</p>
+    </div>
+
+  </div>
 </div>
 
 <!-- ADMIN (hidden unless admin toggles it) -->
@@ -633,25 +713,35 @@ search_exclude: true
       <p>(858) 486-9009 &middot; info@dsasd.org</p>
       <p style="margin-top:6px;color:#1e3352">&copy; 2026 DSA San Diego County</p>
     </div>
-    <div class="ft-col"><h4>Tabs</h4>
+    <div class="ft-col"><h4>Quick Links</h4>
       <a href="javascript:void(0)" onclick="showTab('services')">Services</a>
       <a href="javascript:void(0)" onclick="showTab('community')">Community</a>
       <a href="javascript:void(0)" onclick="showTab('career')">Career</a>
       <a href="javascript:void(0)" onclick="showTab('ml')">ML Lab</a>
     </div>
     <div class="ft-col"><h4>More</h4>
-      <a href="{{ site.baseurl }}/sheriff/info">Full Info</a>
-      <a href="{{ site.baseurl }}/games">Gamification</a>
+      <a href="{{ site.baseurl }}/sheriff/info">Full DSA Info</a>
+      <a href="{{ site.baseurl }}/sheriff/events">Events Calendar</a>
+      <a href="{{ site.baseurl }}/sheriff/store">DSA Store</a>
       <a href="javascript:void(0)" onclick="showTab('services');openDetail('legal')">Legal Defense</a>
     </div>
   </div>
 </footer>
 
-<!-- CHATBOT -->
+<!-- CHATBOT with preset responses -->
 <button class="cb-trigger" onclick="document.getElementById('cbWin').classList.toggle('open')">&#128172;</button>
 <div class="cb-win" id="cbWin">
-  <div class="cb-head"><h3>DSA Assistant (AI)</h3><button class="cb-x" onclick="document.getElementById('cbWin').classList.remove('open')">&times;</button></div>
-  <div class="cb-msgs" id="cbMsgs"><div class="cm bot"><div class="cb">Hi! Ask me anything about membership, benefits, legal defense, events, or the store.</div></div></div>
+  <div class="cb-head"><h3>DSA Assistant</h3><button class="cb-x" onclick="document.getElementById('cbWin').classList.remove('open')">&times;</button></div>
+  <div class="cb-msgs" id="cbMsgs">
+    <div class="cm bot"><div class="cb">Hi! I'm the DSA Assistant. Ask me about membership, benefits, legal defense, events, stations, or the store. You can also click a quick question below.</div></div>
+  </div>
+  <div class="cb-chips" id="cbChips">
+    <span class="cb-chip" onclick="askPreset('What benefits does DSA offer?')">Benefits</span>
+    <span class="cb-chip" onclick="askPreset('How does legal defense work?')">Legal</span>
+    <span class="cb-chip" onclick="askPreset('What events are coming up?')">Events</span>
+    <span class="cb-chip" onclick="askPreset('How do I contact the DSA?')">Contact</span>
+    <span class="cb-chip" onclick="askPreset('What stations are in San Diego County?')">Stations</span>
+  </div>
   <div class="cb-input"><input id="cbIn" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendChat()"><button id="cbSend" onclick="sendChat()">Send</button></div>
 </div>
 
@@ -756,7 +846,6 @@ const searchMap = [
   { label: 'Contact',              target: '{{ site.baseurl }}/sheriff/contact' },
   { label: 'ML Lab',               tab: 'ml' },
   { label: 'Call Priority Trainer', tab: 'ml' },
-  { label: 'Gamification',         target: '#gamification' },
   { label: 'Full DSA Info',        target: '{{ site.baseurl }}/sheriff/info' },
 ];
 
@@ -802,12 +891,14 @@ function mTab(t) { switchModalTab(t); }
 
 function doLogin(e) {
   e.preventDefault();
+  hideError('lErr');
   apiRequest('/api/sheriff/authenticate', 'POST', { uid: el('lUid').value, password: el('lPw').value })
     .then(d => { user = d.user; closeModal(); updateUI(); })
     .catch(err => showError('lErr', err.message));
 }
 function doSignup(e) {
   e.preventDefault();
+  hideError('sErr');
   const body = {
     name: el('sName').value, uid: el('sUid').value, sheriff_id: el('sSid').value,
     email: el('sEmail').value, rank: el('sRank').value, station: el('sStation').value,
@@ -856,8 +947,117 @@ function loadAdmin() {
 }
 
 /* ================================================================
-   CHATBOT
+   HERO BACKGROUND SLIDESHOW
    ================================================================ */
+(function() {
+  const imgs = document.querySelectorAll('.hero-bg img');
+  if (imgs.length < 2) return;
+  let idx = 0;
+  setInterval(() => {
+    imgs[idx].classList.remove('active');
+    idx = (idx + 1) % imgs.length;
+    imgs[idx].classList.add('active');
+  }, 5000);
+})();
+
+/* ================================================================
+   MINI CALENDAR + UPCOMING EVENTS (sidebar)
+   ================================================================ */
+const sideEvents = [
+  { title: 'Monthly General Meeting', date: '2026-04-15', time: '6:00 PM', loc: 'DSA HQ, Poway' },
+  { title: 'Spring BBQ & Family Day', date: '2026-04-22', time: '12:00 PM', loc: 'Vista Station' },
+  { title: 'Legal Defense Workshop', date: '2026-04-28', time: '2:00 PM', loc: 'Central Jail Training' },
+  { title: 'Scholarship Fundraiser Gala', date: '2026-05-06', time: '7:00 PM', loc: 'Sheraton Mission Valley' },
+];
+
+(function buildMiniCal() {
+  const now = new Date();
+  const y = now.getFullYear(), m = now.getMonth();
+  const first = new Date(y, m, 1);
+  const last = new Date(y, m + 1, 0);
+  const startDay = first.getDay();
+  const daysInMonth = last.getDate();
+  const eventDates = new Set(sideEvents.map(e => parseInt(e.date.split('-')[2])));
+
+  let html = '';
+  ['S','M','T','W','T','F','S'].forEach(d => { html += `<div class="mc-hdr">${d}</div>`; });
+  for (let i = 0; i < startDay; i++) html += '<div class="mc-day"></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    let cls = 'mc-day';
+    if (d === now.getDate()) cls += ' today';
+    if (eventDates.has(d)) cls += ' has-event';
+    html += `<div class="${cls}">${d}</div>`;
+  }
+  el('miniCal').innerHTML = html;
+
+  // Upcoming events list
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  el('upcomingEvents').innerHTML = sideEvents.slice(0, 3).map(ev => {
+    const d = new Date(ev.date);
+    return `<div class="evt-item">
+      <div class="evt-date-box"><div class="day">${d.getDate()}</div><div class="mon">${months[d.getMonth()]}</div></div>
+      <div class="evt-info"><div class="evt-title">${ev.title}</div><div class="evt-meta">${ev.time} &bull; ${ev.loc}</div></div>
+    </div>`;
+  }).join('');
+})();
+
+/* ================================================================
+   CHATBOT — Preset responses for demo (no API key needed)
+   Falls back to API if available, otherwise uses local responses
+   ================================================================ */
+const PRESET_RESPONSES = {
+  'benefits': 'The DSA offers comprehensive benefits including medical insurance (multiple plan options with low copays), Delta Dental PPO with preventive care covered at 100%, VSP vision coverage for exams, frames, and contacts, plus group term life insurance and short/long-term disability coverage. Benefits extend to members and their families. For specific plan details, call (858) 486-9009 or email benefits@dsasd.org.',
+  'legal defense': 'The DSA Legal Defense Fund provides 24/7 legal representation for members. Coverage includes: administrative investigations (IA interviews & Skelly hearings), critical incident response (immediate attorney dispatch for officer-involved incidents), civil litigation defense for on-duty actions, and Weingarten rights representation. The fund covers attorney fees, expert witnesses, and court costs. Emergency Legal Hotline: (858) 486-9009.',
+  'legal': 'The DSA Legal Defense Fund provides 24/7 legal representation for members. Coverage includes: administrative investigations (IA interviews & Skelly hearings), critical incident response (immediate attorney dispatch for officer-involved incidents), civil litigation defense for on-duty actions, and Weingarten rights representation. The fund covers attorney fees, expert witnesses, and court costs. Emergency Legal Hotline: (858) 486-9009.',
+  'events': 'Upcoming DSA events include: Monthly General Meeting (April 15, 6:00 PM at DSA HQ in Poway), Spring BBQ & Family Day (April 22, 12:00 PM at Vista Station), Legal Defense Workshop (April 28, 2:00 PM at Central Jail Training Room), and the Scholarship Fundraiser Gala (May 6, 7:00 PM at Sheraton Mission Valley). Visit the Events page for full details and to RSVP.',
+  'contact': 'You can reach the DSA at: Address: 13881 Danielson Street, Poway, CA 92064. Phone: (858) 486-9009 (also the 24/7 Legal Hotline). Email: info@dsasd.org or benefits@dsasd.org for benefits questions. Office Hours: Monday-Friday, 8:00 AM - 5:00 PM. Visit the Contact page for a map and more details.',
+  'stations': 'DSA members serve across San Diego County at these patrol stations: San Diego Central, Vista, Encinitas, Fallbrook, Imperial Beach, Lemon Grove, Pine Valley, Rancho San Diego, San Marcos, Santee, 4S Ranch, and Court Services. Detention facilities include Vista Detention, Central Jail, East Mesa, George Bailey, and Las Colinas. Specialized units include K-9, SWAT, Investigations, Narcotics, Traffic, Search & Rescue, Crime Lab, Gang Unit, and Bomb/Arson.',
+  'membership': 'All sworn personnel of the San Diego County Sheriff\'s Department are eligible for DSA membership. Membership dues are automatically deducted from paychecks, and benefits begin immediately upon enrollment. Members include Deputies, Corporals, Sergeants, Lieutenants, and Captains. To enroll, contact the DSA office at (858) 486-9009.',
+  'store': 'The DSA Store offers official merchandise including challenge coins, patches, memorabilia, and apparel. The store is located at DSA Headquarters in Poway and is also available online. Member discounts apply automatically. Online orders ship within 5-7 business days. Visit the Store page for current inventory.',
+  'wellness': 'The DSA offers comprehensive wellness services: a Peer Support Team with trained deputy counselors (fully confidential), Critical Incident Stress Management (CISM) debriefings, mental health referrals to therapists experienced with law enforcement issues, fitness facility partnerships and gym discounts, stress management workshops, family support services, and confidential substance abuse counseling referrals. Contact the wellness line: (858) 486-9009 x wellness.',
+  'rank': 'The San Diego County Sheriff\'s Department rank structure includes: Deputy (entry-level, patrol & calls for service), Corporal (senior deputy, field training officer), Sergeant (first-line supervisor), Lieutenant (division commander), and Captain (senior commander, station commander). The DSA represents sworn personnel at every rank level. Visit the Rank Pathway page for personalized promotion planning.',
+  'about': 'The Deputy Sheriffs\' Association of San Diego County (DSA) was founded in 1955 and is the exclusive collective bargaining unit for all sworn deputies. With over 4,229 active members, the DSA negotiates contracts with the County covering wages, benefits, working conditions, overtime, and retirement. Headquarters: 13881 Danielson Street, Poway, CA 92064. Website: dsasd.org.',
+  'hours': 'DSA Headquarters office hours are Monday through Friday, 8:00 AM to 5:00 PM. The 24/7 Legal Hotline is always available at (858) 486-9009 for emergencies. Address: 13881 Danielson Street, Poway, CA 92064.',
+  'grievance': 'If you have a workplace issue or contract dispute, contact your station\'s Shop Steward first — they are your frontline union representative. Stewards can help with grievance filing, MOU interpretation, and Weingarten rights representation at investigatory interviews. For complex cases, contact the DSA office at (858) 486-9009 or email info@dsasd.org.',
+  'mou': 'The DSA negotiates Memoranda of Understanding (MOUs) with the County of San Diego covering wages, benefits, working conditions, overtime, and retirement for all sworn personnel. Current MOU documents and contract amendments are available through the Forms & Documents section. Contact info@dsasd.org for specific contract questions.',
+  'newsletter': 'The Silver Star Newsletter is the DSA\'s bi-monthly publication sent to all members. It covers union updates, negotiation progress, legislative alerts, board meeting summaries, and community news. Contact communications@dsasd.org to submit content or subscribe.',
+  'scholarship': 'The DSA Scholarship Program provides financial assistance to children of active DSA members for college and vocational education. Applications are accepted annually. The 2026-2027 application period is currently open. Contact the DSA office at (858) 486-9009 for application materials and deadlines.',
+  'weingarten': 'Under Weingarten Rights, you have the right to request union representation at any investigatory interview that you reasonably believe could lead to discipline. Your Shop Steward or a DSA representative can attend to assist you. If you are called to an investigatory interview, contact the DSA immediately at (858) 486-9009.',
+  'login': 'To log in to the DSA portal, click the "Log In" button in the top right corner and enter your username and password. If you don\'t have an account yet, click "Join" to create one with your Sheriff ID badge number. If you\'re having trouble, contact info@dsasd.org for account assistance.',
+  'help': 'I can help you with information about: DSA membership & benefits, legal defense services, upcoming events, station locations, the DSA store, wellness programs, rank structure, contract/MOU questions, grievance procedures, and more. Just ask your question or click one of the quick topics below!',
+};
+
+function findPresetResponse(msg) {
+  const lower = msg.toLowerCase();
+  // Check for keyword matches
+  const keywords = [
+    { keys: ['benefit', 'insurance', 'medical', 'dental', 'vision', 'health'], resp: 'benefits' },
+    { keys: ['legal', 'defense', 'attorney', 'lawyer', 'representation'], resp: 'legal defense' },
+    { keys: ['event', 'calendar', 'bbq', 'picnic', 'meeting', 'gala', 'upcoming'], resp: 'events' },
+    { keys: ['contact', 'phone', 'email', 'address', 'reach', 'call'], resp: 'contact' },
+    { keys: ['station', 'location', 'facility', 'detention', 'patrol'], resp: 'stations' },
+    { keys: ['member', 'join', 'enroll', 'dues', 'eligible'], resp: 'membership' },
+    { keys: ['store', 'merch', 'merchandise', 'apparel', 'coin', 'patch', 'shop', 'buy'], resp: 'store' },
+    { keys: ['wellness', 'mental', 'peer support', 'counseling', 'stress', 'cism', 'fitness'], resp: 'wellness' },
+    { keys: ['rank', 'promotion', 'deputy', 'sergeant', 'lieutenant', 'captain', 'corporal', 'pathway'], resp: 'rank' },
+    { keys: ['about', 'history', 'founded', 'mission', 'what is', 'who is'], resp: 'about' },
+    { keys: ['hours', 'open', 'office hours', 'when'], resp: 'hours' },
+    { keys: ['grievance', 'dispute', 'complaint', 'steward', 'workplace'], resp: 'grievance' },
+    { keys: ['mou', 'contract', 'negotiat', 'wages', 'salary', 'overtime', 'bargain'], resp: 'mou' },
+    { keys: ['newsletter', 'silver star', 'publication'], resp: 'newsletter' },
+    { keys: ['scholarship', 'education', 'college', 'financial aid'], resp: 'scholarship' },
+    { keys: ['weingarten', 'rights', 'interview', 'investigat'], resp: 'weingarten' },
+    { keys: ['login', 'log in', 'sign in', 'account', 'password'], resp: 'login' },
+    { keys: ['help', 'what can you', 'how do i', 'assist'], resp: 'help' },
+  ];
+  for (const kw of keywords) {
+    if (kw.keys.some(k => lower.includes(k))) {
+      return PRESET_RESPONSES[kw.resp];
+    }
+  }
+  return null;
+}
+
 let chatHist = [];
 function addChatMessage(text, sender) {
   const c = el('cbMsgs');
@@ -866,11 +1066,29 @@ function addChatMessage(text, sender) {
   div.innerHTML = '<div class="cb">' + sanitizeHTML(text) + '</div>';
   c.appendChild(div); c.scrollTop = c.scrollHeight;
 }
+
+function askPreset(q) {
+  el('cbIn').value = q;
+  sendChat();
+}
+
 function sendChat() {
   const inp = el('cbIn'); const msg = inp.value.trim(); inp.value = '';
   if (!msg) return;
   addChatMessage(msg, 'user');
   chatHist.push({ role: 'user', content: msg });
+
+  // Try preset first
+  const preset = findPresetResponse(msg);
+  if (preset) {
+    setTimeout(() => {
+      addChatMessage(preset, 'bot');
+      chatHist.push({ role: 'assistant', content: preset });
+    }, 400);
+    return;
+  }
+
+  // Fallback: try API, then generic response
   const c = el('cbMsgs');
   const typing = document.createElement('div');
   const tid = 't' + Date.now();
@@ -886,7 +1104,9 @@ function sendChat() {
     })
     .catch(() => {
       el(tid)?.remove();
-      addChatMessage("Sorry, I can't connect right now. Call (858) 486-9009 or email info@dsasd.org.", 'bot');
+      const fallback = "I'm not sure about that specific question. For detailed assistance, please contact the DSA office at (858) 486-9009 or email info@dsasd.org. You can also try asking about benefits, legal defense, events, stations, membership, wellness, or the store.";
+      addChatMessage(fallback, 'bot');
+      chatHist.push({ role: 'assistant', content: fallback });
     })
     .finally(() => { btn.disabled = false; btn.textContent = 'Send'; });
 }
@@ -901,14 +1121,7 @@ fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
 
 /* ================================================================
    ML LAB — Call Priority KNN Trainer
-   Feature vector: [timeOfDay, locationType, keywordSeverity, injuryReported]
-     timeOfDay:        0 = day (6am-6pm), 1 = evening (6pm-11pm), 2 = night (11pm-6am)
-     locationType:     0 = residential, 1 = commercial, 2 = public, 3 = highway
-     keywordSeverity:  0 = low (noise, welfare), 1 = medium (theft, disturb), 2 = high (weapon, assault)
-     injuryReported:   0 = no, 1 = yes
-   Labels: 1 = P1 (emergency), 2 = P2 (urgent), 3 = P3 (routine)
    ================================================================ */
-
 const ML_TRAIN = [
   { desc: 'Domestic disturbance with weapon at 2am in a residential home; injuries reported.',
     feat: [2,0,2,1], suggest: 1, tags: ['Night','Residential','Weapon','Injury'] },
@@ -943,7 +1156,6 @@ const ML_TEST = [
 
 const PRIO_TEXT = { 1: 'P1 Emergency', 2: 'P2 Urgent', 3: 'P3 Routine' };
 const PRIO_SHORT = { 1: 'P1', 2: 'P2', 3: 'P3' };
-
 let mlLabels = new Array(ML_TRAIN.length).fill(null);
 
 function mlRenderCases() {
@@ -955,32 +1167,17 @@ function mlRenderCases() {
       return `<button class="ml-btn ${sel}" onclick="mlLabel(${i}, ${p})">${PRIO_TEXT[p]}</button>`;
     }).join('');
     const tags = c.tags.map(t => `<span class="ml-feat-chip">${t}</span>`).join('');
-    return `
-      <div class="ml-case ${answered}">
-        <div class="ml-case-num">Training Case ${i+1} of ${ML_TRAIN.length}</div>
-        <div class="ml-case-desc">${c.desc}</div>
-        <div class="ml-case-features">${tags}</div>
-        <div class="ml-case-btns">${btns}</div>
-      </div>
-    `;
+    return `<div class="ml-case ${answered}"><div class="ml-case-num">Case ${i+1}/${ML_TRAIN.length}</div><div class="ml-case-desc">${c.desc}</div><div class="ml-case-features">${tags}</div><div class="ml-case-btns">${btns}</div></div>`;
   }).join('');
   mlUpdateProgress();
 }
 
-function mlLabel(i, p) {
-  mlLabels[i] = p;
-  mlRenderCases();
-}
-
-function mlAutoLabel() {
-  ML_TRAIN.forEach((c, i) => { mlLabels[i] = c.suggest; });
-  mlRenderCases();
-}
+function mlLabel(i, p) { mlLabels[i] = p; mlRenderCases(); }
+function mlAutoLabel() { ML_TRAIN.forEach((c, i) => { mlLabels[i] = c.suggest; }); mlRenderCases(); }
 
 function mlUpdateProgress() {
   const done = mlLabels.filter(x => x !== null).length;
-  const pct = (done / ML_TRAIN.length) * 100;
-  el('mlProg').style.width = pct + '%';
+  el('mlProg').style.width = (done / ML_TRAIN.length * 100) + '%';
   el('mlTrainBtn').disabled = done < ML_TRAIN.length;
 }
 
@@ -995,7 +1192,6 @@ function mlStep(n) {
   }
 }
 
-/* KNN (k=3) Euclidean. Returns predicted label among train set. */
 function mlKnn(testFeat, trainFeats, trainLabels, k) {
   const dists = trainFeats.map((f, i) => ({
     d: Math.sqrt(f.reduce((s, v, j) => s + (v - testFeat[j])**2, 0)),
@@ -1006,75 +1202,36 @@ function mlKnn(testFeat, trainFeats, trainLabels, k) {
   const votes = { 1:0, 2:0, 3:0 };
   top.forEach(x => { votes[x.label] = (votes[x.label] || 0) + 1; });
   let best = 1, bestCount = -1;
-  for (const lbl of [1,2,3]) {
-    if (votes[lbl] > bestCount) { bestCount = votes[lbl]; best = parseInt(lbl); }
-  }
+  for (const lbl of [1,2,3]) { if (votes[lbl] > bestCount) { bestCount = votes[lbl]; best = parseInt(lbl); } }
   return best;
 }
 
 function mlTrain() {
   mlStep(2);
   const loader = el('mlLoaderText');
-  const steps = [
-    'Encoding features &amp; training KNN (k=3)&hellip;',
-    'Computing distances for 5 test calls&hellip;',
-    'Tallying nearest-neighbor votes&hellip;',
-    'Scoring against expert ground truth&hellip;',
-  ];
-  let i = 0;
-  loader.innerHTML = steps[0];
-  const iv = setInterval(() => {
-    i++;
-    if (i >= steps.length) { clearInterval(iv); mlEvaluate(); return; }
-    loader.innerHTML = steps[i];
-  }, 550);
+  const steps = ['Encoding features & training KNN (k=3)...','Computing distances for 5 test calls...','Tallying nearest-neighbor votes...','Scoring against expert ground truth...'];
+  let i = 0; loader.innerHTML = steps[0];
+  const iv = setInterval(() => { i++; if (i >= steps.length) { clearInterval(iv); mlEvaluate(); return; } loader.innerHTML = steps[i]; }, 550);
 }
 
 function mlEvaluate() {
   const trainFeats = ML_TRAIN.map(c => c.feat);
-  const trainLabels = mlLabels;
-  const K = 3;
-
-  const preds = ML_TEST.map(t => mlKnn(t.feat, trainFeats, trainLabels, K));
+  const preds = ML_TEST.map(t => mlKnn(t.feat, trainFeats, mlLabels, 3));
   const correct = preds.filter((p, i) => p === ML_TEST[i].truth).length;
-
   el('mlScoreNum').textContent = correct + '/' + ML_TEST.length;
-  let sub;
-  if (correct === ML_TEST.length) sub = 'Perfect. Your labels trained a model that matches the dispatch desk exactly.';
-  else if (correct >= 3) sub = 'Solid. The model generalized well from your training labels.';
-  else sub = 'Underfit. Try labeling training cases more consistently with severity and injury.';
-  el('mlScoreSub').textContent = sub;
-
+  el('mlScoreSub').textContent = correct === ML_TEST.length ? 'Perfect. Your labels trained a model that matches the dispatch desk exactly.'
+    : correct >= 3 ? 'Solid. The model generalized well from your training labels.'
+    : 'Underfit. Try labeling training cases more consistently with severity and injury.';
   el('mlResults').innerHTML = ML_TEST.map((t, i) => {
-    const pred = preds[i];
-    const ok = pred === t.truth;
-    return `
-      <div class="ml-result-row ${ok ? 'correct' : 'wrong'}">
-        <div class="ml-result-desc">${t.desc}<br><span style="color:#64748b;font-size:0.72rem">Expert: ${PRIO_TEXT[t.truth]} &nbsp;&middot;&nbsp; Model: ${PRIO_TEXT[pred]}</span></div>
-        <div class="ml-result-pred p${pred}">${PRIO_SHORT[pred]}</div>
-        <div class="ml-result-icon ${ok ? 'correct' : 'wrong'}">${ok ? '&#10003;' : '&#10007;'}</div>
-      </div>
-    `;
+    const pred = preds[i], ok = pred === t.truth;
+    return `<div class="ml-result-row ${ok?'correct':'wrong'}"><div class="ml-result-desc">${t.desc}<br><span style="color:#64748b;font-size:0.7rem">Expert: ${PRIO_TEXT[t.truth]} &middot; Model: ${PRIO_TEXT[pred]}</span></div><div class="ml-result-pred p${pred}">${PRIO_SHORT[pred]}</div><div class="ml-result-icon ${ok?'correct':'wrong'}">${ok?'&#10003;':'&#10007;'}</div></div>`;
   }).join('');
-
-  const labelCounts = { 1:0, 2:0, 3:0 };
-  mlLabels.forEach(l => { labelCounts[l]++; });
-  el('mlExplain').innerHTML = `
-    <b>How KNN decided:</b> for each test call, the model found the 3 closest training cases by feature distance
-    (time-of-day, location, keyword severity, injury) and took a majority vote of their labels.<br>
-    <b>Your training distribution:</b> P1 = ${labelCounts[1]}, P2 = ${labelCounts[2]}, P3 = ${labelCounts[3]}.
-    Balanced classes usually produce better KNN accuracy.
-  `;
-
+  const lc = { 1:0, 2:0, 3:0 }; mlLabels.forEach(l => { lc[l]++; });
+  el('mlExplain').innerHTML = `<b>How KNN decided:</b> for each test call, the model found the 3 closest training cases by feature distance and took a majority vote.<br><b>Your training distribution:</b> P1=${lc[1]}, P2=${lc[2]}, P3=${lc[3]}. Balanced classes produce better accuracy.`;
   mlStep(3);
 }
 
-function mlReset() {
-  mlLabels = new Array(ML_TRAIN.length).fill(null);
-  mlRenderCases();
-  mlStep(1);
-}
-
+function mlReset() { mlLabels = new Array(ML_TRAIN.length).fill(null); mlRenderCases(); mlStep(1); }
 mlRenderCases();
 </script>
 </body>
