@@ -565,6 +565,23 @@ function openChatbot() {
   // In a real app, this would open the chatbot
   alert('AI Assistant would open here. In the main portal, you can access the chatbot by clicking the chat icon in the bottom right corner.');
 }
+
+/* ================================================================
+   AUTO-FILL: Personalize FAQ for logged-in member
+   ================================================================ */
+const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8325'
+  : 'https://sheriff.opencodingsociety.com';
+
+fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .then(user => {
+    const lead = document.querySelector('.page .lead');
+    if (lead && user.name) {
+      lead.textContent = `Hi ${user.name.split(' ')[0]}! Find answers to the most common questions from DSA members at ${user.station || 'your station'}. Can't find what you need? Contact us directly.`;
+    }
+  })
+  .catch(() => {});
 </script>
 
 </body>

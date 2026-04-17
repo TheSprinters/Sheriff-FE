@@ -268,5 +268,30 @@ search_exclude: true
 
 <div class="pg-footer">&copy; 2026 Deputy Sheriffs' Association of San Diego County</div>
 
+<script>
+/* ================================================================
+   AUTO-FILL gamification hub from logged-in user session
+   ================================================================ */
+const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8325'
+  : 'https://sheriff.opencodingsociety.com';
+
+fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .then(user => {
+    // Personalize the page header
+    const h1 = document.querySelector('.page-header h1');
+    if (h1 && user.name) {
+      h1.innerHTML = '&#127918; ' + user.name.split(' ')[0] + "'s Gamification Hub";
+    }
+    // Personalize the description
+    const desc = document.querySelector('.page-header p');
+    if (desc && user.rank) {
+      desc.textContent = `Welcome, ${user.rank} ${user.name.split(' ')[1] || user.name}! Challenge yourself with interactive learning games, earn badges, and climb the leaderboard.`;
+    }
+  })
+  .catch(() => {});
+</script>
+
 </body>
 </html>

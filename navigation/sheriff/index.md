@@ -1132,7 +1132,20 @@ fetch(`${API}/api/sheriff/id`, {
   }
 })
   .then(r => { if (!r.ok) throw 0; return r.json(); })
-  .then(d => { user = d; updateUI(); })
+  .then(d => {
+    user = d;
+    updateUI();
+    // Personalize chatbot greeting
+    const msgs = el('cbMsgs');
+    if (msgs && user.name) {
+      msgs.innerHTML = `<div class="cm bot"><div class="cb">Hi ${user.name.split(' ')[0]}! I'm the DSA Assistant. As a ${user.rank || 'member'} at ${user.station || 'your station'}, I can help with benefits, legal defense, events, and more. Ask away or click a quick question below.</div></div>`;
+    }
+    // Personalize the hero welcome
+    const heroP = document.querySelector('.hero p');
+    if (heroP && user.name) {
+      heroP.textContent = `Welcome back, ${user.rank || ''} ${user.name.split(' ')[0]}. Benefits, legal defense, events, and advocacy — all in one place.`;
+    }
+  })
   .catch(() => {});
 
 /* ================================================================

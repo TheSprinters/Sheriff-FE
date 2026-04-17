@@ -554,6 +554,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+/* ================================================================
+   AUTO-FILL contact form from logged-in user session
+   ================================================================ */
+const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8325'
+  : 'https://sheriff.opencodingsociety.com';
+
+fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .then(user => {
+    if (user.name) document.getElementById('fullName').value = user.name;
+    if (user.email) document.getElementById('email').value = user.email;
+    if (user.phone) document.getElementById('phone').value = user.phone;
+    if (user.sheriff_id) document.getElementById('badge').value = user.sheriff_id;
+    if (user.station) document.getElementById('station').value = user.station;
+  })
+  .catch(() => {});
 </script>
 
 </body>

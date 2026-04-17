@@ -512,6 +512,28 @@ function createEvent(e) {
   // Scroll to events list
   document.getElementById('eventsList').scrollIntoView({ behavior: 'smooth' });
 }
+
+/* ================================================================
+   AUTO-FILL event form with logged-in user's station as default location
+   ================================================================ */
+const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8325'
+  : 'https://sheriff.opencodingsociety.com';
+
+fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .then(user => {
+    // Pre-fill the event location with user's station
+    const locInput = document.getElementById('eventLocation');
+    if (user.station && !locInput.value) locInput.value = user.station;
+
+    // Show a welcome note on the page
+    const lead = document.querySelector('.page .lead');
+    if (lead && user.name) {
+      lead.textContent = `Welcome, ${user.name.split(' ')[0]}! View upcoming events, RSVP to attend, and create new gatherings for our community.`;
+    }
+  })
+  .catch(() => {});
 </script>
 
 </body>

@@ -672,6 +672,23 @@ document.getElementById('cartModal').addEventListener('click', function(e) {
     closeCart();
   }
 });
+
+/* ================================================================
+   AUTO-FILL: Personalize store for logged-in member
+   ================================================================ */
+const API_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8325'
+  : 'https://sheriff.opencodingsociety.com';
+
+fetch(`${API_URL}/api/sheriff/id`, { credentials: 'include' })
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .then(user => {
+    const lead = document.querySelector('.page .lead');
+    if (lead && user.name) {
+      lead.textContent = `Welcome, ${user.name.split(' ')[0]}! Browse official DSA merchandise. Member discounts applied automatically at checkout.`;
+    }
+  })
+  .catch(() => {});
 </script>
 
 </body>

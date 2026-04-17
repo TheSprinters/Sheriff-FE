@@ -441,6 +441,23 @@ function getArticleIcon(category) {
   };
   return icons[category] || '&#128240;';
 }
+
+/* ================================================================
+   AUTO-FILL: Personalize greeting for logged-in user
+   ================================================================ */
+const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8325'
+  : 'https://sheriff.opencodingsociety.com';
+
+fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .then(user => {
+    const lead = document.querySelector('.page .lead');
+    if (lead && user.name) {
+      lead.textContent = `Welcome, ${user.name.split(' ')[0]}! Stay informed with the latest announcements, negotiations, and updates from your DSA at ${user.station || 'San Diego County'}.`;
+    }
+  })
+  .catch(() => {});
 </script>
 
 </body>

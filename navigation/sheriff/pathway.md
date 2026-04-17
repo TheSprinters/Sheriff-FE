@@ -616,6 +616,54 @@ document.querySelectorAll('.resource-link').forEach(link => {
     alert(`Resource access for "${resource}" would be implemented here.\n\nIn a real implementation, this would link to the actual resource documents, registration forms, or external systems.`);
   });
 });
+
+/* ================================================================
+   AUTO-FILL from logged-in user session
+   ================================================================ */
+const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8325'
+  : 'https://sheriff.opencodingsociety.com';
+
+fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .then(user => {
+    // Map user rank to the select option value
+    const rankMap = {
+      'Deputy': 'deputy', 'Corporal': 'corporal', 'Sergeant': 'sergeant',
+      'Lieutenant': 'lieutenant', 'Captain': 'captain'
+    };
+    const rankSelect = document.getElementById('currentRank');
+    if (user.rank && rankMap[user.rank]) {
+      rankSelect.value = rankMap[user.rank];
+    }
+    // Autofill years of service
+    const yearsInput = document.getElementById('yearsService');
+    if (user.years_of_service != null && user.years_of_service > 0) {
+      yearsInput.value = user.years_of_service;
+    } else if (user.date_of_hire) {
+      // Calculate from hire date
+      const hired = new Date(user.date_of_hire);
+      const years = Math.floor((Date.now() - hired) / (365.25 * 24 * 60 * 60 * 1000));
+      if (years >= 0) yearsInput.value = years;
+    }
+
+    // Highlight current rank node in the timeline
+    const ranks = ['deputy','corporal','sergeant','lieutenant','captain'];
+    const currentIdx = ranks.indexOf(rankMap[user.rank] || '');
+    if (currentIdx >= 0) {
+      const nodes = document.querySelectorAll('.rank-node');
+      nodes.forEach((node, i) => {
+        const icon = node.querySelector('.rank-icon');
+        if (i < currentIdx) {
+          icon.style.background = 'linear-gradient(135deg,#34d399,#059669)';
+          icon.style.boxShadow = '0 4px 16px rgba(52,211,153,0.3)';
+        } else if (i === currentIdx) {
+          icon.style.boxShadow = '0 0 0 4px rgba(251,191,36,0.4), 0 4px 16px rgba(245,158,11,0.4)';
+        }
+      });
+    }
+  })
+  .catch(() => {});
 </script>
 
 </body>
