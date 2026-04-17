@@ -627,6 +627,9 @@ search_exclude: true
         <h2>&#129504; ML Lab &mdash; Call Priority Trainer</h2>
         <p>Teach a KNN classifier to triage sheriff dispatch calls</p>
       </div>
+      <div style="margin-bottom:14px">
+        <a href="{{ site.baseurl }}/games" class="btn btn-gold" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">&#127918; Play DSA Games</a>
+      </div>
       <div class="ml-intro">
         <h3>What this is</h3>
         <p>You are the data scientist. Label 8 real-world dispatch scenarios with a priority (P1 = emergency, P2 = urgent, P3 = routine). The browser trains a <b>k-Nearest-Neighbors</b> classifier on your labels, then tests it on 5 unseen calls.</p>
