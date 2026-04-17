@@ -197,7 +197,7 @@ search_exclude: true
       background: #162a46; border: 1px solid #1e3352; border-radius: 16px; padding: 32px; margin-bottom: 40px;
     }
     .map-container {
-      background: #0f2040; border-radius: 12px; height: 400px; display: flex; align-items: center; justify-content: center;
+      background: #0f2040; border-radius: 12px; height: 200px; display: flex; align-items: center; justify-content: center;
       color: #475569; font-size: 1.1rem; position: relative; overflow: hidden;
     }
     .map-container::before {
@@ -411,50 +411,6 @@ search_exclude: true
       </div>
     </div>
     
-    <div class="staff-card">
-      <div class="staff-header">
-        <div class="staff-avatar">SJ</div>
-        <div class="staff-info">
-          <h3>Sarah Johnson</h3>
-          <p>Wellness Program Manager</p>
-        </div>
-      </div>
-      <div class="staff-contact">
-        <strong>Email:</strong> wellness@dsasd.org<br>
-        <strong>Phone:</strong> (858) 486-9009 x 401<br>
-        <strong>Responsibilities:</strong> Peer support, mental health resources, wellness programs
-      </div>
-    </div>
-    
-    <div class="staff-card">
-      <div class="staff-header">
-        <div class="staff-avatar">RB</div>
-        <div class="staff-info">
-          <h3>Robert Brown</h3>
-          <p>Events Coordinator</p>
-        </div>
-      </div>
-      <div class="staff-contact">
-        <strong>Email:</strong> events@dsasd.org<br>
-        <strong>Phone:</strong> (858) 486-9009 x 501<br>
-        <strong>Responsibilities:</strong> Member events, social activities, fundraising
-      </div>
-    </div>
-    
-    <div class="staff-card">
-      <div class="staff-header">
-        <div class="staff-avatar">TW</div>
-        <div class="staff-info">
-          <h3>Tina Wilson</h3>
-          <p>Administrative Director</p>
-        </div>
-      </div>
-      <div class="staff-contact">
-        <strong>Email:</strong> admin@dsasd.org<br>
-        <strong>Phone:</strong> (858) 486-9009 x 102<br>
-        <strong>Responsibilities:</strong> Office operations, member records, communications
-      </div>
-    </div>
   </div>
 </div>
 

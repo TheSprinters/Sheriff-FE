@@ -37,7 +37,7 @@ search_exclude: true
     .back-btn:hover { background: rgba(251,191,36,0.15); }
 
     /* Page content */
-    .page { max-width: 1000px; margin: 0 auto; padding: 40px 24px 60px; }
+    .page { max-width: 1000px; margin: 0 auto; padding: 28px 24px 40px; }
     .page h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg,#fbbf24,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
     .page .lead { color: #7f8ea3; font-size: 1rem; margin-bottom: 32px; }
     .page h2 { font-size: 1.3rem; font-weight: 700; color: #fbbf24; border-bottom: 1px solid rgba(251,191,36,0.12); padding-bottom: 8px; margin: 36px 0 16px; }
@@ -135,11 +135,10 @@ search_exclude: true
     /* Contact section */
     .contact-section {
       background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(245,158,11,0.04));
-      border: 1px solid rgba(251,191,36,0.25); border-radius: 16px; padding: 32px;
+      border: 1px solid rgba(251,191,36,0.25); border-radius: 16px; padding: 20px;
       text-align: center; margin-bottom: 40px;
     }
-    .contact-section h2 { color: #fbbf24; margin-bottom: 16px; border: none; padding: 0; }
-    .contact-section p { color: #cbd5e1; margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .contact-section h2 { color: #fbbf24; margin-bottom: 12px; border: none; padding: 0; font-size: 1.1rem; }
     .contact-buttons {
       display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
     }
@@ -165,24 +164,6 @@ search_exclude: true
     .no-results-text { font-size: 1.1rem; margin-bottom: 8px; }
     .no-results-sub { font-size: 0.9rem; opacity: 0.8; }
 
-    /* Popular questions */
-    .popular-questions {
-      background: #162a46; border: 1px solid #1e3352; border-radius: 12px; padding: 24px;
-      margin-bottom: 32px;
-    }
-    .popular-questions h3 { color: #fbbf24; margin-bottom: 16px; font-size: 1.1rem; }
-    .popular-list {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px;
-    }
-    .popular-item {
-      padding: 12px 16px; background: rgba(22,42,70,0.6); border: 1px solid #1e3352;
-      border-radius: 8px; color: #94a3b8; font-size: 0.85rem; cursor: pointer;
-      transition: all 0.2s;
-    }
-    .popular-item:hover {
-      border-color: #fbbf24; color: #fbbf24; background: rgba(251,191,36,0.05);
-    }
-
     /* Responsive */
     @media (max-width: 700px) {
       .search-container { padding: 20px; }
@@ -190,7 +171,6 @@ search_exclude: true
       .faq-question { padding: 16px 20px; }
       .faq-question h3 { font-size: 0.95rem; }
       .faq-answer-content { padding: 0 20px 16px; font-size: 0.85rem; }
-      .popular-list { grid-template-columns: 1fr; }
       .contact-buttons { flex-direction: column; align-items: center; }
     }
   </style>
@@ -210,7 +190,7 @@ search_exclude: true
 <div class="page">
 
 <h1>Frequently Asked Questions</h1>
-<p class="lead">Find answers to common questions about membership, benefits, legal defense, events, and more. Can't find what you're looking for? Contact us directly.</p>
+<p class="lead">Answers to common questions about membership, benefits, and legal defense.</p>
 
 <!-- Search -->
 <div class="search-container">
@@ -220,23 +200,13 @@ search_exclude: true
   </div>
 </div>
 
-<!-- Popular Questions -->
-<div class="popular-questions">
-  <h3>Popular Questions</h3>
-  <div class="popular-list" id="popularList">
-    <!-- Popular questions will be populated by JavaScript -->
-  </div>
-</div>
-
 <!-- Category Tabs -->
 <div class="category-tabs">
-  <button class="category-tab active" onclick="filterCategory('all')">All Categories</button>
+  <button class="category-tab active" onclick="filterCategory('all')">All</button>
   <button class="category-tab" onclick="filterCategory('membership')">Membership</button>
   <button class="category-tab" onclick="filterCategory('benefits')">Benefits</button>
   <button class="category-tab" onclick="filterCategory('legal')">Legal Defense</button>
   <button class="category-tab" onclick="filterCategory('wellness')">Wellness</button>
-  <button class="category-tab" onclick="filterCategory('career')">Career</button>
-  <button class="category-tab" onclick="filterCategory('events')">Events</button>
 </div>
 
 <!-- FAQ Items -->
@@ -254,14 +224,9 @@ search_exclude: true
 <!-- Contact Section -->
 <div class="contact-section">
   <h2>Still Have Questions?</h2>
-  <p>Can't find the answer you're looking for? Our team is here to help you with any questions about your DSA membership and benefits.</p>
   <div class="contact-buttons">
-    <a href="{{ site.baseurl }}/sheriff/contact" class="contact-btn contact-primary">
-      &#128222; Contact DSA Staff
-    </a>
-    <a href="#" class="contact-btn contact-secondary" onclick="openChatbot(); return false;">
-      &#128172; Ask AI Assistant
-    </a>
+    <a href="{{ site.baseurl }}/sheriff/contact" class="contact-btn contact-primary">&#128222; Contact DSA Staff</a>
+    <a href="#" class="contact-btn contact-secondary" onclick="openChatbot(); return false;">&#128172; Ask AI Assistant</a>
   </div>
 </div>
 
@@ -274,181 +239,37 @@ const faqData = [
     id: 1,
     category: 'membership',
     question: 'How do I join the DSA?',
-    answer: `<p>Joining the DSA is straightforward and automatic for most sworn personnel:</p>
-    <ul>
-      <li>If you're a new deputy, membership is typically initiated during your hiring process</li>
-      <li>Dues are automatically deducted from your paycheck</li>
-      <li>You'll receive a welcome packet with your membership card and benefits information</li>
-      <li>For questions about your membership status, contact DSA Headquarters at (858) 486-9009</li>
-    </ul>
-    <p><strong>Note:</strong> Membership is mandatory for all sworn deputies in San Diego County as part of our collective bargaining agreement.</p>`
+    answer: `<p>Membership is automatic for sworn personnel and initiated during your hiring process. Dues are deducted from your paycheck and you'll receive a welcome packet with your membership card. Contact DSA HQ at <strong>(858) 486-9009</strong> for membership status questions.</p>`
   },
   {
     id: 2,
     category: 'membership',
     question: 'What are the membership dues?',
-    answer: `<p>DSA membership dues are structured as follows:</p>
-    <ul>
-      <li><strong>Regular Deputies:</strong> 1.5% of base salary</li>
-      <li><strong>Corporals:</strong> 1.4% of base salary</li>
-      <li><strong>Sergeants:</strong> 1.3% of base salary</li>
-      <li><strong>Lieutenants:</strong> 1.2% of base salary</li>
-      <li><strong>Captains:</strong> 1.1% of base salary</li>
-    </ul>
-    <p>Dues are automatically deducted from your monthly paycheck and fund all DSA operations, including legal defense, contract negotiations, and member services.</p>`
+    answer: `<p>Dues range from <strong>1.1%&ndash;1.5%</strong> of base salary depending on rank (Regular Deputies 1.5%, down to Captains 1.1%). They are automatically deducted monthly and fund legal defense, contract negotiations, and member services.</p>`
   },
   {
     id: 3,
     category: 'benefits',
     question: 'What health insurance options are available?',
-    answer: `<p>The DSA negotiates comprehensive health insurance options for members:</p>
-    <ul>
-      <li><strong>Medical Plans:</strong> Multiple HMO and PPO options with low copays</li>
-      <li><strong>Dental:</strong> Delta Dental PPO with preventive care covered at 100%</li>
-      <li><strong>Vision:</strong> VSP coverage for exams, frames, lenses, and contacts</li>
-      <li><strong>Life Insurance:</strong> Group term life insurance at no cost to members</li>
-      <li><strong>Disability:</strong> Short-term and long-term disability coverage</li>
-    </ul>
-    <p>For specific plan details or to make changes, contact the benefits team at benefits@dsasd.org or (858) 486-9009 x benefits.</p>`
+    answer: `<p>The DSA negotiates medical (HMO/PPO), Delta Dental, VSP vision, group life insurance, and short/long-term disability coverage. For plan details or changes, contact <strong>benefits@dsasd.org</strong> or <strong>(858) 486-9009 x benefits</strong>.</p>`
   },
   {
     id: 4,
     category: 'legal',
     question: 'When should I call the Legal Defense Fund?',
-    answer: `<p>Contact the Legal Defense Fund <strong>immediately</strong> in any of these situations:</p>
-    <ul>
-      <li>Critical incident involving use of force or vehicle pursuit</li>
-      <li>Notification of administrative investigation</li>
-      <li>Request for voluntary statement or interview</li>
-      <li>Service of civil lawsuit related to on-duty actions</li>
-      <li>Any situation where you believe legal representation may be needed</li>
-    </ul>
-    <p><strong>24/7 Legal Hotline:</strong> (858) 486-9009</p>
-    <p>Don't wait - early legal intervention is crucial for protecting your rights and career.</p>`
+    answer: `<p>Call <strong>immediately</strong> for any critical use-of-force incident, administrative investigation, request for a statement, or civil lawsuit related to on-duty actions. Early intervention is crucial. <strong>24/7 Legal Hotline: (858) 486-9009</strong>.</p>`
   },
   {
     id: 5,
     category: 'legal',
     question: 'What does the Legal Defense Fund cover?',
-    answer: `<p>The LDF provides comprehensive legal coverage for:</p>
-    <ul>
-      <li><strong>Administrative Investigations:</strong> Full representation during IA interviews and Skelly hearings</li>
-      <li><strong>Critical Incidents:</strong> 24/7 attorney response for officer-involved incidents</li>
-      <li><strong>Civil Litigation:</strong> Defense against lawsuits arising from on-duty actions</li>
-      <li><strong>Criminal Defense:</strong> Representation for criminal charges related to official duties</li>
-      <li><strong>Expert Witnesses:</strong> Coverage for qualified expert testimony</li>
-      <li><strong>Court Costs:</strong> All filing fees and court expenses</li>
-    </ul>
-    <p>Coverage is automatic for all members in good standing with no deductibles or out-of-pocket costs.</p>`
+    answer: `<p>The LDF covers IA representation, 24/7 critical-incident attorney response, civil litigation defense, criminal defense for on-duty matters, expert witnesses, and all court costs. Coverage is automatic for members in good standing with no out-of-pocket costs.</p>`
   },
   {
     id: 6,
     category: 'wellness',
     question: 'What mental health resources are available?',
-    answer: `<p>The DSA provides comprehensive mental health support:</p>
-    <ul>
-      <li><strong>Peer Support Team:</strong> Trained deputy counselors available 24/7</li>
-      <li><strong>CISM Team:</strong> Critical Incident Stress Management debriefings</li>
-      <li><strong>Therapy Referrals:</strong> Licensed therapists experienced with law enforcement</li>
-      <li><strong>Confidential Counseling:</strong> Up to 12 free sessions per year</li>
-      <li><strong>Family Support:</strong> Resources for spouses and family members</li>
-      <li><strong>Substance Abuse Programs:</strong> Confidential treatment and support</li>
-    </ul>
-    <p><strong>Confidential Hotline:</strong> (858) 486-9009 x wellness</p>
-    <p>All services are completely confidential and will not affect your career or standing.</p>`
-  },
-  {
-    id: 7,
-    category: 'career',
-    question: 'How can I advance in my career?',
-    answer: `<p>The DSA supports career advancement through:</p>
-    <ul>
-      <li><strong>Rank Pathway Program:</strong> Personalized promotion planning and timelines</li>
-      <li><strong>Training Opportunities:</strong> Free access to leadership and specialized training</li>
-      <li><strong>Mentorship Network:</strong> Connect with senior deputies for guidance</li>
-      <li><strong>Education Benefits:</strong> Tuition assistance for advanced degrees</li>
-      <li><strong>Promotional Preparation:</strong> Study guides and interview coaching</li>
-      <li><strong>Career Counseling:</strong> One-on-one guidance with career development specialists</li>
-    </ul>
-    <p>Visit our <a href="{{ site.baseurl }}/sheriff/pathway">Rank Pathway</a> page for personalized career planning.</p>`
-  },
-  {
-    id: 8,
-    category: 'events',
-    question: 'What types of events does the DSA host?',
-    answer: `<p>The DSA organizes various events throughout the year:</p>
-    <ul>
-      <li><strong>Monthly Meetings:</strong> General membership meetings with updates and discussions</li>
-      <li><strong>Social Events:</strong> BBQs, family days, holiday parties, and networking gatherings</li>
-      <li><strong>Training Events:</strong> Professional development and specialized training</li>
-      <li><strong>Fundraisers:</strong> Scholarship galas and charity events</li>
-      <li><strong>Community Events:</strong> Shop with a Deputy and community outreach programs</li>
-      <li><strong>Retirement Events:</strong> Recognition ceremonies for retiring members</li>
-    </ul>
-    <p>Check our <a href="{{ site.baseurl }}/sheriff/events">Events Calendar</a> for upcoming gatherings and RSVP information.</p>`
-  },
-  {
-    id: 9,
-    category: 'benefits',
-    question: 'How do I enroll or change my benefits?',
-    answer: `<p>Benefits enrollment and changes:</p>
-    <ul>
-      <li><strong>New Members:</strong> Automatic enrollment during hiring process</li>
-      <li><strong>Open Enrollment:</strong> Annual opportunity to make changes (typically in November)</li>
-      <li><strong>Life Events:</strong> Changes allowed within 30 days of marriage, birth, adoption, etc.</li>
-      <li><strong>Qualifying Events:</strong> Changes allowed for divorce, death, loss of other coverage</li>
-    </ul>
-    <p><strong>To make changes:</strong></p>
-    <ul>
-      <li>Contact Benefits Department: benefits@dsasd.org</li>
-      <li>Call: (858) 486-9009 x benefits</li>
-      <li>Visit DSA Headquarters in Poway</li>
-    </ul>`
-  },
-  {
-    id: 10,
-    category: 'membership',
-    question: 'What is the role of a Shop Steward?',
-    answer: `<p>Shop Stewards are vital union representatives who:</p>
-    <ul>
-      <li><strong>Represent Members:</strong> First point of contact for workplace issues and concerns</li>
-      <li><strong>Enforce Contract:</strong> Ensure MOU compliance at the station level</li>
-      <li><strong>Weingarten Rights:</strong> Provide representation during investigatory interviews</li>
-      <li><strong>Grievance Support:</strong> Assist with filing and pursuing grievances</li>
-      <li><strong>Contract Education:</strong> Help members understand their rights and benefits</li>
-      <li><strong>Communication:</strong> Relay important information between members and leadership</li>
-    </ul>
-    <p>Each station has designated Shop Stewards. Contact your station's steward or DSA HQ for assistance.</p>`
-  },
-  {
-    id: 11,
-    category: 'wellness',
-    question: 'What fitness benefits are available?',
-    answer: `<p>The DSA offers comprehensive fitness benefits:</p>
-    <ul>
-      <li><strong>Gym Discounts:</strong> Reduced rates at participating fitness centers countywide</li>
-      <li><strong>DSA Wellness Center:</strong> Free access to our headquarters fitness facility</li>
-      <li><strong>Equipment Reimbursement:</strong> Annual allowance for home fitness equipment</li>
-      <li><strong>Personal Training:</strong> Discounted rates with certified trainers</li>
-      <li><strong>Fitness Classes:</strong> Free group fitness classes at various locations</li>
-      <li><strong>Health Screenings:</strong> Annual physical fitness assessments</li>
-    </ul>
-    <p>Contact the wellness team at wellness@dsasd.org for a full list of participating facilities and programs.</p>`
-  },
-  {
-    id: 12,
-    category: 'career',
-    question: 'What educational assistance is available?',
-    answer: `<p>The DSA supports continuing education through:</p>
-    <ul>
-      <li><strong>Tuition Reimbursement:</strong> Up to $5,000 annually for job-related courses</li>
-      <li><strong>Scholarship Programs:</strong> For members' children pursuing higher education</li>
-      <li><strong>Partnerships:</strong> Reduced tuition at local colleges and universities</li>
-      <li><strong>Online Learning:</strong> Free access to professional development courses</li>
-      <li><strong>Study Leave:</strong> Paid time off for exam preparation</li>
-      <li><strong>Book Reimbursement:</strong> Coverage for required textbooks and materials</li>
-    </ul>
-    <p>Applications and guidelines are available on the member portal or by contacting education@dsasd.org.</p>`
+    answer: `<p>The DSA offers 24/7 peer support, CISM debriefings, law-enforcement-experienced therapist referrals, up to 12 free confidential counseling sessions per year, and family support resources. All services are confidential and will not affect your career. <strong>Hotline: (858) 486-9009 x wellness</strong>.</p>`
   }
 ];
 
@@ -458,7 +279,6 @@ let searchQuery = '';
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
   renderFAQ();
-  renderPopularQuestions();
 });
 
 function renderFAQ() {
@@ -507,22 +327,6 @@ function renderFAQ() {
   container.innerHTML = html;
 }
 
-function renderPopularQuestions() {
-  const popularList = document.getElementById('popularList');
-  const popularQuestions = faqData.slice(0, 6); // First 6 questions as popular
-  
-  let html = '';
-  popularQuestions.forEach(item => {
-    html += `
-      <div class="popular-item" onclick="scrollToFAQ(${item.id})">
-        ${item.question}
-      </div>
-    `;
-  });
-  
-  popularList.innerHTML = html;
-}
-
 function toggleFAQ(id) {
   const faqItem = document.querySelector(`.faq-item[data-id="${id}"]`);
   const isActive = faqItem.classList.contains('active');
@@ -535,14 +339,6 @@ function toggleFAQ(id) {
   // Open clicked item if it wasn't active
   if (!isActive) {
     faqItem.classList.add('active');
-  }
-}
-
-function scrollToFAQ(id) {
-  const faqItem = document.querySelector(`.faq-item[data-id="${id}"]`);
-  if (faqItem) {
-    faqItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    setTimeout(() => toggleFAQ(id), 500);
   }
 }
 
@@ -578,7 +374,7 @@ fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
   .then(user => {
     const lead = document.querySelector('.page .lead');
     if (lead && user.name) {
-      lead.textContent = `Hi ${user.name.split(' ')[0]}! Find answers to the most common questions from DSA members at ${user.station || 'your station'}. Can't find what you need? Contact us directly.`;
+      lead.textContent = `Hi ${user.name.split(' ')[0]}! Browse common questions or contact us directly.`;
     }
   })
   .catch(() => {});

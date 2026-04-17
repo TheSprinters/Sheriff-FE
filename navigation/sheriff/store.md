@@ -200,26 +200,10 @@ search_exclude: true
     }
     .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16,185,129,0.35); }
 
-    /* Order info */
-    .order-info {
-      background: linear-gradient(135deg, rgba(22,42,70,0.8), rgba(11,26,46,0.8));
-      border: 1px solid #1e3352; border-radius: 16px; padding: 24px; margin-bottom: 32px;
-    }
-    .info-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
-    }
-    .info-item {
-      text-align: center;
-    }
-    .info-icon { font-size: 2rem; color: #fbbf24; margin-bottom: 8px; }
-    .info-title { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .info-desc { font-size: 0.8rem; color: #94a3b8; line-height: 1.5; }
-
     /* Responsive */
     @media (max-width: 700px) {
       .products-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
       .cart-header { flex-direction: column; gap: 16px; align-items: flex-start; }
-      .info-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -249,32 +233,6 @@ search_exclude: true
 </div>
 
 <p class="lead">Show your DSA pride with official merchandise, apparel, and gear. All proceeds support member programs and initiatives.</p>
-
-<!-- Order Information -->
-<div class="order-info">
-  <div class="info-grid">
-    <div class="info-item">
-      <div class="info-icon">&#128233;</div>
-      <div class="info-title">Free Shipping</div>
-      <div class="info-desc">On orders over $50 within San Diego County</div>
-    </div>
-    <div class="info-item">
-      <div class="info-icon">&#128197;</div>
-      <div class="info-title">Pickup Available</div>
-      <div class="info-desc">Collect at DSA Headquarters in Poway</div>
-    </div>
-    <div class="info-item">
-      <div class="info-icon">&#128188;</div>
-      <div class="info-title">Member Discount</div>
-      <div class="info-desc">10% off with active membership</div>
-    </div>
-    <div class="info-item">
-      <div class="info-icon">&#128279;</div>
-      <div class="info-title">Secure Payment</div>
-      <div class="info-desc">Protected checkout system</div>
-    </div>
-  </div>
-</div>
 
 <!-- Category Tabs -->
 <div class="category-tabs">
@@ -387,66 +345,6 @@ const products = [
     icon: "&#128169;",
     sizes: []
   },
-  {
-    id: 7,
-    title: "Performance T-Shirt",
-    category: "apparel",
-    price: 28.00,
-    description: "Moisture-wicking performance shirt with DSA logo.",
-    badge: "new",
-    icon: "&#128087;",
-    sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
-  },
-  {
-    id: 8,
-    title: "DSA Coffee Mug",
-    category: "accessories",
-    price: 12.00,
-    description: "Ceramic mug with DSA logo. Perfect for your morning coffee.",
-    badge: null,
-    icon: "&#2615;",
-    sizes: []
-  },
-  {
-    id: 9,
-    title: "Tactical Flashlight",
-    category: "gear",
-    price: 45.00,
-    description: "High-powered LED flashlight with DSA engraving.",
-    badge: null,
-    icon: "&#128293;",
-    sizes: []
-  },
-  {
-    id: 10,
-    title: "DSA Name Plate",
-    category: "badges",
-    price: 18.00,
-    description: "Custom name plate for uniforms and desks.",
-    badge: null,
-    icon: "&#128210;",
-    sizes: []
-  },
-  {
-    id: 11,
-    title: "Fleece Jacket",
-    category: "apparel",
-    price: 65.00,
-    description: "Comfortable fleece jacket with embroidered DSA logo.",
-    badge: "sale",
-    icon: "&#128085;",
-    sizes: ["S", "M", "L", "XL", "2XL", "3XL"]
-  },
-  {
-    id: 12,
-    title: "DSA Keychain",
-    category: "accessories",
-    price: 10.00,
-    description: "Durable metal keychain with DSA logo.",
-    badge: null,
-    icon: "&#128295;",
-    sizes: []
-  }
 ];
 
 let cart = [];

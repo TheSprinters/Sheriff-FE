@@ -178,17 +178,17 @@ search_exclude: true
     </div>
 
     <div class="game-card" onclick="location.href='{{ site.baseurl }}/games'">
-      <div class="gc-icon">&#127891;</div>
-      <h3>Pop Quiz</h3>
-      <p>Rapid-fire multiple choice questions covering networking fundamentals, protocols, security, and troubleshooting.</p>
+      <div class="gc-icon">&#128680;</div>
+      <h3>Robbery Response</h3>
+      <p>Respond to a live robbery scenario. Make tactical decisions under pressure &mdash; safety, protocol, and timing matter.</p>
       <span class="gc-tag tag-active">Active</span>
       <br><a href="{{ site.baseurl }}/games" class="gc-play">Play Now &#8594;</a>
     </div>
 
     <div class="game-card" onclick="location.href='{{ site.baseurl }}/games'">
-      <div class="gc-icon">&#128295;</div>
-      <h3>MTU Lab</h3>
-      <p>Interactive packet fragmentation simulator. Learn how Maximum Transmission Unit affects network performance.</p>
+      <div class="gc-icon">&#127919;</div>
+      <h3>Target Range</h3>
+      <p>Test your aim and reaction time at the virtual shooting range. Hit threats, avoid civilians, earn your marksman badge.</p>
       <span class="gc-tag tag-active">Active</span>
       <br><a href="{{ site.baseurl }}/games" class="gc-play">Play Now &#8594;</a>
     </div>
@@ -211,8 +211,6 @@ search_exclude: true
         <tr><td><span class="rank-badge rank-1">1</span></td><td>M. Rodriguez</td><td style="color:#fbbf24;font-weight:700">2,450</td><td>6</td><td>24</td></tr>
         <tr><td><span class="rank-badge rank-2">2</span></td><td>D. Chen</td><td style="color:#fbbf24;font-weight:700">2,180</td><td>5</td><td>21</td></tr>
         <tr><td><span class="rank-badge rank-3">3</span></td><td>J. Thompson</td><td style="color:#fbbf24;font-weight:700">1,920</td><td>4</td><td>18</td></tr>
-        <tr><td>4</td><td>DSA Admin</td><td>1,540</td><td>3</td><td>14</td></tr>
-        <tr><td>5</td><td>Guest Player</td><td>890</td><td>2</td><td>8</td></tr>
       </tbody>
     </table>
   </div>
@@ -227,19 +225,14 @@ search_exclude: true
         <div class="bc-desc">Complete your first game</div>
       </div>
       <div class="badge-card">
-        <div class="bc-icon">&#127775;</div>
-        <div class="bc-name">Sharp Shooter</div>
-        <div class="bc-desc">Score 100% on a quiz</div>
+        <div class="bc-icon">&#127919;</div>
+        <div class="bc-name">Marksman</div>
+        <div class="bc-desc">85%+ accuracy on Target Range</div>
       </div>
       <div class="badge-card locked">
-        <div class="bc-icon">&#128293;</div>
-        <div class="bc-name">On Fire</div>
-        <div class="bc-desc">7-day play streak</div>
-      </div>
-      <div class="badge-card locked">
-        <div class="bc-icon">&#129504;</div>
-        <div class="bc-name">ML Expert</div>
-        <div class="bc-desc">Perfect ML Lab score</div>
+        <div class="bc-icon">&#128680;</div>
+        <div class="bc-name">Tactician</div>
+        <div class="bc-desc">Score 120+ on Robbery Response</div>
       </div>
       <div class="badge-card locked">
         <div class="bc-icon">&#128272;</div>
@@ -252,14 +245,14 @@ search_exclude: true
         <div class="bc-desc">Reach #1 on leaderboard</div>
       </div>
       <div class="badge-card locked">
-        <div class="bc-icon">&#128218;</div>
-        <div class="bc-name">Scholar</div>
-        <div class="bc-desc">Pass all quiz categories</div>
+        <div class="bc-icon">&#128293;</div>
+        <div class="bc-name">On Fire</div>
+        <div class="bc-desc">7-day play streak</div>
       </div>
       <div class="badge-card locked">
         <div class="bc-icon">&#9889;</div>
-        <div class="bc-name">Speed Demon</div>
-        <div class="bc-desc">Under 30s avg answer time</div>
+        <div class="bc-name">Quick Draw</div>
+        <div class="bc-desc">Under 1s avg reaction time</div>
       </div>
     </div>
   </div>

@@ -37,7 +37,7 @@ search_exclude: true
     .back-btn:hover { background: rgba(251,191,36,0.15); }
 
     /* Page content */
-    .page { max-width: 1000px; margin: 0 auto; padding: 40px 24px 60px; }
+    .page { max-width: 1000px; margin: 0 auto; padding: 24px 24px 40px; }
     .page h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg,#fbbf24,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
     .page .lead { color: #7f8ea3; font-size: 1rem; margin-bottom: 32px; }
     .page h2 { font-size: 1.3rem; font-weight: 700; color: #fbbf24; border-bottom: 1px solid rgba(251,191,36,0.12); padding-bottom: 8px; margin: 36px 0 16px; }
@@ -49,7 +49,7 @@ search_exclude: true
     /* Pathway visual */
     .pathway-container {
       background: linear-gradient(135deg, rgba(22,42,70,0.9), rgba(11,26,46,0.9));
-      border: 1px solid #1e3352; border-radius: 16px; padding: 32px; margin-bottom: 40px;
+      border: 1px solid #1e3352; border-radius: 16px; padding: 24px; margin-bottom: 24px;
       position: relative; overflow: hidden;
     }
     .pathway-container::before {
@@ -60,7 +60,7 @@ search_exclude: true
 
     /* Rank timeline */
     .rank-timeline {
-      display: flex; justify-content: space-between; align-items: flex-start; margin: 40px 0;
+      display: flex; justify-content: space-between; align-items: flex-start; margin: 20px 0;
       position: relative; padding: 0 20px;
     }
     .rank-timeline::before {
@@ -90,7 +90,7 @@ search_exclude: true
 
     /* Rank details */
     .rank-details {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 24px;
     }
     .rank-card {
       background: #162a46; border: 1px solid #1e3352; border-radius: 12px; padding: 24px;
@@ -129,7 +129,7 @@ search_exclude: true
     /* Personal assessment */
     .assessment {
       background: linear-gradient(135deg, rgba(22,42,70,0.8), rgba(11,26,46,0.8));
-      border: 1px solid #1e3352; border-radius: 16px; padding: 32px; margin-bottom: 40px;
+      border: 1px solid #1e3352; border-radius: 16px; padding: 24px; margin-bottom: 24px;
     }
     .assessment h2 { color: #fbbf24; margin-bottom: 20px; border: none; padding: 0; }
     .form-grid {
@@ -249,7 +249,7 @@ search_exclude: true
 <div class="page">
 
 <h1>Your Career Pathway</h1>
-<p class="lead">Plan your advancement through the San Diego County Sheriff's Department ranks. Get personalized timelines, requirements, and next steps for your career progression.</p>
+<p class="lead">Plan your advancement through the SDSO ranks.</p>
 
 <!-- Pathway Visual -->
 <div class="pathway-container">
@@ -295,17 +295,13 @@ search_exclude: true
     <div class="requirements">
       <h4>Requirements</h4>
       <ul>
-        <li>High school diploma or GED</li>
-        <li>21+ years of age</li>
-        <li>U.S. citizenship</li>
-        <li>Valid California driver's license</li>
-        <li>Pass background investigation</li>
-        <li>Complete Academy training</li>
+        <li>21+, U.S. citizen, HS diploma/GED</li>
+        <li>Pass background check &amp; complete Academy</li>
       </ul>
     </div>
     <div class="next-steps">
-      <h4>Next Steps to Corporal</h4>
-      <p>Complete 2-4 years of service, maintain excellent performance evaluations, complete FTO certification, and demonstrate leadership potential.</p>
+      <h4>Next: Corporal</h4>
+      <p>2-4 yrs service, FTO cert, strong evals.</p>
     </div>
   </div>
 
@@ -320,17 +316,13 @@ search_exclude: true
     <div class="requirements">
       <h4>Requirements</h4>
       <ul>
-        <li>2-4 years as Deputy Sheriff</li>
-        <li>Field Training Officer certification</li>
-        <li>Excellent performance record</li>
-        <li>Leadership experience</li>
-        <li>Complete advanced training courses</li>
-        <li>Pass promotional examination</li>
+        <li>2-4 yrs as Deputy, FTO certification</li>
+        <li>Pass promotional exam, leadership record</li>
       </ul>
     </div>
     <div class="next-steps">
-      <h4>Next Steps to Sergeant</h4>
-      <p>Gain 2-4 additional years of experience, complete supervisory training, mentor junior deputies, and prepare for promotional process.</p>
+      <h4>Next: Sergeant</h4>
+      <p>Supervisory training, mentor junior deputies, 2-4 more yrs.</p>
     </div>
   </div>
 
@@ -345,17 +337,13 @@ search_exclude: true
     <div class="requirements">
       <h4>Requirements</h4>
       <ul>
-        <li>4-8 years total service</li>
-        <li>Supervisory experience as Corporal</li>
-        <li>Complete supervisory leadership course</li>
-        <li>Strong performance evaluations</li>
-        <li>Pass written assessment and interview</li>
-        <li>Demonstrate command presence</li>
+        <li>4-8 yrs service, supervisory leadership course</li>
+        <li>Written assessment &amp; interview, command presence</li>
       </ul>
     </div>
     <div class="next-steps">
-      <h4>Next Steps to Lieutenant</h4>
-      <p>Complete 4+ years as Sergeant, gain command experience, complete advanced leadership training, and develop strategic planning skills.</p>
+      <h4>Next: Lieutenant</h4>
+      <p>4+ yrs as Sergeant, advanced leadership &amp; strategic planning.</p>
     </div>
   </div>
 
@@ -370,17 +358,13 @@ search_exclude: true
     <div class="requirements">
       <h4>Requirements</h4>
       <ul>
-        <li>8-12 years total service</li>
-        <li>4+ years as Sergeant</li>
-        <li>Command experience</li>
-        <li>Advanced leadership certification</li>
-        <li>Budget management experience</li>
-        <li>Inter-agency coordination skills</li>
+        <li>8-12 yrs service, 4+ yrs as Sergeant</li>
+        <li>Advanced leadership cert, budget &amp; inter-agency experience</li>
       </ul>
     </div>
     <div class="next-steps">
-      <h4>Next Steps to Captain</h4>
-      <p>Gain additional command experience, complete executive leadership training, develop departmental policy expertise, and demonstrate strategic vision.</p>
+      <h4>Next: Captain</h4>
+      <p>Executive leadership training, policy expertise, strategic vision.</p>
     </div>
   </div>
 
@@ -395,26 +379,22 @@ search_exclude: true
     <div class="requirements">
       <h4>Requirements</h4>
       <ul>
-        <li>12+ years total service</li>
-        <li>4+ years as Lieutenant</li>
-        <li>Executive leadership experience</li>
-        <li>Departmental policy development</li>
-        <li>Public affairs experience</li>
-        <li>Major operations command</li>
+        <li>12+ yrs service, 4+ yrs as Lieutenant</li>
+        <li>Executive leadership, policy dev, major ops command</li>
       </ul>
     </div>
     <div class="next-steps">
-      <h4>Career Development</h4>
-      <p>Consider specialized command roles, advanced education, or preparation for executive leadership positions within the department.</p>
+      <h4>Career Growth</h4>
+      <p>Specialized command roles, advanced education, executive positions.</p>
     </div>
   </div>
 </div>
 
 <!-- Personal Assessment -->
 <div class="assessment">
-  <h2>Personal Career Assessment</h2>
-  <p style="color:#94a3b8;margin-bottom:20px">Get a personalized career timeline based on your current position and experience.</p>
-  
+  <h2 style="margin-bottom:12px">Personal Career Assessment</h2>
+  <button class="calculate-btn" id="toggleAssessment" onclick="document.getElementById('assessmentForm').style.display=document.getElementById('assessmentForm').style.display==='none'?'block':'none'; this.textContent=document.getElementById('assessmentForm').style.display==='none'?'Take Assessment':'Hide Assessment';" style="margin-bottom:16px">Take Assessment</button>
+  <div id="assessmentForm" style="display:none">
   <div class="form-grid">
     <div class="form-group">
       <label class="form-label">Current Rank</label>
@@ -467,36 +447,17 @@ search_exclude: true
       <!-- Results will be populated by JavaScript -->
     </div>
   </div>
+  </div>
 </div>
 
-<!-- Resources -->
-<div class="resources">
-  <h2>Career Development Resources</h2>
-  <div class="resource-grid">
-    <div class="resource-card">
-      <div class="resource-icon">&#128214;</div>
-      <div class="resource-title">Study Guides</div>
-      <div class="resource-desc">Comprehensive preparation materials for promotional exams and interviews.</div>
-      <a href="#" class="resource-link">Download Guides &rarr;</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-icon">&#127891;</div>
-      <div class="resource-title">Training Programs</div>
-      <div class="resource-desc">Leadership courses, certifications, and professional development opportunities.</div>
-      <a href="#" class="resource-link">View Programs &rarr;</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-icon">&#128188;</div>
-      <div class="resource-title">Mentorship Network</div>
-      <div class="resource-desc">Connect with senior deputies who can guide your career advancement.</div>
-      <a href="#" class="resource-link">Join Network &rarr;</a>
-    </div>
-    <div class="resource-card">
-      <div class="resource-icon">&#128200;</div>
-      <div class="resource-title">Education Benefits</div>
-      <div class="resource-desc">Tuition assistance and educational opportunities for career advancement.</div>
-      <a href="#" class="resource-link">Learn More &rarr;</a>
-    </div>
+<!-- Resources (compact) -->
+<div class="resources" style="padding:20px">
+  <h2 style="margin-bottom:12px;font-size:1.1rem">Resources</h2>
+  <div class="resource-grid" style="gap:12px">
+    <div class="resource-card" style="padding:14px"><div class="resource-title" style="margin-bottom:4px;font-size:0.9rem">Study Guides</div><a href="#" class="resource-link">Download &rarr;</a></div>
+    <div class="resource-card" style="padding:14px"><div class="resource-title" style="margin-bottom:4px;font-size:0.9rem">Training Programs</div><a href="#" class="resource-link">View &rarr;</a></div>
+    <div class="resource-card" style="padding:14px"><div class="resource-title" style="margin-bottom:4px;font-size:0.9rem">Mentorship Network</div><a href="#" class="resource-link">Join &rarr;</a></div>
+    <div class="resource-card" style="padding:14px"><div class="resource-title" style="margin-bottom:4px;font-size:0.9rem">Education Benefits</div><a href="#" class="resource-link">Learn More &rarr;</a></div>
   </div>
 </div>
 

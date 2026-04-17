@@ -193,6 +193,8 @@ search_exclude: true
     }
     .btn-gold:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
+    @keyframes targetPop { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
     @media (max-width: 768px) {
       .game-feature-grid { grid-template-columns: 1fr 1fr; }
       .game-layout { flex-direction: column; }
@@ -225,44 +227,34 @@ search_exclude: true
 
   <div class="game-feature-grid">
     <div class="game-feature-card">
-      <h4>Contest Fit</h4>
+      <h4>Training Modules</h4>
       <div class="requirement-tags">
-        <span class="requirement-tag">Background</span>
-        <span class="requirement-tag">Player</span>
-        <span class="requirement-tag">NPC</span>
-        <span class="requirement-tag">AI NPC</span>
+        <span class="requirement-tag">Net Patrol</span>
+        <span class="requirement-tag warning">Robbery Sim</span>
+        <span class="requirement-tag academic">Target Range</span>
       </div>
     </div>
     <div class="game-feature-card">
-      <h4>Academic Focus</h4>
+      <h4>Skills Tested</h4>
       <div class="requirement-tags">
-        <span class="requirement-tag academic">OSI 7-Layer</span>
-        <span class="requirement-tag academic">TCP/IP 5-Layer</span>
-        <span class="requirement-tag academic">MTU / MSS</span>
+        <span class="requirement-tag academic">Tactical Response</span>
+        <span class="requirement-tag academic">Marksmanship</span>
+        <span class="requirement-tag academic">Networking</span>
       </div>
     </div>
     <div class="game-feature-card">
-      <h4>Real Project Link</h4>
-      <p>Every packet mission connects back to GitHub Pages, HTTPS, NGINX, Flask / Spring, AWS EC2, Docker, and SQL so the lesson applies to your real deployment instead of abstract notes.</p>
+      <h4>Real Scenarios</h4>
+      <p>Robbery response, target identification, suspect pursuit, hostage negotiation, and network security &mdash; all based on real deputy training.</p>
     </div>
     <div class="game-feature-card">
-      <h4>Slack Concepts Used</h4>
-      <p>The Slack asks are shown directly: fun game, real deployment, OSI vs TCP/IP, MTU formation, request/response flow, pop-quiz review, and a clear player/NPC/AI NPC structure.</p>
-    </div>
-  </div>
-  <div class="game-feature-card" style="margin-bottom:18px">
-    <h4>How To Teach It</h4>
-    <div class="teach-list">
-      <div class="teach-step"><strong>1.</strong> Point to the board and say: these seven circles are the OSI layers we use to explain networking.</div>
-      <div class="teach-step"><strong>2.</strong> Point to the labels under them and say: TCP/IP combines some of those jobs into five practical layers.</div>
-      <div class="teach-step"><strong>3.</strong> Move the player and explain: our project traffic starts at GitHub Pages, then moves through HTTPS, TCP, IP, Ethernet, NGINX, Docker, and the backend.</div>
-      <div class="teach-step"><strong>4.</strong> Use an oversized packet to teach MTU and request/response flow: if the payload is too big, fragment it before delivery so the backend can answer cleanly.</div>
+      <h4>Earn Badges</h4>
+      <p>Complete challenges to unlock badges like Marksman, Tactician, and Net Guardian. Climb the leaderboard in the <a href="{{ site.baseurl }}/sheriff/gamification" style="color:#fbbf24">Gamification Hub</a>.</p>
     </div>
   </div>
   <div class="game-tabs">
     <button class="gtab active" onclick="switchGameTab(this,'patrol')">&#127914; Net Patrol Mission</button>
-    <button class="gtab" onclick="switchGameTab(this,'quiz')">&#9997;&#65039; Pop Quiz Review</button>
-    <button class="gtab" onclick="switchGameTab(this,'mtu')">&#128202; MTU Lab</button>
+    <button class="gtab" onclick="switchGameTab(this,'robbery')">&#128680; Robbery Response</button>
+    <button class="gtab" onclick="switchGameTab(this,'range')">&#127919; Target Range</button>
   </div>
 
   <!-- TAB 1: Canvas Game -->
@@ -349,167 +341,95 @@ search_exclude: true
         </div>
       </div>
     </div>
-    <div class="layer-guide">
+    <div class="layer-guide" id="layerGuide" style="display:none">
       <div class="guide-card">
-        <h4>Network Stack Lesson Guide</h4>
+        <h4>Network Stack Guide</h4>
         <div class="stack-guide">
-          <div class="stack-row">
-            <strong>HTTP/DNS (Application Layer)</strong>
-            <span>Frontend (GitHub Pages) -> Backend (AWS EC2 with Docker)</span>
-            <p>The frontend uses JavaScript <code>fetch()</code> to send HTTP(S) requests. DNS resolves the backend domain, and the backend builds request and response data for CRUD operations.</p>
-          </div>
-          <div class="stack-row">
-            <strong>Presentation + Session</strong>
-            <span>SSL/TLS, Certbot, and ongoing communication</span>
-            <p>Presentation handles encryption and translation. Session manages dialogues between apps, such as persistent connections and application conversations.</p>
-          </div>
-          <div class="stack-row">
-            <strong>TCP/UDP (Transport Layer)</strong>
-            <span>Request and response move as reliable segments</span>
-            <p>TCP breaks data into segments, often around 1460 bytes of payload. NGINX receives traffic and routes it to the correct backend service.</p>
-          </div>
-          <div class="stack-row">
-            <strong>IP (Network Layer)</strong>
-            <span>Request and response become routed packets</span>
-            <p>The TCP segment is wrapped in an IP packet with source and destination IP addresses. Routers move those packets across the internet to AWS.</p>
-          </div>
-          <div class="stack-row">
-            <strong>Data Link + Physical</strong>
-            <span>Ethernet/Wi-Fi frames and electrical or optical signals</span>
-            <p>The packet becomes a frame with MAC addresses and CRC, then moves as bits through cables, fiber, or wireless signals.</p>
-          </div>
-          <div class="stack-row">
-            <strong>NGINX as Orchestrator</strong>
-            <span>Traffic manager between internet and backend</span>
-            <p>NGINX acts as the orchestrator, connecting traffic from the internet to Flask or Spring containers and sending responses back out.</p>
-          </div>
+          <div class="stack-row"><strong>Application</strong><p>fetch() sends HTTP(S) requests. DNS resolves domains. Backend handles CRUD.</p></div>
+          <div class="stack-row"><strong>Transport</strong><p>TCP segments data at ~1460B payload. NGINX routes to backend services.</p></div>
+          <div class="stack-row"><strong>Network</strong><p>IP packets with src/dst addresses route through the internet to AWS.</p></div>
+          <div class="stack-row"><strong>Link + Physical</strong><p>Ethernet frames with MAC/CRC become electrical/optical/radio signals.</p></div>
         </div>
       </div>
       <div class="guide-card">
-        <h4>College Board Requirement Match</h4>
+        <h4>Game Elements</h4>
         <div class="stack-guide">
-          <div class="stack-row">
-            <strong>Fun and Gamified</strong>
-            <p>Player movement, packet pickup, fragmentation, rescue, and delivery turn Unit 4 into a game instead of a static note page.</p>
-          </div>
-          <div class="stack-row">
-            <strong>Real to Our Project</strong>
-            <p>The mission uses GitHub Pages, HTTPS, NGINX, Docker, Flask / Spring, AWS EC2, and SQL exactly like the blog and deployment stack.</p>
-          </div>
-          <div class="stack-row">
-            <strong>Academic</strong>
-            <p>The board shows the OSI 7-layer explanation and the TCP/IP 5-layer standard while the MTU lab teaches segmentation and framing.</p>
-          </div>
-          <div class="stack-row">
-            <strong>Required Game Parts</strong>
-            <p>Background: layer board. Player: frontend engineer. NPC: Router Ron. AI NPC: Hacker H4X. The Java leaderboard is excluded from the challenge.</p>
-          </div>
+          <div class="stack-row"><strong>Player</strong><p>Frontend engineer carrying packets through the OSI stack.</p></div>
+          <div class="stack-row"><strong>NPC</strong><p>Router Ron teaches OSI vs TCP/IP, MTU, and deployment flow.</p></div>
+          <div class="stack-row"><strong>AI NPC</strong><p>Hacker H4X steals packets &mdash; chase and recover them.</p></div>
         </div>
+      </div>
+    </div>
+    <button class="gb-btn" style="margin-top:12px" onclick="var g=document.getElementById('layerGuide');g.style.display=g.style.display==='none'?'grid':'none';this.textContent=g.style.display==='none'?'Show Network Guide':'Hide Network Guide'">Show Network Guide</button>
+  </div>
+
+  <!-- TAB 2: Robbery Response Simulation -->
+  <div class="gtab-panel" id="gtab-robbery" style="display:none">
+    <div style="max-width:820px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+        <div style="font-size:2.2rem">&#128680;</div>
+        <div>
+          <h2 style="font-size:1.2rem;color:#fbbf24;margin:0">Robbery Response Simulator</h2>
+          <p style="font-size:0.82rem;color:#94a3b8;margin:4px 0 0">Make split-second decisions as you respond to an in-progress robbery call. Choose wisely &mdash; your score depends on safety, protocol, and timing.</p>
+        </div>
+      </div>
+      <!-- Stats bar -->
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+        <div style="padding:8px 14px;background:#162a46;border:1px solid #1e3352;border-radius:10px;font-size:0.78rem"><span style="color:#64748b">Score:</span> <strong id="robScore" style="color:#fbbf24">0</strong></div>
+        <div style="padding:8px 14px;background:#162a46;border:1px solid #1e3352;border-radius:10px;font-size:0.78rem"><span style="color:#64748b">Scene:</span> <strong id="robScene" style="color:#60a5fa">1/5</strong></div>
+        <div style="padding:8px 14px;background:#162a46;border:1px solid #1e3352;border-radius:10px;font-size:0.78rem"><span style="color:#64748b">Rating:</span> <strong id="robRating" style="color:#34d399">--</strong></div>
+        <div style="padding:8px 14px;background:#162a46;border:1px solid #1e3352;border-radius:10px;font-size:0.78rem"><span style="color:#64748b">Timer:</span> <strong id="robTimer" style="color:#ef4444">15s</strong></div>
+      </div>
+      <!-- Scene display -->
+      <div id="robContainer" style="background:linear-gradient(135deg,rgba(22,42,70,0.8),rgba(11,26,46,0.9));border:1px solid #1e3352;border-radius:16px;padding:28px;min-height:320px">
+        <div style="text-align:center;padding:40px 20px">
+          <div style="font-size:3rem;margin-bottom:12px">&#128694;</div>
+          <h3 style="color:#fbbf24;font-size:1.1rem">Ready to Respond?</h3>
+          <p style="color:#94a3b8;font-size:0.85rem;max-width:500px;margin:10px auto 20px">You'll face 5 real-world robbery scenarios. Each scene gives you 15 seconds to pick the best tactical response. Points are awarded for safety, proper protocol, and de-escalation when appropriate.</p>
+          <button class="btn-gold" onclick="startRobbery()">Begin Simulation &#8594;</button>
+        </div>
+      </div>
+      <!-- Debrief -->
+      <div id="robDebrief" style="margin-top:12px;padding:12px 16px;background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.15);border-radius:10px;font-size:0.82rem;color:#94a3b8;display:none">
+        <strong style="color:#60a5fa">Debrief:</strong> <span id="robDebriefText"></span>
       </div>
     </div>
   </div>
 
-  <!-- TAB 2: Quiz -->
-  <div class="gtab-panel" id="gtab-quiz" style="display:none">
-    <div class="model-compare" style="max-width:760px;margin:0 auto 18px">
-      <div class="model-col">
-        <div class="model-title">OSI Model &mdash; 7 Layers <span style="font-weight:400;font-size:0.75rem;color:#94a3b8">(Guideline)</span></div>
-        <div class="ml" style="border-color:#f59e0b;background:rgba(245,158,11,0.10)">L7 &mdash; Application<br><span>HTTP, DNS, fetch() from GitHub Pages</span></div>
-        <div class="ml" style="border-color:#d97706;background:rgba(217,119,6,0.08)">L6 &mdash; Presentation<br><span>TLS/SSL encrypts data &rarr; HTTPS</span></div>
-        <div class="ml" style="border-color:#b45309;background:rgba(180,83,9,0.08)">L5 &mdash; Session<br><span>Manages socket &amp; keep-alive state</span></div>
-        <div class="ml" style="border-color:#3b82f6;background:rgba(59,130,246,0.08)">L4 &mdash; Transport<br><span>TCP ports, seq#, MSS = 1460 B</span></div>
-        <div class="ml" style="border-color:#10b981;background:rgba(16,185,129,0.08)">L3 &mdash; Network<br><span>IP addresses, routing to EC2</span></div>
-        <div class="ml" style="border-color:#8b5cf6;background:rgba(139,92,246,0.08)">L2 &mdash; Data Link<br><span>Ethernet frames, MAC, FCS/CRC</span></div>
-        <div class="ml" style="border-color:#475569;background:rgba(71,85,105,0.08)">L1 &mdash; Physical<br><span>Electrical/optical/radio signals</span></div>
+  <!-- TAB 3: Target Range -->
+  <div class="gtab-panel" id="gtab-range" style="display:none">
+    <div style="max-width:820px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+        <div style="font-size:2.2rem">&#127919;</div>
+        <div>
+          <h2 style="font-size:1.2rem;color:#fbbf24;margin:0">Deputy Target Range</h2>
+          <p style="font-size:0.82rem;color:#94a3b8;margin:4px 0 0">Test your aim and reaction time. Click targets as they appear &mdash; but watch out for civilians! Hitting innocents costs points.</p>
+        </div>
       </div>
-      <div class="model-vs">vs</div>
-      <div class="model-col">
-        <div class="model-title">TCP/IP Model &mdash; 5 Layers <span style="font-weight:400;font-size:0.75rem;color:#94a3b8">(Standard)</span></div>
-        <div class="ml span3" style="border-color:#f59e0b;background:rgba(245,158,11,0.10)">Application (L7 + L6 + L5 merged)<br><span>HTTP, TLS, Sessions all live here</span></div>
-        <div class="ml" style="border-color:#3b82f6;background:rgba(59,130,246,0.08)">Transport<br><span>TCP/UDP, ports, MSS = 1460 B</span></div>
-        <div class="ml" style="border-color:#10b981;background:rgba(16,185,129,0.08)">Internet<br><span>IP packets, routing, TTL</span></div>
-        <div class="ml span2" style="border-color:#8b5cf6;background:rgba(139,92,246,0.08)">Link (L2 + L1 merged)<br><span>Ethernet, MAC, Wi-Fi &amp; physical signals</span></div>
+      <!-- Stats bar -->
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+        <div style="padding:8px 14px;background:#162a46;border:1px solid #1e3352;border-radius:10px;font-size:0.78rem"><span style="color:#64748b">Score:</span> <strong id="rangeScore" style="color:#fbbf24">0</strong></div>
+        <div style="padding:8px 14px;background:#162a46;border:1px solid #1e3352;border-radius:10px;font-size:0.78rem"><span style="color:#64748b">Accuracy:</span> <strong id="rangeAccuracy" style="color:#34d399">--</strong></div>
+        <div style="padding:8px 14px;background:#162a46;border:1px solid #1e3352;border-radius:10px;font-size:0.78rem"><span style="color:#64748b">Round:</span> <strong id="rangeRound" style="color:#60a5fa">0/20</strong></div>
+        <div style="padding:8px 14px;background:#162a46;border:1px solid #1e3352;border-radius:10px;font-size:0.78rem"><span style="color:#64748b">Time:</span> <strong id="rangeTime" style="color:#ef4444">60s</strong></div>
       </div>
-    </div>
-    <div style="max-width:760px;margin:0 auto 14px;padding:10px 14px;background:rgba(251,191,36,0.07);border-left:3px solid #fbbf24;border-radius:6px;font-size:0.8rem;color:#cbd5e1">
-      <strong style="color:#fbbf24">Key Distinction:</strong> OSI is a 7-layer <em>reference guideline</em> used for teaching and troubleshooting. TCP/IP is the 5-layer <em>practical standard</em> the internet actually runs on. They differ at the top (OSI splits App/Presentation/Session; TCP/IP merges them) and at the bottom (OSI splits Data Link/Physical; TCP/IP merges them as &ldquo;Link&rdquo;).
-    </div>
-    <div id="quizContainer" style="max-width:760px;margin:0 auto"></div>
-  </div>
-
-  <!-- TAB 3: MTU Explorer -->
-  <div class="gtab-panel" id="gtab-mtu" style="display:none">
-    <div class="mtu-explorer">
-      <p style="font-size:0.88rem;color:#94a3b8;max-width:700px">Adjust the payload size to see how a real project request is encapsulated. This lab mirrors a GitHub Pages frontend calling an AWS backend through HTTPS, TCP, IP, Ethernet, NGINX, and your application server.</p>
-      <div class="mtu-row">
-        <label>Application Payload (bytes)</label>
-        <input type="range" id="mtuPayload" min="100" max="3000" value="800" oninput="updateMTU()">
-        <span id="mtuPayloadVal">800 B</span>
+      <!-- Range canvas area -->
+      <div id="rangeArea" style="position:relative;background:linear-gradient(180deg,#1a2744 0%,#0f1c30 40%,#162a46 100%);border:3px solid #3b82f6;border-radius:16px;height:400px;overflow:hidden;cursor:crosshair;user-select:none" onclick="rangeClick(event)">
+        <div id="rangeOverlay" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(8,15,29,0.85);z-index:10;text-align:center;padding:24px">
+          <div style="font-size:3rem;margin-bottom:12px">&#127919;</div>
+          <h3 style="color:#fbbf24;font-size:1.1rem">Deputy Target Range</h3>
+          <p style="color:#94a3b8;font-size:0.85rem;max-width:460px;margin:10px auto 20px">20 targets will appear for 60 seconds. Red targets (&#128308;) are threats &mdash; click them for points. Blue targets (&#128309;) are civilians &mdash; avoid clicking them or lose points. Speed bonus for fast reactions!</p>
+          <button class="btn-gold" onclick="event.stopPropagation();startRange()">Start Training &#8594;</button>
+        </div>
+        <!-- Targets will be spawned here dynamically -->
+        <div id="rangeTargets" style="position:absolute;inset:0"></div>
+        <!-- Lane lines for depth illusion -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(0deg,rgba(22,42,70,0.9),transparent);pointer-events:none"></div>
+        <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);font-size:0.7rem;color:#334155;pointer-events:none">SDSO TRAINING FACILITY &mdash; RANGE 1</div>
       </div>
-      <div class="mtu-frame-box">
-        <div class="mtu-viz" id="mtuFrameViz"></div>
-        <div style="margin-top:10px;font-size:0.78rem;color:#64748b" id="mtuFrameLabel"></div>
-      </div>
-      <div class="mtu-warn" id="mtuWarn">&#9888; Payload exceeds 1460 B TCP MSS (MTU 1500 &minus; 40 B headers). Fragmentation required &mdash; Fragments needed: <strong id="mtuFragCount">-</strong></div>
-      <div class="mtu-info-grid" id="mtuCalcGrid">
-        <div class="mtu-ic"><h5>Pop Quiz Check</h5><p id="mtuQuizCheck">With a payload of 800B, the TCP segment stays below the Ethernet MTU, so one frame can carry it cleanly.</p></div>
-        <div class="mtu-ic"><h5>Fragment Plan</h5><p id="mtuFragmentPlan">1 fragment: 800B payload + 40B TCP/IP overhead inside a 858B Ethernet frame.</p></div>
-        <div class="mtu-ic"><h5>Encapsulation Flow</h5><p id="mtuEncapFlow">Application data becomes a TCP segment, then an IP packet, then an Ethernet frame, then bits on the wire.</p></div>
-      </div>
-      <div class="mtu-info-grid">
-        <div class="mtu-ic"><h5>Ethernet Frame (L2)</h5><p>14B Dest/Src MAC + EtherType<br>+ IP Packet (payload)<br>+ 4B FCS / CRC tail<br><strong>Max: 1518 B total</strong></p></div>
-        <div class="mtu-ic"><h5>IP Packet (L3)</h5><p>20B IP Header<br>(TTL, src/dst IP, protocol)<br>+ TCP Segment<br><strong>Max: 1500 B (MTU)</strong></p></div>
-        <div class="mtu-ic"><h5>TCP Segment (L4)</h5><p>20B TCP Header<br>(ports, seq, ack, flags)<br>+ Application Data<br><strong>Max payload: 1460 B (MSS)</strong></p></div>
-        <div class="mtu-ic"><h5>Our Deployment Stack</h5><p>GitHub Pages JS <code>fetch()</code><br>&#8594; HTTPS via Certbot/TLS<br>&#8594; TCP &#8594; IP &#8594; Ethernet<br>&#8594; NGINX &#8594; Flask / Spring on EC2</p></div>
-        <div class="mtu-ic"><h5>OSI Model (7 layers)</h5><p>7: Application (HTTP/DNS)<br>6: Presentation (TLS/SSL)<br>5: Session (WebSocket)<br>4: Transport (TCP/UDP)<br>3: Network (IP routing)<br>2: Data Link (Ethernet)<br>1: Physical (signals)</p></div>
-        <div class="mtu-ic"><h5>TCP/IP Model (5 layers)</h5><p>5: Application (L5+L6+L7)<br>4: Transport (TCP/UDP)<br>3: Internet (IP)<br>2: Link (Ethernet/Wi-Fi)<br>1: Physical (bits/signals)<br><br><em>OSI is a guideline (7);<br>TCP/IP is the standard (5).</em></p></div>
-      </div>
-
-      <!-- Step-by-step Request Journey -->
-      <h4 style="color:#fbbf24;margin:22px 0 10px;font-size:0.95rem;letter-spacing:0.04em;text-transform:uppercase">Request Journey: GitHub Pages &rarr; AWS EC2</h4>
-      <p style="font-size:0.8rem;color:#94a3b8;margin-bottom:12px">Trace a single <code>fetch()</code> call through every layer. Each step wraps the previous in a new header — this is <strong>encapsulation</strong>.</p>
-      <div class="journey">
-        <div class="journey-step" style="border-color:#f59e0b">
-          <div style="font-size:0.7rem;color:#f59e0b;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L7 / TCP/IP Application</div>
-          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">HTTP Request Generated</div>
-          <div style="font-size:0.78rem;color:#94a3b8"><code>fetch("https://api.ec2.example/data")</code> creates an HTTP GET with headers. DNS resolves the hostname to the EC2 IP address first.</div>
-        </div>
-        <div class="js-arrow">&#8595;</div>
-        <div class="journey-step" style="border-color:#d97706">
-          <div style="font-size:0.7rem;color:#d97706;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L6 / TCP/IP Application (TLS)</div>
-          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">TLS Encryption (HTTPS)</div>
-          <div style="font-size:0.78rem;color:#94a3b8">Certbot/Let&rsquo;s Encrypt cert activates. The HTTP plaintext is encrypted into a TLS record. Nobody in transit can read the payload.</div>
-        </div>
-        <div class="js-arrow">&#8595;</div>
-        <div class="journey-step" style="border-color:#3b82f6">
-          <div style="font-size:0.7rem;color:#3b82f6;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L4 / TCP/IP Transport</div>
-          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">TCP Segment (MSS = 1460 B)</div>
-          <div style="font-size:0.78rem;color:#94a3b8">TLS record is handed to TCP. A 20 B TCP header is added (src port, dst port :443, seq#, ack#, flags). If encrypted payload &gt; 1460 B, TCP splits it across multiple segments.</div>
-        </div>
-        <div class="js-arrow">&#8595;</div>
-        <div class="journey-step" style="border-color:#10b981">
-          <div style="font-size:0.7rem;color:#10b981;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L3 / TCP/IP Internet</div>
-          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">IP Packet (MTU = 1500 B)</div>
-          <div style="font-size:0.78rem;color:#94a3b8">20 B IP header wraps the TCP segment (src IP = client, dst IP = EC2 public IP, TTL, protocol=6/TCP). Total IP payload cannot exceed 1500 B (MTU).</div>
-        </div>
-        <div class="js-arrow">&#8595;</div>
-        <div class="journey-step" style="border-color:#8b5cf6">
-          <div style="font-size:0.7rem;color:#8b5cf6;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L2 / TCP/IP Link</div>
-          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">Ethernet Frame (max 1518 B)</div>
-          <div style="font-size:0.78rem;color:#94a3b8">14 B Ethernet header (src MAC, dst MAC, EtherType 0x0800) + IP packet + 4 B FCS/CRC trailer. ARP resolved the next-hop MAC. Frame max = 1518 B.</div>
-        </div>
-        <div class="js-arrow">&#8595;</div>
-        <div class="journey-step" style="border-color:#475569">
-          <div style="font-size:0.7rem;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">OSI L1 / TCP/IP Physical</div>
-          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">Bits on the Wire</div>
-          <div style="font-size:0.78rem;color:#94a3b8">Frame is converted to electrical (copper), optical (fiber), or radio (Wi-Fi) signals and transmitted across the physical medium to the next hop.</div>
-        </div>
-        <div class="js-arrow">&#8595;</div>
-        <div class="journey-step" style="border-color:#fbbf24;background:rgba(251,191,36,0.06)">
-          <div style="font-size:0.7rem;color:#fbbf24;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">AWS EC2 &mdash; NGINX Reverse Proxy</div>
-          <div style="font-weight:600;color:#e2e8f0;margin:2px 0">Decapsulation + Routing</div>
-          <div style="font-size:0.78rem;color:#94a3b8">EC2 reassembles frames &rarr; IP packet &rarr; TCP stream &rarr; decrypts TLS &rarr; HTTP request. NGINX inspects the Host header and proxies the request to the correct Docker container (Flask or Spring).</div>
-        </div>
+      <!-- Post-round feedback -->
+      <div id="rangeFeedback" style="margin-top:12px;padding:12px 16px;background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.15);border-radius:10px;font-size:0.82rem;color:#94a3b8;display:none">
+        <strong style="color:#34d399">Range Report:</strong> <span id="rangeFeedbackText"></span>
       </div>
     </div>
   </div>
@@ -532,8 +452,6 @@ function el(id) { return document.getElementById(id); }
     document.querySelectorAll('.gtab-panel').forEach(p => p.style.display = 'none');
     const panel = el('gtab-' + tab);
     if (panel) panel.style.display = 'block';
-    if (tab === 'quiz') initQuiz();
-    if (tab === 'mtu') updateMTU();
     if (tab !== 'patrol') { gameRunning = false; gamePaused = false; if (animId) cancelAnimationFrame(animId); }
   };
 
@@ -1396,256 +1314,305 @@ function el(id) { return document.getElementById(id); }
   };
 
   /* ================================================================
-     POP QUIZ REVIEW
+     ROBBERY RESPONSE SIMULATOR
      ================================================================ */
-  const QUIZ_POOL = [
+  const ROB_SCENARIOS = [
     {
-      cat: 'Models',
-      q: 'Which statement best compares the OSI model and the TCP/IP model used in class?',
-      opts: ['OSI is the internet standard and TCP/IP is only theoretical', 'OSI is a 7-layer guideline, while TCP/IP is the practical 5-layer standard', 'Both are always shown as 7 layers', 'TCP/IP replaces physical media entirely'],
-      ans: 1,
-      exp: 'OSI is a reference model that helps explain responsibilities in detail. TCP/IP is the practical stack used on real networks, often shown in 4 or 5 layers.'
+      title: 'Dispatch Call',
+      scene: 'You receive a 211 (robbery in progress) at a convenience store on Main St. Two suspects reported inside. What is your first action?',
+      emoji: '&#128222;',
+      options: [
+        { text: 'Rush in immediately with weapon drawn', pts: -10, feedback: 'Rushing in without info puts everyone at risk. Always assess first.' },
+        { text: 'Acknowledge dispatch and request backup while en route', pts: 30, feedback: 'Correct. Acknowledge, request backup, and gather intel while responding.' },
+        { text: 'Drive past the store to look inside', pts: 5, feedback: 'Observing is good but you need to acknowledge dispatch and request backup first.' },
+        { text: 'Wait at the station for more details', pts: -5, feedback: 'Time is critical in a robbery call. Respond immediately while gathering info.' }
+      ]
     },
     {
-      cat: 'Deployment',
-      q: 'In a GitHub Pages frontend calling a Flask or Spring backend, what is a good Layer 7 example?',
-      opts: ['Ethernet MAC addressing', 'A JavaScript fetch() request using HTTPS', 'Electrical signaling over a cable', 'CRC frame checking'],
-      ans: 1,
-      exp: 'Application-layer behavior includes HTTP requests, DNS lookups, and app-to-app communication. A browser fetch() request is a direct Unit 4 example.'
+      title: 'Arrival on Scene',
+      scene: 'You arrive first on scene. The store front is glass and you can see one suspect at the register with a handgun. A second suspect is near the door. Backup is 2 minutes out.',
+      emoji: '&#128663;',
+      options: [
+        { text: 'Enter through the front door alone', pts: -15, feedback: 'Never enter alone against armed suspects. Wait for backup and contain the scene.' },
+        { text: 'Set up a perimeter and relay suspect descriptions to dispatch', pts: 30, feedback: 'Excellent. Contain, observe, and communicate. This is textbook response.' },
+        { text: 'Use your PA system to order suspects out', pts: 5, feedback: 'This could work but risks escalation. Better to contain quietly until backup arrives.' },
+        { text: 'Block the front entrance with your patrol car', pts: 10, feedback: 'Using your vehicle as cover is smart, but be careful not to trap suspects with hostages.' }
+      ]
     },
     {
-      cat: 'Security',
-      q: 'Which part of the deployment most closely matches the OSI Presentation layer idea in this lesson?',
-      opts: ['Certbot-managed TLS encryption', 'SQL query planning', 'Route 53 billing', 'Docker image naming'],
-      ans: 0,
-      exp: 'The Presentation-layer idea is data translation and encryption. In this stack, TLS certificates and HTTPS best represent that role.'
+      title: 'Suspect Fleeing',
+      scene: 'One suspect runs out the back door while the other stays inside with 3 hostages. Backup just arrived. What do you prioritize?',
+      emoji: '&#127939;',
+      options: [
+        { text: 'Chase the fleeing suspect on foot alone', pts: -5, feedback: 'The hostage situation is the higher priority. Direct backup to track the fleeing suspect.' },
+        { text: 'Direct backup to pursue the runner while you maintain position on the hostage situation', pts: 30, feedback: 'Perfect. Hostage safety is priority one. Coordinate backup for the pursuit.' },
+        { text: 'Leave your position to get a better view', pts: -10, feedback: 'Abandoning your position could compromise the containment perimeter.' },
+        { text: 'Fire a warning shot to stop the runner', pts: -20, feedback: 'Warning shots are not authorized and create extreme danger for bystanders.' }
+      ]
     },
     {
-      cat: 'Transport',
-      q: 'Why is the TCP Maximum Segment Size commonly 1460 bytes on a standard Ethernet network?',
-      opts: ['1500B MTU minus 20B IP and 20B TCP headers', '1518B Ethernet frame minus 58B DNS headers', '1024B default browser packet size plus 436B retry room', 'Because TCP always reserves 60B for SQL'],
-      ans: 0,
-      exp: 'Standard Ethernet MTU is 1500B for the IP packet. With 20B IP and 20B TCP overhead, the TCP payload typically tops out at 1460B.'
+      title: 'Negotiation',
+      scene: 'The remaining suspect is now barricaded with hostages and demands a getaway car. He is becoming increasingly agitated. What approach do you take?',
+      emoji: '&#128483;',
+      options: [
+        { text: 'Agree to all demands immediately', pts: 0, feedback: 'Avoid giving everything up front. Slow negotiations buy time for tactical teams.' },
+        { text: 'Keep suspect talking calmly, buy time for negotiators and SWAT to arrive', pts: 30, feedback: 'Excellent. Time is on your side. Keep communication open and stall tactically.' },
+        { text: 'Cut the store power to disorient the suspect', pts: -5, feedback: 'This could panic the suspect and endanger hostages. Leave tactical decisions to SWAT.' },
+        { text: 'Refuse all communication', pts: -15, feedback: 'Cutting off communication removes your ability to monitor the situation and protect hostages.' }
+      ]
     },
     {
-      cat: 'Encapsulation',
-      q: 'What is the correct order when application data travels down the stack?',
-      opts: ['Data -> TCP segment -> IP packet -> Ethernet frame', 'Data -> IP packet -> TCP segment -> Ethernet frame', 'Ethernet frame -> TCP segment -> IP packet -> data', 'Data -> Ethernet frame -> IP packet -> TCP segment'],
-      ans: 0,
-      exp: 'Encapsulation adds transport first, then network, then link framing before the Physical layer turns the bits into signals.'
-    },
-    {
-      cat: 'Roles',
-      q: 'What does NGINX most realistically do in this project network path?',
-      opts: ['Store SQL rows directly', 'Act as a reverse proxy between incoming traffic and backend services', 'Replace DNS entirely', 'Handle the Java leaderboard challenge'],
-      ans: 1,
-      exp: 'NGINX receives requests and forwards them to the right backend service, so it lives around the boundary between Transport and Application concerns.'
-    },
-    {
-      cat: 'Session',
-      q: 'Which choice best matches the OSI Session layer idea?',
-      opts: ['Tracking an ongoing WebSocket or persistent app conversation', 'Adding source MAC addresses', 'Sending radio signals through Wi-Fi', 'Choosing the SQL table name'],
-      ans: 0,
-      exp: 'Session is about managing ongoing communication between applications. In TCP/IP, that idea is usually folded into the Application layer.'
-    },
-    {
-      cat: 'Network',
-      q: 'At Layer 3, what information is most important for routing traffic from your browser toward AWS EC2?',
-      opts: ['Source and destination IP addresses', 'Source and destination MAC addresses only', 'TLS certificate issuer', 'HTML element IDs'],
-      ans: 0,
-      exp: 'IP addresses are what routers use to move packets across networks. MAC addresses matter locally on the current link.'
-    },
-    {
-      cat: 'MTU',
-      q: 'A payload is 2200 bytes. With TCP/IP overhead of 40 bytes and Ethernet MTU 1500, how many fragments are needed?',
-      opts: ['1', '2', '3', '4'],
-      ans: 1,
-      exp: 'The MSS is 1460 bytes, so 2200 bytes of payload needs two pieces: 1460 bytes and 740 bytes.'
-    },
-    {
-      cat: 'Link',
-      q: 'Which choice belongs most directly to the Data Link layer?',
-      opts: ['Ethernet framing and FCS/CRC checking', 'REST API route naming', 'TLS certificate renewal', 'Browser DOM rendering'],
-      ans: 0,
-      exp: 'The Data Link layer handles local framing, MAC addressing, and frame validation such as CRC checks.'
-    },
-    {
-      cat: 'Project',
-      q: 'Why does this lesson connect networking to your own deployment instead of only memorizing definitions?',
-      opts: ['Because Unit 4 wants students to apply networking concepts to real computing systems', 'Because TCP/IP has no definitions', 'Because OSI replaced all projects', 'Because Java leaderboards are required for packet delivery'],
-      ans: 0,
-      exp: 'The strongest Unit 4 understanding comes from applying the model to a real system you built and deployed, not just naming layers.'
-    },
-    {
-      cat: 'Physical',
-      q: 'What is happening at the Physical layer when your request finally leaves the machine?',
-      opts: ['Bits are transmitted as electrical, optical, or radio signals', 'SQL rows are joined', 'HTTP headers are parsed into JSON', 'NGINX chooses a color theme'],
-      ans: 0,
-      exp: 'The Physical layer is where the raw bitstream becomes a signal traveling across actual hardware media.'
+      title: 'Resolution',
+      scene: 'SWAT is in position. The suspect agrees to release one hostage in exchange for water. As the hostage exits, the suspect becomes visible through the doorway. What is the call?',
+      emoji: '&#128737;',
+      options: [
+        { text: 'Take the shot yourself', pts: -10, feedback: 'This is SWAT\'s operation now. Unauthorized action could jeopardize the entire rescue.' },
+        { text: 'Let SWAT handle it while you secure the released hostage', pts: 30, feedback: 'Perfect. Secure the hostage, maintain your perimeter role, and let SWAT execute their plan.' },
+        { text: 'Rush the door while the suspect is distracted', pts: -20, feedback: 'Extremely dangerous. Uncoordinated entry risks crossfire with SWAT and hostage harm.' },
+        { text: 'Yell at the suspect to surrender', pts: 5, feedback: 'Verbal commands can help but could also startle the suspect. Defer to SWAT command.' }
+      ]
     }
   ];
 
-  let quizDeck = [];
-  let qIdx = 0;
-  let qScore = 0;
-  let qAnswered = false;
+  let robIdx = 0, robScore = 0, robTimer = null, robTimeLeft = 15;
 
-  function shuffle(arr) {
-    const copy = arr.slice();
-    for (let i = copy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
+  function updateRobStats() {
+    if (el('robScore')) el('robScore').textContent = robScore;
+    if (el('robScene')) el('robScene').textContent = (robIdx + 1) + '/5';
+    if (el('robTimer')) el('robTimer').textContent = robTimeLeft + 's';
+    const rating = robScore >= 100 ? 'Elite' : robScore >= 60 ? 'Proficient' : robScore >= 30 ? 'Developing' : 'Needs Work';
+    const rCol = robScore >= 100 ? '#fbbf24' : robScore >= 60 ? '#34d399' : robScore >= 30 ? '#60a5fa' : '#ef4444';
+    if (el('robRating')) { el('robRating').textContent = rating; el('robRating').style.color = rCol; }
   }
 
-  window.initQuiz = function () {
-    if (el('quizContainer') && el('quizContainer').innerHTML) return;
-    quizDeck = shuffle(QUIZ_POOL).slice(0, 10);
-    qIdx = 0;
-    qScore = 0;
-    renderQ();
-  };
-
-  function renderQ() {
-    const c = el('quizContainer');
+  function renderRobScene() {
+    const s = ROB_SCENARIOS[robIdx];
+    const c = el('robContainer');
     if (!c) return;
-    if (qIdx >= quizDeck.length) {
-      const pct = Math.round((qScore / quizDeck.length) * 100);
-      const msg = pct >= 80
-        ? '<p style="color:#34d399;margin-top:8px">&#9733; Pop-quiz ready. You can explain Unit 4 with project evidence, not just vocabulary.</p>'
-        : pct >= 50
-          ? '<p style="color:#fbbf24;margin-top:8px">&#128218; Mid-range score. Replay the mission and MTU lab to tighten the weak spots.</p>'
-          : '<p style="color:#94a3b8;margin-top:8px">Another pass will help. Focus on model comparison, encapsulation order, and MTU math.</p>';
-      c.innerHTML = '<div class="quiz-score"><div class="qs-num">' + qScore + '/' + quizDeck.length + '</div><p style="color:#94a3b8;margin-top:8px">' + pct + '% mastery on the pop quiz review</p>' + msg + '<button class="btn-gold" style="margin-top:18px" onclick="resetQuiz()">Retry Quiz</button></div>';
-      return;
-    }
+    robTimeLeft = 15;
+    updateRobStats();
+    clearInterval(robTimer);
+    robTimer = setInterval(() => {
+      robTimeLeft--;
+      if (el('robTimer')) el('robTimer').textContent = robTimeLeft + 's';
+      if (robTimeLeft <= 0) { clearInterval(robTimer); robAnswer(-1); }
+    }, 1000);
 
-    qAnswered = false;
-    const q = quizDeck[qIdx];
     c.innerHTML =
-      '<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:0.78rem;color:#475569;margin-bottom:8px"><span>Question ' + (qIdx + 1) + ' / ' + quizDeck.length + '</span><span>Category: ' + q.cat + '</span><span>Score: ' + qScore + '</span></div>' +
-      '<div class="quiz-q"><h4>' + q.q + '</h4><div class="quiz-opts">' +
-      q.opts.map((o, i) => '<button class="qopt" onclick="answerQuiz(' + i + ')">' + o + '</button>').join('') +
-      '</div><div class="quiz-exp" id="quizExp"><strong>Explanation:</strong> ' + q.exp + '</div></div>';
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="font-size:1.6rem">' + s.emoji + '</span><h3 style="color:#fbbf24;font-size:1rem;margin:0">Scene ' + (robIdx+1) + ': ' + s.title + '</h3></div>' +
+      '<p style="color:#cbd5e1;font-size:0.88rem;line-height:1.6;margin-bottom:18px">' + s.scene + '</p>' +
+      '<div style="display:grid;gap:8px">' +
+      s.options.map((o, i) =>
+        '<button onclick="robAnswer(' + i + ')" style="text-align:left;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid #1e3352;border-radius:10px;color:#cbd5e1;font-size:0.84rem;cursor:pointer;transition:all 0.15s" onmouseover="this.style.borderColor=\'#3b82f6\';this.style.color=\'#e2e8f0\'" onmouseout="this.style.borderColor=\'#1e3352\';this.style.color=\'#cbd5e1\'">' +
+        '<strong style="color:#60a5fa">' + String.fromCharCode(65+i) + '.</strong> ' + o.text + '</button>'
+      ).join('') +
+      '</div>';
   }
 
-  window.answerQuiz = function (i) {
-    if (qAnswered) return;
-    qAnswered = true;
-    const q = quizDeck[qIdx];
-    document.querySelectorAll('.qopt').forEach((b, j) => {
-      if (j === q.ans) b.classList.add('correct');
-      else if (j === i) b.classList.add('wrong');
-      b.disabled = true;
+  window.robAnswer = function(idx) {
+    clearInterval(robTimer);
+    const s = ROB_SCENARIOS[robIdx];
+    let pts, feedback;
+    if (idx < 0) {
+      pts = -10; feedback = 'Time ran out! In a real scenario, hesitation can cost lives. You must act decisively.';
+    } else {
+      pts = s.options[idx].pts; feedback = s.options[idx].feedback;
+    }
+    robScore += pts;
+    updateRobStats();
+
+    const db = el('robDebrief');
+    const dbt = el('robDebriefText');
+    if (db && dbt) {
+      dbt.innerHTML = '<span style="color:' + (pts > 0 ? '#34d399' : '#ef4444') + '">' + (pts > 0 ? '+' : '') + pts + ' pts.</span> ' + feedback;
+      db.style.display = 'block';
+    }
+
+    // Highlight chosen option
+    const btns = el('robContainer').querySelectorAll('button');
+    btns.forEach((b, i) => {
+      b.style.pointerEvents = 'none';
+      const opt = s.options[i];
+      if (opt && opt.pts >= 25) b.style.borderColor = '#34d399';
+      if (i === idx && pts < 0) b.style.borderColor = '#ef4444';
     });
-    const exp = el('quizExp');
-    if (exp) exp.classList.add('show');
-    if (i === q.ans) qScore++;
+
     setTimeout(() => {
-      qIdx++;
-      renderQ();
-    }, 1900);
+      robIdx++;
+      if (robIdx >= ROB_SCENARIOS.length) {
+        endRobbery();
+      } else {
+        el('robDebrief').style.display = 'none';
+        renderRobScene();
+      }
+    }, 2200);
   };
 
-  window.resetQuiz = function () {
-    qIdx = 0;
-    qScore = 0;
-    quizDeck = shuffle(QUIZ_POOL).slice(0, 10);
-    const c = el('quizContainer');
-    if (c) c.innerHTML = '';
-    renderQ();
+  function endRobbery() {
+    const c = el('robContainer');
+    const grade = robScore >= 120 ? 'Elite Deputy' : robScore >= 80 ? 'Senior Deputy' : robScore >= 40 ? 'Deputy' : 'Trainee';
+    const gradeCol = robScore >= 120 ? '#fbbf24' : robScore >= 80 ? '#34d399' : robScore >= 40 ? '#60a5fa' : '#ef4444';
+    c.innerHTML =
+      '<div style="text-align:center;padding:30px 20px">' +
+      '<div style="font-size:3rem;margin-bottom:10px">&#128737;</div>' +
+      '<h3 style="color:#fbbf24;font-size:1.2rem">Simulation Complete</h3>' +
+      '<div style="font-size:2.4rem;font-weight:800;color:#fbbf24;margin:12px 0">' + robScore + ' pts</div>' +
+      '<p style="color:' + gradeCol + ';font-size:1rem;font-weight:700">Rating: ' + grade + '</p>' +
+      '<p style="color:#94a3b8;font-size:0.84rem;margin:12px 0 20px;max-width:400px;display:inline-block">Your decisions were evaluated on safety protocol, tactical awareness, de-escalation, and proper chain of command.</p>' +
+      '<br><button class="btn-gold" onclick="startRobbery()">Retry Simulation</button>' +
+      '</div>';
+    el('robDebrief').style.display = 'none';
+    updateRobStats();
+  }
+
+  window.startRobbery = function() {
+    robIdx = 0; robScore = 0;
+    el('robDebrief').style.display = 'none';
+    renderRobScene();
   };
 
   /* ================================================================
-     MTU LAB
+     TARGET RANGE
      ================================================================ */
-  window.updateMTU = function () {
-    const payloadEl = el('mtuPayload');
-    if (!payloadEl) return;
+  let rangeActive = false, rangeTimer = null, rangeTimeLeft = 60;
+  let rangeHits = 0, rangeMisses = 0, rangeCivHits = 0, rangeSpawned = 0, rangeTotal = 20;
+  let rangeScoreVal = 0, rangeSpawnTimer = null;
 
-    const payload = parseInt(payloadEl.value, 10);
-    if (el('mtuPayloadVal')) el('mtuPayloadVal').textContent = payload + ' B';
+  function updateRangeStats() {
+    if (el('rangeScore')) el('rangeScore').textContent = rangeScoreVal;
+    const total = rangeHits + rangeMisses + rangeCivHits;
+    const acc = total > 0 ? Math.round((rangeHits / total) * 100) + '%' : '--';
+    if (el('rangeAccuracy')) el('rangeAccuracy').textContent = acc;
+    if (el('rangeRound')) el('rangeRound').textContent = rangeSpawned + '/' + rangeTotal;
+    if (el('rangeTime')) el('rangeTime').textContent = rangeTimeLeft + 's';
+  }
 
-    const tcpHdr = 20;
-    const ipHdr = 20;
-    const ethHdr = 14;
-    const ethFcs = 4;
-    const mss = 1460;
-    const needsFrag = payload > mss;
-    const frags = needsFrag ? Math.ceil(payload / mss) : 1;
-    const fragmentPayloads = [];
+  function spawnTarget() {
+    if (!rangeActive || rangeSpawned >= rangeTotal) return;
+    rangeSpawned++;
+    const area = el('rangeTargets');
+    if (!area) return;
+    const isThreat = Math.random() < 0.65;
+    const size = 44 + Math.floor(Math.random() * 20);
+    const maxX = area.offsetWidth - size - 10;
+    const maxY = area.offsetHeight - size - 30;
+    const x = 10 + Math.floor(Math.random() * maxX);
+    const y = 20 + Math.floor(Math.random() * maxY);
+    const lifespan = 1800 + Math.floor(Math.random() * 1200);
+    const spawnTime = Date.now();
 
-    let remaining = payload;
-    while (remaining > 0) {
-      const part = Math.min(mss, remaining);
-      fragmentPayloads.push(part);
-      remaining -= part;
-    }
-
-    const firstPayload = fragmentPayloads[0] || 0;
-    const ipPkt = firstPayload + tcpHdr + ipHdr;
-    const frame = ipPkt + ethHdr + ethFcs;
-    const segs = [
-      { label: 'Eth Hdr', bytes: ethHdr, col: '#8b5cf6', tc: 'white' },
-      { label: 'IP Hdr', bytes: ipHdr, col: '#10b981', tc: 'white' },
-      { label: 'TCP Hdr', bytes: tcpHdr, col: '#3b82f6', tc: 'white' },
-      { label: 'Payload', bytes: firstPayload, col: '#f59e0b', tc: '#1e3a5f' },
-      { label: 'FCS', bytes: ethFcs, col: '#475569', tc: 'white' },
-    ];
-
-    const viz = el('mtuFrameViz');
-    if (viz) {
-      viz.innerHTML = segs.map(sg =>
-        '<div class="mf-seg" style="background:' + sg.col + ';flex:' + sg.bytes + ';color:' + sg.tc + '"><strong>' + sg.label + '</strong><span>' + sg.bytes + 'B</span></div>'
-      ).join('');
-    }
-
-    const lbl = el('mtuFrameLabel');
-    if (lbl) {
-      lbl.innerHTML = 'Frame: <strong>' + frame + 'B</strong> &nbsp;|&nbsp; IP packet: <strong>' + ipPkt + 'B</strong> &nbsp;|&nbsp; MTU check: ' +
-        (ipPkt <= 1500
-          ? '<span style="color:#34d399">OK (' + ipPkt + ' <= 1500)</span>'
-          : '<span style="color:#ef4444">Exceeds MTU</span>') +
-        ' &nbsp;|&nbsp; ' +
-        (needsFrag
-          ? '<span style="color:#f59e0b">' + frags + ' fragments required</span>'
-          : '<span style="color:#34d399">No fragmentation needed</span>');
-    }
-
-    const warn = el('mtuWarn');
-    if (warn) {
-      if (needsFrag) {
-        warn.classList.add('show');
-        const fc = el('mtuFragCount');
-        if (fc) fc.textContent = frags;
+    const t = document.createElement('div');
+    t.className = 'range-target';
+    t.dataset.threat = isThreat ? '1' : '0';
+    t.dataset.spawn = spawnTime;
+    t.style.cssText = 'position:absolute;left:' + x + 'px;top:' + y + 'px;width:' + size + 'px;height:' + size + 'px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:' + (size * 0.5) + 'px;cursor:crosshair;transition:transform 0.1s,opacity 0.2s;animation:targetPop 0.15s ease-out;z-index:5;' +
+      (isThreat
+        ? 'background:radial-gradient(circle,#dc2626 30%,#7f1d1d 100%);border:2px solid #ef4444;box-shadow:0 0 12px rgba(239,68,68,0.4)'
+        : 'background:radial-gradient(circle,#2563eb 30%,#1e3a5f 100%);border:2px solid #3b82f6;box-shadow:0 0 12px rgba(59,130,246,0.4)');
+    t.innerHTML = isThreat ? '&#128299;' : '&#129489;';
+    t.onclick = function(e) {
+      e.stopPropagation();
+      if (!rangeActive) return;
+      const reaction = Date.now() - parseInt(this.dataset.spawn);
+      if (this.dataset.threat === '1') {
+        rangeHits++;
+        const bonus = reaction < 800 ? 15 : reaction < 1200 ? 10 : 5;
+        rangeScoreVal += 10 + bonus;
+        this.innerHTML = '&#10060;';
+        this.style.background = 'rgba(52,211,153,0.3)';
+        this.style.borderColor = '#34d399';
       } else {
-        warn.classList.remove('show');
+        rangeCivHits++;
+        rangeScoreVal -= 20;
+        this.innerHTML = '&#9888;';
+        this.style.background = 'rgba(239,68,68,0.3)';
+        this.style.borderColor = '#ef4444';
       }
-    }
+      this.style.pointerEvents = 'none';
+      updateRangeStats();
+      setTimeout(() => { if (this.parentNode) this.parentNode.removeChild(this); }, 300);
+    };
 
-    const quizCheck = el('mtuQuizCheck');
-    if (quizCheck) {
-      quizCheck.innerHTML = needsFrag
-        ? 'This payload is too large for one TCP segment on Ethernet. A Unit 4 pop quiz should expect you to compute <strong>' + frags + '</strong> fragments and explain why.'
-        : 'This payload fits under the 1460B MSS, so it can travel in a single TCP segment inside one Ethernet frame.';
-    }
+    area.appendChild(t);
+    setTimeout(() => {
+      if (t.parentNode && t.style.pointerEvents !== 'none') {
+        if (isThreat) rangeMisses++;
+        t.style.opacity = '0';
+        setTimeout(() => { if (t.parentNode) t.parentNode.removeChild(t); }, 200);
+        updateRangeStats();
+      }
+    }, lifespan);
+  }
 
-    const plan = el('mtuFragmentPlan');
-    if (plan) {
-      const sizes = fragmentPayloads.map((size, idx) => 'Fragment ' + (idx + 1) + ': ' + size + 'B payload').join('<br>');
-      plan.innerHTML = sizes + '<br><span style="color:#64748b">Each fragment still needs its own 20B TCP + 20B IP overhead.</span>';
-    }
-
-    const flow = el('mtuEncapFlow');
-    if (flow) {
-      flow.innerHTML = 'Application payload ' + payload + 'B -> TCP segment(s) -> IP packet(s) -> Ethernet frame(s) -> bits on the wire.<br><span style="color:#64748b">OSI gives you the language; TCP/IP is the practical stack doing the work.</span>';
-    }
+  window.rangeClick = function(e) {
+    if (!rangeActive) return;
+    if (e.target.closest('.range-target') || e.target.closest('#rangeOverlay')) return;
+    rangeMisses++;
+    updateRangeStats();
   };
 
-  window.addEventListener('load', function () {
-    updateMTU();
-  });
+  window.startRange = function() {
+    rangeActive = true;
+    rangeScoreVal = 0; rangeHits = 0; rangeMisses = 0; rangeCivHits = 0; rangeSpawned = 0; rangeTimeLeft = 60;
+    const ov = el('rangeOverlay'); if (ov) ov.style.display = 'none';
+    const fb = el('rangeFeedback'); if (fb) fb.style.display = 'none';
+    const area = el('rangeTargets'); if (area) area.innerHTML = '';
+    updateRangeStats();
+
+    clearInterval(rangeTimer);
+    rangeTimer = setInterval(() => {
+      rangeTimeLeft--;
+      if (el('rangeTime')) el('rangeTime').textContent = rangeTimeLeft + 's';
+      if (rangeTimeLeft <= 0) endRange();
+    }, 1000);
+
+    clearInterval(rangeSpawnTimer);
+    rangeSpawnTimer = setInterval(() => {
+      if (rangeSpawned < rangeTotal && rangeActive) spawnTarget();
+    }, 2400);
+    spawnTarget();
+  };
+
+  function endRange() {
+    rangeActive = false;
+    clearInterval(rangeTimer);
+    clearInterval(rangeSpawnTimer);
+    const area = el('rangeTargets'); if (area) area.innerHTML = '';
+
+    const total = rangeHits + rangeMisses + rangeCivHits;
+    const acc = total > 0 ? Math.round((rangeHits / total) * 100) : 0;
+    const grade = acc >= 85 && rangeCivHits === 0 ? 'Expert Marksman' : acc >= 70 ? 'Sharpshooter' : acc >= 50 ? 'Qualified' : 'Needs Practice';
+    const gradeCol = acc >= 85 && rangeCivHits === 0 ? '#fbbf24' : acc >= 70 ? '#34d399' : acc >= 50 ? '#60a5fa' : '#ef4444';
+
+    const ov = el('rangeOverlay');
+    if (ov) {
+      ov.style.display = 'flex';
+      ov.innerHTML =
+        '<div style="font-size:2.6rem;margin-bottom:8px">&#127919;</div>' +
+        '<h3 style="color:#fbbf24;font-size:1.1rem">Training Complete</h3>' +
+        '<div style="font-size:2.2rem;font-weight:800;color:#fbbf24;margin:8px 0">' + rangeScoreVal + ' pts</div>' +
+        '<p style="color:' + gradeCol + ';font-weight:700">' + grade + '</p>' +
+        '<div style="display:flex;gap:16px;margin:12px 0;font-size:0.82rem;color:#94a3b8">' +
+        '<span>Threats Hit: <strong style="color:#34d399">' + rangeHits + '</strong></span>' +
+        '<span>Missed: <strong style="color:#ef4444">' + rangeMisses + '</strong></span>' +
+        '<span>Civilian Hits: <strong style="color:#ef4444">' + rangeCivHits + '</strong></span>' +
+        '<span>Accuracy: <strong style="color:#fbbf24">' + acc + '%</strong></span>' +
+        '</div>' +
+        '<button class="btn-gold" style="margin-top:8px" onclick="event.stopPropagation();startRange()">Retry Training</button>';
+    }
+
+    const fb = el('rangeFeedback');
+    const fbt = el('rangeFeedbackText');
+    if (fb && fbt) {
+      fbt.textContent = rangeCivHits > 0
+        ? 'You hit ' + rangeCivHits + ' civilian(s). In the field, target identification is critical. Practice distinguishing threats from bystanders.'
+        : acc >= 80
+          ? 'Outstanding performance! Clean target discrimination and solid accuracy. Ready for duty.'
+          : 'Keep practicing. Focus on quick target identification and steady aim.';
+      fb.style.display = 'block';
+    }
+    updateRangeStats();
+  }
 
 })();
 </script>

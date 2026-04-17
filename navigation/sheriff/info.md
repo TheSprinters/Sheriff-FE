@@ -196,36 +196,21 @@ search_exclude: true
   <div class="station-chip">Encinitas</div>
   <div class="station-chip">Fallbrook</div>
   <div class="station-chip">Imperial Beach</div>
-  <div class="station-chip">Lemon Grove</div>
-  <div class="station-chip">Pine Valley</div>
-  <div class="station-chip">Rancho San Diego</div>
-  <div class="station-chip">San Marcos</div>
   <div class="station-chip">Santee</div>
-  <div class="station-chip">4S Ranch</div>
-  <div class="station-chip">Court Services</div>
+  <div class="station-chip">San Marcos</div>
+  <div class="station-chip">+ 7 more</div>
 </div>
 
-<h3>Detention Facilities</h3>
+<h3>Detention & Specialized</h3>
 <div class="station-grid">
-  <div class="station-chip">Vista Detention</div>
   <div class="station-chip">Central Jail</div>
+  <div class="station-chip">Vista Detention</div>
   <div class="station-chip">East Mesa</div>
-  <div class="station-chip">George Bailey</div>
-  <div class="station-chip">Las Colinas</div>
-  <div class="station-chip">Facility Operations</div>
-</div>
-
-<h3>Specialized Units</h3>
-<div class="station-grid">
-  <div class="station-chip">K-9 Unit</div>
   <div class="station-chip">SWAT</div>
-  <div class="station-chip">Investigations / Detective</div>
-  <div class="station-chip">Narcotics</div>
-  <div class="station-chip">Traffic</div>
+  <div class="station-chip">K-9 Unit</div>
+  <div class="station-chip">Investigations</div>
   <div class="station-chip">Search & Rescue</div>
   <div class="station-chip">Crime Lab</div>
-  <div class="station-chip">Gang Unit</div>
-  <div class="station-chip">Bomb/Arson</div>
 </div>
 
 <div class="divider"></div>
@@ -236,41 +221,33 @@ search_exclude: true
   <div class="info-card">
     <h3>Health & Insurance</h3>
     <ul>
-      <li><strong>Medical:</strong> Multiple plan options with low copays and broad networks</li>
-      <li><strong>Dental:</strong> Delta Dental PPO/Premier &mdash; preventive at 100%</li>
-      <li><strong>Vision:</strong> VSP annual exams, frames, lenses, contacts</li>
-      <li><strong>Life & Disability:</strong> Group term life + short/long-term disability</li>
-      <li><strong>Supplemental:</strong> Additional life, accident, critical illness policies</li>
+      <li><strong>Medical:</strong> Multiple plans, low copays, broad networks</li>
+      <li><strong>Dental/Vision:</strong> Delta Dental PPO + VSP coverage</li>
+      <li><strong>Life & Disability:</strong> Group term life + disability</li>
     </ul>
   </div>
   <div class="info-card">
     <h3>Legal Defense Fund</h3>
     <ul>
-      <li><strong>IA Investigations:</strong> Full representation at interviews and Skelly hearings</li>
-      <li><strong>Critical Incidents:</strong> Immediate 24/7 attorney response</li>
-      <li><strong>Civil Litigation:</strong> Defense against on-duty lawsuits</li>
-      <li><strong>Weingarten Rights:</strong> Union rep at investigatory interviews</li>
-      <li><strong>Coverage:</strong> Attorney fees, expert witnesses, court costs</li>
+      <li><strong>IA Investigations:</strong> Full representation at hearings</li>
+      <li><strong>Critical Incidents:</strong> 24/7 attorney response</li>
+      <li><strong>Civil Litigation:</strong> Defense for on-duty lawsuits</li>
     </ul>
   </div>
   <div class="info-card">
     <h3>Wellness & Support</h3>
     <ul>
-      <li><strong>Peer Support Team:</strong> Trained deputy counselors (confidential)</li>
-      <li><strong>CISM:</strong> Critical Incident Stress Management debriefings</li>
-      <li><strong>Mental Health:</strong> Licensed therapists experienced with LE issues</li>
-      <li><strong>Fitness:</strong> Gym discounts and facility access countywide</li>
-      <li><strong>Family Support:</strong> Resources for spouses and families</li>
+      <li><strong>Peer Support:</strong> Confidential counseling</li>
+      <li><strong>CISM:</strong> Critical incident debriefings</li>
+      <li><strong>Fitness:</strong> Gym discounts countywide</li>
     </ul>
   </div>
   <div class="info-card">
-    <h3>Publications & Communications</h3>
+    <h3>Publications</h3>
     <ul>
-      <li><strong>Silver Star Newsletter:</strong> Bi-monthly print publication to all members</li>
-      <li><strong>Board Meeting Minutes:</strong> Official records from monthly meetings</li>
-      <li><strong>Legislative Updates:</strong> Alerts on bills affecting law enforcement</li>
-      <li><strong>President's Reports:</strong> Monthly leadership updates</li>
-      <li><strong>Voter Guides:</strong> Election endorsements and ballot measures</li>
+      <li><strong>Silver Star Newsletter:</strong> Bi-monthly print publication</li>
+      <li><strong>Legislative Updates:</strong> Bills affecting LE</li>
+      <li><strong>Voter Guides:</strong> Election endorsements</li>
     </ul>
   </div>
 </div>
@@ -279,13 +256,9 @@ search_exclude: true
 
 <h2>History & Milestones</h2>
 <ul>
-  <li><strong>1955</strong> &mdash; DSA founded as a small association of San Diego County deputies</li>
-  <li><strong>1960s</strong> &mdash; Established as the exclusive collective bargaining unit for sworn personnel</li>
-  <li><strong>1970s</strong> &mdash; Created the Legal Defense Fund to protect members in administrative and civil proceedings</li>
-  <li><strong>1980s</strong> &mdash; Negotiated landmark contracts expanding retirement benefits and overtime protections</li>
-  <li><strong>1990s</strong> &mdash; Launched the Silver Star Newsletter and expanded member communications</li>
-  <li><strong>2000s</strong> &mdash; Built DSA Headquarters in Poway; grew membership past 3,000</li>
-  <li><strong>2010s</strong> &mdash; Expanded wellness and peer support services; launched scholarship programs</li>
+  <li><strong>1955</strong> &mdash; DSA founded as a collective bargaining unit for San Diego County deputies</li>
+  <li><strong>1970s</strong> &mdash; Created the Legal Defense Fund for administrative and civil proceedings</li>
+  <li><strong>2000s</strong> &mdash; Built DSA Headquarters in Poway; membership surpassed 3,000</li>
   <li><strong>2020s</strong> &mdash; Membership exceeds 4,200; modernized digital services and member portal</li>
 </ul>
 

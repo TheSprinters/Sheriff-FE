@@ -214,11 +214,6 @@ search_exclude: true
   <!-- News articles will be populated by JavaScript -->
 </div>
 
-<!-- Load More -->
-<div class="load-more">
-  <button class="load-more-btn" onclick="loadMoreNews()">Load More Articles</button>
-</div>
-
 <!-- Newsletter Signup -->
 <div class="newsletter">
   <h2>Stay Connected</h2>
@@ -266,44 +261,11 @@ const newsData = [
     readTime: "2 min read",
     featured: false,
     image: "community"
-  },
-  {
-    id: 4,
-    title: "Advanced De-escalation Training Certification Available",
-    category: "training",
-    date: "2026-04-03",
-    excerpt: "Free advanced certification course for all members interested in specialized de-escalation techniques.",
-    content: "The DSA is offering a comprehensive advanced de-escalation training certification program at no cost to members. This 40-hour course covers verbal techniques, crisis intervention...",
-    readTime: "4 min read",
-    featured: false,
-    image: "training"
-  },
-  {
-    id: 5,
-    title: "Scholarship Applications Now Open for 2026",
-    category: "announcement",
-    date: "2026-04-01",
-    excerpt: "DSA scholarship program for members' children now accepting applications for the 2026-2027 academic year.",
-    content: "The Deputy Sheriffs' Association Scholarship Committee is pleased to announce that applications are now being accepted for the 2026-2027 academic year. Scholarships are available to children of active DSA members...",
-    readTime: "3 min read",
-    featured: false,
-    image: "scholarship"
-  },
-  {
-    id: 6,
-    title: "New Wellness Center Opening at DSA Headquarters",
-    category: "announcement",
-    date: "2026-03-28",
-    excerpt: "State-of-the-art wellness facility now available to all members with fitness equipment, counseling rooms, and relaxation areas.",
-    content: "DSA is proud to announce the grand opening of our new Wellness Center at headquarters. This facility represents our commitment to member health and wellbeing...",
-    readTime: "4 min read",
-    featured: false,
-    image: "wellness"
   }
 ];
 
 let currentFilter = 'all';
-let displayedNews = 6;
+let displayedNews = 3;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
@@ -354,14 +316,6 @@ function renderNews() {
   });
   
   newsGrid.innerHTML = html;
-  
-  // Hide load more if all articles are shown
-  const loadMoreBtn = document.querySelector('.load-more-btn');
-  if (articlesToShow.length >= filteredNews.length) {
-    loadMoreBtn.style.display = 'none';
-  } else {
-    loadMoreBtn.style.display = 'inline-block';
-  }
 }
 
 function renderFeatured() {
@@ -398,17 +352,12 @@ function renderFeatured() {
 
 function filterNews(category) {
   currentFilter = category;
-  displayedNews = 6; // Reset displayed count
+  displayedNews = 3; // Reset displayed count
   
   // Update active tab
   document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
   event.target.classList.add('active');
   
-  renderNews();
-}
-
-function loadMoreNews() {
-  displayedNews += 6;
   renderNews();
 }
 

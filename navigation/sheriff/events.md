@@ -194,7 +194,7 @@ search_exclude: true
 <div class="page">
 
 <h1>DSA Events Calendar</h1>
-<p class="lead">Stay connected with your fellow deputies. View upcoming events, RSVP to attend, and create new gatherings for our community.</p>
+<p class="lead">View upcoming events, RSVP, and create new gatherings.</p>
 
 <!-- Calendar -->
 <div class="calendar-container">
@@ -211,8 +211,11 @@ search_exclude: true
   </div>
 </div>
 
-<!-- Create Event Section -->
-<div class="create-event" id="createEvent">
+<!-- Toggle button for Create Event form -->
+<button class="cal-btn" style="margin-bottom:16px" onclick="document.getElementById('createEvent').style.display=document.getElementById('createEvent').style.display==='none'?'block':'none'">+ Create Event</button>
+
+<!-- Create Event Section (hidden by default) -->
+<div class="create-event" id="createEvent" style="display:none">
   <h2 style="color:#fbbf24;margin-bottom:20px">Create New Event</h2>
   <form id="eventForm" onsubmit="createEvent(event)">
     <div class="form-grid">
@@ -282,7 +285,7 @@ const sampleEvents = [
     date: "2026-04-15",
     time: "18:00",
     location: "DSA Headquarters, Poway",
-    description: "Regular monthly meeting to discuss union business, upcoming negotiations, and member concerns. Dinner will be provided.",
+    description: "Monthly union business meeting. Dinner provided.",
     rsvp: { yes: 45, no: 8, total: 53 }
   },
   {
@@ -292,7 +295,7 @@ const sampleEvents = [
     date: "2026-04-22",
     time: "12:00",
     location: "Vista Station Picnic Area",
-    description: "Bring your family for a spring BBQ. Games, activities for kids, and great food. Members and their families welcome.",
+    description: "Family BBQ with games and activities. Members and families welcome.",
     rsvp: { yes: 120, no: 15, total: 135 }
   },
   {
@@ -302,18 +305,8 @@ const sampleEvents = [
     date: "2026-04-28",
     time: "14:00",
     location: "Central Jail Training Room",
-    description: "Essential training on your rights during administrative investigations, critical incident procedures, and legal defense best practices.",
+    description: "Training on rights during investigations and legal defense.",
     rsvp: { yes: 28, no: 5, total: 33 }
-  },
-  {
-    id: 4,
-    title: "Scholarship Fundraiser Gala",
-    type: "fundraiser",
-    date: "2026-05-06",
-    time: "19:00",
-    location: "Sheraton Mission Valley",
-    description: "Annual fundraising gala to support scholarships for deputies' children. Dinner, auction, and guest speakers.",
-    rsvp: { yes: 85, no: 12, total: 97 }
   }
 ];
 
@@ -530,7 +523,7 @@ fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
     // Show a welcome note on the page
     const lead = document.querySelector('.page .lead');
     if (lead && user.name) {
-      lead.textContent = `Welcome, ${user.name.split(' ')[0]}! View upcoming events, RSVP to attend, and create new gatherings for our community.`;
+      lead.textContent = `Welcome, ${user.name.split(' ')[0]}! View events, RSVP, and create gatherings.`;
     }
   })
   .catch(() => {});
