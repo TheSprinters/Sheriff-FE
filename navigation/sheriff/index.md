@@ -183,6 +183,17 @@ search_exclude: true
     .tile-title { font-size: 0.85rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
     .tile-desc { font-size: 0.7rem; color: #64748b; line-height: 1.4; }
 
+    /* My Information button */
+    .my-info-btn {
+      display: block; width: 100%; text-align: center;
+      margin-top: 10px; padding: 10px 0;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #1e3a5f; font-weight: 700; font-size: 0.85rem;
+      border-radius: 10px; text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .my-info-btn:hover { box-shadow: 0 4px 14px rgba(245,158,11,0.4); transform: translateY(-1px); color: #1e3a5f; }
+
     /* Expandable detail panel for Member Services */
     .detail-panel {
       display: none; margin: 10px 0 0;
@@ -547,6 +558,7 @@ search_exclude: true
         <div class="tile" onclick="openDetail('wellness')"><div class="tile-icon">&#127891;</div><div class="tile-title">Wellness</div><div class="tile-desc">Peer support &amp; mental health</div></div>
         <div class="tile" onclick="openDetail('forms')"><div class="tile-icon">&#128196;</div><div class="tile-title">Forms &amp; Docs</div><div class="tile-desc">Contracts &amp; downloads</div></div>
       </div>
+      <a href="{{ site.baseurl }}/sheriff/pathway" class="my-info-btn">My Information</a>
       <div class="detail-panel" id="dp-benefits"><div class="dp-card">
         <button class="dp-close" onclick="closeDetail('benefits')">&times;</button>
         <h3>Benefits &amp; Insurance</h3>
