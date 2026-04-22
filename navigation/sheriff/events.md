@@ -41,8 +41,6 @@ search_exclude: true
     .page h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg,#fbbf24,#f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
     .page .lead { color: #7f8ea3; font-size: 1rem; margin-bottom: 32px; }
     .page h2 { font-size: 1.3rem; font-weight: 700; color: #fbbf24; border-bottom: 1px solid rgba(251,191,36,0.12); padding-bottom: 8px; margin: 36px 0 16px; }
-    .page h3 { font-size: 1.05rem; color: #e2e8f0; margin: 20px 0 8px; }
-    .page p { font-size: 0.88rem; color: #94a3b8; margin-bottom: 12px; line-height: 1.7; }
 
     /* Calendar */
     .calendar-container {
@@ -51,21 +49,15 @@ search_exclude: true
     .calendar-header {
       display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
     }
-    .calendar-nav {
-      display: flex; gap: 8px; align-items: center;
-    }
+    .calendar-nav { display: flex; gap: 8px; align-items: center; }
     .cal-btn {
       padding: 8px 12px; background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.3);
       border-radius: 8px; color: #fbbf24; cursor: pointer; font-size: 0.85rem; font-weight: 600;
       transition: all 0.2s;
     }
     .cal-btn:hover { background: rgba(251,191,36,0.15); }
-    .cal-month {
-      font-size: 1.1rem; font-weight: 700; color: #fbbf24; min-width: 150px; text-align: center;
-    }
-    .calendar-grid {
-      display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 16px;
-    }
+    .cal-month { font-size: 1.1rem; font-weight: 700; color: #fbbf24; min-width: 150px; text-align: center; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 16px; }
     .cal-day-header {
       padding: 8px; text-align: center; font-size: 0.75rem; font-weight: 700;
       color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;
@@ -92,17 +84,12 @@ search_exclude: true
       margin-bottom: 16px; transition: all 0.2s;
     }
     .event-card:hover { border-color: #fbbf24; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.3); }
-    .event-header {
-      display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;
-    }
+    .event-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
     .event-title { font-size: 1.1rem; font-weight: 700; color: #fbbf24; margin-bottom: 4px; }
     .event-date { font-size: 0.85rem; color: #60a5fa; font-weight: 600; }
     .event-time { font-size: 0.85rem; color: #94a3b8; }
-    .event-location { font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px; }
     .event-desc { font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 12px; }
-    .event-actions {
-      display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
-    }
+    .event-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .rsvp-btn {
       padding: 8px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
       border: none; transition: all 0.2s;
@@ -111,6 +98,8 @@ search_exclude: true
     .rsvp-yes:hover { box-shadow: 0 4px 14px rgba(16,185,129,0.3); }
     .rsvp-no { background: transparent; color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
     .rsvp-no:hover { background: rgba(239,68,68,0.08); }
+    .rsvp-yes.active-rsvp { box-shadow: 0 0 0 2px #10b981; }
+    .rsvp-no.active-rsvp  { background: rgba(239,68,68,0.15); box-shadow: 0 0 0 2px #ef4444; }
     .rsvp-count {
       font-size: 0.8rem; color: #64748b; padding: 4px 10px; background: rgba(100,116,139,0.1);
       border-radius: 12px;
@@ -119,40 +108,10 @@ search_exclude: true
       padding: 4px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .type-meeting { background: rgba(96,165,250,0.12); color: #60a5fa; }
-    .type-social { background: rgba(251,191,36,0.12); color: #fbbf24; }
-    .type-training { background: rgba(52,211,153,0.12); color: #34d399; }
-    .type-fundraiser { background: rgba(239,68,68,0.12); color: #ef4444; }
-
-    /* Create event form */
-    .create-event {
-      background: linear-gradient(135deg, rgba(22,42,70,0.8), rgba(11,26,46,0.8));
-      border: 1px solid #1e3352; border-radius: 16px; padding: 24px; margin-bottom: 32px;
-    }
-    .form-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
-    }
-    .form-group { margin-bottom: 16px; }
-    .form-group.full { grid-column: 1 / -1; }
-    .form-label {
-      display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 6px; font-weight: 600;
-    }
-    .form-input, .form-select, .form-textarea {
-      width: 100%; padding: 10px 14px; background: #0d1727; border: 1px solid #1e3352;
-      border-radius: 8px; color: #e2e8f0; font-size: 0.85rem; outline: none;
-      transition: all 0.2s;
-    }
-    .form-input:focus, .form-select:focus, .form-textarea:focus {
-      border-color: #fbbf24; background: rgba(251,191,36,0.05);
-    }
-    .form-textarea { resize: vertical; min-height: 80px; }
-    .submit-btn {
-      padding: 12px 24px; background: linear-gradient(135deg,#f59e0b,#d97706);
-      color: #1e3a5f; border: none; border-radius: 10px;
-      font-weight: 700; font-size: 0.9rem; cursor: pointer;
-      transition: all 0.2s; letter-spacing: 0.3px;
-    }
-    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,158,11,0.35); }
+    .type-meeting   { background: rgba(96,165,250,0.12); color: #60a5fa; }
+    .type-social    { background: rgba(251,191,36,0.12); color: #fbbf24; }
+    .type-training  { background: rgba(52,211,153,0.12); color: #34d399; }
+    .type-fundraiser{ background: rgba(239,68,68,0.12); color: #ef4444; }
 
     /* Filter tabs */
     .filter-tabs {
@@ -170,9 +129,10 @@ search_exclude: true
       color: #fbbf24; box-shadow: inset 0 0 0 1px rgba(251,191,36,0.25);
     }
 
-    /* Responsive */
+    /* Loading spinner */
+    .loading-text { text-align: center; color: #64748b; padding: 40px; }
+
     @media (max-width: 700px) {
-      .form-grid { grid-template-columns: 1fr; }
       .calendar-grid { gap: 1px; }
       .cal-day { font-size: 0.75rem; }
       .event-header { flex-direction: column; gap: 8px; }
@@ -194,339 +154,273 @@ search_exclude: true
 <div class="page">
 
 <h1>DSA Events Calendar</h1>
-<p class="lead">View upcoming events, RSVP, and create new gatherings.</p>
+<p class="lead" id="leadText">View upcoming events and RSVP.</p>
 
 <!-- Calendar -->
 <div class="calendar-container">
   <div class="calendar-header">
     <div class="calendar-nav">
       <button class="cal-btn" onclick="changeMonth(-1)">&lt;</button>
-      <div class="cal-month" id="currentMonth">January 2026</div>
+      <div class="cal-month" id="currentMonth">Loading…</div>
       <button class="cal-btn" onclick="changeMonth(1)">&gt;</button>
     </div>
     <button class="cal-btn" onclick="goToToday()">Today</button>
   </div>
-  <div class="calendar-grid" id="calendarGrid">
-    <!-- Calendar will be generated by JavaScript -->
-  </div>
-</div>
-
-<!-- Toggle button for Create Event form -->
-<button class="cal-btn" style="margin-bottom:16px" onclick="document.getElementById('createEvent').style.display=document.getElementById('createEvent').style.display==='none'?'block':'none'">+ Create Event</button>
-
-<!-- Create Event Section (hidden by default) -->
-<div class="create-event" id="createEvent" style="display:none">
-  <h2 style="color:#fbbf24;margin-bottom:20px">Create New Event</h2>
-  <form id="eventForm" onsubmit="createEvent(event)">
-    <div class="form-grid">
-      <div class="form-group">
-        <label class="form-label">Event Title *</label>
-        <input type="text" class="form-input" id="eventTitle" required placeholder="Monthly Meeting, BBQ, etc.">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Event Type *</label>
-        <select class="form-select" id="eventType" required>
-          <option value="">Select type...</option>
-          <option value="meeting">Meeting</option>
-          <option value="social">Social Event</option>
-          <option value="training">Training</option>
-          <option value="fundraiser">Fundraiser</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Date *</label>
-        <input type="date" class="form-input" id="eventDate" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Time *</label>
-        <input type="time" class="form-input" id="eventTime" required>
-      </div>
-      <div class="form-group full">
-        <label class="form-label">Location *</label>
-        <input type="text" class="form-input" id="eventLocation" required placeholder="DSA Headquarters, Station, etc.">
-      </div>
-      <div class="form-group full">
-        <label class="form-label">Description</label>
-        <textarea class="form-textarea" id="eventDescription" placeholder="Event details, agenda items, what to bring, etc."></textarea>
-      </div>
-    </div>
-    <button type="submit" class="submit-btn">Create Event</button>
-  </form>
+  <div class="calendar-grid" id="calendarGrid"></div>
 </div>
 
 <!-- Filter Tabs -->
 <div class="filter-tabs">
-  <button class="filter-tab active" onclick="filterEvents('all')">All Events</button>
-  <button class="filter-tab" onclick="filterEvents('meeting')">Meetings</button>
-  <button class="filter-tab" onclick="filterEvents('social')">Social</button>
-  <button class="filter-tab" onclick="filterEvents('training')">Training</button>
-  <button class="filter-tab" onclick="filterEvents('fundraiser">Fundraisers</button>
+  <button class="filter-tab active" data-filter="all"    onclick="setFilter('all',this)">All Events</button>
+  <button class="filter-tab"        data-filter="meeting"   onclick="setFilter('meeting',this)">Meetings</button>
+  <button class="filter-tab"        data-filter="social"    onclick="setFilter('social',this)">Social</button>
+  <button class="filter-tab"        data-filter="training"  onclick="setFilter('training',this)">Training</button>
+  <button class="filter-tab"        data-filter="fundraiser" onclick="setFilter('fundraiser',this)">Fundraisers</button>
 </div>
 
 <!-- Events List -->
 <div class="events-section" id="eventsList">
-  <!-- Events will be populated by JavaScript -->
+  <div class="loading-text">Loading events…</div>
 </div>
 
 </div>
 
 <script>
-// Calendar state
-let currentDate = new Date();
+const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? 'http://localhost:8325'
+  : 'https://sheriff.opencodingsociety.com';
+
+let currentDate  = new Date();
 let selectedDate = null;
-let events = [];
+let allEvents    = [];
+let activeFilter = 'all';
+let currentUser  = null;
+// map of eventId -> user's RSVP response ('yes'/'no')
+let myRsvps = {};
 
-// Sample events data (in real app, this would come from backend)
-const sampleEvents = [
-  {
-    id: 1,
-    title: "Monthly General Meeting",
-    type: "meeting",
-    date: "2026-04-15",
-    time: "18:00",
-    location: "DSA Headquarters, Poway",
-    description: "Monthly union business meeting. Dinner provided.",
-    rsvp: { yes: 45, no: 8, total: 53 }
-  },
-  {
-    id: 2,
-    title: "Spring BBQ & Family Day",
-    type: "social",
-    date: "2026-04-22",
-    time: "12:00",
-    location: "Vista Station Picnic Area",
-    description: "Family BBQ with games and activities. Members and families welcome.",
-    rsvp: { yes: 120, no: 15, total: 135 }
-  },
-  {
-    id: 3,
-    title: "Legal Defense Workshop",
-    type: "training",
-    date: "2026-04-28",
-    time: "14:00",
-    location: "Central Jail Training Room",
-    description: "Training on rights during investigations and legal defense.",
-    rsvp: { yes: 28, no: 5, total: 33 }
-  }
-];
+/* ──────────────────────────────────────────────────────────────
+   Date helper — parse ISO "YYYY-MM-DD" as LOCAL date (no UTC shift)
+────────────────────────────────────────────────────────────── */
+function parseLocalDate(iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
 
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-  events = sampleEvents;
+function fmtDateLong(iso) {
+  return parseLocalDate(iso).toLocaleDateString('en-US', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Bootstrap: load user + events on DOMContentLoaded
+────────────────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', async () => {
+  // Try to identify the logged-in user (graceful if not logged in)
+  try {
+    const r = await fetch(`${API}/api/sheriff/id`, { credentials: 'include' });
+    if (r.ok) {
+      currentUser = await r.json();
+      const lead = document.getElementById('leadText');
+      if (currentUser.name) {
+        lead.textContent = `Welcome, ${currentUser.name.split(' ')[0]}! View events and RSVP.`;
+      }
+    }
+  } catch (_) {}
+
+  await fetchEvents();
   renderCalendar();
   renderEvents();
-  
-  // Set today's date as default for event creation
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('eventDate').value = today;
 });
 
-// Calendar functions
-function renderCalendar() {
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const prevLastDay = new Date(year, month, 0);
-  
-  const startDate = firstDay.getDay();
-  const endDate = lastDay.getDate();
-  const prevEndDate = prevLastDay.getDate();
-  
-  // Update month display
-  const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
-  document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
-  
-  // Generate calendar grid
-  let html = '';
-  
-  // Day headers
-  const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  dayHeaders.forEach(day => {
-    html += `<div class="cal-day-header">${day}</div>`;
-  });
-  
-  // Previous month days
-  for (let i = startDate - 1; i >= 0; i--) {
-    html += `<div class="cal-day other-month">${prevEndDate - i}</div>`;
+/* ──────────────────────────────────────────────────────────────
+   Fetch events from backend
+────────────────────────────────────────────────────────────── */
+async function fetchEvents() {
+  try {
+    const r = await fetch(`${API}/api/events`, { credentials: 'include' });
+    if (!r.ok) throw new Error('Failed');
+    allEvents = await r.json();
+  } catch (_) {
+    document.getElementById('eventsList').innerHTML =
+      '<p style="text-align:center;color:#ef4444;padding:40px">Could not load events. Please try again.</p>';
   }
-  
-  // Current month days
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Calendar rendering
+────────────────────────────────────────────────────────────── */
+function renderCalendar() {
+  const year      = currentDate.getFullYear();
+  const month     = currentDate.getMonth();
+  const firstDay  = new Date(year, month, 1);
+  const lastDay   = new Date(year, month + 1, 0);
+  const prevLast  = new Date(year, month, 0);
+
+  const startDOW  = firstDay.getDay();
+  const endDate   = lastDay.getDate();
+  const prevEnd   = prevLast.getDate();
+
+  const monthNames = ["January","February","March","April","May","June",
+    "July","August","September","October","November","December"];
+  document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+
+  let html = '';
+  ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d => {
+    html += `<div class="cal-day-header">${d}</div>`;
+  });
+
+  // Previous-month padding
+  for (let i = startDOW - 1; i >= 0; i--) {
+    html += `<div class="cal-day other-month">${prevEnd - i}</div>`;
+  }
+
   const today = new Date();
   for (let day = 1; day <= endDate; day++) {
-    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    const hasEvent = events.some(e => e.date === dateStr);
-    const isToday = today.getFullYear() === year && today.getMonth() === month && today.getDate() === day;
-    const isSelected = selectedDate === dateStr;
-    
-    let classes = 'cal-day';
-    if (hasEvent) classes += ' has-event';
-    if (isToday) classes += ' today';
-    if (isSelected) classes += ' selected';
-    
-    html += `<div class="${classes}" onclick="selectDate('${dateStr}')">${day}</div>`;
+    const dateStr  = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const hasEvent = allEvents.some(e => e.date === dateStr);
+    const isToday  = today.getFullYear() === year && today.getMonth() === month && today.getDate() === day;
+    const isSel    = selectedDate === dateStr;
+
+    let cls = 'cal-day';
+    if (hasEvent) cls += ' has-event';
+    if (isToday)  cls += ' today';
+    if (isSel)    cls += ' selected';
+
+    html += `<div class="${cls}" onclick="selectDate('${dateStr}')">${day}</div>`;
   }
-  
-  // Next month days
-  const remainingDays = 42 - (startDate + endDate);
-  for (let day = 1; day <= remainingDays; day++) {
+
+  // Next-month padding
+  const remaining = 42 - (startDOW + endDate);
+  for (let day = 1; day <= remaining; day++) {
     html += `<div class="cal-day other-month">${day}</div>`;
   }
-  
+
   document.getElementById('calendarGrid').innerHTML = html;
 }
 
-function changeMonth(direction) {
-  currentDate.setMonth(currentDate.getMonth() + direction);
+function changeMonth(dir) {
+  currentDate.setMonth(currentDate.getMonth() + dir);
   renderCalendar();
 }
 
 function goToToday() {
-  currentDate = new Date();
+  currentDate  = new Date();
   selectedDate = new Date().toISOString().split('T')[0];
   renderCalendar();
   renderEvents();
 }
 
 function selectDate(dateStr) {
-  selectedDate = dateStr;
+  selectedDate = (selectedDate === dateStr) ? null : dateStr;
   renderCalendar();
   renderEvents();
 }
 
-// Events functions
-function renderEvents(filter = 'all') {
-  const eventsList = document.getElementById('eventsList');
-  let filteredEvents = events;
-  
-  if (filter !== 'all') {
-    filteredEvents = events.filter(e => e.type === filter);
+/* ──────────────────────────────────────────────────────────────
+   Filter tabs
+────────────────────────────────────────────────────────────── */
+function setFilter(type, btn) {
+  activeFilter = type;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderEvents();
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Events list rendering
+────────────────────────────────────────────────────────────── */
+function renderEvents() {
+  const container = document.getElementById('eventsList');
+  let filtered    = allEvents.slice();
+
+  if (activeFilter !== 'all') {
+    filtered = filtered.filter(e => e.type === activeFilter);
   }
-  
-  // If a date is selected, show only that date's events
   if (selectedDate) {
-    filteredEvents = filteredEvents.filter(e => e.date === selectedDate);
+    filtered = filtered.filter(e => e.date === selectedDate);
   }
-  
-  // Sort by date
-  filteredEvents.sort((a, b) => new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time));
-  
-  if (filteredEvents.length === 0) {
-    eventsList.innerHTML = '<p style="text-align:center;color:#64748b;padding:40px">No events found for the selected criteria.</p>';
+
+  filtered.sort((a, b) => {
+    const da = parseLocalDate(a.date).getTime() + timeToMs(a.time);
+    const db = parseLocalDate(b.date).getTime() + timeToMs(b.time);
+    return da - db;
+  });
+
+  if (!filtered.length) {
+    container.innerHTML = '<p style="text-align:center;color:#64748b;padding:40px">No events found for the selected criteria.</p>';
     return;
   }
-  
-  let html = '';
-  filteredEvents.forEach(event => {
-    const typeClass = `type-${event.type}`;
-    const eventDate = new Date(event.date);
-    const dateStr = eventDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    
-    html += `
-      <div class="event-card">
+
+  container.innerHTML = filtered.map(ev => {
+    const myResp    = myRsvps[ev.id] || null;
+    const yesActive = myResp === 'yes' ? ' active-rsvp' : '';
+    const noActive  = myResp === 'no'  ? ' active-rsvp' : '';
+    const rsvpDisabled = !currentUser ? 'title="Log in to RSVP"' : '';
+
+    return `
+      <div class="event-card" id="event-${ev.id}">
         <div class="event-header">
           <div>
-            <div class="event-title">${event.title}</div>
-            <div class="event-date">${dateStr}</div>
-            <div class="event-time">${event.time} &bull; ${event.location}</div>
+            <div class="event-title">${escHtml(ev.title)}</div>
+            <div class="event-date">${fmtDateLong(ev.date)}</div>
+            <div class="event-time">${escHtml(ev.time)} &bull; ${escHtml(ev.location)}</div>
           </div>
-          <div class="event-type ${typeClass}">${event.type}</div>
+          <div class="event-type type-${ev.type}">${ev.type}</div>
         </div>
-        <div class="event-desc">${event.description}</div>
+        ${ev.description ? `<div class="event-desc">${escHtml(ev.description)}</div>` : ''}
         <div class="event-actions">
-          <button class="rsvp-btn rsvp-yes" onclick="rsvpEvent(${event.id}, 'yes')">RSVP Yes</button>
-          <button class="rsvp-btn rsvp-no" onclick="rsvpEvent(${event.id}, 'no')">RSVP No</button>
-          <div class="rsvp-count">${event.rsvp.yes} attending &bull; ${event.rsvp.total} responses</div>
+          <button class="rsvp-btn rsvp-yes${yesActive}" ${rsvpDisabled} onclick="submitRsvp(${ev.id},'yes')">&#10003; Going</button>
+          <button class="rsvp-btn rsvp-no${noActive}"   ${rsvpDisabled} onclick="submitRsvp(${ev.id},'no')">&#10007; Not Going</button>
+          <div class="rsvp-count">${ev.rsvp.yes} attending &bull; ${ev.rsvp.total} responses</div>
         </div>
       </div>
     `;
-  });
-  
-  eventsList.innerHTML = html;
+  }).join('');
 }
 
-function filterEvents(type) {
-  // Update active tab
-  document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
-  event.target.classList.add('active');
-  
-  renderEvents(type);
+function timeToMs(timeStr) {
+  if (!timeStr) return 0;
+  const [h, m] = timeStr.split(':').map(Number);
+  return ((h || 0) * 60 + (m || 0)) * 60000;
 }
 
-function rsvpEvent(eventId, response) {
-  const event = events.find(e => e.id === eventId);
-  if (event) {
-    if (response === 'yes' && !event.rsvp.userResponded) {
-      event.rsvp.yes++;
-      event.rsvp.total++;
-      event.rsvp.userResponded = true;
-    } else if (response === 'no' && !event.rsvp.userResponded) {
-      event.rsvp.no++;
-      event.rsvp.total++;
-      event.rsvp.userResponded = true;
-    }
-    
+function escHtml(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ──────────────────────────────────────────────────────────────
+   RSVP submission
+────────────────────────────────────────────────────────────── */
+async function submitRsvp(eventId, response) {
+  if (!currentUser) {
+    alert('Please log in to RSVP for events.');
+    return;
+  }
+
+  // Optimistic toggle: if already this response, treat as a confirmation
+  const prev = myRsvps[eventId];
+  myRsvps[eventId] = response;
+
+  try {
+    const r = await fetch(`${API}/api/events/${eventId}/rsvp`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ response })
+    });
+    if (!r.ok) throw new Error('Failed');
+    // Re-fetch to get updated counts
+    await fetchEvents();
+    renderCalendar();
     renderEvents();
-    
-    // Show confirmation
-    const action = response === 'yes' ? 'attending' : 'not attending';
-    alert(`You have been marked as ${action} for "${event.title}".`);
+  } catch (_) {
+    // Revert optimistic update on failure
+    if (prev) myRsvps[eventId] = prev;
+    else delete myRsvps[eventId];
+    alert('Could not save your RSVP. Please try again.');
   }
 }
-
-function createEvent(e) {
-  e.preventDefault();
-  
-  const newEvent = {
-    id: events.length + 1,
-    title: document.getElementById('eventTitle').value,
-    type: document.getElementById('eventType').value,
-    date: document.getElementById('eventDate').value,
-    time: document.getElementById('eventTime').value,
-    location: document.getElementById('eventLocation').value,
-    description: document.getElementById('eventDescription').value,
-    rsvp: { yes: 0, no: 0, total: 0 }
-  };
-  
-  events.push(newEvent);
-  
-  // Reset form
-  document.getElementById('eventForm').reset();
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('eventDate').value = today;
-  
-  // Refresh display
-  renderCalendar();
-  renderEvents();
-  
-  alert(`Event "${newEvent.title}" has been created successfully!`);
-  
-  // Scroll to events list
-  document.getElementById('eventsList').scrollIntoView({ behavior: 'smooth' });
-}
-
-/* ================================================================
-   AUTO-FILL event form with logged-in user's station as default location
-   ================================================================ */
-const API = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-  ? 'http://localhost:8325'
-  : 'https://sheriff.opencodingsociety.com';
-
-fetch(`${API}/api/sheriff/id`, { credentials: 'include' })
-  .then(r => { if (!r.ok) throw 0; return r.json(); })
-  .then(user => {
-    // Pre-fill the event location with user's station
-    const locInput = document.getElementById('eventLocation');
-    if (user.station && !locInput.value) locInput.value = user.station;
-
-    // Show a welcome note on the page
-    const lead = document.querySelector('.page .lead');
-    if (lead && user.name) {
-      lead.textContent = `Welcome, ${user.name.split(' ')[0]}! View events, RSVP, and create gatherings.`;
-    }
-  })
-  .catch(() => {});
 </script>
 
 </body>
