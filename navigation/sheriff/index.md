@@ -377,6 +377,36 @@ search_exclude: true
     .modal-submit { width: 100%; padding: 10px; background: linear-gradient(135deg,#f59e0b,#d97706); color: #1e3a5f; border: none; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; margin-top: 8px; }
     .modal-err { color: #ef4444; font-size: 0.78rem; margin-top: 8px; display: none; }
 
+    /* Google OAuth button */
+    .btn-google {
+      width: 100%; padding: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: #fff; color: #3c4043; border: 1px solid #dadce0; border-radius: 8px;
+      font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: box-shadow 0.2s;
+    }
+    .btn-google:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+    .btn-google svg { flex-shrink: 0; }
+    .or-divider {
+      display: flex; align-items: center; gap: 10px; margin: 14px 0;
+      color: #334155; font-size: 0.75rem;
+    }
+    .or-divider::before, .or-divider::after {
+      content: ''; flex: 1; height: 1px; background: #1e3352;
+    }
+
+    /* Google completion modal overlay */
+    .gmodal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
+    .gmodal-bg.open { display: flex; }
+    .gmodal { background: #162a46; border: 1px solid rgba(251,191,36,0.3); border-radius: 14px; padding: 28px; max-width: 460px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; }
+    .gmodal-badge {
+      display: flex; align-items: center; gap: 10px; background: rgba(66,133,244,0.1);
+      border: 1px solid rgba(66,133,244,0.3); border-radius: 10px;
+      padding: 10px 14px; margin-bottom: 20px;
+    }
+    .gmodal-badge .g-avatar { width: 36px; height: 36px; border-radius: 50%; background: #4285f4; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+    .gmodal-badge .g-info { font-size: 0.8rem; }
+    .gmodal-badge .g-name  { color: #e2e8f0; font-weight: 700; }
+    .gmodal-badge .g-email { color: #64748b; }
+
     /* ===== ADMIN ===== */
     .admin-section { display: none; max-width: 1100px; margin: 0 auto; padding: 20px 24px 40px; }
     .admin-section.open { display: block; }
@@ -760,6 +790,64 @@ search_exclude: true
   <div class="cb-input"><input id="cbIn" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendChat()"><button id="cbSend" onclick="sendChat()">Send</button></div>
 </div>
 
+<!-- GOOGLE SIGN-UP COMPLETION MODAL -->
+<div class="gmodal-bg" id="gModalBg">
+  <div class="gmodal">
+    <button class="modal-x" onclick="closeGModal()">&times;</button>
+    <h2 style="color:#fbbf24;margin-bottom:4px;">Complete Your Account</h2>
+    <p style="color:#64748b;font-size:0.8rem;margin-bottom:18px;">Your Google identity was verified. Just fill in your DSA details below.</p>
+
+    <!-- Google account badge -->
+    <div class="gmodal-badge">
+      <div class="g-avatar" id="gAvatarInitial">G</div>
+      <div class="g-info">
+        <div class="g-name" id="gBadgeName">—</div>
+        <div class="g-email" id="gBadgeEmail">—</div>
+      </div>
+    </div>
+
+    <form id="fGSign" onsubmit="doGoogleSignup(event)">
+      <div class="fg">
+        <label>Full Name <span style="color:#34d399;font-size:0.7rem;">(from Google)</span></label>
+        <input id="gName" readonly style="opacity:0.7;cursor:not-allowed;">
+      </div>
+      <div class="fg">
+        <label>Email <span style="color:#34d399;font-size:0.7rem;">(from Google)</span></label>
+        <input type="email" id="gEmail" readonly style="opacity:0.7;cursor:not-allowed;">
+      </div>
+      <div class="fg"><label>Choose a Username *</label><input id="gUid" placeholder="e.g. jsmith_sd" required></div>
+      <div class="fg"><label>Badge / Sheriff ID *</label><input id="gSid" placeholder="SD-1234" required></div>
+      <div class="fg">
+        <label>Rank</label>
+        <select id="gRank">
+          <option>Deputy</option><option>Corporal</option><option>Sergeant</option>
+          <option>Lieutenant</option><option>Captain</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Station</label>
+        <select id="gStation">
+          <option>San Diego Central</option><option>Vista Station</option>
+          <option>Encinitas Station</option><option>Fallbrook Station</option>
+          <option>Imperial Beach Station</option><option>Lemon Grove Station</option>
+          <option>Pine Valley Station</option><option>Rancho San Diego Station</option>
+          <option>San Marcos Station</option><option>Santee Station</option>
+          <option>4S Ranch Station</option><option>DSA Headquarters - Poway</option>
+        </select>
+      </div>
+      <div class="fg"><label>Phone</label><input type="tel" id="gPhone" placeholder="(xxx) xxx-xxxx"></div>
+      <div class="fg">
+        <label>Create a Password *
+          <span style="color:#64748b;font-size:0.7rem;margin-left:4px;">(used for password login as a backup)</span>
+        </label>
+        <input type="password" id="gPw" placeholder="Min 8 characters" required minlength="8">
+      </div>
+      <button type="submit" class="modal-submit">Create Account &amp; Sign In</button>
+      <p class="modal-err" id="gErr"></p>
+    </form>
+  </div>
+</div>
+
 <!-- LOGIN MODAL -->
 <div class="modal-bg" id="modalBg">
   <div class="modal">
@@ -768,12 +856,22 @@ search_exclude: true
     <p class="sub" id="mSub">Access your DSA portal</p>
     <div class="mtabs"><div class="mtab on" id="tLog" onclick="mTab('login')">Log In</div><div class="mtab" id="tSign" onclick="mTab('signup')">Sign Up</div></div>
     <form id="fLogin" onsubmit="doLogin(event)">
+      <button type="button" class="btn-google" onclick="googleAuth()">
+        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Continue with Google
+      </button>
+      <div class="or-divider">or sign in with password</div>
       <div class="fg"><label>Username</label><input id="lUid" placeholder="Enter username" required></div>
       <div class="fg"><label>Password</label><input type="password" id="lPw" placeholder="Enter password" required></div>
       <button type="submit" class="modal-submit">Log In</button>
       <p class="modal-err" id="lErr"></p>
     </form>
     <form id="fSign" onsubmit="doSignup(event)" style="display:none">
+      <button type="button" class="btn-google" onclick="googleAuth()">
+        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Sign up with Google
+      </button>
+      <div class="or-divider">or fill in manually</div>
       <div class="fg"><label>Full Name</label><input id="sName" placeholder="John Smith" required></div>
       <div class="fg"><label>Username</label><input id="sUid" placeholder="Choose a username" required></div>
       <div class="fg"><label>Badge / Sheriff ID</label><input id="sSid" placeholder="SD-1234" required></div>
@@ -899,6 +997,85 @@ document.addEventListener('click', function(e) {
 /* ================================================================
    MODAL / AUTH / ADMIN
    ================================================================ */
+/* ================================================================
+   GOOGLE AUTH
+   ================================================================ */
+function googleAuth() {
+  // Redirect browser to backend OAuth entry point
+  window.location.href = API + '/api/auth/google';
+}
+
+function closeGModal() {
+  el('gModalBg').classList.remove('open');
+  history.replaceState({}, '', location.pathname);
+}
+
+function openGModal(name, email) {
+  el('gName').value          = name;
+  el('gEmail').value         = email;
+  el('gBadgeName').textContent  = name;
+  el('gBadgeEmail').textContent = email;
+  el('gAvatarInitial').textContent = name.charAt(0).toUpperCase();
+  el('gModalBg').classList.add('open');
+}
+
+async function doGoogleSignup(e) {
+  e.preventDefault();
+  hideError('gErr');
+  const body = {
+    name:      el('gName').value,
+    uid:       el('gUid').value.trim(),
+    sheriff_id:el('gSid').value.trim(),
+    email:     el('gEmail').value,
+    rank:      el('gRank').value,
+    station:   el('gStation').value,
+    phone:     el('gPhone').value.trim(),
+    password:  el('gPw').value,
+  };
+  try {
+    await apiRequest('/api/sheriff/user', 'POST', body);
+    // Account created — now log in automatically
+    const d = await apiRequest('/api/sheriff/authenticate', 'POST', {
+      uid: body.uid, password: body.password
+    });
+    user = d.user;
+    closeGModal();
+    closeModal();
+    updateUI();
+    history.replaceState({}, '', location.pathname);
+  } catch(err) {
+    showError('gErr', err.message);
+  }
+}
+
+/* Handle OAuth callbacks that arrive as query-string params */
+(function checkOAuthParams() {
+  const params = new URLSearchParams(location.search);
+
+  if (params.get('google_login') === 'success') {
+    // Existing user signed in via Google — fetch their profile
+    apiRequest('/api/sheriff/id', 'GET')
+      .then(data => { user = data; updateUI(); })
+      .catch(() => {});
+    history.replaceState({}, '', location.pathname);
+  }
+
+  const newUser = params.get('new_user');
+  if (newUser) {
+    try {
+      const profile = JSON.parse(atob(newUser.replace(/-/g,'+').replace(/_/g,'/')));
+      openGModal(profile.name || '', profile.email || '');
+    } catch(_) {}
+    history.replaceState({}, '', location.pathname);
+  }
+
+  const authError = params.get('auth_error');
+  if (authError) {
+    alert('Google sign-in failed: ' + authError.replace(/_/g,' ') + '. Please try again or use username/password.');
+    history.replaceState({}, '', location.pathname);
+  }
+})();
+
 function openModal(tab) { el('modalBg').classList.add('open'); switchModalTab(tab || 'login'); }
 function closeModal() { el('modalBg').classList.remove('open'); hideError('lErr'); hideError('sErr'); }
 function switchModalTab(t) {
