@@ -1,3 +1,110 @@
+# DSA San Diego Portal — Frontend Handoff
+
+> **Handoff document for TheSprinters → incoming team, May 2026**
+> Original team: Akhil, Neil, Moiz (DNHS Computer Science, Period 2)
+> Client: Deputy Sheriffs' Association of San Diego County — [dsasd.org](https://dsasd.org)
+> Live portal: `dsasd.opencodingsociety.com/sheriff/`
+
+This Jekyll frontend hosts the DSASD member portal alongside the broader OCS class site. The DSASD-specific pages all live under `navigation/sheriff/`. Everything else in this repo belongs to the shared class framework — don't modify it unless you know what you're doing.
+
+---
+
+## DSASD Portal — Where Everything Lives
+
+### Frontend files (your responsibility)
+
+```
+cap_front/
+├── navigation/sheriff/
+│   ├── index.md          # Main single-page portal — hero, dashboard, news, store, FAQ, contact
+│   ├── events.md         # Interactive events calendar with RSVP
+│   ├── faq.md            # Searchable FAQ + AI chatbot widget
+│   ├── store.md          # DSA merch store with cart
+│   ├── news.md           # News feed
+│   ├── info.md           # About / mission / stations / leadership
+│   ├── contact.md        # Contact section with staff photos
+│   ├── pathway.md        # Deputy rank pathway
+│   ├── gamification.md   # Games hub
+│   └── games.md          # Net Patrol, Robbery Response, Target Range
+├── images/dsa/           # All DSA branding and event images (11 images)
+├── assets/js/api/
+│   └── sheriff.code-workspace
+└── _posts/capstone/
+    ├── 2026-03-09-dsa-website-redesign-blog.md    # Pitch / before-after writeup
+    ├── 2026-03-20-dsa-portal-build-summary.md     # Full build summary
+    ├── 2026-03-20-dsa-srp-refactoring.md          # SRP refactoring blog
+    └── 2026-03-19-dsa-rebuild-timeline.md         # Timeline
+```
+
+### What was built
+
+| Section | Features | Notes |
+|---|---|---|
+| Hero | DSA logo, stats (4,229 members / 70+ years / 12 stations / 24/7), CTA buttons | Static |
+| Resource Dashboard | 8 tiles (Benefits, Legal, Wellness, Forms, Events, Store, Newsletters, PAC) with inline expandable panels | No page reloads |
+| Search | Sticky header autocomplete — results after 2 characters, scrolls to section | All sections indexed |
+| Events Calendar | Month-view grid, day detail panel, RSVP buttons, auto-navigates to next event | RSVP is frontend-only — needs backend hookup |
+| News | 3 image cards with tags and dates | Hardcoded — see next steps |
+| Store | 8 product cards, add-to-cart, quantity controls, checkout modal, member discount | Frontend-only cart |
+| FAQ | 9 Q&As, search filter, category tags | Expandable |
+| AI Chatbot | Floating widget → `POST /api/sheriff/chat` | Claude/OpenAI backend |
+| Authentication | Login/signup modal, badge #, rank, station fields, JWT session, admin panel | Fully wired to backend |
+| Newsletter | Silver Star preview cards with expandable issue content | Hardcoded |
+
+---
+
+## Next Steps for the Incoming Team
+
+### High priority
+
+- **Wire RSVP to the backend** — the RSVP buttons on `events.md` toggle visually using client-side JavaScript but don't persist. Add a `fetch('POST /api/event/rsvp', ...)` call in the onclick handler and display the live RSVP count from the API response.
+- **Replace hardcoded news cards with WordPress API** — the three news cards in `index.md` are static HTML. Pull live data from `https://dsasd.org/wp-json/wp/v2/posts` using `fetch` on page load and render the cards dynamically.
+- **Replace hardcoded newsletter previews** — same pattern as news. The Silver Star cards are static. If the backend adds a newsletters table, fetch from `/api/sheriff/newsletters`.
+- **Wire the store to a backend cart/checkout** — the cart currently lives only in `localStorage`. Add `POST /api/sheriff/order` when the member checks out.
+
+### Medium priority
+
+- **Personalized dashboard per member** — on login the JWT returns `rank` and `station`. Use these to reorder or highlight tiles (e.g., surface station-specific events first).
+- **Gamification leaderboard** — the three games (Net Patrol, Robbery Response, Target Range) track scores locally. Add `POST /api/sheriff/score` and display a live leaderboard on `gamification.md`.
+- **Mobile polish pass** — the portal is responsive but the hamburger menu and some tile grids need a QA pass on phones below 375px width.
+
+### Lower priority / stretch goals
+
+- **Push notifications** — `service-worker.js` exists at the repo root. Wire it to a backend Web Push subscription so members get notified when a new newsletter or event is posted.
+- **Accessibility audit** — run Lighthouse or axe-core. Known gaps: focus states on tile buttons, ARIA labels on the calendar grid, and color-contrast ratios in dark mode.
+- **Transition to a custom domain** — when DSASD is ready to adopt the portal, it should move from `dsasd.opencodingsociety.com` to a subdomain they control (e.g., `portal.dsasd.org`). Update `_config.yml` `baseurl` and NGINX config accordingly.
+
+---
+
+## Running the Frontend Locally
+
+```bash
+# Install Ruby dependencies (first time only)
+bundle install
+
+# Start Jekyll dev server
+make
+
+# Open in browser
+# http://0.0.0.0:4500/
+```
+
+The DSASD portal will be at `http://localhost:4500/sheriff/`.
+
+---
+
+## License
+
+This project's frontend framework is licensed under the Apache License 2.0 (inherited from the OCS Pages project). See [`LICENSE`](./LICENSE).
+
+The DSASD portal pages under `navigation/sheriff/` and assets under `images/dsa/` were authored by Akhil, Neil, and Moiz as a community contribution. The DSA branding, logo, and images remain the property of the Deputy Sheriffs' Association of San Diego County.
+
+---
+
+# OCS Pages — Original README
+
+> The documentation below covers the shared OCS Pages framework this project runs on.
+
 # Introduction
 
 Founded and maintained by John Mortensen.
