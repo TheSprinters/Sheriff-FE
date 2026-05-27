@@ -1,17 +1,8 @@
-# DSA San Diego Portal — Frontend Handoff
 
-> **Handoff document for TheSprinters → incoming team, May 2026**
-> Original team: Akhil, Neil, Moiz (DNHS Computer Science, Period 2)
-> Client: Deputy Sheriffs' Association of San Diego County — [dsasd.org](https://dsasd.org)
-> Live portal: `dsasd.opencodingsociety.com/sheriff/`
-
-This Jekyll frontend hosts the DSASD member portal alongside the broader OCS class site. The DSASD-specific pages all live under `navigation/sheriff/`. Everything else in this repo belongs to the shared class framework — don't modify it unless you know what you're doing.
-
----
 
 ## DSASD Portal — Where Everything Lives
 
-### Frontend files (your responsibility)
+### Frontend files
 
 ```
 cap_front/
